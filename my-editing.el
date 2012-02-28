@@ -116,8 +116,8 @@
   )
 
 (when i-use-save-place
+  (setq-default save-place t)
   (require 'saveplace)
-  (setq save-place t)
   )
 
 (when i-use-ibuffer-mode
