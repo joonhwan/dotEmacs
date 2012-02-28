@@ -39,11 +39,11 @@
 ;;
 ;; qml-mode
 ;;
-(add-to-list 'load-path (concat my-dotfiles-dir "qml-mode"))
-(require 'qml-mode)
-(add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
-(modify-coding-system-alist 'file "\\.qml$" 'utf-8)
-
+(when (my-try-require 'qml-mode)
+  (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
+  (modify-coding-system-alist 'file "\\.qml$" 'utf-8)
+  )
+  
 ;;
 ;; markdown
 ;;

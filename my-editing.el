@@ -16,6 +16,7 @@
 (defvar i-use-cua-mode nil)
 (defvar i-use-nxhtml-mode nil)
 (defvar i-use-popwin nil)
+(defvar i-use-truncate-line-mode t)
 
 ;; platform independent setq
 (setq
@@ -297,6 +298,9 @@ home directory is a root directory) and removes automounter prefixes
    )
   (global-set-key (kbd "C-c p") popwin:keymap)
   )
+
+(when i-use-truncate-line-mode
+	  (toggle-truncate-lines 1))
 
 (eval-after-load "info"
   '(progn
