@@ -34,29 +34,29 @@
 		  :post-init (autoload 'anything-ack "anything-ack"
 					   "Run ack in `anything' buffer to narrow results." t)
 		  :depends anything)
-   (:name anything-books
-		  :description "Anything command for PDF books"
-		  :website "https://github.com/kiwanami/emacs-anything-books/"
-		  :type github
-		  :pkgname "kiwanami/emacs-anything-books"
-		  :depends (anything deferred)
-		  :features anything-books)
-   (:name eclim
-       :website "https://github.com/senny/emacs-eclim/"
-       :description "This project brings some of the great eclipse features to emacs developers."
-       :type github
-       :pkgname "senny/emacs-eclim"
-       :load-path ("." "vendor")
-       :features eclim
-       :post-init (progn
-                    (setq eclim-auto-save t)
-                    (global-eclim-mode -1)))
-   (:name deferred
-       :description "Simple asynchronous functions for emacs lisp"
-       :website "https://github.com/kiwanami/emacs-deferred"
-       :type github
-       :pkgname "kiwanami/emacs-deferred"
-       :features "deferred")
+   ;; (:name anything-books
+   ;; 		  :description "Anything command for PDF books"
+   ;; 		  :website "https://github.com/kiwanami/emacs-anything-books/"
+   ;; 		  :type github
+   ;; 		  :pkgname "kiwanami/emacs-anything-books"
+   ;; 		  :depends (anything deferred)
+   ;; 		  :features anything-books)
+   ;; (:name eclim
+   ;;     :website "https://github.com/senny/emacs-eclim/"
+   ;;     :description "This project brings some of the great eclipse features to emacs developers."
+   ;;     :type github
+   ;;     :pkgname "senny/emacs-eclim"
+   ;;     :load-path ("." "vendor")
+   ;;     :features eclim
+   ;;     :post-init (progn
+   ;;                  (setq eclim-auto-save t)
+   ;;                  (global-eclim-mode -1)))
+   ;; (:name deferred
+   ;;     :description "Simple asynchronous functions for emacs lisp"
+   ;;     :website "https://github.com/kiwanami/emacs-deferred"
+   ;;     :type github
+   ;;     :pkgname "kiwanami/emacs-deferred"
+   ;;     :features "deferred")
    (:name eproject
 		  :description "File grouping (\"project\") extension for emacs"
 		  :type git
@@ -132,53 +132,87 @@
 							 (lambda()
 							   ;; restore case fold search in log4j log file(easy to search!!!)
 							   (setq case-fold-search t)))))
-   (:name rainbow-mode
-		  :description "rainbowing mode"
-		  :type elpa
-		  :post-init (progn (autoload 'rainbow-mode "rainbow-mode" "rain bow mode." t)
-							))
-   (:name qml-mode
-		  :description "joonhwan's modified qml-mode"
-		  :type git
-		  :url "git://github.com/Joonhwan/qml-mode.git"
-		  :depends rainbow-mode
-		  ;; the core functionality needs to be present.
-		  ;; eproject-extras, otoh, has autoload cookies.
-		  ;; lang/* can be added by the user as needed.
-		  :features qml-mode)
-   (:name split-root
-		  :description "Create a new top-level window in GNU Emacs while keeping your current window configuration.  For example, pop up an Eclipse-style compilation window."
-		  :type http
-		  :url "http://nschum.de/src/emacs/split-root/split-root.el"
-		  :features "split-root"
-		  :after (progn
-				   (defvar compilation-window nil
-					 "The window opened for displaying a compilation buffer.")
-				   (setq compilation-window-height 14)
-				   
-				   (defun my-display-buffer (buffer &optional not-this-window)
-					 (if (or (compilation-buffer-p buffer)
-							 (equal (buffer-name buffer) "*Shell Command Output*"))
-						 (unless (and compilation-window (window-live-p compilation-window))
-						   (setq compilation-window (split-root-window compilation-window-height))
-						   (set-window-buffer compilation-window buffer))
-					   (let ((display-buffer-function nil))
-						 (display-buffer buffer not-this-window))))
-
-				   (setq display-buffer-function 'my-display-buffer)
-
-				   ;; on success, delete compilation window right away!
-				   (add-hook 'compilation-finish-functions
-							 '(lambda(buf res)
-								(unless (or (eq last-command 'grep)
-											(eq last-command 'grep-find))
-								  (when (equal res "finished\n")
-									(when compilation-window
-									  (delete-window compilation-window)
-									  (setq compilation-window nil))
-									(message "compilation successful")))))
-				   ))
-   ))
+   ;; (:name rainbow-mode
+   ;; 		  :description "rainbowing mode"
+   ;; 		  :type elpa
+   ;; 		  :post-init
+   ;; 		  (progn (autoload 'rainbow-mode "rainbow-mode" "rain bow mode." t)))
+   ;; (:name qml-mode
+   ;; 		  :description "joonhwan's modified qml-mode"
+   ;; 		  :type git
+   ;; 		  :url "git://github.com/Joonhwan/qml-mode.git"
+   ;; 		  :depends rainbow-mode
+   ;; 		  ;; the core functionality needs to be present.
+   ;; 		  ;; eproject-extras, otoh, has autoload cookies.
+   ;; 		  ;; lang/* can be added by the user as needed.
+   ;; 		  :features qml-mode)
+   ;; (:name split-root
+   ;; 		  :description "Create a new top-level window in GNU Emacs while keeping your current window configuration.  For example, pop up an Eclipse-style compilation window."
+   ;; 		  :type http
+   ;; 		  :url "http://nschum.de/src/emacs/split-root/split-root.el"
+   ;; 		  :features "split-root"
+   ;; 		  :after (progn
+   ;; 				   (defvar compilation-window nil
+   ;; 					 "The window opened for displaying a compilation buffer.")
+   ;; 				   (setq compilation-window-height 14)
+   ;; 				   (defun my-display-buffer (buffer &optional not-this-window)
+   ;; 					 (if (or (compilation-buffer-p buffer)
+   ;; 							 (equal (buffer-name buffer) "*Shell Command Output*"))
+   ;; 						 (unless (and compilation-window (window-live-p compilation-window))
+   ;; 						   (setq compilation-window (split-root-window compilation-window-height))
+   ;; 						   (set-window-buffer compilation-window buffer))
+   ;; 					   (let ((display-buffer-function nil))
+   ;; 						 (display-buffer buffer not-this-window))))
+   ;; 				   (setq display-buffer-function 'my-display-buffer)
+   ;; 				   ;; on success, delete compilation window right away!
+   ;; 				   (add-hook 'compilation-finish-functions
+   ;; 							 '(lambda(buf res)
+   ;; 								(unless (or (eq last-command 'grep)
+   ;; 											(eq last-command 'grep-find))
+   ;; 								  (when (equal res "finished\n")
+   ;; 									(when compilation-window
+   ;; 									  (delete-window compilation-window)
+   ;; 									  (setq compilation-window nil))
+   ;; 									(message "compilation successful")))))
+   ;; 				   ))
+   ;; )
+   (:name yasnippet
+	:website "https://github.com/capitaomorte/yasnippet"
+	:description "YASnippet is a template system for Emacs."
+	:type git
+	:url "git://github.com/capitaomorte/yasnippet.git"
+	:features "yasnippet"
+	:prepare (progn
+		   ;; Set up the default snippets directory
+		   ;;
+		   ;; Principle: don't override any user settings
+		   ;; for yas/snippet-dirs, whether those were made
+		   ;; with setq or customize.  If the user doesn't
+		   ;; want the default snippets, she shouldn't get
+		   ;; them!
+		   (unless (or (boundp 'yas/snippet-dirs) (get 'yas/snippet-dirs 'customized-value))
+		     (setq yas/snippet-dirs 
+			   (list (concat el-get-dir (file-name-as-directory "yasnippet") "snippets")))))
+	:post-init (progn
+		     ;; Trick customize into believing the standard
+		     ;; value includes the default snippets.
+		     ;; yasnippet would probably do this itself,
+		     ;; except that it doesn't include an
+		     ;; installation procedure that sets up the
+		     ;; snippets directory, and thus doesn't know
+		     ;; where those snippets will be installed.  See
+		     ;; http://code.google.com/p/yasnippet/issues/detail?id=179
+		     (put 'yas/snippet-dirs 'standard-value 
+			  ;; as cus-edit.el specifies, "a cons-cell
+			  ;; whose car evaluates to the standard
+			  ;; value"
+			  (list (list 'quote
+				      (list (concat el-get-dir (file-name-as-directory "yasnippet") "snippets"))))))
+	;; byte-compile load vc-svn and that fails
+	;; see https://github.com/dimitri/el-get/issues/200
+	:compile nil)
+ )
+ )
 
 ;; my packages
 (setq
@@ -188,14 +222,14 @@
   '(
     anything
     anything-ack
-    anything-books
+    ;; anything-books
     asciidoc
     auto-install
-    cmake-mode
+    ;; cmake-mode
     cmd-mode
     csharp-mode
-    deferred
-    eclim
+    ;; deferred
+    ;; eclim
     el-get
     eproject
     graphviz-dot-mode
@@ -208,16 +242,15 @@
     markdown-mode
     package
     popwin
-	qml-mode
+    ;; qml-mode
     rainbow-delimiters
-    rainbow-mode
+    ;; rainbow-mode
     scss-mode
     smex
     ;; split-root
     ;; switch-window
     textmate
     workgroups
-    yasnippet
     )
 
   ;; add to my packages all from `el-get-sources'
