@@ -133,10 +133,19 @@
 							   ;; restore case fold search in log4j log file(easy to search!!!)
 							   (setq case-fold-search t)))))
    (:name rainbow-mode
-	  :description "rainbowing mode"
-	  :type elpa
-	  :post-init (progn (autoload 'rainbow-mode "rainbow-mode" "rain bow mode." t)
-			    ))
+		  :description "rainbowing mode"
+		  :type elpa
+		  :post-init (progn (autoload 'rainbow-mode "rainbow-mode" "rain bow mode." t)
+							))
+   (:name qml-mode
+		  :description "joonhwan's modified qml-mode"
+		  :type git
+		  :url "git://github.com/Joonhwan/qml-mode.git"
+		  :depends rainbow-mode
+		  ;; the core functionality needs to be present.
+		  ;; eproject-extras, otoh, has autoload cookies.
+		  ;; lang/* can be added by the user as needed.
+		  :features qml-mode)
    (:name split-root
 		  :description "Create a new top-level window in GNU Emacs while keeping your current window configuration.  For example, pop up an Eclipse-style compilation window."
 		  :type http
@@ -199,6 +208,7 @@
     markdown-mode
     package
     popwin
+	qml-mode
     rainbow-delimiters
     rainbow-mode
     scss-mode
