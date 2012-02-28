@@ -1,0 +1,1 @@
+;; all contents has been moved 'my-ido.el'
