@@ -36,7 +36,8 @@
   (define-key anything-command-map (kbd "k") 'anything-ack)
   (cond
    (win32p
-	(setq anything-ack-command "ack --nocolor --nogroup ")))))
+  	(setq anything-ack-command "ack.pl --no-group --no-color -i ")))
+  ))
 
 (setq
  anything-command-map-prefix-key (kbd "C-c a")

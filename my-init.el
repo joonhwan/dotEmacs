@@ -4,15 +4,6 @@
 ;; the very first package of mine
 (require 'my-lisp)
 
-;; for quick access -_-
-(setq vc-handled-backends '(SVN Git Hg))
-
-;; show possible path problem
-(list-load-path-shadows)
-
-
-(setq special-display-function 'popwin:special-display-popup-window)
-
 ;;
 ;; Load path etc.
 ;;
@@ -82,7 +73,7 @@
 ;; (require 'my-shell)
 ;; ;; (require 'my-svn)
 ;; ;; (require 'my-web)
-;; (require 'my-grep)
+(require 'my-grep)
 ;; (require 'my-isearch)
 (require 'my-ido)
 ;; ;; (require 'my-ecb)
@@ -104,11 +95,6 @@
 
 ;; (require 'my-icicles)
 
-;; activate disabled features
-(put 'narrow-to-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-
 ;; file association(special file ext for my work)
 ;; (hint: see the doc for `set-auto-mode' function and its code)
 ;; (hint: see also the doc for `magic-fallback-mode-alist'.)
@@ -129,13 +115,8 @@
 ;;   t)
 ;; (add-to-list 'magic-mode-alist '(my-is-stl-header . c++-mode))
 
-;; one that should be loaded at last
-(require 'workgroups)
-(setq
- wg-prefix-key (kbd "C-c w")
- wg-morph-on nil
- )
-(workgroups-mode t)
+;; show possible path problem
+(list-load-path-shadows)
 
 ;;
 ;; IMPORTANT! we relocated emacs *Customization* file

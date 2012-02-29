@@ -52,6 +52,7 @@
 		"c:/dev/gnuwin32/include"
 		))
 
+;; when opening a header like the one in stl
 (add-to-list 'magic-fallback-mode-alist
 			 '("[.*]*#include[ ]*\"" . c++-mode))
 

@@ -4,8 +4,8 @@
 
 ;; my on/off option
 (defvar i-use-show-paren-mode t)
-(defvar i-display-time-date t)
-(defvar i-use-column-number-mode t)
+(defvar i-display-time-date nil)
+(defvar i-use-column-number-mode nil)
 (defvar i-use-global-hl-line-mode t)
 (defvar i-use-save-history-mode t)
 (defvar i-use-save-place t)
@@ -16,6 +16,8 @@
 (defvar i-use-cua-mode nil)
 (defvar i-use-nxhtml-mode nil)
 (defvar i-use-popwin nil)
+(defvar i-use-delsel t)
+(defvar i-use-workgroup nil)
 
 ;; platform independent setq
 (setq
@@ -56,6 +58,10 @@
  make-backup-files nil
  ;; 
  completion-ignored-extensions '(".svn/" "CVS/" ".o" "~" ".bin" ".bak" ".obj" ".map" ".ico" ".pif" ".lnk" ".a" ".ln" ".blg" ".bbl" ".dll" ".drv" ".vxd" ".386" ".elc" ".lof" ".glo" ".idx" ".lot" ".dvi" ".fmt" ".tfm" ".pdf" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".fasl" ".ufsl" ".fsl" ".dxl" ".pfsl" ".dfsl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo")
+ safe-local-variable-values '(
+							  (eval rainbow-mode t)
+							  (my-org-current-project-name . "orgwiki")
+							  )
  )
 
 ;; per platform setq
@@ -283,7 +289,8 @@ home directory is a root directory) and removes automounter prefixes
   (cua-mode t)
   )
 
-(when i-use-nxhtml-mode
+(when (and i-use-nxhtml-mode
+		   (my-try-require "nxhtml"))
   (load "nxhtml/autostart.el" t "loaded nxhtml...")
  )
 
@@ -297,6 +304,21 @@ home directory is a root directory) and removes automounter prefixes
    )
   (global-set-key (kbd "C-c p") popwin:keymap)
   )
+
+(when i-use-delsel
+  (delete-selection-mode 1)
+  )
+
+
+(when (and i-use-workgroup
+		   (my-try require 'workgroups))
+  ;; one that should be loaded at last
+  (setq
+   wg-prefix-key (kbd "C-c w")
+   wg-morph-on nil
+   )
+  (workgroups-mode t))
+
 
 (eval-after-load "info"
   '(progn
@@ -370,8 +392,12 @@ home directory is a root directory) and removes automounter prefixes
      (define-key dired-mode-map (kbd "ESC C-s") 'dired-isearch-filenames-regexp)
      (define-key dired-mode-map (kbd "ESC C-r") 'dired-isearch-backward-regexp)))
 
-;; i use it very often
+;; activate disabled features
 (put 'narrow-to-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+;; move will banish if cursor is over there...
 (mouse-avoidance-mode 'banish)
 
 

@@ -2,9 +2,6 @@
 ;; isearch improvement..
 ;;
 
-;; (if win32p
-;; 	(require 'w32-grep))
-
 ;; i do isearch by sexp more than by word
 (defun my-isearch-yank-sexp ()
   "*Pull next expression from buffer into search string."

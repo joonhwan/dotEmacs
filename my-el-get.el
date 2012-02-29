@@ -41,16 +41,6 @@
 		  :pkgname "kiwanami/emacs-anything-books"
 		  :depends (anything deferred)
 		  :features anything-books)
-   (:name eclim
-       :website "https://github.com/senny/emacs-eclim/"
-       :description "This project brings some of the great eclipse features to emacs developers."
-       :type github
-       :pkgname "senny/emacs-eclim"
-       :load-path ("." "vendor")
-       :features eclim
-       :post-init (progn
-                    (setq eclim-auto-save t)
-                    (global-eclim-mode -1)))
    (:name deferred
        :description "Simple asynchronous functions for emacs lisp"
        :website "https://github.com/kiwanami/emacs-deferred"
@@ -58,14 +48,14 @@
        :pkgname "kiwanami/emacs-deferred"
        :features "deferred")
    (:name eproject
-		  :description "File grouping (\"project\") extension for emacs"
-		  :type git
-		  :url "https://github.com/jrockway/eproject.git"
-		  :load-path ("." "lang")
-		  ;; the core functionality needs to be present.
-		  ;; eproject-extras, otoh, has autoload cookies.
-		  ;; lang/* can be added by the user as needed.
-		  :features eproject)
+   		  :description "File grouping (\"project\") extension for emacs"
+   		  :type git
+   		  :url "https://github.com/jrockway/eproject.git"
+   		  :load-path ("." "lang")
+   		  ;; the core functionality needs to be present.
+   		  ;; eproject-extras, otoh, has autoload cookies.
+   		  ;; lang/* can be added by the user as needed.
+   		  :features eproject)
    (:name iedit
 		  :description "Edit multiple regions with the same content simultaneously."
 		  :type emacswiki
@@ -85,10 +75,10 @@
    (:name magit				; git meet emacs, and a binding
 	  :after (lambda ()
 		   (global-set-key (kbd "C-x C-z") 'magit-status)))
-   (:name goto-last-change		; move pointer back to last change
-	  :after (lambda ()
-		   ;; when using AZERTY keyboard, consider C-x C-_
-		   (global-set-key (kbd "C-x C-/") 'goto-last-change)))
+   ;; (:name goto-last-change		; move pointer back to last change
+   ;; 	  :after (lambda ()
+   ;; 		   ;; when using AZERTY keyboard, consider C-x C-_
+   ;; 		   (global-set-key (kbd "C-x C-/") 'goto-last-change)))
    (:name log4j-mode
 		  :description "log4j log view mode"
 		  :features log4j-mode
@@ -107,22 +97,22 @@
 				   (add-to-list 'auto-mode-alist '("\\.\\(cmd\\|bat\\)$" . cmd-mode) nil)
 				   (add-hook 'cmd-mode-hook (lambda () (setq comment-start "rem ")))))
    (:name popwin
-	  :description "popwin is a popup window manager for Emacs"
-	  :type git
-	  :url "https://github.com/m2ym/popwin-el"
-	  :load-path ("." "misc")
-	  :features popwin
-	  :post-init (progn
-		       (message "'popwin' has been loaded...")
-		       (setq
-			display-buffer-function 'popwin:display-buffer
-			special-display-function 'popwin:special-display-popup-window
-			special-display-regexps '((regexp-opt '((regexp-opt '("\\*completions\\*" "\\*Completions\\*" "\\*Help\\*" "\\*Anything.*\\*")))))
-			;; special-display-buffer-names
-			;; '("*cmd shell*" "*compilation*"))
-			)
-		       )
-	  )
+   	  :description "popwin is a popup window manager for Emacs"
+   	  :type git
+   	  :url "https://github.com/m2ym/popwin-el"
+   	  :load-path ("." "misc")
+   	  :features popwin
+   	  :post-init (progn
+   		       (message "'popwin' has been loaded...")
+   		       (setq
+   			display-buffer-function 'popwin:display-buffer
+   			special-display-function 'popwin:special-display-popup-window
+   			special-display-regexps '((regexp-opt '((regexp-opt '("\\*completions\\*" "\\*Completions\\*" "\\*Help\\*" "\\*Anything.*\\*")))))
+   			;; special-display-buffer-names
+   			;; '("*cmd shell*" "*compilation*"))
+   			)
+   		       )
+   	  )
    (:name log4j-mode
 		  :description "log4j log view mode"
 		  :features log4j-mode
@@ -142,42 +132,12 @@
 		  :type git
 		  :url "git://github.com/Joonhwan/qml-mode.git"
 		  :depends rainbow-mode
-		  ;; the core functionality needs to be present.
-		  ;; eproject-extras, otoh, has autoload cookies.
-		  ;; lang/* can be added by the user as needed.
 		  :features qml-mode)
-   (:name split-root
-		  :description "Create a new top-level window in GNU Emacs while keeping your current window configuration.  For example, pop up an Eclipse-style compilation window."
-		  :type http
-		  :url "http://nschum.de/src/emacs/split-root/split-root.el"
-		  :features "split-root"
-		  :after (progn
-				   (defvar compilation-window nil
-					 "The window opened for displaying a compilation buffer.")
-				   (setq compilation-window-height 14)
-				   
-				   (defun my-display-buffer (buffer &optional not-this-window)
-					 (if (or (compilation-buffer-p buffer)
-							 (equal (buffer-name buffer) "*Shell Command Output*"))
-						 (unless (and compilation-window (window-live-p compilation-window))
-						   (setq compilation-window (split-root-window compilation-window-height))
-						   (set-window-buffer compilation-window buffer))
-					   (let ((display-buffer-function nil))
-						 (display-buffer buffer not-this-window))))
-
-				   (setq display-buffer-function 'my-display-buffer)
-
-				   ;; on success, delete compilation window right away!
-				   (add-hook 'compilation-finish-functions
-							 '(lambda(buf res)
-								(unless (or (eq last-command 'grep)
-											(eq last-command 'grep-find))
-								  (when (equal res "finished\n")
-									(when compilation-window
-									  (delete-window compilation-window)
-									  (setq compilation-window nil))
-									(message "compilation successful")))))
-				   ))
+   (:name full-ack
+		  :description "full ack.pl mode"
+		  :type git
+		  :url "git://github.com/nschum/full-ack.git"
+		  :features full-ack)
    ))
 
 ;; my packages
@@ -195,9 +155,7 @@
     cmd-mode
     csharp-mode
     deferred
-    eclim
     el-get
-    eproject
     graphviz-dot-mode
     gtranslate
     htmlize
@@ -207,15 +165,12 @@
     lua-mode
     markdown-mode
     package
-    popwin
-	qml-mode
+    qml-mode
     rainbow-delimiters
     rainbow-mode
     scss-mode
     smex
-    ;; split-root
-    ;; switch-window
-    textmate
+    ;; textmate
     workgroups
     yasnippet
     )

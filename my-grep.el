@@ -1,3 +1,6 @@
+(eval-after-load "full-ack"
+  (setq ack-executable "c:/dev/scripts/ack.cmd"))
+
 (setq  grep-files-aliases
 	   '(("el" . "*.el")
 		 ("cpp" . "*.cc *.cpp *.c *.h *.hh *.hpp *.ihh *.inl *.cxx *.hxx")
@@ -31,9 +34,11 @@
 
 (if win32p
 	(setq find-program "c:\\dev\\gnuwin32\\bin\\gfind.exe"))
+
 (defun my-setup-grep-mode ()
   (turn-on-follow-mode)
-  (setq font-lock-defaults '(grep-mode-font-lock-keywords t)))
+  ;; (setq font-lock-defaults '(grep-mode-font-lock-keywords t))
+)
 (add-hook 'grep-setup-hook 'my-setup-grep-mode)
 
 (provide 'my-grep)
