@@ -34,6 +34,12 @@
 		  :post-init (autoload 'anything-ack "anything-ack"
 					   "Run ack in `anything' buffer to narrow results." t)
 		  :depends anything)
+   (:name deferred
+	  :description "Simple asynchronous functions for emacs lisp"
+	  :website "https://github.com/kiwanami/emacs-deferred"
+	  :type github
+	  :pkgname "kiwanami/emacs-deferred"
+	  :features "deferred")
    (:name eproject
    		  :description "File grouping (\"project\") extension for emacs"
    		  :type git
@@ -163,48 +169,41 @@
  )
  )
 
-;; my packages
+;; my packages : list of packages we use straight from official recipes
 (setq
  my-el-get-packages
  (append
-  ;; list of packages we use straight from official recipes
   '(
-    anything
-    anything-ack
-    ;; anything-books
-    asciidoc
-    auto-install
-    ;; cmake-mode
-    cmd-mode
-    csharp-mode
-    ;; deferred
-    ;; eclim
-    el-get
-    graphviz-dot-mode
-    gtranslate
-    htmlize
-    iedit
-    keywiz
-    log4j-mode
-    lua-mode
-    markdown-mode
-    package
-    qml-mode
-    popwin
-    rainbow-delimiters
-    ;; rainbow-mode
-    scss-mode
-    smex
-    ;; textmate
-    workgroups
-    )
+	anything
+	anything-ack
+	asciidoc
+	auto-install
+	cmd-mode
+	csharp-mode
+	el-get
+	graphviz-dot-mode
+	gtranslate
+	htmlize
+	iedit
+	keywiz
+	log4j-mode
+	lua-mode
+	markdown-mode
+	package
+	popwin
+	qml-mode
+	rainbow-delimiters
+	scss-mode
+	smex
+	workgroups
+	)))
 
-  ;; add to my packages all from `el-get-sources'
-  ;; (loop for src in el-get-sources
-  ;; 	     for name = (el-get-as-symbol (el-get-source-name src))
-  ;; 	     unless (member name '(emms))
-  ;; 	     collect name)))
-  (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
+;; add to my packages all from `el-get-sources'
+;; (loop for src in el-get-sources
+;; 	     for name = (el-get-as-symbol (el-get-source-name src))
+;; 	     unless (member name '(emms))
+;; 	     collect name)))
+(mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))
 
 
 ;; (unless (string-match "apple-darwin" system-configuration)

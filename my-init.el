@@ -123,3 +123,21 @@
 ;; so, we need to RELOAD IT HERE...
 ;;
 (load custom-file)
+
+(toggle-debug-on-error -1)
+
+(progn
+  (message "modifying frame...")
+  (let ((new-config
+		 (cond
+		  ((or win32p unixp)
+		   '((top . 0) (left . 0) (width . 220) (height . 66)))
+		  (macp
+		   '((top . 10) (left . 10) (width . 150) (height . 46)))
+		  )))
+	(my-modify-alist-with-alist 'default-frame-alist new-config)
+	)
+  (setq initial-frame-alist default-frame-alist)
+  (modify-all-frames-parameters default-frame-alist)
+  )
+

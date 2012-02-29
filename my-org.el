@@ -18,11 +18,9 @@
 ;; (setq org-export-html-xml-declaration
 ;; 	  '(("html" . "<?xml version=\"1.0\" encoding=\"%s\"?>")
 ;; 		("php" . "<?php echo \"<?xml version=\\\"1.0\\\" encoding=\\\"%s\\\" ?>\"; ?>")))
-(setq org-export-html-xml-declaration
-	  (my-modify-alist
-	   org-export-html-xml-declaration
-	   "html"
-	   ""))
+(my-modify-alist-with-alist
+ 'org-export-html-xml-declaration
+ '(("html" . "")))
 				 
 ;; active org-babel languages
 (org-babel-do-load-languages

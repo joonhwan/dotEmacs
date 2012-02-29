@@ -70,22 +70,53 @@ extension matcher"
 (defun my-disable-truncate-line ()
   (setq truncate-lines nil))
 
-;; hint from
-;; http://curiousprogrammer.wordpress.com/2009/03/10/elisp-association-lists/
-(defun my-modify-alist (seq key-to-change value-to-change)
-  "Replace an element within an association list where the cars match."
-  (let ((modified-list nil))
+(defun my-modify-alist (alist-to-modify key-to-change value-to-change)
+  "Replace an element within an association list. 
+
+ALIST-TO-MODIFY must be association list's symbol.
+KEY-TO-CHANGE is a search key
+VALUE-TO-CHANGE is a value of which is KEY by matching `equal' function
+
+example:
+
+\(progn
+  (setq my-frame-parameters '((menu-bar-lines . 0)
+							  (tool-bar-lines . 0)
+							  (scroll-bar . 14)
+							  (font . \"Ubuntu Mono-11:normal:antialias=natural\")))
+  (setq my-frame-parameters `(,@my-frame-parameters (height . 10)))
+  (my-modify-alist 'my-frame-parameters 'height 20)
+  my-frame-parameters)
+
+"
+  (let ((seq (symbol-value alist-to-modify))
+		(alist-temp nil)
+		(match-found))
 	(mapcar (lambda (elem)
 			  (let* ((key (car elem))
 					 (val (cdr elem)))
 				(if (equal key-to-change key)
-					(add-to-list 'modified-list `(,key . ,value-to-change))
-				  (add-to-list 'modified-list elem))
+					(progn
+					  (add-to-list 'alist-temp `(,key . ,value-to-change) t)
+					  (setq match-found t))
+				  (add-to-list 'alist-temp elem t)
+				  )
 				)
 			  )
 			seq)
-	(setq seq modified-list)
-	seq
+	(unless match-found
+	  (add-to-list 'alist-temp `(,key-to-change . ,value-to-change)))
+	(set alist-to-modify alist-temp)
+	(symbol-value alist-to-modify)
 	))
+
+(defun my-modify-alist-with-alist(alist-to-modify alist-source)
+  "Replace more than one element within an association list"
+  (mapcar
+   (lambda (elem)
+	 (let* ((key (car elem))
+			(val (cdr elem)))
+	   (my-modify-alist alist-to-modify key val)))
+   alist-source))
 
 (provide 'my-lisp)

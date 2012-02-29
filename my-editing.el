@@ -19,6 +19,7 @@
 (defvar i-use-delsel t)
 (defvar i-use-workgroup nil)
 (defvar i-use-truncate-line-mode t)
+(defvar i-use-desktop t)
 
 ;; platform independent setq
 (setq
@@ -321,6 +322,10 @@ home directory is a root directory) and removes automounter prefixes
 
 (when i-use-truncate-line-mode
 	  (toggle-truncate-lines 1))
+
+(when i-use-desktop
+  (desktop-save-mode 1)
+  )
 
 (eval-after-load "info"
   '(progn
