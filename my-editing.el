@@ -18,6 +18,7 @@
 (defvar i-use-popwin nil)
 (defvar i-use-delsel t)
 (defvar i-use-workgroup nil)
+(defvar i-use-truncate-line-mode t)
 
 ;; platform independent setq
 (setq
@@ -309,7 +310,6 @@ home directory is a root directory) and removes automounter prefixes
   (delete-selection-mode 1)
   )
 
-
 (when (and i-use-workgroup
 		   (my-try require 'workgroups))
   ;; one that should be loaded at last
@@ -319,6 +319,8 @@ home directory is a root directory) and removes automounter prefixes
    )
   (workgroups-mode t))
 
+(when i-use-truncate-line-mode
+	  (toggle-truncate-lines 1))
 
 (eval-after-load "info"
   '(progn

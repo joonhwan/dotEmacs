@@ -22,7 +22,7 @@ of an error, just add the package to a list of missing packages."
     (file-error  ; condition
      (progn
        (message "Checking for library `%s'... Missing" feature)
-       (add-to-list 'missing-packages-list feature 'append))
+       (add-to-list 'my-missing-packages-list feature 'append))
      nil)))
 
 ;; [TIP] http://dreamstorm.cafe24.com/cgi-bin/moin.cgi/dreamstorm/emacs

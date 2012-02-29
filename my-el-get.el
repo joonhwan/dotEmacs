@@ -34,19 +34,6 @@
 		  :post-init (autoload 'anything-ack "anything-ack"
 					   "Run ack in `anything' buffer to narrow results." t)
 		  :depends anything)
-   (:name anything-books
-		  :description "Anything command for PDF books"
-		  :website "https://github.com/kiwanami/emacs-anything-books/"
-		  :type github
-		  :pkgname "kiwanami/emacs-anything-books"
-		  :depends (anything deferred)
-		  :features anything-books)
-   (:name deferred
-       :description "Simple asynchronous functions for emacs lisp"
-       :website "https://github.com/kiwanami/emacs-deferred"
-       :type github
-       :pkgname "kiwanami/emacs-deferred"
-       :features "deferred")
    (:name eproject
    		  :description "File grouping (\"project\") extension for emacs"
    		  :type git
@@ -75,10 +62,10 @@
    (:name magit				; git meet emacs, and a binding
 	  :after (lambda ()
 		   (global-set-key (kbd "C-x C-z") 'magit-status)))
-   ;; (:name goto-last-change		; move pointer back to last change
-   ;; 	  :after (lambda ()
-   ;; 		   ;; when using AZERTY keyboard, consider C-x C-_
-   ;; 		   (global-set-key (kbd "C-x C-/") 'goto-last-change)))
+   (:name goto-last-change		; move pointer back to last change
+   	  :after (lambda ()
+   		   ;; when using AZERTY keyboard, consider C-x C-_
+   		   (global-set-key (kbd "C-x C-/") 'goto-last-change)))
    (:name log4j-mode
 		  :description "log4j log view mode"
 		  :features log4j-mode
@@ -138,7 +125,43 @@
 		  :type git
 		  :url "git://github.com/nschum/full-ack.git"
 		  :features full-ack)
-   ))
+   (:name yasnippet
+		  :website "https://github.com/capitaomorte/yasnippet"
+		  :description "YASnippet is a template system for Emacs."
+		  :type git
+		  :url "git://github.com/capitaomorte/yasnippet.git"
+		  :features "yasnippet"
+		  :prepare (progn
+					 ;; Set up the default snippets directory
+					 ;;
+					 ;; Principle: don't override any user settings
+					 ;; for yas/snippet-dirs, whether those were made
+					 ;; with setq or customize.  If the user doesn't
+					 ;; want the default snippets, she shouldn't get
+					 ;; them!
+					 (unless (or (boundp 'yas/snippet-dirs) (get 'yas/snippet-dirs 'customized-value))
+					   (setq yas/snippet-dirs 
+							 (list (concat el-get-dir (file-name-as-directory "yasnippet") "snippets")))))
+		  :post-init (progn
+					   ;; Trick customize into believing the standard
+					   ;; value includes the default snippets.
+					   ;; yasnippet would probably do this itself,
+					   ;; except that it doesn't include an
+					   ;; installation procedure that sets up the
+					   ;; snippets directory, and thus doesn't know
+					   ;; where those snippets will be installed.  See
+					   ;; http://code.google.com/p/yasnippet/issues/detail?id=179
+					   (put 'yas/snippet-dirs 'standard-value 
+							;; as cus-edit.el specifies, "a cons-cell
+							;; whose car evaluates to the standard
+							;; value"
+							(list (list 'quote
+										(list (concat el-get-dir (file-name-as-directory "yasnippet") "snippets"))))))
+		  ;; byte-compile load vc-svn and that fails
+		  ;; see https://github.com/dimitri/el-get/issues/200
+		  :compile nil)
+ )
+ )
 
 ;; my packages
 (setq
@@ -148,13 +171,14 @@
   '(
     anything
     anything-ack
-    anything-books
+    ;; anything-books
     asciidoc
     auto-install
-    cmake-mode
+    ;; cmake-mode
     cmd-mode
     csharp-mode
-    deferred
+    ;; deferred
+    ;; eclim
     el-get
     graphviz-dot-mode
     gtranslate
@@ -166,13 +190,13 @@
     markdown-mode
     package
     qml-mode
+    popwin
     rainbow-delimiters
-    rainbow-mode
+    ;; rainbow-mode
     scss-mode
     smex
     ;; textmate
     workgroups
-    yasnippet
     )
 
   ;; add to my packages all from `el-get-sources'
