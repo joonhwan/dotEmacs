@@ -74,7 +74,7 @@
 ;; ;; (require 'my-svn)
 ;; ;; (require 'my-web)
 (require 'my-grep)
-;; (require 'my-isearch)
+(require 'my-isearch)
 (require 'my-ido)
 ;; ;; (require 'my-ecb)
 ;; (require 'my-tags)
@@ -115,8 +115,10 @@
 ;;   t)
 ;; (add-to-list 'magic-mode-alist '(my-is-stl-header . c++-mode))
 
+;; ---------------
 ;; show possible path problem
-(list-load-path-shadows)
+;; ---------------
+;; (list-load-path-shadows)
 
 ;;
 ;; IMPORTANT! we relocated emacs *Customization* file

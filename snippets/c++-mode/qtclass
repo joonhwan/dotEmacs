@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: qt class decl ... { ... }
+# key: qtclass
+# --
+#pragma once
+
+#include <${2:$(yas/substr text ".*")}>
+
+class ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`} : public ${2:QObject}
+{
+    Q_OBJECT
+public:
+    ${1:$(yas/substr text "[^: ]*")}(QObject* parent=0);
+    virtual ~${1:$(yas/substr text "[^: ]*")}();
+	$0
+signals:
+public slots:
+protected:
+};

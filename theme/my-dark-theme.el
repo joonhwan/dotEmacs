@@ -131,7 +131,7 @@
    `(mode-line-buffer-id ((t (:slant italic :weight bold))))
    `(mode-line-emphasis ((t (:weight bold :weight bold :inherit mode-line))))
    `(mode-line-highlight ((t :inherit mode-line-emphasis)))
-   `(region ((t (:foreground nil :background ,my-dark-bg+2))))
+   `(region ((t (:foreground nil :background ,my-dark-bg+1))))
    `(scroll-bar ((t (:background ,my-dark-bg+2))))
    `(secondary-selection ((t (:foreground nil :background ,my-dark-bg+2))))
    `(tool-bar ((t (:background ,my-dark-bg+2))))
@@ -364,7 +364,7 @@
    `(highlight-current-line ((t (:inherit my-dark-highlight-subtle))))
 
    ;; hightlight the current line
-   `(hl-line ((t (:inherit nil :background ,my-dark-bg+1))))
+   `(hl-line ((t (:inherit nil :background ,my-dark-bg-1))))
    
    ;; holiday
    `(holiday ((t (:underline t :inherit my-dark-primary-4))))
@@ -587,6 +587,12 @@
    `(w3m-arrived-anchor-face ((t (:inherit my-dark-primary-2))))
    `(w3m-image-face ((t (:inherit my-dark-primary-3))))
    `(w3m-form-face ((t (:inherit widget-field))))
+
+   ;; rst
+   `(rst-level-1-face ((t (:foreground ,my-dark-green+4 :background nil))))
+   `(rst-level-2-face ((t (:foreground ,my-dark-green+2 :background nil))))
+   `(rst-level-3-face ((t (:foreground ,my-dark-green+1 :background nil))))
+   `(rst-level-4-face ((t (:foreground ,my-dark-green :background nil))))
    
    ;; which 
    `(which-func ((t (:inherit mode-line))))

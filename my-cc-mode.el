@@ -349,6 +349,9 @@ will be
   (setq show-trailing-whitespace t)
   (hs-minor-mode 1)
   (c-set-style "mystyle" nil)
+  ;; for work with auto-complete and yasnippet
+  (when (boundp 'ac-sources)
+	(append ac-sources '(ac-source-yasnippet)))
   ;; (flymake-mode 1)
   ;; (set (make-local-variable 'compile-command)
   ;; 	   (my-recommend-compile-command))

@@ -40,7 +40,6 @@
   ))
 
 (setq
- anything-command-map-prefix-key (kbd "C-c a")
  anything-candidate-number-limit nil
  anything-c-locate-command (case system-type
 							 ('gnu/linux "locate -i -r %s")
@@ -112,30 +111,6 @@
    anything-c-top-command "pslist"
    )
   ))
-(define-key anything-command-map (kbd "<RET>") 'anything)
-(define-key anything-command-map (kbd "C-l") 'anything-filelist)
-(global-set-key (read-kbd-macro anything-command-map-prefix-key)
-				'anything-command-map)
-(global-set-key (kbd "C-c C-x C-d") 'anything-debug-output)
-
-;; ;; [2008/01/14]
-;; ;; (auto-install-from-emacswiki "anything-dabbrev-expand.el")
-;; (require 'anything-dabbrev-expand)
-;; (define-key anything-command-map (kbd "/") 'anything-dabbrev-expand)
-;; (define-key anything-dabbrev-map [(control ?@)] 'anything-dabbrev-find-all-buffers)
-;; (setq anything-dabbrev-input-idle-delay 0.0)
-;; (setq anything-dabbrev-idle-delay 1.0)
-;; (setq anything-dabbrev-expand-candidate-number-limit 20)
-;; (setq anything-dabbrev-expand-strategies
-;;       '(;; anything-dabbrev-expand--first-partial-dabbrev
-;;         anything-dabbrev-expand--anything))
-;; (setq anything-dabbrev-sources
-;;       '(anything-dabbrev-partial-source
-;;         ;; anything-c-source-complete-emacs-commands
-;;         ;; anything-c-source-complete-emacs-functions
-;;         ;; anything-c-source-complete-emacs-variables
-;;         ;; anything-c-source-complete-emacs-other-symbols
-;;         anything-dabbrev-all-source))
 
 ;;
 ;; anything grep
@@ -165,6 +140,38 @@
 		;; anything-c-source-file-cache
 		;; anything-c-source-locate
 		))
+
+;; variable first and function last
+(defun my-anything-for-help-variable ()
+  (interactive)
+  (anything
+   :sources '(anything-c-source-emacs-variables anything-c-source-emacs-functions)
+   :input (concat
+		   ;;"\b"
+		   (thing-at-point 'symbol)
+		   ;; "\b"
+		   (if (featurep 'anything-match-plugin) " " "")
+		   )
+   :buffer "*Anything Help(func/var)*"
+   )
+  )
+(global-set-key (kbd "C-h v") 'my-anything-for-help-variable)
+
+;; function first and variable last
+(defun my-anything-for-help-function ()
+  (interactive)
+  (anything
+   :sources '(anything-c-source-emacs-functions anything-c-source-emacs-variables)
+   :input (concat
+		   ;;"\b"
+		   (thing-at-point 'symbol)
+		   ;; "\b"
+		   (if (featurep 'anything-match-plugin) " " "")
+		   )
+   :buffer "*Anything Help(func/var)*"
+   )
+  )
+(global-set-key (kbd "C-h f") 'my-anything-for-help-function)
 
 ;;
 ;; old hack for 'everything' in windows
@@ -199,82 +206,51 @@
 
 (add-to-list 'anything-after-initialize-hook 'my-disable-truncate-line)
 
-(defvar anything-c-everything-preferred-directory
-  nil)
-
-(defun my-anything-cc-mode-hook ()
-  (make-local-variable 'anything-c-everything-preferred-directory))
-
-(add-hook 'c-mode-hook 'my-anything-cc-mode-hook)
-(add-hook 'c++-mode-hook 'my-anything-cc-mode-hook)
-
-(defvar last-anything-c-everything-pattern nil)
-
-(defun anything-c-source-everything-process ()
-  (let* ((my/dir (buffer-local-value 'anything-c-everything-preferred-directory anything-current-buffer))
-		 (my/pattern (if (stringp my/dir)
-					  (concat (regexp-quote my/dir) ".*" anything-pattern)
-					anything-pattern)))
-	(setq last-anything-c-everything-pattern my/pattern)
-	(apply 'start-process "everything-process" nil
-		   (append anything-c-everything-options
-				   (list my/pattern)))))
+;; 
+;; locate and c/c++ project affinity....
+;; 
+(progn
+  (defvar anything-c-everything-preferred-directory
+	nil)
   
-(defvar anything-c-source-everything
-	  '((name . "Everything")
-		(candidates . anything-c-source-everything-process)
-		(type . file)
-		(requires-pattern . 3)
-		(delayed))
-  "Source for retrieving files matching the current input pattern with locate.")
+  (defun my-anything-cc-mode-hook ()
+	(make-local-variable 'anything-c-everything-preferred-directory))
+
+  (add-hook 'c-mode-hook 'my-anything-cc-mode-hook)
+  (add-hook 'c++-mode-hook 'my-anything-cc-mode-hook)
+
+  (defvar last-anything-c-everything-pattern nil)
+
+  (defun anything-c-source-everything-process ()
+	(let* ((my/dir (buffer-local-value 'anything-c-everything-preferred-directory anything-current-buffer))
+		   (my/pattern (if (stringp my/dir)
+						   (concat (regexp-quote my/dir) ".*" anything-pattern)
+						 anything-pattern)))
+	  (setq last-anything-c-everything-pattern my/pattern)
+	  (apply 'start-process "everything-process" nil
+			 (append anything-c-everything-options
+					 (list my/pattern)))))
+  
+  (defvar anything-c-source-everything
+	'((name . "Everything")
+	  (candidates . anything-c-source-everything-process)
+	  (type . file)
+	  (requires-pattern . 3)
+	  (delayed))
+	"Source for retrieving files matching the current input pattern with locate.")
+  )
 
 (defun my-anything-customize-face ()
   (interactive)
   (anything 'anything-c-source-customize-face))
 
-;; (defun my-anything-c-source-ctags ()
-;;   (interactive)
-;;   (anything 'anything-c-source-ctags))
-
-;; (defun everything-search(everything-pattern)
-;;   (with-temp-buffer
-;; 	(apply 'start-process "everything" temp-buffer
-;; 	   (append anything-c-everything-options (list everything-pattern)))
-;; (apply 'start-process )
-
-;; (progn
-;;   (apply 'start-process "everything-process" (get-buffer-create "*everything*")
-;; 		 (append anything-c-everything-options (list anything-pattern)))
-;;   (with-current-buffer "*everything*"
-;; 	(goto-char (point-min))
-;; 	(search-forward-regexp "^\\(.*\\)$" (point) t)
-;; 	(match-beginning "\\1")
-
-;; (defun my-anything-show-in-new-frame (buf)
-;;   (let* ((my-anything-frame
-;; 		  (window-frame 
-;; 		   (special-display-popup-frame
-;; 			(current-buffer)
-;; 			'((top . 1)
-;; 			  (left . 120)
-;; 			  (width . 140)
-;; 			  (height . 64)
-;; 			  (font . "Monaco-10"))))))
-;; 	(anything-maybe-fit-frame)
-;; 	(select-frame-set-input-focus my-anything-frame)))
-
-
-;; (unless macp
-;;   (progn
-;; 	(setq anything-display-function 'my-anything-show-in-new-frame)
-;; 	(setq anything-save-configuration-functions '(set-frame-configuration . current-frame-configuration))))
-
-;; (if my-anything-show-dedicate-frame
-;; 	(progn
-;; 	  (setq anything-display-function 'my-anything-show-in-new-frame)
-;; 	  (setq anything-save-configuration-functions '(set-frame-configuration . current-frame-configuration)))
-;;   (progn
-;; 	(setq anything-samewindow nil)
-;; 	(push '("*anything*" :height 40) popwin:special-display-config)))
+(progn
+  (setq anything-command-map-prefix-key (kbd "C-c a"))
+  (define-key anything-command-map (kbd "<RET>") 'anything)
+  (define-key anything-command-map (kbd "C-l") 'anything-filelist)
+  (global-set-key (read-kbd-macro anything-command-map-prefix-key)
+				  'anything-command-map)
+  (global-set-key (kbd "C-c C-x C-d") 'anything-debug-output)
+  )
 
 (provide 'my-anything)

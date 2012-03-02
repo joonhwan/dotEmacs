@@ -39,7 +39,7 @@
 	  :website "https://github.com/kiwanami/emacs-deferred"
 	  :type github
 	  :pkgname "kiwanami/emacs-deferred"
-	  :features "deferred")
+	  :features deferred)
    (:name eproject
    		  :description "File grouping (\"project\") extension for emacs"
    		  :type git
@@ -49,6 +49,18 @@
    		  ;; eproject-extras, otoh, has autoload cookies.
    		  ;; lang/* can be added by the user as needed.
    		  :features eproject)
+   (:name evil
+		  :description "Emacs Vim Improved Implementation."
+		  :type git
+		  :url "git://gitorious.org/evil/evil.git"
+		  :features evil
+		  )
+   (:name ido-ubiquitous
+		  :description "ido everywherer really!"
+		  :type git
+		  :url "git://github.com/technomancy/ido-ubiquitous.git"
+		  :features ido-ubiquitous
+		  )
    (:name iedit
 		  :description "Edit multiple regions with the same content simultaneously."
 		  :type emacswiki
@@ -184,6 +196,8 @@
 	graphviz-dot-mode
 	gtranslate
 	htmlize
+	ido-ubiquitous
+	;; ido-hacks
 	iedit
 	keywiz
 	log4j-mode

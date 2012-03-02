@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Qt app main function ...
+# key: qappmain
+# --
+#include <QApplication>
+
+int main(int argc, char** argv)
+\{
+	QApplication app(argc, argv);
+	QCoreApplication::setOrganizationName("joonhwan");
+	QCoreApplication::setOrganizationDomain("www.joonhwan.org");
+	QCoreApplication::setApplicationName("${1:appName}");
+	$0
+	return app.exec();
+\}

@@ -24,10 +24,6 @@
 ;;              ;; (turn-on-eldoc-mode)
 ;;              (rainbow-delimiters-mode t)
 ;; 			 ))
-(unless macp
-  (progn
-	(add-to-list 'load-path (concat my-dotfiles-dir "magit"))
-	(require 'magit)))
 
 ;;
 ;; ruby mode

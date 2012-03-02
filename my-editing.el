@@ -15,11 +15,12 @@
 (defvar i-use-recentf nil)
 (defvar i-use-cua-mode nil)
 (defvar i-use-nxhtml-mode nil)
-(defvar i-use-popwin nil)
+(defvar i-use-popwin t)
 (defvar i-use-delsel t)
 (defvar i-use-workgroup nil)
 (defvar i-use-truncate-line-mode t)
 (defvar i-use-desktop t)
+(defvar i-use-yas t)
 
 ;; platform independent setq
 (setq
@@ -325,6 +326,20 @@ home directory is a root directory) and removes automounter prefixes
 
 (when i-use-desktop
   (desktop-save-mode 1)
+  )
+
+(when (and i-use-yas
+		   (my-try-require 'yasnippet))
+  (setq
+   ;; not to use original yas/x-prompt at first
+   yas/prompt-functions '(yas/dropdown-prompt yas/completing-prompt)
+   ;; my private snippets
+   )
+  (setq yas/snippet-dirs 
+		`(,(concat my-dotfiles-dir "snippets")
+		  ,(concat my-dotfiles-dir "alien/el-get-package/yasnippet/snippets")))
+  ;; (yas/initialize)
+  (yas/global-mode 1)
   )
 
 (eval-after-load "info"
