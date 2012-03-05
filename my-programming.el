@@ -4,6 +4,12 @@
 ;; (require 'vc-svn)
 
 ;;
+;; magit
+;;
+(when (my-try-require 'magit)
+  (global-set-key (kbd "C-x C-g") 'magit-status))
+
+;;
 ;; nXML mode
 ;;
 ;; (progn
@@ -39,7 +45,7 @@
   (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
   (modify-coding-system-alist 'file "\\.qml$" 'utf-8)
   )
-  
+
 ;;
 ;; markdown
 ;;
@@ -87,7 +93,7 @@
 ;; ediff
 (eval-after-load "ediff"
   '(progn
-	 (setq 
+	 (setq
 	  ;; ediff-window-setup-function 'ediff-setup-windows-plain
 	  ediff-window-setup-function 'ediff-setup-windows-multiframe
 	  ediff-split-window-function 'split-window-horizontally
@@ -103,7 +109,7 @@
 (eval-after-load "compile"
   '(progn
 	 (defun my-compilation-setup()
-	   (setq 
+	   (setq
 		truncate-lines t
 		compilation-scroll-output t
 		compilation-window-height 15)
@@ -114,7 +120,7 @@
 
 ;;
 ;; eshell
-;; 
+;;
 (if win32p
     (defun eshell/op (FILE)
       "Invoke (w32-shell-execute \"Open\" FILE) and substitute slashes for backslashes.
@@ -128,7 +134,7 @@
   '(progn
 	 (cond
 	  ((and win32p officep)
-	   (progn 
+	   (progn
 		 (setq
 		  graphviz-dot-dot-program "c:\\dev\\graphviz\\bin\\dot.exe"
 		  graphviz-dot-indent-width 4
