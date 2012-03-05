@@ -7,7 +7,9 @@
 ;; magit
 ;;
 (when (my-try-require 'magit)
-  (global-set-key (kbd "C-x C-g") 'magit-status))
+  (global-set-key (kbd "C-x C-g") 'magit-status)
+  (setq magit-process-connection-type nil)
+)
 
 ;;
 ;; nXML mode
@@ -117,6 +119,13 @@
 	 (add-hook 'compilation-mode-hook 'my-compilation-setup)
 	 ))
 
+;;
+;; cmake
+;;
+(when (my-try-require 'cmake-mode)
+  (require 'cmake-mode)
+  (add-to-list 'auto-mode-alist '(("CMakeLists\\.txt\\'" . cmake-mode)
+								  ("\\.cmake\\'" . cmake-mode))))
 
 ;;
 ;; eshell
