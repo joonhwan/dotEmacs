@@ -19,6 +19,8 @@
 
 (add-to-list 'load-path my-dotfiles-dir)
 (add-to-list 'load-path my-autoinstall-dir)
+(add-to-list 'load-path "alien/manual-installed")
+
 ;; (add-to-list 'load-path my-ccmode-dir)
 (add-to-list 'load-path my-etc-dir)	;; misc elisp packages...
 
@@ -41,6 +43,7 @@
   ;; (setq default-korean-keyboard "3f") ;;--> 3beolsik final.
   (setq default-korean-keyboard "390")) ;;--> 3beolsik 390
 (define-coding-system-alias 'ks_c_5601-1987 'korean-iso-8bit)
+(add-to-list 'file-coding-system-alist '("\\.el\\'" . utf-8))
 
 ;;
 ;; i'm not using normal path of emacs customization!

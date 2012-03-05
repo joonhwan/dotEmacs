@@ -34,11 +34,12 @@
 	  (my-dark-red-3 "#Cd8500")
 	  (my-dark-red-4 "#8b4500")
 	  (my-dark-orange "#dfaf8f")
+	  (my-dark-orange-1 "#8b5a00")
 	  (my-dark-yellow "#Ffb90f")
 	  (my-dark-yellow-1 "#Cd950c")
 	  (my-dark-yellow-2 "#8b6508")
 
-	  (my-dark-green-4  "#698b69")
+	  (my-dark-green-2  "#698b69")
 	  (my-dark-green-1 "#9bcd9b")
 	  (my-dark-green "#6e8b3d")
 	  (my-dark-green+1 "#2e8b57")
@@ -109,8 +110,7 @@
    `(fixed-pitch ((t (:weight bold))))
    `(italic ((t (:slant italic))))
    `(underline ((t (:underline t))))
-   `(variable-pitch ((t (:weight bold :family "³ª´®°íµñ" :inherit default))))
-
+   `(variable-pitch ((t (:weight bold :family "ë‚˜ëˆ”ê³ ë”•" :inherit default))))
    `(fringe ((t (:inherit default :background ,my-dark-bg+1))))
    `(header-line ((t (:inherit my-dark-highlight-damp :box (:color "#2e3330" :line-width 2)))))
    `(highlight ((t (:underline nil :background ,my-dark-blue-3))))
@@ -135,6 +135,25 @@
    `(scroll-bar ((t (:background ,my-dark-bg+2))))
    `(secondary-selection ((t (:foreground nil :background ,my-dark-bg+2))))
    `(tool-bar ((t (:background ,my-dark-bg+2))))
+
+   ;; font-locking
+   `(font-lock-builtin-face ((t (:inherit my-dark-blue))))
+   `(font-lock-comment-face ((t (:foreground ,my-dark-green :slant italic))))
+   `(font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face))))
+   `(font-lock-constant-face ((t (:inherit my-dark-primary-1))))
+   `(font-lock-doc-face ((t (:inherit my-dark-green+1))))
+   `(font-lock-doc-string-face ((t (:foreground ,my-dark-blue+1))))
+   `(font-lock-function-name-face ((t (:foreground ,my-dark-blue))))
+   `(font-lock-keyword-face ((t (:slant italic :inherit my-dark-blue+1))))
+   `(font-lock-negation-char-face ((t (:inherit my-dark-primary-1))))
+   `(font-lock-preprocessor-face ((t (:inherit my-dark-red-1))))
+   `(font-lock-string-face ((t (:inherit my-dark-blue-3))))
+   `(font-lock-type-face ((t (:inherit my-dark-green+2))))
+   `(font-lock-variable-name-face ((t (:foreground ,my-dark-yellow-1))))
+   `(font-lock-warning-face ((t (:inherit my-dark-highlight-alerting))))
+   `(font-lock-pseudo-keyword-face ((t (:inherit my-dark-primary-4))))
+   `(font-lock-operator-face ((t (:inherit my-dark-primary-3))))
+
 
    ;; apt-utils
    `(apt-utils-normal-package ((t (:inherit my-dark-primary-1))))
@@ -269,24 +288,6 @@
    `(font-latex-warning ((t (:inherit font-lock-warning-face))))
    `(font-latex-sedate ((t (:inherit my-dark-primary-1))))
    `(font-latex-title-4 ((t (:inherit my-dark-title))))
-
-      ;; font-locking
-   `(font-lock-builtin-face ((t (:inherit my-dark-blue))))
-   `(font-lock-comment-face ((t (:foreground ,my-dark-green :slant italic))))
-   `(font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face))))
-   `(font-lock-constant-face ((t (:inherit my-dark-primary-1))))
-   `(font-lock-doc-face ((t (:inherit my-dark-green+1))))
-   `(font-lock-doc-string-face ((t (:foreground ,my-dark-blue+1))))
-   `(font-lock-function-name-face ((t (:foreground ,my-dark-blue))))
-   `(font-lock-keyword-face ((t (:slant italic :inherit my-dark-blue+1))))
-   `(font-lock-negation-char-face ((t (:inherit my-dark-primary-1))))
-   `(font-lock-preprocessor-face ((t (:inherit my-dark-red-1))))
-   `(font-lock-string-face ((t (:inherit my-dark-blue-3))))
-   `(font-lock-type-face ((t (:inherit my-dark-green+2))))
-   `(font-lock-variable-name-face ((t (:foreground ,my-dark-yellow-1))))
-   `(font-lock-warning-face ((t (:inherit my-dark-highlight-alerting))))
-   `(font-lock-pseudo-keyword-face ((t (:inherit my-dark-primary-4))))
-   `(font-lock-operator-face ((t (:inherit my-dark-primary-3))))
 
    ;; gnus
    `(gnus-group-mail-1-face ((t (:weight bold :inherit gnus-group-mail-1-empty-face))))
@@ -463,7 +464,7 @@
 
    ;; org-mode
    `(org-agenda-clocking
-	 ((t (:background ,my-dark-green-4 :weight bold))) t)
+	 ((t (:background ,my-dark-green-2 :weight bold))) t)
    `(org-agenda-date-today
 	 ((t (:foreground ,my-dark-cyan :slant italic :weight bold))) t)
    `(org-agenda-date
@@ -609,7 +610,7 @@
    `(anything-grep-match ((t (:inherit my-dark-red))))
    `(anything-overlay-line-face ((t (:inherit region))))
    `(anything-dir-heading ((t (:inherit region))))
-   `(anything-match ((t (:foreground ,my-dark-red+1 :inherit italic))))
+   `(anything-match ((t (:foreground ,my-dark-orange :inherit italic))))
 
    ;; wl (wanderlust)
    ;; some faces end with -face, while other don't; confusing
