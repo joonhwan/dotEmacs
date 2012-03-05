@@ -1,3 +1,5 @@
+;; -*- coding:utf-8; -*-
+
 (require 'generic-x) ;; for many files' editing
 ;; (require 'indent)
 ;; (require 'misc)
@@ -6,7 +8,7 @@
 (defvar i-use-show-paren-mode t)
 (defvar i-display-time-date nil)
 (defvar i-use-column-number-mode nil)
-(defvar i-use-global-hl-line-mode t)
+(defvar i-use-global-hl-line-mode nil)
 (defvar i-use-save-history-mode t)
 (defvar i-use-save-place t)
 (defvar i-use-ibuffer-mode t)
@@ -39,10 +41,10 @@
  ;; recursive minibuffer command now possible
  enable-recursive-minibuffers t
  ;; --- hard to remember(file name completion incase sensitively) --
- ;; 
- ;; match file name case --> automatically set by emacs 
+ ;;
+ ;; match file name case --> automatically set by emacs
  ;; ;; match file name case
- ;; read-file-name-completion-ignore-case t ;; 
+ ;; read-file-name-completion-ignore-case t ;;
  ;; match buffer name case
  read-buffer-completion-ignore-case t
  ;; every completion excluding filename/buffername case
@@ -51,15 +53,15 @@
  case-fold-search t
  ;; quiet
  visible-bell t
- ;; 
+ ;;
  hscroll-step 5
- ;; 
+ ;;
  standard-indent 4
- ;; 
+ ;;
  default-tab-width 4
  ;; convenient to move around currunt window.
  make-backup-files nil
- ;; 
+ ;;
  completion-ignored-extensions '(".svn/" "CVS/" ".o" "~" ".bin" ".bak" ".obj" ".map" ".ico" ".pif" ".lnk" ".a" ".ln" ".blg" ".bbl" ".dll" ".drv" ".vxd" ".386" ".elc" ".lof" ".glo" ".idx" ".lot" ".dvi" ".fmt" ".tfm" ".pdf" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".fasl" ".ufsl" ".fsl" ".dxl" ".pfsl" ".dfsl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo")
  safe-local-variable-values '(
 							  (eval rainbow-mode t)
@@ -75,7 +77,7 @@
   (setq ring-bell-function (lambda () t)))
  )
 
-;; function alias 
+;; function alias
 (fset `yes-or-no-p `y-or-n-p)
 (defalias `dtw `delete-trailing-whitespace)
 (defalias `wcr `whitespace-cleanup-region)
@@ -84,7 +86,7 @@
 (defalias `ccc `my-compile-this-file-only)
 (defalias `ffb `font-lock-fontify-buffer)
 
-;; 
+;;
 ;; full option config
 ;;
 (when i-use-column-number-mode
@@ -277,10 +279,10 @@ home directory is a root directory) and removes automounter prefixes
   ;;
   ;; cua-mode (using it for its rectangle selection feature)
   ;;
-  ;; ;; CUA¿¡¼­ Ã³·³, ¼±ÅÃ¿µ¿ª È°¼ºÈ­½Ã DELÀÌ³ª ´Ù¸¥ Å° ÀÔ·ÂÀ» ÇÏ¸é
-  ;; ;; ¼±ÅÃ¿µ¿ªÀÌ Áö¿öÁø´Ù
-  ;; ;; ÀÌ ³»¿ëÀº ¹İµå½Ã icicleÀÇ È°¼ºÈ­º¸´Ù´Â ¸ÕÀú ¿Í¾ß ÇÑ´Ù.
-  ;; ;; http://www.emacswiki.org/cgi-bin/wiki/Icicles_-_Customization_and_General_Tips ÂüÁ¶
+  ;; ;; CUAì—ì„œ ì²˜ëŸ¼, ì„ íƒì˜ì—­ í™œì„±í™”ì‹œ DELì´ë‚˜ ë‹¤ë¥¸ í‚¤ ì…ë ¥ì„ í•˜ë©´
+  ;; ;; ì„ íƒì˜ì—­ì´ ì§€ì›Œì§„ë‹¤
+  ;; ;; ì´ ë‚´ìš©ì€ ë°˜ë“œì‹œ icicleì˜ í™œì„±í™”ë³´ë‹¤ëŠ” ë¨¼ì € ì™€ì•¼ í•œë‹¤.
+  ;; ;; http://www.emacswiki.org/cgi-bin/wiki/Icicles_-_Customization_and_General_Tips ì°¸ì¡°
   ;; (require 'delsel)
   ;; ;; (delete-selection-mode t)
   (setq cua-enable-cua-keys nil)
@@ -335,7 +337,7 @@ home directory is a root directory) and removes automounter prefixes
    yas/prompt-functions '(yas/dropdown-prompt yas/completing-prompt)
    ;; my private snippets
    )
-  (setq yas/snippet-dirs 
+  (setq yas/snippet-dirs
 		`(,(concat my-dotfiles-dir "snippets")
 		  ,(concat my-dotfiles-dir "alien/el-get-package/yasnippet/snippets")))
   ;; (yas/initialize)

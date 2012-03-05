@@ -63,7 +63,7 @@
 
   (custom-theme-set-faces
    'my-dark
-   
+
    ;; setup for inheritance
    `(my-dark-foreground ((t (:foreground ,my-dark-fg))))
    `(my-dark-background ((t (:background ,my-dark-bg))))
@@ -73,8 +73,8 @@
    `(my-dark-primary-2 ((t (:foreground ,my-dark-red-1))))
    `(my-dark-primary-3 ((t (:foreground ,my-dark-red-2))))
    `(my-dark-primary-4 ((t (:foreground ,my-dark-red-3))))
-   `(my-dark-primary-5 ((t (:foreground ,my-dark-red-4))))  
-   `(my-dark-highlight-damp ((t (:foreground "#88b090" :background "#2e3330"))))
+   `(my-dark-primary-5 ((t (:foreground ,my-dark-red-4))))
+   `(my-dark-highlight-damp ((t (:background ,my-dark-yellow-2))))
    `(my-dark-highlight-alerting ((t (:background ,my-dark-red-4))))
    `(my-dark-highlight-subtle ((t (:background ,my-dark-bg+2))))
    `(my-dark-lowlight-1 ((t (:foreground "#606060"))))
@@ -101,7 +101,7 @@
    `(my-dark-blue-3 ((t (:foreground ,my-dark-blue-3))))
    `(my-dark-blue-4 ((t (:foreground ,my-dark-blue-4))))
    `(my-dark-title ((t (:inherit variable-pitch :weight bold :inherit default))))
-   
+
    ;; basics
    `(Bold ((t (:weight bold))))
    `(bold-italic ((t (:slant italic :weight bold))))
@@ -110,10 +110,10 @@
    `(italic ((t (:slant italic))))
    `(underline ((t (:underline t))))
    `(variable-pitch ((t (:weight bold :family "³ª´®°íµñ" :inherit default))))
-   
+
    `(fringe ((t (:inherit default :background ,my-dark-bg+1))))
    `(header-line ((t (:inherit my-dark-highlight-damp :box (:color "#2e3330" :line-width 2)))))
-   `(highlight ((t (:underline nil :inherit my-dark-highlight-subtle))))
+   `(highlight ((t (:underline nil :background ,my-dark-blue-3))))
    `(hover-highlight ((t (:underline t :foreground ,my-dark-yellow))))
    `(match ((t (:inherit my-dark-highlight-alerting :underline nil))))
    `(menu ((t (:background "#1e2320"))))
@@ -135,7 +135,7 @@
    `(scroll-bar ((t (:background ,my-dark-bg+2))))
    `(secondary-selection ((t (:foreground nil :background ,my-dark-bg+2))))
    `(tool-bar ((t (:background ,my-dark-bg+2))))
-   
+
    ;; apt-utils
    `(apt-utils-normal-package ((t (:inherit my-dark-primary-1))))
    `(apt-utils-virtual-package ((t (:inherit my-dark-primary-2))))
@@ -162,7 +162,7 @@
    `(circe-originator-face ((t (:inherit bold))))
    `(circe-prompt-face ((t (:inherit my-dark-primary-1))))
    `(circe-server-face ((t (:inherit font-lock-comment-face))))
-   
+
    ;; comint
    `(comint-highlight-input ((t (:inherit my-dark-green))))
    `(comint-highlight-prompt ((t (:inherit my-dark-green+1))))
@@ -170,10 +170,10 @@
    ;; compilation
    `(compilation-info ((t (:inherit my-dark-primary-1))))
    `(compilation-warning ((t (:inherit font-lock-warning-face))))
-   
+
    ;; cua
    `(cua-rectangle ((t (:inherit region))))
-   
+
    ;; custom
    `(fancy-widget-button ((t (:background "#4f4f4f" :box ( :line-width 2 :style released-button )))))
    `(fancy-widget-button-pressed ((t (:background "#4f4f4f" :box ( :line-width 2 :style pressed-button )))))
@@ -201,10 +201,10 @@
    `(custom-state ((t (:inherit font-lock-comment-face))))
    `(custom-variable-button ((t (:weight bold :underline t))))
    `(custom-variable-tag ((t (:inherit my-dark-primary-2))))
-   
+
    ;; diary
    `(diary ((t (:underline nil :inherit my-dark-primary-1))))
-   
+
    ;; dictionary
    `(dictionary-button ((t (:inherit fancy-widget-button))))
    `(dictionary-reference ((t (:inherit my-dark-primary-1))))
@@ -224,8 +224,8 @@
    `(emms-pbi-song ((t (:foreground ,my-dark-yellow))))
    `(emms-pbi-current ((t (:inherit my-dark-primary-1))))
    `(emms-pbi-mark-marked ((t (:inherit my-dark-primary-2))))
-   
-   ;; erc 
+
+   ;; erc
    `(erc-action-face ((t (:inherit erc-default-face))))
    `(erc-bold-face ((t (:weight bold))))
    `(erc-current-nick-face ((t (:inherit my-dark-primary-1))))
@@ -245,8 +245,8 @@
    `(erc-underline-face ((t (:inherit underline))))
    `(erc-default-face ((t (:foreground ,my-dark-fg))))
    `(erc-input-face ((t (:foreground ,my-dark-yellow))))
-   
-   
+
+
    ;; eshell
    `(eshell-prompt ((t (:inherit my-dark-primary-1))))
    `(eshell-ls-archive ((t (:foreground ,my-dark-red-1 :weight bold))))
@@ -263,7 +263,7 @@
    ;; flyspell
    `(flyspell-duplicate ((t (:foreground ,my-dark-yellow :weight bold))))
    `(flyspell-incorrect ((t (:foreground ,my-dark-red :weight bold))))
-   
+
    ;; font-latex
    `(font-latex-bold ((t (:inherit bold))))
    `(font-latex-warning ((t (:inherit font-lock-warning-face))))
@@ -301,7 +301,7 @@
    `(gnus-group-mail-5-empty-face ((t (:inherit gnus-group-news-5-empty-face))))
    `(gnus-group-mail-6-face ((t (:weight bold :inherit gnus-group-mail-6-empty-face))))
    `(gnus-group-mail-6-empty-face ((t (:inherit gnus-group-news-6-empty-face))))
-   `(gnus-group-mail-low-face ((t (:weight bold :inherit gnus-group-mail-low-empty-face)))) 
+   `(gnus-group-mail-low-face ((t (:weight bold :inherit gnus-group-mail-low-empty-face))))
    `(gnus-group-mail-low-empty-face ((t (:inherit gnus-group-news-low-empty-face))))
    `(gnus-group-news-1-face ((t (:weight bold :inherit gnus-group-news-1-empty-face))))
    `(gnus-group-news-2-face ((t (:weight bold :inherit gnus-group-news-2-empty-face))))
@@ -309,7 +309,7 @@
    `(gnus-group-news-4-face ((t (:weight bold :inherit gnus-group-news-4-empty-face))))
    `(gnus-group-news-5-face ((t (:weight bold :inherit gnus-group-news-5-empty-face))))
    `(gnus-group-news-6-face ((t (:weight bold :inherit gnus-group-news-6-empty-face))))
-   `(gnus-group-news-low-face ((t (:weight bold :inherit gnus-group-news-low-empty-face))))  
+   `(gnus-group-news-low-face ((t (:weight bold :inherit gnus-group-news-low-empty-face))))
    `(gnus-header-content-face ((t (:inherit message-header-other-face))))
    `(gnus-header-from-face ((t (:inherit message-header-from-face))))
    `(gnus-header-name-face ((t (:inherit message-header-name-face))))
@@ -352,23 +352,23 @@
 
    ;; help-argument
    `(help-argument-name ((t (:weight bold))))
-   
+
    ;; hi-lock-mode
    `(hi-yellow  ((t (:foreground ,my-dark-yellow))))
    `(hi-pink  ((t (:foreground ,my-dark-red-4))))
    `(hi-green  ((t (:foreground ,my-dark-green-1))))
    `(hi-blue  ((t (:foreground ,my-dark-blue-5))))
-   
+
 
    ;; highlight
    `(highlight-current-line ((t (:inherit my-dark-highlight-subtle))))
 
    ;; hightlight the current line
    `(hl-line ((t (:inherit nil :background ,my-dark-bg-1))))
-   
+
    ;; holiday
    `(holiday ((t (:underline t :inherit my-dark-primary-4))))
-   
+
    ;; ibuffer
    `(ibuffer-deletion ((t (:inherit my-dark-primary-2))))
    `(ibuffer-marked ((t (:inherit my-dark-primary-1))))
@@ -376,11 +376,11 @@
    `(ibuffer-help-buffer ((t (:inherit font-lock-comment-face))))
 
    ;; icomplete
-   `(icompletep-choices ((t (:foreground ,my-dark-fg)))) 
-   `(icompletep-determined ((t (:foreground ,my-dark-green+1)))) 
-   `(icompletep-nb-candidates ((t (:foreground ,my-dark-green+3)))) 
+   `(icompletep-choices ((t (:foreground ,my-dark-fg))))
+   `(icompletep-determined ((t (:foreground ,my-dark-green+1))))
+   `(icompletep-nb-candidates ((t (:foreground ,my-dark-green+3))))
    `(icompletep-keys ((t (:foreground ,my-dark-red))))
-   
+
    ;; ido
    `(ido-first-match ((t (:inherit my-dark-primary-1))))
    `(ido-only-match ((t (:inherit my-dark-primary-2))))
@@ -401,7 +401,7 @@
    ;; `(info-title-3 ((t (:inherit info-title-4 :foreground ,my-dark-yellow-1 :))))
    ;; `(info-title-2 ((t (:inherit info-title-3 :foreground ,my-dark-yellow))))
    `(info-menu-header ((t (:inherit variable-pitch :foreground ,my-dark-yellow-1))))
-   
+
    ;; isearch
    `(isearch ((t (:foreground ,my-dark-bg-1 :background ,my-dark-yellow))))
    `(isearch-fail ((t (:foreground ,my-dark-fg :background ,my-dark-red-4))))
@@ -430,7 +430,7 @@
    `(jde-java-font-lock-number-face ((t (:inherit font-lock-constant))))
    `(jde-java-font-lock-operator-face ((t (:inherit font-lock-keyword-face))))
    `(jde-java-font-lock-link-face ((t (:inherit my-dark-primary-5 :underline t))))
-   
+
    ;; keywiz
    `(keywiz-right-face ((t (:inherit my-dark-primary-1))))
    `(keywiz-wrong-face ((t (:inherit font-lock-warning-face))))
@@ -440,11 +440,11 @@
    `(magit-section-title ((t (:inherit my-dark-red))))
    `(magit-item-highlight ((t (:inherit my-dark-blue))))
    `(magit-branch ((t (:inherit my-dark-blue))))
-   
+
    ;; makefile
    `(makefile-space ((t (:inherit font-lock-warning-face))))
    `(makefile-shell ((t (nil))))
-   
+
    ;; message
    `(message-cited-text-face ((t (:inherit font-lock-comment-face))))
    `(message-header-name-face ((t (:inherit my-dark-green+1))))
@@ -457,10 +457,10 @@
    `(message-header-xheader-face ((t (:inherit my-dark-green))))
    `(message-mml-face ((t (:inherit my-dark-primary-1))))
    `(message-separator-face ((t (:inherit font-lock-comment-face))))
-   
+
    ;; minimap
    `(minimap-active-region-background ((t (:foreground nil :background "#233323"))))
-   
+
    ;; org-mode
    `(org-agenda-clocking
 	 ((t (:background ,my-dark-green-4 :weight bold))) t)
@@ -470,7 +470,7 @@
 	 ((t (:foreground ,my-dark-blue))) t)
    `(org-agenda-date-weekend
 	 ((t (:foreground ,my-dark-blue+1))) t)
-   
+
    `(org-agenda-structure
 	 ((t (:inherit font-lock-comment-face))))
    `(org-archived ((t (:foreground ,my-dark-fg :weight bold))))
@@ -525,8 +525,8 @@
    `(rainbow-delimiters-depth-10-face ((t (:foreground ,my-dark-green+2))))
    `(rainbow-delimiters-depth-11-face ((t (:foreground ,my-dark-blue+1))))
    `(rainbow-delimiters-depth-12-face ((t (:foreground ,my-dark-red-4))))
-   
-   
+
+
    ;; rcirc
    `(rcirc-my-nick ((t (:inherit my-dark-primary-1))))
    `(rcirc-other-nick ((t (:inherit bold))))
@@ -538,14 +538,14 @@
    `(rcirc-timestamp ((t (:inherit font-lock-comment-face))))
    `(rcirc-prompt ((t (:inherit my-dark-primary-1))))
    `(rcirc-mode-line-nick ((t (:inherit my-dark-primary-1))))
-   
+
    ;; show-paren
    `(show-paren-mismatch ((t (:inherit font-lock-warning-face :weight bold))))
    `(show-paren-match ((t (:foreground ,my-dark-orange :background ,my-dark-bg+2 :weight bold :underline nil))))
 
    ;; setnu
    `(setnu-line-number ((t (:inherit my-dark-lowlight-2))))
-   
+
    ;; speedbar
    `(speedbar-button-face ((t (:inherit my-dark-primary-1))))
    `(speedbar-file-face ((t (:inherit my-dark-primary-2))))
@@ -555,13 +555,13 @@
 
    ;; strokes
    `(strokes-char-face ((t (:inherit font-lock-keyword-face))))
-   
+
    ;; todoo
    `(todoo-item-header-face ((t (:inherit my-dark-primary-1))))
    `(todoo-item-assigned-header-face ((t (:inherit my-dark-primary-2))))
    `(todoo-sub-item-header-face ((t (:foreground ,my-dark-yellow))))
 
-   
+
    ;; tuareg
    `(tuareg-font-lock-governing-face ((t (:inherit my-dark-primary-2))))
    `(tuareg-font-lock-interactive-error-face ((t (:inherit font-lock-warning-face))))
@@ -571,7 +571,7 @@
    ;; twittering-mode
    `(twittering-username-face ((t (:inherit my-dark-red-2))))
    `(twittering-uri-face ((t (:inherit my-dark-blue :underline t))))
-   
+
    ;; w3m
    `(w3m-form-button-face ((t (:inherit widget-button))))
    `(w3m-form-button-pressed-face ((t (:inherit widget-button-pressed))))
@@ -593,19 +593,23 @@
    `(rst-level-2-face ((t (:foreground ,my-dark-green+2 :background nil))))
    `(rst-level-3-face ((t (:foreground ,my-dark-green+1 :background nil))))
    `(rst-level-4-face ((t (:foreground ,my-dark-green :background nil))))
-   
-   ;; which 
+
+   ;; which
    `(which-func ((t (:inherit mode-line))))
 
    ;; anything
+   `(anything-header ((t (:foreground ,my-dark-yellow))))
    `(anything-isearch-match ((t (:inherit isearch))))
    `(anything-dir-priv ((t (:inherit my-dark-highlight-subtle))))
    `(anything-file-name ((t (:foreground ,my-dark-yellow-1))))
+   `(anything-ff-file ((t (:inherit italic))))
+   `(anything-ff-executable ((t (:foreground ,my-dark-green+4 :inherit italic))))
+   `(anything-ff-directory ((t (:inherit italic))))
    `(anything-grep-file ((t (:foreground ,my-dark-yellow-1))))
    `(anything-grep-match ((t (:inherit my-dark-red))))
    `(anything-overlay-line-face ((t (:inherit region))))
-   `(anything-dir-heading ((t (:inherit my-dark-highlight-damp))))
-   `(anything-match ((t (:inherit my-dark-highlight-damp))))
+   `(anything-dir-heading ((t (:inherit region))))
+   `(anything-match ((t (:foreground ,my-dark-red+1 :inherit italic))))
 
    ;; wl (wanderlust)
    ;; some faces end with -face, while other don't; confusing
@@ -614,7 +618,7 @@
    `(wl-highlight-folder-path-face ((t (:inherit my-dark-orange))))
    `(wl-highlight-folder-unread-face ((t (:inherit my-dark-blue))))
    `(wl-highlight-folder-zero-face ((t (:inherit my-dark-fg))))
-   `(wl-highlight-folder-unknown-face ((t (:inherit my-dark-blue))))    
+   `(wl-highlight-folder-unknown-face ((t (:inherit my-dark-blue))))
    `(wl-highlight-message-citation-header ((t (:inherit my-dark-red-1))))
    `(wl-highlight-message-cited-text-1 ((t (:inherit my-dark-red))))
    `(wl-highlight-message-cited-text-2 ((t (:inherit my-dark-green+2))))
@@ -625,7 +629,7 @@
    `(wl-highlight-message-important-header-contents ((t (:inherit my-dark-green+2))))
    `(wl-highlight-message-header-contents ((t (:inherit my-dark-green+1))))
    `(wl-highlight-message-important-header-contents2 ((t (:inherit my-dark-green+2))))
-   `(wl-highlight-message-signature ((t (:inherit my-dark-green))))   
+   `(wl-highlight-message-signature ((t (:inherit my-dark-green))))
    `(wl-highlight-message-unimportant-header-contents ((t (:inherit my-dark-lowlight-2))))
    `(wl-highlight-summary-answered-face ((t (:inherit my-dark-blue))))
    `(wl-highlight-summary-disposed-face ((t (:inherit my-dark-lowlight-2

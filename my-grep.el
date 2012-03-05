@@ -1,3 +1,5 @@
+;; -*- coding:utf-8; -*-
+
 (eval-after-load "full-ack"
   (setq ack-executable "c:/dev/scripts/ack.cmd"))
 

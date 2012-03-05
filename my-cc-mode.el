@@ -1,3 +1,5 @@
+;; -*- coding:utf-8; -*-
+
 (require 'cc-mode)
 (require 'cc-vars)
 
@@ -63,11 +65,11 @@
 		  "\\bWp[:alnum:]*\\b"
 		  "\\Q[:alnum:]*\\b"
 		  ))
-			 
+
 ;;
 ;; Customizations for all modes in CC Mode.
 ;;
-;; ¾ÆÁ÷ ¿Ï¼º ¾ÈµÈ mfc macro µé¿©¾²±â line-up ÇÔ¼ö
+;; ì•„ì§ ì™„ì„± ì•ˆëœ mfc macro ë“¤ì—¬ì“°ê¸° line-up í•¨ìˆ˜
 (defun my-c-msvc-macro-indent (langelem)
   (save-excursion
 	(message "--------------------------")
@@ -103,7 +105,7 @@
 
    switch(...)
    {
-   case XXX:   
+   case XXX:
    {
         xxxx;
    }
@@ -115,7 +117,7 @@ will be
 
    switch(...)
    {
-   case XXX:   
+   case XXX:
       {
          xxxx;
       }
@@ -130,7 +132,7 @@ will be
 		  c-basic-offset
 		0))))
 
-;; wx 
+;; wx
 (add-to-list 'c++-font-lock-extra-types "\\bwx[A-Z][a-z][a-zA-Z]*?\\b")
 
 (defun my-c-lineup-topmost-intro-cont(langelm)
@@ -161,7 +163,7 @@ will be
 	  nil))))
 
 (defun my-file-containig-signature-exist-p (dir file-pattern-regexp signature-regexp)
-  (let ((found-file-list (directory-files-and-attributes 
+  (let ((found-file-list (directory-files-and-attributes
 						  dir
 						  t
 						  file-pattern-regexp))
@@ -200,7 +202,7 @@ will be
 		(setq targetname (concat srctitle ".o")))))
 	;; (if (string-match "/vobs" dirname)
 	;;     (setq makeprog "pbuild"))
-	(concat 
+	(concat
 	 (cond
 	  ;; when there is makefile in this dir..
 	  ((or (file-exists-p "Makefile")
@@ -274,7 +276,7 @@ will be
 ;; it)"
 ;;   (set (make-local-variable 'post-command-hook)
 ;;        (cons 'show-fly-err-at-point post-command-hook)))
-;; 
+;;
 
 ;; (setq flymake-allowed-file-name-masks
 ;; 	  '(("\\.\\(?:c\\(?:pp\\|xx\\|\\+\\+\\)?\\|CC\\)\\'" my-flymake-simple-make-init)
@@ -313,7 +315,7 @@ will be
 ;; ;;
 ;; ;; cc-mode hook configuration
 ;; ;;
-(c-add-style 
+(c-add-style
  "mystyle"
  '("stroustrup"
    (indent-tabs-mode . t)

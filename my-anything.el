@@ -1,3 +1,5 @@
+;; -*- coding:utf-8; -*-
+
 ;; TODO more doc
 (require 'anything)
 (require 'anything-config)
