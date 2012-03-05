@@ -143,3 +143,5 @@
   (modify-all-frames-parameters default-frame-alist)
   )
 
+;; disable trackback....
+(toggle-debug-on-error nil)
