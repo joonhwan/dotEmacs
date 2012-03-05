@@ -1,3 +1,4 @@
+;; TODO more doc
 (require 'anything)
 (require 'anything-config)
 (require 'anything-match-plugin)
@@ -63,7 +64,7 @@
 							 ("Copy Name" . (lambda (candidate)
 											  (kill-new (anything-c-colors-get-name candidate))))
 							 ("Copy RGB" . (lambda (candidate)
-											 (kill-new (anything-c-colors-get-rgb candidate))))     
+											 (kill-new (anything-c-colors-get-rgb candidate))))
 							 ))
  )
 (cond
@@ -206,13 +207,13 @@
 
 (add-to-list 'anything-after-initialize-hook 'my-disable-truncate-line)
 
-;; 
+;;
 ;; locate and c/c++ project affinity....
-;; 
+;;
 (progn
   (defvar anything-c-everything-preferred-directory
 	nil)
-  
+
   (defun my-anything-cc-mode-hook ()
 	(make-local-variable 'anything-c-everything-preferred-directory))
 
@@ -230,7 +231,7 @@
 	  (apply 'start-process "everything-process" nil
 			 (append anything-c-everything-options
 					 (list my/pattern)))))
-  
+
   (defvar anything-c-source-everything
 	'((name . "Everything")
 	  (candidates . anything-c-source-everything-process)
