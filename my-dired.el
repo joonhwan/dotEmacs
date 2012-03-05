@@ -1,6 +1,5 @@
 (require 'dired)
 (require 'dired-x)
-(require 'ls-lisp)
 (require 'wdired)
 (require 'find-lisp)
 ;;
@@ -14,6 +13,7 @@
 (cond
  (win32p
   (progn
+	(require 'ls-lisp)
 	(setq dired-listing-switches "-alh"
 		  ;; ls-lisp-use-insert-directory-program nil
 		  ls-lisp-verbosity '('links 'uid)
@@ -94,9 +94,16 @@
 ;; dired-x setting
 ;;
 (dired-omit-mode t)
+(setq dired-omit-files (concat dired-omit-files "\\|\\.DS_Store$\\|\\.git$"))
 
 ;; override
 ;; (define-key dired-mode-map [(meta return)] 'my-open-in-total-cmd)
+
+(defun my-dired-mode-hook ()
+  (dired-omit-mode 1)
+  )
+
+(add-hook 'dired-mode-hook 'my-dired-mode-hook)
 
 (provide 'my-dired)
 
