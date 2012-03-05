@@ -70,7 +70,7 @@
 (require 'my-cc-mode) ;; for c/c++ mode only
 (require 'my-dired)
 ;; ;; (require 'my-muse)
-;; (require 'my-shell)
+(require 'my-shell)
 ;; ;; (require 'my-svn)
 ;; ;; (require 'my-web)
 (require 'my-grep)

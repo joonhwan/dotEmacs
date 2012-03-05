@@ -67,7 +67,7 @@
 	   ;; 'alpha' : transparency
 	   ;; 1st number : foreground value,
 	   ;; 2nd number : background value
-	   (alpha . (98 96))
+	   ;; (alpha . (98 96))
 	   ;; ;; gamma correction
 	   ;; ;; 'nil' ==> default gamma
 	   ;; ;; 2.1 ==> maybe center? (check `frame.c' code)
