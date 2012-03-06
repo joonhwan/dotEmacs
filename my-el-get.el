@@ -40,66 +40,59 @@
       url)))
 
 
+;; local sources
+(setq el-get-sources
+      '(
+		(:name iimage
+			   :description "inline'd image mode"
+			   :type http
+			   :url "http://www.netlaputa.ne.jp/~kose/Emacs/lisp/iimage.el"
+			   )
+		(:name qml-mode
+			   :type git
+			   :url "git://github.com/Joonhwan/qml-mode.git"
+			   )
+		(:name log4j-mode
+			   :type elpa
+			   )
+		))
 
-;; now either el-get is `require'd already, or have been `load'ed by the
-;; el-get installer.
-(setq
- el-get-sources
- (append
-  '(
-    anything
-    anything-ack
-    asciidoc
-    auto-install
-    csharp-mode
-    deferred
-    el-get
-    eproject
-    evil
-    full-ack
-    goto-last-change
-    graphviz-dot-mode
-    gtranslate
-    htmlize
-    ido-ubiquitous
-    iedit
-    keywiz
-    log4j-mode
-    lua-mode
-    magit
-    markdown-mode
-    package
-    popwin
-    (name: qml-mode
-	   :type git
-	   :url "git://github.com/Joonhwan/qml-mode.git")
-    rainbow-delimiters
-    rainbow-mode
-    scss-mode
-    smex
-    workgroups
-    yasnippet
-    )
+(setq my-packages
+      (append
+       '(
+		 anything
+		 anything-ack
+		 asciidoc
+		 auto-install
+		 csharp-mode
+		 deferred
+		 el-get
+		 eproject
+		 evil
+		 full-ack
+		 goto-last-change
+		 graphviz-dot-mode
+		 gtranslate
+		 htmlize
+		 ido-ubiquitous
+		 iedit
+		 keywiz
+		 lua-mode
+		 magit
+		 markdown-mode
+		 nxhtml
+		 package
+		 popwin
+		 rainbow-delimiters
+		 rainbow-mode
+		 scss-mode
+		 smex
+		 workgroups
+		 yasnippet
+		 )
+       (mapcar 'el-get-source-name el-get-sources)))
 
-  ;; (mapcar (lambda (pkg) `(:name ,pkg :type elpa))
-  ;; 	  el-get-sources-from-elpa)
-
-  (mapcar
-   (lambda (pkg) `(:name ,pkg :type emacswiki))
-   '(
-     cmd-mode
-     )
-   )
-
-  ;; (mapcar (lambda (url)
-  ;; 	    `(:name ,(el-get-package-name-from-url url)
-  ;; 		    :type http
-  ;; 		    :url ,url))
-  ;; 	  el-get-sources-from-http)
-  ))
-
-(loop for source in el-get-sources
-      do (ignore-errors (el-get 'sync (list (el-get-source-name source)))))
+(el-get 'sync my-packages)
 
 (package-initialize)
 

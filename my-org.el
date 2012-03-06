@@ -21,7 +21,7 @@
 (my-modify-alist-with-alist
  'org-export-html-xml-declaration
  '(("html" . "")))
-				 
+
 ;; active org-babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -34,7 +34,7 @@
 ;; customizing org
 (setq
  org-startup-folded t
- ;; #+begin_src ... #+end_src 부분을 원래의 font-lock 으로..
+ ;; #+begin_src ... #+end_src  font-lock
  org-src-fontify-natively t
  org-agenda-files '("~/DropBox/todo.org")
  org-default-notes-file "~/DropBox/notes.org"
@@ -127,6 +127,6 @@
 (define-key org-mode-map "\C-coa" 'org-agenda)
 (define-key org-mode-map "\C-cob" 'org-iswitchb)
 (define-key org-mode-map "\C-cop" 'my-org-publish)
-	  
+
 
 (provide 'my-org)
