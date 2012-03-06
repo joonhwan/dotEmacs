@@ -19,7 +19,7 @@
 
 (add-to-list 'load-path my-dotfiles-dir)
 (add-to-list 'load-path my-autoinstall-dir)
-(add-to-list 'load-path "alien/manual-installed")
+(add-to-list 'load-path "alien/manual-package")
 
 ;; (add-to-list 'load-path my-ccmode-dir)
 (add-to-list 'load-path my-etc-dir)	;; misc elisp packages...
