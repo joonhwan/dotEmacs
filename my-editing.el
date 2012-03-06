@@ -304,7 +304,7 @@ home directory is a root directory) and removes automounter prefixes
   (setq
    display-buffer-function 'popwin:display-buffer
    special-display-function 'popwin:special-display-popup-window
-   special-display-regexps `(,(regexp-opt '("\\*completions\\*" "\\*Completions\\*" "\\*Help\\*")))
+   special-display-regexps `(,(regexp-opt '("\\*selection\\*" "\\*completions\\*" "\\*Completions\\*" "\\*Help\\*")))
    ;; special-display-buffer-names '("*cmd shell*" "*compilation*"))
    )
   (global-set-key (kbd "C-c p") popwin:keymap)

@@ -136,7 +136,7 @@
   (let ((new-config
 		 (cond
 		  ((or win32p unixp)
-		   '((top . 0) (left . 0) (width . 220) (height . 66)))
+		   '((top . 0) (left . 0) (width . 180) (height . 62)))
 		  (macp
 		   '((top . 10) (left . 10) (width . 150) (height . 46)))
 		  )))

@@ -127,8 +127,13 @@
 ;;
 (when (my-try-require 'cmake-mode)
   (require 'cmake-mode)
-  (add-to-list 'auto-mode-alist '(("CMakeLists\\.txt\\'" . cmake-mode)
-								  ("\\.cmake\\'" . cmake-mode))))
+  (setq auto-mode-alist
+		(append '(
+				  ("CMakeLists\\.txt\\'" . cmake-mode)
+				  ("\\.cmake\\'" . cmake-mode)
+				  )
+				auto-mode-alist))
+  )
 
 ;;
 ;; eshell

@@ -127,6 +127,9 @@
 (define-key org-mode-map "\C-coa" 'org-agenda)
 (define-key org-mode-map "\C-cob" 'org-iswitchb)
 (define-key org-mode-map "\C-cop" 'my-org-publish)
-
+(when (locate-library "anything")
+  (define-key org-mode-map (kbd "C-c a o") 'anything-info-org)
+  (define-key org-mode-map (kbd "C-c a k") 'anything-org-keywords)
+)
 
 (provide 'my-org)

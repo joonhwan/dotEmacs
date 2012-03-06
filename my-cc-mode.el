@@ -152,6 +152,11 @@ will be
 		 (t
 		  (c-lineup-topmost-intro-cont langelm))))))))
 
+;; (font-lock-add-keywords
+;;  'c++-mode
+;;  '(((regexp-opt '("foreach" "emit" "Q_ASSERT")) . font-lock-keyword-face)))
+
+
 (defun my-c-lineup-statement-cont(langelm)
   (save-excursion
 	(previous-line)

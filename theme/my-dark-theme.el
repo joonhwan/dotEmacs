@@ -463,6 +463,7 @@
    `(minimap-active-region-background ((t (:foreground nil :background "#233323"))))
 
    ;; org-mode
+   `(org-document-title ((t (:weight bold :height 1.4 :foreground ,my-dark-blue+1))))
    `(org-agenda-clocking
 	 ((t (:background ,my-dark-green-2 :weight bold))) t)
    `(org-agenda-date-today
@@ -483,14 +484,14 @@
    `(org-formula ((t (:foreground ,my-dark-yellow-2))))
    `(org-headline-done ((t (:foreground ,my-dark-green+3))))
    `(org-hide ((t (:foreground ,my-dark-bg+2))))
-   `(org-level-1 ((t (:foreground ,my-dark-orange))))
-   `(org-level-2 ((t (:foreground ,my-dark-yellow))))
-   `(org-level-3 ((t (:foreground ,my-dark-blue))))
-   `(org-level-4 ((t (:foreground ,my-dark-cyan))))
-   `(org-level-5 ((t (:foreground ,my-dark-blue-1))))
-   `(org-level-6 ((t (:foreground ,my-dark-blue-2))))
-   `(org-level-7 ((t (:foreground ,my-dark-blue-3))))
-   `(org-level-8 ((t (:foreground ,my-dark-blue-4))))
+   `(org-level-1 ((t (:height 1.10 :foreground ,my-dark-yellow :inherit org-level-2))))
+   `(org-level-2 ((t (:height 1.08 :foreground ,my-dark-yellow-1 :inherit org-level-3))))
+   `(org-level-3 ((t (:height 1.06 :foreground ,my-dark-yellow-2 :inherit org-level-4))))
+   `(org-level-4 ((t (:height 1.04 :foreground ,my-dark-cyan :inherit org-level-5))))
+   `(org-level-5 ((t (:foreground ,my-dark-blue-1 :inherit org-level-6))))
+   `(org-level-6 ((t (:foreground ,my-dark-blue-2 :inherit org-level-7))))
+   `(org-level-7 ((t (:foreground ,my-dark-blue-3 :inherit org-level-8))))
+   `(org-level-8 ((t (:weight bold :foreground ,my-dark-blue-4))))
    `(org-link ((t (:foreground ,my-dark-yellow-2 :underline t))))
    `(org-scheduled ((t (:foreground ,my-dark-green+4))))
    `(org-scheduled-previously ((t (:foreground ,my-dark-red-4))))

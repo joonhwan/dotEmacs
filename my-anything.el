@@ -43,7 +43,7 @@
   ))
 
 (setq
- anything-candidate-number-limit nil
+ anything-candidate-number-limit 100
  anything-c-locate-command (case system-type
 							 ('gnu/linux "locate -i -r %s")
 							 ('berkeley-unix "locate -i %s")

@@ -9,9 +9,9 @@
 (load-theme 'my-dark)
 ;; (load-theme 'solarized-jhlee-dark)
 
-;; 
+;;
 ;;  from 'frame.c'
-;;  
+;;
 ;; static const struct frame_parm_table frame_parms[] =
 ;; {
 ;;   {"auto-raise",		&Qauto_raise},
@@ -63,7 +63,7 @@
 	 '(;; (menu-bar-lines . 0) ;; (menu-bar-mode nil)
 	   (tool-bar-lines . 0) ;; (setq tool-bar-mode nil)
 	   ;; (scroll-bar . 14)
-	   (font . "Ubuntu Mono-11:normal:antialias=natural")
+	   ;; (font . "Ubuntu Mono-11:normal:antialias=natural")
 	   ;; 'alpha' : transparency
 	   ;; 1st number : foreground value,
 	   ;; 2nd number : background value
@@ -75,7 +75,8 @@
 	   (line-spacing . 0)
 	   ;; (font . "Anonymous Pro-11:normal:antialias=natural")
 	   ;; (font . "Andale Mono-10.0:bold:spacing=110:antialias=natural")
-	   ;; (font . "³ª´®°íµñÄÚµù-11:normal:antialias=natural")
+	   (font . "Bitstream Vera Sans Mono-11.0:normal:spacing=110:antialias=natural")
+	   ;; (font . "ë‚˜ëˆ”ê³ ë”•ì½”ë”©-11:normal:antialias=natural")
 	   ))
 	(macp
 	 '(
@@ -89,4 +90,3 @@
   )
 
 (provide 'my-theme)
-
