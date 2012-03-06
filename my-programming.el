@@ -8,7 +8,10 @@
 ;;
 (when (my-try-require 'magit)
   (global-set-key (kbd "C-x C-g") 'magit-status)
-  (setq magit-process-connection-type nil)
+  ;; unable to detect end of process in magit process buffer?!
+  ;; discussion found https://github.com/magit/magit/issues/18
+  ;; but no help. :(
+  ;; (setq magit-process-connection-type nil)
 )
 
 ;;
