@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: switch case statement for hsm ... { ... } old version
+# key: switchsm
+# --
+switch(${1:e->sig})
+{
+case Q_ENTRY_SIG:
+    return Q_HANDLED();
+case Q_INIT_SIG:
+    return Q_HANDLED();
+case Q_EXIT_SIG:
+    return Q_HANDLED();$0
+}
