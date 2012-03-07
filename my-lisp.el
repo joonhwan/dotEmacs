@@ -26,7 +26,7 @@ of an error, just add the package to a list of missing packages."
      nil)))
 
 ;; [TIP] http://dreamstorm.cafe24.com/cgi-bin/moin.cgi/dreamstorm/emacs
-;; ¿©·¯ È¯°æ¿¡¼­ ¾²±â À§ÇÑ ¼³Á¤°ªµé
+;; ì—¬ëŸ¬ í™˜ê²½ì—ì„œ ì“°ê¸° ìœ„í•œ ì„¤ì •ê°’ë“¤
 (defconst win32p
   (if (eq system-type 'windows-nt) t nil)
   "true if win32 nt-emacs")
