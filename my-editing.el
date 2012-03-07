@@ -428,8 +428,6 @@ home directory is a root directory) and removes automounter prefixes
 ;;
 ;; joon customized editing feature
 (progn
-  (global-set-key (kbd "C-c g r") 'rgrep)		; Search Recursively
-  (global-set-key (kbd "C-c g l") 'lgrep)		; Search Locally
   (global-set-key (kbd "C-c b r") 'rename-buffer)
   (global-set-key (kbd "C-c e b") 'ediff-buffers)
   (global-set-key (kbd "C-c e r") 'ediff-revision)

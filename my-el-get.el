@@ -10,10 +10,19 @@
 (unless (require 'el-get nil t)
   (with-current-buffer
       (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (let (el-get-master-branch)
+       "https://raw.github.com/Joonhwan/el-get/master/el-get-install.el")
+    (let ((el-get-master-branch t)
+	  (el-get-git-install-url "git@github.com:Joonhwan/el-get.git"))
       (end-of-buffer)
       (eval-print-last-sexp))))
+
+(unless (functionp 'el-get-package-name)
+  (defun el-get-package-name (package-symbol)
+    "Returns a string package"
+    (if (symbolp package-symbol)
+	(cadr (split-string (format "%s" package-symbol) ":"))
+      package-symbol))
+  )
 
 (eval-after-load "package"
   '(progn

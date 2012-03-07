@@ -1,7 +1,16 @@
 ;; -*- coding:utf-8; -*-
 
-(eval-after-load "full-ack"
-  (setq ack-executable "c:/dev/scripts/ack.cmd"))
+(when win32p
+  (eval-after-load "full-ack"
+	(progn
+	  (setq ack-executable "c:/dev/scripts/ack.cmd")
+	  ;; (setq ack-arguments '("--nogroup" "--nopager"))
+	  (setq
+	   ack-heading nil
+	   ack-context 0
+	   )
+	)
+  ))
 
 (setq  grep-files-aliases
 	   '(("el" . "*.el")
@@ -43,4 +52,12 @@
 )
 (add-hook 'grep-setup-hook 'my-setup-grep-mode)
 
+(progn
+  (global-set-key (kbd "C-c g r") 'rgrep)		; Search Recursively
+  (global-set-key (kbd "C-c g l") 'lgrep)		; Search Locally
+  (if (commandp 'ack)
+	(global-set-key (kbd "C-c g a") 'ack))
+  )
+
 (provide 'my-grep)
+
