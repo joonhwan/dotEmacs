@@ -77,7 +77,7 @@
 		 deferred
 		 el-get
 		 eproject
-		 evil
+		 ;; evil
 		 full-ack
 		 goto-last-change
 		 graphviz-dot-mode
