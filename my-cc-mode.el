@@ -333,6 +333,15 @@ will be
 					  defun-close-semi
 					  scope-operator
 					  ))
+   (c-hanging-braces-alist . (
+							  (statement-case-open after)
+							  (inline-open after)
+							  ;; (brace-list-open)
+							  ;; (brace-entry-open)
+							  ;; (substatement-open after)
+							  ;; (block-close . c-snug-do-while)
+							  ;; (arglist-cont-nonempty)
+							  ))
    (c-offsets-alist
 	(arglist-intro . ++)
 	(comment-intro . 0)
