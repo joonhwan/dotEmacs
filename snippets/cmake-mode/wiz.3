@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: static lib
+# key: wiz
+# --
+
+PROJECT(${1:ProjectName})
+
+INCLUDE_DIRECTORIES(\${CMAKE_CURRENT_BINARY_DIR})
+
+SET(QT_USE_QTMAIN ON)
+INCLUDE(\${QT_USE_FILE})
+
+SET(sources
+  $0
+  )
+
+SET(header
+  )
+
+
+ADD_LIBRARY(\${PROJECT_NAME}
+  \${sources}
+  \${header}
+  )
