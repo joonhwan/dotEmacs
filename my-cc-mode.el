@@ -394,7 +394,7 @@ will be
 
 (define-key c-mode-base-map (kbd "C-m") 'newline)
 (define-key c-mode-base-map (kbd "C-<f7>") 'compile)
-(define-key c-mode-base-map (kbd "C-<f8>") 'recompile))
+(define-key c-mode-base-map (kbd "C-<f8>") 'recompile)
 (define-key c-mode-base-map (kbd "C-c h p") '(lambda(arg)
 											   (interactive "P")
 											   (ff-find-other-file arg t)))
