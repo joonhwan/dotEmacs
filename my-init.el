@@ -87,9 +87,8 @@
 ;; (require 'erc)
 ;; (require 'find-dired)
 ;; (require 'locate)
-
-(if (and macp (not (daemonp)))
-	(require 'my-font))
+(unless (daemonp)
+  (require 'my-font))
 
 ;; final big brother that can handle many configuration
 ;;

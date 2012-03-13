@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: ref data() const; / setData(ref);
+# key: getset
+# --
+${1:int} ${2:data}(void) const {
+return m_$2;
+}
+void set${2:$(concat (upcase (substring (yas/substr text ".*") 0 1)) (substring (yas/substr text ".*") 1))}($1& value) {
+m_$2 = value;
+}

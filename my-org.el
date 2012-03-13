@@ -36,8 +36,8 @@
  org-startup-folded t
  ;; #+begin_src ... #+end_src  font-lock
  org-src-fontify-natively t
- org-agenda-files '("~/DropBox/todo.org")
- org-default-notes-file "~/DropBox/notes.org"
+ org-directory "~/DropBox/org"
+ org-agenda-files '("todo.org")
  ;; org-agenda-ndays 7
  ;; org-deadline-warning-days 14
  ;; org-agenda-show-all-dates t
@@ -45,7 +45,7 @@
  ;; org-agenda-skip-scheduled-if-done t
  ;; org-agenda-start-on-weekday nil
  ;; org-reverse-note-order t
- org-remember-store-without-prompt t
+ ;; org-remember-store-without-prompt t
  ;; org-fast-tag-selection-single-key (quote expert))
 
  org-plantuml-jar-path "c:/dev/plantuml/plantuml.jar"
@@ -59,9 +59,14 @@
 		"Joonhwan Lee"
 		)
 	  (fset 'user-full-name 'my-user-full-name)))
-
-(setq org-export-htmlize-output-type 'css)
-(setq org-export-html-style "<link rel=\"stylesheet\" type=\"text/css\" href=\"org-styles.css\">")
+(setq
+ org-export-htmlize-output-type 'css
+ setq org-export-html-style (concat "<link"
+									"rel=\"stylesheet\" "
+									"type=\"text/css\" "
+									"href=\"org-styles.css\""
+									">")
+ )
 
 (setq org-publish-project-alist
 	  '(
@@ -123,6 +128,35 @@
 ;; ;; Set to <your Dropbox root directory>/MobileOrg.
 ;; (setq org-mobile-directory "~/Dropbox/MobileOrg")
 
+;;
+;; org-capture configuration
+;;
+(setq
+ ;; filename for notes fallback case out of 'org-capture-template'
+ org-default-notes-file "notes.org"
+ ;; 
+ org-capture-templates 
+ '(("j" ;; key
+	"Journal" ;; description
+	entry ;; type
+	(file+datetree "journal.org") ;; target
+	"* %?\nEntered on %U\n  %i\n  %a" ;; template
+	)
+   ("c" ;; key
+	"CodeNote" ;; description
+	entry ;; type
+	(file+headline "note.org" "Code") ;; target
+	"** %?\nEntered on %U\n  %i\n  %a" ;; template
+	)
+   ("l" ;; key
+	"Lifehack" ;; description
+	entry ;; type
+	(file+headline "note.org" "Life") ;; target
+	"** %?\nEntered on %U\n  %i\n  %a" ;; template
+	)
+   )
+ )
+ 
 (define-key org-mode-map "\C-col" 'org-store-link)
 (define-key org-mode-map "\C-coa" 'org-agenda)
 (define-key org-mode-map "\C-cob" 'org-iswitchb)
@@ -131,5 +165,6 @@
   (define-key org-mode-map (kbd "C-c a o") 'anything-info-org)
   (define-key org-mode-map (kbd "C-c a k") 'anything-org-keywords)
 )
+(define-key global-map (kbd "C-c c") 'org-capture)
 
 (provide 'my-org)

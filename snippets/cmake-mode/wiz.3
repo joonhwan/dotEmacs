@@ -1,16 +1,24 @@
 # -*- mode: snippet -*-
-# name: qt blank top cmakelist
+# name: static lib
 # key: wiz
 # --
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8 FATAL_ERROR)
-
 PROJECT(${1:ProjectName})
-
-# Set up the environment
-FIND_PACKAGE(Qt4 REQUIRED)
 
 INCLUDE_DIRECTORIES(\${CMAKE_CURRENT_BINARY_DIR})
 
 SET(QT_USE_QTMAIN ON)
 INCLUDE(\${QT_USE_FILE})
+
+SET(sources
+  $0
+  )
+
+SET(header
+  )
+
+
+ADD_LIBRARY(\${PROJECT_NAME}
+  \${sources}
+  \${header}
+  )
