@@ -48,7 +48,9 @@
  ;; org-remember-store-without-prompt t
  ;; org-fast-tag-selection-single-key (quote expert))
 
- org-plantuml-jar-path "c:/dev/plantuml/plantuml.jar"
+ org-plantuml-jar-path (cond
+						(win32p "c:/dev/plantuml/plantuml.jar")
+						(macp "~/scripts/plantuml.jar"))
  )
 
 (if win32p
@@ -61,11 +63,11 @@
 	  (fset 'user-full-name 'my-user-full-name)))
 (setq
  org-export-htmlize-output-type 'css
- setq org-export-html-style (concat "<link"
-									"rel=\"stylesheet\" "
-									"type=\"text/css\" "
-									"href=\"org-styles.css\""
-									">")
+ org-export-html-style (concat "<link"
+							   "rel=\"stylesheet\" "
+							   "type=\"text/css\" "
+							   "href=\"org-styles.css\""
+							   ">")
  )
 
 (setq org-publish-project-alist
