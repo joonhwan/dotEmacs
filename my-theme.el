@@ -82,8 +82,8 @@
 	 '(
 	   (tool-bar-lines . 0)
 	   ;; (font . "Monaco-12:normal:antialias=natural")
-	   (font . "Ubuntu_Mono-14:normal:antialias=natural")
-	   ;; (font . "Menlo-13:normal:antialias=natural")
+	   ;; (font . "Ubuntu_Mono-14:normal:antialias=natural")
+	   (font . "Menlo-14:normal:antialias=natural")
 	   ))))
   (setq initial-frame-alist default-frame-alist)
   (modify-all-frames-parameters default-frame-alist)

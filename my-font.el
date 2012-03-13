@@ -7,9 +7,9 @@
   ;; 				 ;; "Monaco-14")
   ;; 				 ;;"Andale_Mono-14")
   (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-					'("NanumGothicOTF" . "iso10646-1"))
+					'("NanumGothic" . "iso10646-1"))
   (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-					'("NanumGothicOTF" . "iso10646-1"))
+					'("NanumGothic" . "iso10646-1"))
   (set-fontset-font "fontset-default" 'kana
 					'("Hiragino Kaku Gothic Pro" . "iso10646-1"))
   (set-fontset-font "fontset-default" 'han
