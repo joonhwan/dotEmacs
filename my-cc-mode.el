@@ -392,7 +392,7 @@ will be
 
 (add-to-list 'auto-mode-alist '("\\.\\(c\\|cpp\\|cxx\\|cc\\|h\\|inl\\|hpp\\|ihh\\|hh\\)\\(\\.~[^~]+[~]?\\)?$" . c++-mode) nil)
 
-(define-key c-mode-base-map (kbd "C-m" 'newline)
+(define-key c-mode-base-map (kbd "C-m") 'newline)
 (define-key c-mode-base-map (kbd "C-<f7>") 'compile)
 (define-key c-mode-base-map (kbd "C-<f8>") 'recompile))
 (define-key c-mode-base-map (kbd "C-c h p") '(lambda(arg)
