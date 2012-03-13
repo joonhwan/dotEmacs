@@ -185,6 +185,17 @@
 	  flymake-log-level 2
 	  )))
 
+;;
+;; plantuml
+;;
+(eval-after-load "plantuml"
+  (progn
+	(setq plantuml-jar-path (cond
+							 (win32p "c:/dev/plantuml/plantuml.jar")
+							 (t "~/scripts/plantuml.jar"))
+	)
+  )
+  )
 
 ;; (require 'csharp-mode)
 
