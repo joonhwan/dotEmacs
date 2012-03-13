@@ -3,16 +3,6 @@
 (require 'cc-mode)
 (require 'cc-vars)
 
-(define-key c-mode-base-map "\C-m" 'newline)
-(define-key c-mode-base-map "\C-cc" 'compile)
-(define-key c-mode-base-map "\C-c\C-c" 'compile)
-(define-key c-mode-base-map "\C-c\C-f" 'my-compile-this-file-only)
-(define-key c-mode-base-map "\C-c\C-r" 'recompile)
-(define-key c-mode-base-map "\C-chp" '(lambda(arg)
-										(interactive "P")
-										(ff-find-other-file arg t)))
-(define-key c-mode-base-map "\C-cho" 'ff-find-other-file)
-
 ;; order of cdr list is IMPORTANT!  (for example, when
 ;; 'ff-find-other-file' failed it would ask user the default file name
 ;; with the extension which is car of this list!)
@@ -191,11 +181,6 @@ will be
 ;; compile mode
 ;;
 (require 'compile)
-(setq my-compile-key
-	  '((",c" . compile)
-		(",r" . recompile)))
-(dolist (joonkey my-compile-key)
-  (define-key mode-specific-map (car joonkey) (cdr joonkey)))
 (defun my-recommend-compile-command(&optional arg)
   (let* ((my-buffer (current-buffer))
 		 (srcname (file-name-nondirectory buffer-file-name))
@@ -243,6 +228,11 @@ will be
 	  (t "echo unknown compilation case!"))
 	 (if targetname (concat " " targetname)))
 	))
+(setq my-compile-key
+	  '((",c" . compile)
+		(",r" . recompile)))
+(dolist (joonkey my-compile-key)
+  (define-key mode-specific-map (car joonkey) (cdr joonkey)))
 
 ;;
 ;; flymake - for cc mode
@@ -376,23 +366,6 @@ will be
   ;; 	   (my-recommend-compile-command))
   )
 
-(defun my-compile-this-file-only()
-  (interactive)
-  (set (make-local-variable 'compile-command)
-	   (my-recommend-compile-command t))
-  ;; check if we compile only current buffer...
-  (let ((compile-one-file (string-match (file-name-sans-extension (file-name-nondirectory buffer-file-name))
-										compile-command))
-		(old-compilation-ask-about-save compilation-ask-about-save))
-	(if compile-one-file
-		(progn
-		  (save-buffer)
-		  (setq compilation-ask-about-save nil)))
-	(call-interactively 'compile)
-	(if compile-one-file
-		(setq compilation-ask-about-save old-compilation-ask-about-save))
-	))
-
 (setq my-build-dir "")
 (set (make-local-variable 'my-build-dir) nil)
 (put 'my-build-dir 'disabled nil)
@@ -418,5 +391,13 @@ will be
 ;; 		))))))))
 
 (add-to-list 'auto-mode-alist '("\\.\\(c\\|cpp\\|cxx\\|cc\\|h\\|inl\\|hpp\\|ihh\\|hh\\)\\(\\.~[^~]+[~]?\\)?$" . c++-mode) nil)
+
+(define-key c-mode-base-map (kbd "C-m" 'newline)
+(define-key c-mode-base-map (kbd "C-<f7>") 'compile)
+(define-key c-mode-base-map (kbd "C-<f8>") 'recompile))
+(define-key c-mode-base-map (kbd "C-c h p") '(lambda(arg)
+											   (interactive "P")
+											   (ff-find-other-file arg t)))
+(define-key c-mode-base-map (kbd "C-c h o") 'ff-find-other-file)
 
 (provide 'my-cc-mode)
