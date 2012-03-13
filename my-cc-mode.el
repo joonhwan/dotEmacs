@@ -13,6 +13,9 @@
 										(ff-find-other-file arg t)))
 (define-key c-mode-base-map "\C-cho" 'ff-find-other-file)
 
+;; order of cdr list is IMPORTANT!  (for example, when
+;; 'ff-find-other-file' failed it would ask user the default file name
+;; with the extension which is car of this list!)
 (setq cc-other-file-alist
 	  '(("\\.cc\\'"
 		 (".hh" ".h"))
@@ -21,7 +24,7 @@
 		("\\.c\\'"
 		 (".h"))
 		("\\.h\\'"
-		 (".c" ".cc" ".C" ".CC" ".cxx" ".cpp"))
+		 (".cpp" ".cxx" ".C" ".CC" ".c" ".cc" ))
 		("\\.C\\'"
 		 (".H" ".hh" ".h"))
 		("\\.H\\'"
@@ -338,8 +341,8 @@ will be
 							  (inline-open after)
 							  ;; (brace-list-open)
 							  ;; (brace-entry-open)
-							  ;; (substatement-open after)
-							  ;; (block-close . c-snug-do-while)
+							  (substatement-open after)
+							  (block-close . c-snug-do-while)
 							  ;; (arglist-cont-nonempty)
 							  ))
    (c-offsets-alist
