@@ -47,11 +47,12 @@
  ;; org-reverse-note-order t
  ;; org-remember-store-without-prompt t
  ;; org-fast-tag-selection-single-key (quote expert))
-
  org-plantuml-jar-path (cond
 						(win32p "c:/dev/plantuml/plantuml.jar")
-						(macp "~/scripts/plantuml.jar"))
+						(t "~/scripts/plantuml.jar"))
  )
+
+(add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 
 (if win32p
 	;; in win32p (user-full-name) cannot give us anything.
