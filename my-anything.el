@@ -149,12 +149,22 @@
   (interactive)
   (anything
    :sources '(anything-c-source-emacs-variables anything-c-source-emacs-functions)
-   :input (concat
-		   ;;"\b"
-		   (thing-at-point 'symbol)
-		   ;; "\b"
-		   (if (featurep 'anything-match-plugin) " " "")
-		   )
+   :input (let (
+				(my-hint (thing-at-point 'symbol))
+				(my-input "")
+				)
+			(setq my-input (concat
+							;;"\b"
+							my-hint
+							;; "\b"
+							(if (featurep 'anything-match-plugin)
+								(if my-hint
+									" "
+								  "")
+							  ""
+							  )
+							))
+			my-input)
    :buffer "*Anything Help(func/var)*"
    )
   )
@@ -165,12 +175,22 @@
   (interactive)
   (anything
    :sources '(anything-c-source-emacs-functions anything-c-source-emacs-variables)
-   :input (concat
-		   ;;"\b"
-		   (thing-at-point 'symbol)
-		   ;; "\b"
-		   (if (featurep 'anything-match-plugin) " " "")
-		   )
+   :input (let (
+				(my-hint (thing-at-point 'symbol))
+				(my-input "")
+				)
+			(setq my-input (concat
+							;;"\b"
+							my-hint
+							;; "\b"
+							(if (featurep 'anything-match-plugin)
+								(if my-hint
+									" "
+								  "")
+							  ""
+							  )
+							))
+			my-input)
    :buffer "*Anything Help(func/var)*"
    )
   )

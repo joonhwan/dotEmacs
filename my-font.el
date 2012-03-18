@@ -29,11 +29,11 @@
 	)
    (win32p
 	(set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-					  '("나눔고딕코딩" . "iso10646-1"))
+					  '("나눔고딕" . "iso10646-1"))
 	(set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-					  '("나눔고딕코딩" . "iso10646-1"))
+					  '("나눔고딕" . "iso10646-1"))
 	(setq face-font-rescale-alist
-		  '((".*나눔고딕.*" . 1.2)))
+		  '((".*나눔고딕.*" . 1.0)))
 	)
    ))
 

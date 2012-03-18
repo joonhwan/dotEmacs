@@ -1,12 +1,15 @@
 (require 'filecache)
 (require 'ido)
 
-(setq-default ido-enable-flex-matching t)
-(setq-default ido-everywhere t)
-(ido-mode t)
+(setq
+ ido-enable-flex-matching t
+ ido-everywhere t
+ ido-auto-merge-delay-time 1.2 ;; little more time for me to input new file path
+ )
+(ido-mode 1)
 
 (when (my-try-require 'ido-ubiquitous)
-  (ido-ubiquitous 1))
+  (ido-ubiquitous-mode 1))
 
 (defun my-ido-find-file-in-tag-files ()
   (interactive)
