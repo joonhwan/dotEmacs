@@ -47,6 +47,7 @@
  ;; org-reverse-note-order t
  ;; org-remember-store-without-prompt t
  ;; org-fast-tag-selection-single-key (quote expert))
+ org-confirm-babel-evaluate nil
  org-plantuml-jar-path (cond
 						(win32p "c:/dev/plantuml/plantuml.jar")
 						(t "~/scripts/plantuml.jar"))
