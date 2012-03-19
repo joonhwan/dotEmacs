@@ -160,7 +160,50 @@
 	)
    )
  )
- 
+
+(defvar my-org-image-irfanview-path
+  "c:/Program Files/IrfanView/i_view32.exe"
+  "irfanview is being used to handling image in org mode"
+  )
+
+(defvar my-org-image-subdirectory-name
+ "img"
+ "subdirectory name where image file will be created"
+ )
+
+(defun my-org-paste-image-from-clipboard ()
+  "Take a screenshot into a time stamped unique-named file in the same 
+  directory as the org-buffer and insert
+  a link to this file."
+  (interactive)
+  (let* ((buffer-file-directory
+		  (file-name-directory (buffer-file-name)))
+		 (image-directory (concat
+						   buffer-file-directory
+						   my-org-image-subdirectory-name))
+		 (image-path-body (concat
+						   image-directory
+						   "/"
+						   (file-name-sans-extension
+							(file-name-nondirectory (buffer-file-name)))))
+		 (image-path (convert-standard-filename (concat
+					  image-path-body
+					  "_"
+					  (format-time-string "%Y%m%d_%H%M%S_")
+					  ".png")))
+		 (image-rel-path (file-relative-name image-path buffer-file-directory))
+		 )
+	(cond
+	 ;; Windows: Irfanview
+	 (win32p
+	  (call-process my-org-image-irfanview-path nil nil nil (concat 
+															 "/clippaste /convert=" image-path)))
+	 (t
+	  ;; Linux: ImageMagick
+	  (call-process "import" nil nil nil image-path)))
+	(insert (concat "[[file:" image-rel-path "]]"))
+	(org-display-inline-images)))
+
 (define-key org-mode-map "\C-col" 'org-store-link)
 (define-key org-mode-map "\C-coa" 'org-agenda)
 (define-key org-mode-map "\C-cob" 'org-iswitchb)
