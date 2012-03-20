@@ -168,7 +168,6 @@
    :buffer "*Anything Help(func/var)*"
    )
   )
-(global-set-key (kbd "C-h v") 'my-anything-for-help-variable)
 
 ;; function first and variable last
 (defun my-anything-for-help-function ()
@@ -194,7 +193,6 @@
    :buffer "*Anything Help(func/var)*"
    )
   )
-(global-set-key (kbd "C-h f") 'my-anything-for-help-function)
 
 ;;
 ;; old hack for 'everything' in windows
@@ -271,6 +269,8 @@
   (setq anything-command-map-prefix-key (kbd "C-c a"))
   (define-key anything-command-map (kbd "<RET>") 'anything)
   (define-key anything-command-map (kbd "C-l") 'anything-filelist)
+  (define-key anything-command-map (kbd "C-h v") 'my-anything-for-help-variable)
+  (define-key anything-command-map (kbd "C-h f") 'my-anything-for-help-function)
   (global-set-key (read-kbd-macro anything-command-map-prefix-key)
 				  'anything-command-map)
   (global-set-key (kbd "C-c C-x C-d") 'anything-debug-output)
