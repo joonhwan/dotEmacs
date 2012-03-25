@@ -2,6 +2,7 @@
 (require 'org-compat)
 (require 'org-publish)
 (require 'org-html)
+(require 'org-drill)
 (require 'iimage)
 ;;(require 'gcal)
 ;;(require 'org-install)
