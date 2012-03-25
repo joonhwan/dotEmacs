@@ -161,8 +161,28 @@
 ;;
 ;; python
 ;;
-(eval-after-load "python"
+(defun my-py-execute-buffer (&optional shell dedicated switch)
+  (interactive)
+  (py-execute-buffer shell dedicated switch)
+  (popwin:display-buffer "*Python*")
+  )
+(defun my-py-shell (&optional argprompt dedicated pyshellname switch sepchar)
+  (interactive "P")
+  (let ((py-shell-process (py-shell argprompt dedicated pyshellname switch sepchar)))
+	(when (functionp 'popwin:display-buffer)
+	  (popwin:display-buffer (process-buffer py-shell-process)))
+	))
+(define-key python-mode-map (kbd "\C-c\C-c") 'my-py-execute-buffer)
+(define-key python-mode-map (kbd "\C-c!") 'my-py-shell)
+(define-key python-mode-map (kbd "\C-c\C-z") 'my-py-shell)
+
+(eval-after-load "python-mode"
   '(progn
+	 (setq
+	  ;; disable python-mode to pop up buffer
+	  py-split-windows-on-execute-p nil
+	  py-shell-switch-buffers-on-execute-p nil
+	  )
 	 (cond
 	  (macp
 	   (setq python-python-command "python")
@@ -173,8 +193,7 @@
 	  )))
 
 
-;;
-;; flymake
+;;;; flymake
 ;;
 (eval-after-load "flymake"
   '(progn
