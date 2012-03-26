@@ -62,71 +62,10 @@
 ;;
 ;; Customizations for all modes in CC Mode.
 ;;
-;; 아직 완성 안된 mfc macro 들여쓰기 line-up 함수
-(defun my-c-msvc-macro-indent (langelem)
-  (save-excursion
-	(message "--------------------------")
-	(let* ((dummy 0)
-		   (anch (c-langelem-pos langelem))
-		   (throws (catch 'thrownval
-					 (while (< dummy 1)
-					   (goto-char (c-point 'boi))
-					   (if (looking-at "[A-Z]+_[A-Z]+")
-						   (progn
-							 (message "macro detected!")
-							 (goto-char (c-point 'boi))
-							 ;;(message "%s" (thing-at-point 'line))
-							 (if (or (looking-at "BEGIN_[A-Z_]+")
-									 (looking-at "DECLARE_[A-Z_]+"))
-								 (progn (message "mfc begin macro!")
-										(throw 'thrownval 0))
-							   (if (looking-at "END_[A-Z_]+")
-								   (throw 'thrownval 0)
-								 (while (> (point) anch)
-								   (goto-char (1- (c-point 'bol)))
-								   (goto-char (c-point 'boi))
-								   ;;(message "%s" (thing-at-point 'line))
-								   (if (or (looking-at "BEGIN_[A-Z_]+")
-										   (looking-at "DECLARE_[A-Z_]+"))
-									   (throw 'thrownval c-basic-offset))))))
-						 (throw 'thrownval c-basic-offset))
-					   (setq dummy (+ dummy 1))))))
-	  ;;(message "throwval is %d" throws)
-	  (if (>= throws 0) throws 2))))
-(defun my-c-brach-after-case-indent (langelem)
-  "when brach appear right after case-statement within switch...
-
-   switch(...)
-   {
-   case XXX:
-   {
-        xxxx;
-   }
-   break;
-   case YYY:
-   .
-
-will be
-
-   switch(...)
-   {
-   case XXX:
-      {
-         xxxx;
-      }
-      break;
-   case YYY:
-   .
-"
-  (save-excursion
-	(let ((anch (c-langelem-pos langelem)))
-	  (goto-char anch)
-	  (if (looking-at "case")
-		  c-basic-offset
-		0))))
-
-;; wx
-(add-to-list 'c++-font-lock-extra-types "\\bwx[A-Z][a-z][a-zA-Z]*?\\b")
+;; TODO : use 'regexp-opt'
+;; wxXXX / Qt class name in wxWidgets
+(add-to-list 'c++-font-lock-extra-types
+			 "\\b\\(wx\\|Q[t]*\\)[A-Z][a-z][a-zA-Z]*?\\b")
 
 (defun my-c-lineup-topmost-intro-cont(langelm)
   (save-excursion
@@ -140,7 +79,14 @@ will be
 		(cond
 		 ((re-search-forward "EVT_\\|ON_" (line-end-position) t)
 		  'c-basic-offset)
-		 ((re-search-forward "DEFINE\\|template\\|END_\\|IMPLEMENT\\|DECLARE\\|MAP_PROPERTY" (line-end-position) t)
+		 ((re-search-forward 
+		   (regexp-opt '("DEFINE"
+						 "template"
+						 "END_"
+						 "IMPLEMENT"
+						 "DECLARE"
+						 "MAP_PROPERTY"))
+		   (line-end-position) t)
 		  0)
 		 (t
 		  (c-lineup-topmost-intro-cont langelm))))))))
@@ -235,87 +181,12 @@ will be
   (define-key mode-specific-map (car joonkey) (cdr joonkey)))
 
 ;;
-;; flymake - for cc mode
+;; style
 ;;
-;; (require 'flymake)
-
-;; (define-key c-mode-base-map [?\C--] 'flymake-goto-prev-error)
-;; (define-key c-mode-base-map [?\C-=] 'flymake-goto-next-error)
-
-;; (setq flymake-gui-warnings-enabled nil)
-;; (defun flymake-display-warning (warning)
-;;   "Display a warning to user."
-;;   (lwarn 'flymake :warning warning))
-;; (setq flymake-log-level 1)
-
-;; following tips from
-;; http://stackoverflow.com/questions/5726988/flymake-complains-x-is-not-available-even-when-configured-not-to-use-x
-
-;; show error in the mini buffer instead of in the menu.
-;; flymake-ler(file line type text &optional full-file)
-;; (defun show-fly-err-at-point ()
-;;   "If the cursor is sitting on a flymake error, display the message in the minibuffer"
-;;   (interactive)
-;;   (let ((line-no (line-number-at-pos)))
-;;     (dolist (elem flymake-err-info)
-;;       (if (eq (car elem) line-no)
-;;           (let ((err (car (second elem))))
-;;             (message "%s" (flymake-ler-text err)))))))
-;; (defadvice flymake-goto-next-error (after display-message activate compile)
-;;   "Display the error in the mini-buffer rather than having to mouse over it"
-;;   (show-fly-err-at-point))
-;; (defadvice flymake-goto-prev-error (after display-message activate compile)
-;;   "Display the error in the mini-buffer rather than having to mouse over it"
-;;   (show-fly-err-at-point))
-;; (defadvice flymake-mode (before post-command-stuff activate compile)
-;;   "Add functionality to the post command hook so that if the
-;; cursor is sitting on a flymake error the error information is
-;; displayed in the minibuffer (rather than having to mouse over
-;; it)"
-;;   (set (make-local-variable 'post-command-hook)
-;;        (cons 'show-fly-err-at-point post-command-hook)))
-;;
-
-;; (setq flymake-allowed-file-name-masks
-;; 	  '(("\\.\\(?:c\\(?:pp\\|xx\\|\\+\\+\\)?\\|CC\\)\\'" my-flymake-simple-make-init)
-;; 		("\\.xml\\'" flymake-xml-init)
-;; 		("\\.html?\\'" flymake-xml-init)
-;; 		("\\.cs\\'" flymake-simple-make-init)
-;; 		("\\.p[ml]\\'" flymake-perl-init)
-;; 		("\\.php[345]?\\'" flymake-php-init)
-;; 		("\\.h\\'" flymake-master-make-header-init flymake-master-cleanup)
-;; 		("\\.java\\'" flymake-simple-make-java-init flymake-simple-java-cleanup)
-;; 		("[0-9]+\\.tex\\'" flymake-master-tex-init flymake-master-cleanup)
-;; 		("\\.tex\\'" flymake-simple-tex-init)
-;; 		("\\.idl\\'" flymake-simple-make-init)))
-
-;; (setq flymake-allowed-file-name-masks
-;; 	  (cons '(".+\\.c$"
-;; 			  flymake-simple-make-init
-;; 			  flymake-simple-cleanup
-;; 			  flymake-get-real-file-name)
-;; 			flymake-allowed-file-name-masks))
-
-;; (defun my-flymake-simple-make-init ()
-;;   (flymake-simple-make-init-impl
-;;    'flymake-create-temp-inplace
-;;    t
-;;    t
-;;    "flymake.mak"
-;;    'my-flymake-get-make-cmdline))
-
-;; (defun my-flymake-get-make-cmdline (source base-dir)
-;;   (list "nmake"
-;; 		(list (concat "/fflymake.mak")
-;; 			  "/I"
-;; 			  (concat "CHK_SOURCES=" source)
-;; 			  "check-syntax")))
-;; ;;
-;; ;; cc-mode hook configuration
-;; ;;
 (c-add-style
  "mystyle"
  '("stroustrup"
+   ;; other could use tab :(
    (indent-tabs-mode . t)
    (c-basic-offset . 4)
    (tab-width . 4) ;;necessary setq!!!
@@ -326,30 +197,159 @@ will be
 					  defun-close-semi
 					  scope-operator
 					  ))
-   (c-hanging-braces-alist . (
-							  (statement-case-open after)
-							  (inline-open after)
-							  ;; (brace-list-open)
-							  ;; (brace-entry-open)
-							  (substatement-open after)
-							  (block-close . c-snug-do-while)
-							  ;; (arglist-cont-nonempty)
-							  ))
+   (c-hanging-braces-alist
+	. (
+	   (defun-open after)
+	   (defun-close before after)
+	   (class-open after)
+	   (class-close before after)
+	   (namespace-open after)
+	   (inline-open after)
+	   (inline-close before after)
+	   (block-open after)
+	   (block-close . c-snug-do-while)
+	   (extern-lang-open after)
+	   (extern-lang-close after)
+	   (statement-case-open after)
+	   (substatement-open after)
+	   ))
+   (c-hanging-colons-alist
+	. (
+	   (case-label)
+	   (label after)
+	   (access-label after)
+	   (member-init-intro before)
+	   (inher-intro)
+	   ))
+   (c-hanging-semi&comma-criteria
+	;; following order is important
+	. (c-semi&comma-no-newlines-before-nonblanks
+	   c-semi&comma-no-newlines-for-oneline-inliners
+	   c-semi&comma-inside-parenlist
+	   ))
    (c-offsets-alist
-	(arglist-intro . ++)
-	(comment-intro . 0)
-	(inher-cont . c-lineup-multi-inher)
-	(inline-open . 0)
-	(innamespace . -)
-	(label . 0)
-	(member-init-intro . +)
-	(statement-case-open . +)
-	(statement-case-open . +)
-	(statement-cont . (my-c-lineup-statement-cont c-lineup-math))
-	(substatement-open . 0)
-	(template-args-cont . +)
-	(topmost-intro-cont . my-c-lineup-topmost-intro-cont)
-	)))
+	. ((arglist-intro . ++)
+	   (comment-intro . 0)
+	   (inher-cont . c-lineup-multi-inher)
+	   (inline-open . 0)
+	   (innamespace . -)
+	   (label . 0)
+	   (member-init-intro . +)
+	   (statement-case-open . +)
+	   (statement-case-open . +)
+	   (statement-cont . (my-c-lineup-statement-cont c-lineup-math))
+	   (substatement-open . 0)
+	   (template-args-cont . +)
+	   (topmost-intro-cont . my-c-lineup-topmost-intro-cont)
+	   ))
+	))
+
+(defun my-c-electric-paren (arg)
+  "Hack original `c-electric-paren'"
+  (interactive "*P")
+  (let ((literal (c-save-buffer-state () (c-in-literal)))
+		;; shut this up
+		(c-echo-syntactic-information-p nil))
+    (self-insert-command (prefix-numeric-value arg))
+
+    (if (and (not arg) (not literal))
+		(let* (	;; We want to inhibit blinking the paren since this will
+			   ;; be most disruptive.  We'll blink it ourselves
+			   ;; afterwards.
+			   (old-blink-paren blink-paren-function)
+			   blink-paren-function)
+		  (if (and c-syntactic-indentation c-electric-flag)
+			  (indent-according-to-mode))
+
+		  ;; If we're at EOL, check for new-line clean-ups.
+		  (when (and c-electric-flag c-auto-newline
+					 (looking-at "[ \t]*\\\\?$"))
+
+			;; clean up brace-elseif-brace
+			(when
+				(and (memq 'brace-elseif-brace c-cleanup-list)
+					 (eq last-command-event ?\()
+					 (re-search-backward
+					  (concat "}"
+							  "\\([ \t\n]\\|\\\\\n\\)*"
+							  "else"
+							  "\\([ \t\n]\\|\\\\\n\\)+"
+							  "if"
+							  "\\([ \t\n]\\|\\\\\n\\)*"
+							  "("
+							  "\\=")
+					  nil t)
+					 (not  (c-save-buffer-state () (c-in-literal))))
+			  (delete-region (match-beginning 0) (match-end 0))
+			  (insert-and-inherit "} else if ("))
+
+			;; clean up brace-catch-brace
+			(when
+				(and (memq 'brace-catch-brace c-cleanup-list)
+					 (eq last-command-event ?\()
+					 (re-search-backward
+					  (concat "}"
+							  "\\([ \t\n]\\|\\\\\n\\)*"
+							  "catch"
+							  "\\([ \t\n]\\|\\\\\n\\)*"
+							  "("
+							  "\\=")
+					  nil t)
+					 (not  (c-save-buffer-state () (c-in-literal))))
+			  (delete-region (match-beginning 0) (match-end 0))
+			  (insert-and-inherit "} catch (")))
+
+		  ;; Check for clean-ups at function calls.  These two DON'T need
+		  ;; `c-electric-flag' or `c-syntactic-indentation' set.
+		  ;; Point is currently just after the inserted paren.
+		  (let (beg (end (1- (point))))
+			(cond
+
+			 ;; space-before-funcall clean-up?
+			 ((and (memq 'space-before-funcall c-cleanup-list)
+				   (eq last-command-event ?\()
+				   (save-excursion
+					 (backward-char)
+					 (skip-chars-backward " \t")
+					 (setq beg (point))
+					 (and (c-save-buffer-state () (c-on-identifier))
+                          ;; Don't add a space into #define FOO()....
+                          (not (and (c-beginning-of-macro)
+                                    (c-forward-over-cpp-define-id)
+                                    (eq (point) beg))))))
+			  (save-excursion
+				(delete-region beg end)
+				(goto-char beg)
+				(insert ?\ )))
+
+			 ;; compact-empty-funcall clean-up?
+			 ((c-save-buffer-state ()
+				(and (memq 'compact-empty-funcall c-cleanup-list)
+					 (eq last-command-event ?\))
+					 (save-excursion
+					   (c-safe (backward-char 2))
+					   (when (looking-at "()")
+						 (setq end (point))
+						 (skip-chars-backward " \t")
+						 (setq beg (point))
+						 (c-on-identifier)))))
+			  (delete-region beg end)))
+			;; HACKED HERE...
+			;; add blank between keyword (
+			(save-excursion
+			  (backward-char)
+			  (let ((insert-point (point)))
+				(skip-syntax-backward "w_")
+				(when (looking-at c-keywords-regexp)
+				  (goto-char insert-point)
+				  (insert ?\ ))
+				  ))
+			)
+		  (and (eq last-input-event ?\))
+			   (not executing-kbd-macro)
+			   old-blink-paren
+			   (funcall old-blink-paren))))))
+(define-key c-mode-base-map "("         'my-c-electric-paren)
 
 (defun my-c-mode-common-hook ()
   (subword-mode 1)
