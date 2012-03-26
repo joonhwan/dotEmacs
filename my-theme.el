@@ -73,9 +73,10 @@
 	   ;; ;; 2.1 ==> maybe center? (check `frame.c' code)
 	   ;; (screen-gamma . nil)
 	   (line-spacing . 0)
+	   ;; (font . "Monaco-10:normal:antialias=natural")
 	   ;; (font . "Anonymous Pro-11:normal:antialias=natural")
 	   ;; (font . "Andale Mono-10.0:bold:spacing=110:antialias=natural")
-	   (font . "Bitstream Vera Sans Mono-11.0:normal:spacing=110:antialias=natural")
+	   (font . "Bitstream Vera Sans Mono-10.5:normal:antialias=natural")
 	   ;; (font . "나눔고딕코딩-11:normal:antialias=natural")
 	   ))
 	(macp
