@@ -20,12 +20,21 @@
 		  ls-lisp-ignore-case nil
 		  ls-lisp-use-localized-time-format t
 		  ls-lisp-format-time-list '("%y/%m/%d %H:%M" "%y/%m/%d %H:%M")
-		  ls-lisp-dirs-first t)
+		  ls-lisp-dirs-first t
+		  )
 	(setq ls-lisp-emulation (quote MS-Windows))
 	(ls-lisp-set-options) ;; special functionupdating parameters for ls-lisp
 	))
  (macp
   (message "macp")
+  (setq
+   ls-lisp-use-insert-directory-program nil
+   ls-lisp-emulation 'MacOS
+   ls-lisp-use-localized-time-format t
+   ls-lisp-format-time-list '("%y/%m/%d %H:%M" "%y/%m/%d %H:%M")
+   ls-lisp-dirs-first t
+   )
+  (require 'ls-lisp)
   ))
 
 (setq my-omit-extension '(".svn/" "CVS/" ".o" "~" ".bin" ".bak" ".obj" ".map" ".ico" ".pif" ".lnk" ".a" ".ln" ".blg" ".bbl" ".dll" ".drv" ".vxd" ".386" ".elc" ".lof" ".glo" ".idx" ".lot" ".dvi" ".fmt" ".tfm" ".pdf" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".fasl" ".ufsl" ".fsl" ".dxl" ".pfsl" ".dfsl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo" ".idx" ".lof" ".lot" ".glo" ".blg" ".bbl" ".cp" ".cps" ".fn" ".fns" ".ky" ".kys" ".pg" ".pgs" ".tp" ".tps" ".vr" ".vrs"))
@@ -95,8 +104,8 @@
 ;;
 ;; dired-x setting
 ;;
-(dired-omit-mode t)
-(setq
+(dired-omit-mode nil)
+(set
  dired-omit-files (concat dired-omit-files "\\|\\.DS_Store$\\|\\.git$")
  ;; several exceptional extension that i wanna see.
  dired-omit-extensions (remove-if

@@ -1,7 +1,9 @@
 (defun my-mac-shell()
   (interactive)
   ;; (ansi-term "/bin/bash" "shell")
-  (shell)
+  (let ((shell-buffer (shell)))
+	(when (functionp 'popwin:display-buffer)
+	  (popwin:display-buffer shell-buffer)))
   )
 
 (cond
