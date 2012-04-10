@@ -1,4 +1,4 @@
-;;
+;; -*- coding:utf-8 -*-
 ;; dsvn(equivalent to tortoisesvn)
 ;;
 ;; (require 'vc-svn)
@@ -161,36 +161,80 @@
 ;;
 ;; python
 ;;
-(defun my-py-execute-buffer (&optional shell dedicated switch)
-  (interactive)
-  (py-execute-buffer shell dedicated switch)
-  (popwin:display-buffer "*Python*")
-  )
-(defun my-py-shell (&optional argprompt dedicated pyshellname switch sepchar)
-  (interactive "P")
-  (let ((py-shell-process (py-shell argprompt dedicated pyshellname switch sepchar)))
-	(when (functionp 'popwin:display-buffer)
-	  (popwin:display-buffer (process-buffer py-shell-process)))
-	))
-(define-key python-mode-map (kbd "\C-c\C-c") 'my-py-execute-buffer)
-(define-key python-mode-map (kbd "\C-c!") 'my-py-shell)
-(define-key python-mode-map (kbd "\C-c\C-z") 'my-py-shell)
-
-(eval-after-load "python-mode"
+(eval-after-load "python"
   '(progn
-	 (setq
-	  ;; disable python-mode to pop up buffer
-	  py-split-windows-on-execute-p nil
-	  py-shell-switch-buffers-on-execute-p nil
-	  )
-	 (cond
-	  (macp
-	   (setq python-python-command "python")
+	 (defun my-electric-pair ()
+	   "Insert character pair without sournding spaces"
+	   (interactive)
+	   (let (parens-require-spaces)
+		 (insert-pair)))
+	 (defun my-python-display-shell ()
+	   (interactive)
+	   (if (featurep 'popwin)
+		   (popwin:display-buffer "*Python*")
+		 (display-buffer "*Python*")))
+	 (defun my-python-send-buffer ()
+	   (interactive)
+	   (python-send-buffer)
+	   (when (featurep 'popwin)
+		 (popwin:display-buffer "*Python*")))
+	 (define-key python-mode-map (kbd "\C-c\C-c") 'my-python-send-buffer)
+	 (define-key python-mode-map (kbd "\C-c!") 'my-python-display-shell)
+	 (defun my-python-mode-hook ()
+	   ;; (define-key python-mode-map "\"" 'my-electric-pair)
+	   ;; (define-key python-mode-map "\'" 'my-electric-pair)
+	   ;; (define-key python-mode-map "(" 'my-electric-pair)
+	   ;; (define-key python-mode-map "[" 'my-electric-pair)
+	   ;; (define-key python-mode-map "{" 'my-electric-pair)
+	   (setq
+		indent-tabs-mode nil
+		tab-width 4
+		python-remove-cwd-from-path nil
+		)
 	   )
-	  (t
-	   (setq python-python-command "c:/dev/python26/python.exe")
-	   )
-	  )))
+	 (add-hook 'python-mode-hook 'my-python-mode-hook)
+	 )
+  )
+;; (defun my-py-execute-buffer (&optional shell dedicated switch)
+;;   (interactive)
+;;   (sit-for 1.)
+;;   (py-execute-buffer shell dedicated switch)
+;;   (popwin:display-buffer "*Python*")
+;;   )
+;; (defun my-py-shell (&optional argprompt dedicated pyshellname switch sepchar)
+;;   (interactive "P")
+;;   (let ((py-shell-process (py-shell argprompt dedicated pyshellname switch sepchar)))
+;; 	(when (functionp 'popwin:display-buffer)
+;; 	  (popwin:display-buffer (process-buffer py-shell-process)))
+;; 	))
+;; (define-key python-mode-map (kbd "\C-c\C-c") 'my-py-execute-buffer)
+;; (define-key python-mode-map (kbd "\C-c!") 'my-py-shell)
+;; (define-key python-mode-map (kbd "\C-c\C-z") 'my-py-shell)
+;; (eval-after-load "python-mode"
+;;   '(progn
+;; 	 (setq
+;; 	  ;; disable python-mode to pop up buffer
+;; 	  py-split-windows-on-execute-p nil
+;; 	  py-shell-switch-buffers-on-execute-p nil
+;; 	  )
+;; 	 (cond
+;; 	  (macp
+;; 	   (setq python-python-command "python")
+;; 	   )
+;; 	  (t
+;; 	   (setq python-python-command "c:/dev/python26/python.exe")
+;; 	   )
+;; 	  )
+;; 	 (defun my-python-mode-hook ()
+;; 	   (setq
+;; 		py-shell-name "python"
+;; 		py-shell-toggle-1 "python3"
+;; 		py-shell-toggle-2 "python"
+;; 		)
+;; 	   (call-interactively 'py-switch-shell)
+;; 	   )
+;; 	 (add-hook 'python-mode-hook 'my-python-mode-hook)
+;; ))
 
 
 ;;;; flymake
