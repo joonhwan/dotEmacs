@@ -1,4 +1,4 @@
-alien/el-get-package
+alien/*el-get-package
 _alien
 _*alien
 .emacs.desktop
