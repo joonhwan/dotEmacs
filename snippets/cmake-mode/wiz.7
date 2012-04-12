@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: post-build execution(run current output exe)
+# key: wiz
+# --
+ADD_CUSTOM_COMMAND(TARGET \${PROJECT_NAME}
+  POST_BUILD
+  COMMAND \${PROJECT_NAME}
+  COMMENT "testing \${PROJECT_NAME} ..."
+  )

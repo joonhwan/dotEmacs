@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: add configure script
+# key: wiz
+# --
+# configure header to assign sample data file path.
+SET(${1:CONFIGURE_VAR} ${2:CONFIGURE_VAR_VALUE})
+CONFIGURE_FILE(\${CMAKE_CURRENT_SOURCE_DIR}/${3:configure.in.file}.in
+  \${CMAKE_CURRENT_BINARY_DIR}/$3 @ONLY)
