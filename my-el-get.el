@@ -10,7 +10,9 @@
 (unless (require 'el-get nil t)
   (with-current-buffer
       (url-retrieve-synchronously
-       "https://raw.github.com/Joonhwan/el-get/master/el-get-install.el")
+	   ;; "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
+       "https://raw.github.com/Joonhwan/el-get/master/el-get-install.el"
+	   )
     (let ((el-get-master-branch t)
 	  (el-get-git-install-url "git@github.com:Joonhwan/el-get.git"))
       (end-of-buffer)
@@ -87,11 +89,13 @@
 		 anything-ack
 		 asciidoc
 		 auto-install
+		 auto-complete
 		 csharp-mode
 		 deferred
 		 el-get
 		 eproject
 		 ;; evil
+		 flymake-fringe-icons
 		 full-ack
 		 goto-last-change
 		 graphviz-dot-mode
@@ -104,10 +108,15 @@
 		 magit
 		 markdown-mode
 		 nxhtml
+		 ;; openwith
 		 package
 		 popwin
+		 pymacs
 		 rainbow-delimiters
 		 rainbow-mode
+		 rope
+		 ropemode
+		 ropemacs
 		 scss-mode
 		 smex
 		 workgroups
