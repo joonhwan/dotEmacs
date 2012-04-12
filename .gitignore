@@ -3,3 +3,4 @@ _alien
 _*alien
 .emacs.desktop
 *_flymake.elc
+.DS_Store

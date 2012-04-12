@@ -85,8 +85,7 @@
 (setq my-packages
       (append
        '(
-		 anything
-		 anything-ack
+		 ace-jump-mode
 		 asciidoc
 		 auto-install
 		 auto-complete
@@ -95,11 +94,13 @@
 		 el-get
 		 eproject
 		 ;; evil
+		 expand-region
 		 flymake-fringe-icons
 		 full-ack
 		 goto-last-change
 		 graphviz-dot-mode
 		 gtranslate
+		 helm
 		 htmlize
 		 ido-ubiquitous
 		 iedit
@@ -107,6 +108,7 @@
 		 lua-mode
 		 magit
 		 markdown-mode
+		 mark-multiple
 		 nxhtml
 		 ;; openwith
 		 package

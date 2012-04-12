@@ -95,7 +95,8 @@
 ;; final big brother that can handle many configuration
 ;;
 ;; NOTE: this package should be followed at last
-(require 'my-anything)
+;; (require 'my-anything)
+(require 'my-helm)
 
 ;; (require 'my-icicles)
 

@@ -24,7 +24,7 @@
 (let (
 	  (my-dark-fg  "#dcdccc")
 	  (my-dark-bg-1"#1a0a0a")
-	  (my-dark-bg"#1f1f1f")
+	  (my-dark-bg"#1c1c1c")
 	  (my-dark-bg+1 "#303030")
 	  (my-dark-bg+2  "#5f5f5f")
 	  (my-dark-red+1 "#Ff4500")
