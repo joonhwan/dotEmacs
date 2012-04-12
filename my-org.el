@@ -1,3 +1,6 @@
+;; 
+;; -*- coding:utf-8 -*-
+;; 
 (require 'org)
 (require 'org-compat)
 (require 'org-publish)
