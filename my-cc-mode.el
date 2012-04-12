@@ -361,7 +361,7 @@
   ;; for work with auto-complete and yasnippet
   (when (boundp 'ac-sources)
 	(append ac-sources '(ac-source-yasnippet)))
-  ;; (flymake-mode 1)
+  ;; (flymake-mode 0)
   ;; (set (make-local-variable 'compile-command)
   ;; 	   (my-recommend-compile-command))
   )

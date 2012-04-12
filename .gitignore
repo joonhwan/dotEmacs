@@ -2,3 +2,4 @@ alien/*el-get-package
 _alien
 _*alien
 .emacs.desktop
+*_flymake.elc
