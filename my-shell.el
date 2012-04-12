@@ -8,7 +8,7 @@
 
 (cond
  (win32p
-  (global-set-key "\C-z" 'cmd-shell)
+  (global-set-key "\C-z" 'shell)
   ;; (setq w32-quote-process-args ?\")
   )
  (macp

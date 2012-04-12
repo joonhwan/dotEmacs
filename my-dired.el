@@ -105,7 +105,7 @@
 ;; dired-x setting
 ;;
 (dired-omit-mode nil)
-(set
+(setq
  dired-omit-files (concat dired-omit-files "\\|\\.DS_Store$\\|\\.git$")
  ;; several exceptional extension that i wanna see.
  dired-omit-extensions (remove-if
