@@ -44,7 +44,11 @@
 	   )
 
 (if win32p
-	(setq find-program "c:\\dev\\gnuwin32\\bin\\gfind.exe"))
+	(setq
+	 find-program "c:\\dev\\gnuwin32\\bin\\gfind.exe"
+	 find-ls-option '("-exec ls -hdlsb {} +" . "-hdlsb")
+	 )
+  )
 
 (defun my-setup-grep-mode ()
   (turn-on-follow-mode)
