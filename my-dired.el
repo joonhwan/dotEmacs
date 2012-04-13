@@ -123,6 +123,7 @@
 
 (defun my-dired-mode-hook ()
   (dired-omit-mode 1)
+  (subword-mode 1)
   )
 
 (add-hook 'dired-mode-hook 'my-dired-mode-hook)
