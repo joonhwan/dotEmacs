@@ -418,6 +418,10 @@ home directory is a root directory) and removes automounter prefixes
      (define-key dired-mode-map (kbd "ESC C-s") 'dired-isearch-filenames-regexp)
      (define-key dired-mode-map (kbd "ESC C-r") 'dired-isearch-backward-regexp)))
 
+(eval-after-load "auto-complete"
+  '(progn
+	 (setq ac-auto-start nil)))
+
 ;; activate disabled features
 (put 'narrow-to-region 'disabled nil)
 (put 'downcase-region 'disabled nil)

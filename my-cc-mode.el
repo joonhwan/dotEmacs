@@ -358,6 +358,9 @@
   (setq show-trailing-whitespace t)
   (hs-minor-mode 1)
   (c-set-style "mystyle" nil)
+  ;; TODO more reasonable way to do this?
+  (if debug-on-error
+	  (toggle-debug-on-error))
   ;; for work with auto-complete and yasnippet
   (when (boundp 'ac-sources)
 	(append ac-sources '(ac-source-yasnippet)))
