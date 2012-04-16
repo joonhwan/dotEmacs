@@ -422,6 +422,39 @@ home directory is a root directory) and removes automounter prefixes
   '(progn
 	 (setq ac-auto-start nil)))
 
+(eval-after-load "ace-jump-mode"
+  '(progn
+	 (define-key global-map (kbd "C-c C-SPC") 'ace-jump-mode)
+	 )
+  )
+
+;; mark-more-like-this : "mark-multiple" package.
+;; from https://github.com/magnars/mark-multiple.el
+(when (my-try-require 'inline-string-rectangle)
+  (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
+  )
+(when (my-try-require 'mark-more-like-this)
+  (global-set-key (kbd "C-<") 'mark-previous-like-this)
+  (global-set-key (kbd "C->") 'mark-next-like-this)
+  ;; like the other two, but takes an argument (negative is previous)
+  (global-set-key (kbd "C-M-m") 'mark-more-like-this) 
+  (global-set-key (kbd "C-*") 'mark-all-like-this)
+  )
+(when (my-try-require 'rename-sgml-tag)
+  (eval-after-load "sgml-mode"
+	'(progn
+	   (define-key sgml-mode-map (kbd "C-c C-r") 'rename-sgml-tag)
+	   ))
+  )
+(when (my-try-require 'js2-rename-var)
+  (define-key js2-mode-map (kbd "C-c C-r") 'js2-rename-var)
+  )
+
+;; expand-region
+(when (my-try-require 'expand-region)
+  (global-set-key (kbd "C-M-SPC") 'er/expand-region)
+  )
+
 ;; activate disabled features
 (put 'narrow-to-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
@@ -430,9 +463,9 @@ home directory is a root directory) and removes automounter prefixes
 ;; move will banish if cursor is over there...
 (mouse-avoidance-mode 'banish)
 
-
 ;;
 ;; joon customized editing feature
+;; 
 (progn
   (global-set-key (kbd "C-c b r") 'rename-buffer)
   (global-set-key (kbd "C-c e b") 'ediff-buffers)
