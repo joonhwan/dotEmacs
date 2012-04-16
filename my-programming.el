@@ -182,7 +182,7 @@
 		   (list "pycheckers"  (list local-file))))
 	   (add-to-list 'flymake-allowed-file-name-masks
 					'("\\.py\\'" flymake-pyflakes-init)))
-	 (load-library "flymake-fringe-icons")
+	 ;; (load-library "flymake-fringe-icons")
 	 (global-set-key (kbd "C-c C-p") 'flymake-goto-prev-error)
 	 (global-set-key (kbd "C-c C-n") 'flymake-goto-next-error)
 	 (defun my-electric-pair ()
@@ -214,6 +214,7 @@
 		python-remove-cwd-from-path nil
 		)
 	   (flymake-mode 1)
+	   (eldoc-mode 1)
 	   )
 	 (add-hook 'python-mode-hook 'my-python-mode-hook)
 	 )
