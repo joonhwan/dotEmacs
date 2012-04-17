@@ -301,5 +301,9 @@
 
 ;; (require 'csharp-mode)
 
+(when (and (my-try-require 'eproject)
+		   (boundp 'prj-groups))
+  )
+
 
 (provide 'my-programming)

@@ -125,6 +125,7 @@
    `(button ((t (:foreground ,my-dark-yellow-2 :underline t))))
    `(cursor ((t (:background "#aaaaaa" :foreground nil))))
    `(escape-glyph-face ((t (:foreground ,my-dark-red))))
+   `(link ((t (:foreground ,my-dark-yellow-1))))
    `(minibuffer-prompt ((t (:foreground ,my-dark-yellow))))
    `(mode-line ((t (:inverse-video nil :background ,my-dark-jhlee-mode-line-bg :foreground ,my-dark-jhlee-mode-line-fg :height 1.0))))
    `(mode-line-inactive ((t (:background ,my-dark-jhlee-mode-line-bg-1  :foreground ,my-dark-jhlee-mode-line-fg+1 :inherit mode-line))))
@@ -133,6 +134,7 @@
    `(mode-line-highlight ((t :inherit mode-line-emphasis)))
    `(region ((t (:foreground nil :background ,my-dark-bg+1))))
    `(scroll-bar ((t (:background ,my-dark-bg+2))))
+
    `(secondary-selection ((t (:foreground nil :background ,my-dark-bg+2))))
    `(tool-bar ((t (:background ,my-dark-bg+2))))
 
@@ -600,18 +602,16 @@
    `(which-func ((t (:inherit mode-line))))
 
    ;; anything
-   `(anything-header ((t (:foreground ,my-dark-yellow))))
-   `(anything-isearch-match ((t (:inherit isearch))))
-   `(anything-dir-priv ((t (:inherit my-dark-highlight-subtle))))
-   `(anything-file-name ((t (:foreground ,my-dark-yellow-1))))
-   `(anything-ff-file ((t (:inherit italic))))
-   `(anything-ff-executable ((t (:foreground ,my-dark-green+4 :inherit italic))))
-   `(anything-ff-directory ((t (:inherit italic))))
-   `(anything-grep-file ((t (:foreground ,my-dark-yellow-1))))
-   `(anything-grep-match ((t (:inherit my-dark-red))))
-   `(anything-overlay-line-face ((t (:inherit region))))
-   `(anything-dir-heading ((t (:inherit region))))
-   `(anything-match ((t (:foreground ,my-dark-orange :inherit italic))))
+   `(helm-source-header ((t (:foreground ,my-dark-yellow))))
+   `(helm-ff-file ((t (:inherit italic))))
+   `(helm-ff-executable ((t (:foreground ,my-dark-green+4 :inherit italic))))
+   `(helm-ff-directory ((t (:inherit italic))))
+   `(helm-grep-file ((t (:foreground ,my-dark-yellow-1))))
+   `(helm-grep-match ((t (:inherit my-dark-red))))
+   `(helm-selection ((t (:inherit region))))
+   `(helm-selection-line ((t (:inherit region))))
+   `(helm-header ((t (:inherit region))))
+   `(helm-match ((t (:foreground ,my-dark-orange :inherit italic))))
 
    ;; wl (wanderlust)
    ;; some faces end with -face, while other don't; confusing
