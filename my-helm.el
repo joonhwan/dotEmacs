@@ -85,11 +85,11 @@
   )
 
 (progn
-  (global-set-key (kbd "C-c a") helm-command-map)
   (define-key helm-command-map (kbd "<RET>") 'helm-mini)
   ;; (define-key helm-command-map (kbd "C-l") 'helm-filelist)
   (define-key helm-command-map (kbd "h v") 'my-helm-for-help-variable)
   (define-key helm-command-map (kbd "h f") 'my-helm-for-help-function)
+  (global-set-key (kbd "C-c a") helm-command-map)
   )
 
 (provide 'my-helm)

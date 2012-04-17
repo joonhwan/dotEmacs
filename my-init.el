@@ -39,8 +39,13 @@
 (progn
   (set-language-environment "Korean")
   (setq default-input-method "korean-hangul390")
-  (unless macp
-	(setq process-coding-system-alist '(("locate" . "euc-kr-dos"))))
+  (cond
+	  (macp
+	   (setq process-coding-system "utf-8-mac")
+	   )
+	  (t
+	   (setq process-coding-system-alist '(("locate" . "euc-kr-dos"))))
+	  )
   ;; use 3 beolsik
   ;; (setq default-korean-keyboard "3f") ;;--> 3beolsik final.
   (setq default-korean-keyboard "390")) ;;--> 3beolsik 390

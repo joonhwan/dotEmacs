@@ -101,7 +101,7 @@
 		 ;; eproject
 		 ;; evil
 		 expand-region
-		 flymake-fringe-icons
+		 ;; flymake-fringe-icons
 		 full-ack
 		 goto-last-change
 		 graphviz-dot-mode
@@ -127,6 +127,7 @@
 		 ropemacs
 		 scss-mode
 		 smex
+		 ;; undo-tree
 		 workgroups
 		 yasnippet
 		 )

@@ -455,6 +455,10 @@ home directory is a root directory) and removes automounter prefixes
   (global-set-key (kbd "C-M-SPC") 'er/expand-region)
   )
 
+(when (my-try-require 'undo-tree)
+  (global-undo-tree-mode 1)
+  )
+
 ;; activate disabled features
 (put 'narrow-to-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
