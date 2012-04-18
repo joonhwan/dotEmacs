@@ -172,17 +172,28 @@
 	 (add-to-list 'ac-dictionary-directories "~/.emacs.d/vendor/auto-complete-1.2/dict")
 	 (ac-config-default)
 	 (add-hook 'find-file-hook 'flymake-find-file-hook)
+	 ;; Pyflakes for python
+	 ;; (load-library "flymake-fringe-icons")
 	 (when (load "flymake" t)
-	   (defun flymake-pyflakes-init ()
+	   (defun flymake-pychecker-init ()
 		 (let* ((temp-file (flymake-init-create-temp-buffer-copy
 							'flymake-create-temp-inplace))
 				(local-file (file-relative-name
 							 temp-file
 							 (file-name-directory buffer-file-name))))
-		   (list "pycheckers"  (list local-file))))
+		   (list "pycheck" (list local-file))))
 	   (add-to-list 'flymake-allowed-file-name-masks
-					'("\\.py\\'" flymake-pyflakes-init)))
-	 ;; (load-library "flymake-fringe-icons")
+					'("\\.py\\'" flymake-pychecker-init)))
+	 ;; (when (load "flymake" t)
+	 ;;   (defun flymake-pyflakes-init ()
+	 ;; 	 (let* ((temp-file (flymake-init-create-temp-buffer-copy
+	 ;; 						'flymake-create-temp-inplace))
+	 ;; 			(local-file (file-relative-name
+	 ;; 						 temp-file
+	 ;; 						 (file-name-directory buffer-file-name))))
+	 ;; 	   (list "pycheckers"  (list local-file))))
+	 ;;   (add-to-list 'flymake-allowed-file-name-masks
+	 ;; 				'("\\.py\\'" flymake-pyflakes-init)))
 	 (global-set-key (kbd "C-c C-p") 'flymake-goto-prev-error)
 	 (global-set-key (kbd "C-c C-n") 'flymake-goto-next-error)
 	 (defun my-electric-pair ()
@@ -217,6 +228,12 @@
 	   (eldoc-mode 1)
 	   )
 	 (add-hook 'python-mode-hook 'my-python-mode-hook)
+	 ;; (when macp
+	 ;;   (defun my-inferior-python-mode-comint-filter-for-mac (s)
+	 ;; 	 (replace-regexp-in-string "" "" s)
+	 ;; 	 )
+	 ;;   (add-hook 'inferior-python-mode-hook 'my-inferior-python-mode-comint-filter-for-mac)
+	 ;;   )
 	 )
   )
 ;; (defun my-py-execute-buffer (&optional shell dedicated switch)

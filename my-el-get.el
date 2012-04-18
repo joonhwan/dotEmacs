@@ -1,3 +1,4 @@
+;; -*- coding:utf-8 -*-
 
 (add-to-list 'load-path (concat my-dotfiles-dir "alien/el-get-package/el-get"))
 
@@ -54,33 +55,38 @@
 ;; local sources
 (setq el-get-sources
       '(
-	;; (:name python-mode
-	;;        :type git
-	;;        :url "git://github.com/emacsmirror/python-mode.git"
-	;;        :description "Major mode for editing Python programs"
-	;;        :features (python-mode doctest-mode)
-	;;        :compile nil
-	;;        :load "test/doctest-mode.el"
-	;;        :prepare (progn
-	;; 		  (autoload 'python-mode "python-mode"
-	;; 		    "Python editing mode." t)
-	;; 		  (add-to-list 'auto-mode-alist
-	;; 			       '("\\.py$" . python-mode))
-	;; 		  (add-to-list 'interpreter-mode-alist
-	;; 			       '("python" . python-mode))))
-	(:name iimage
-	       :description "inline'd image mode"
-	       :type http
-	       :url "http://www.netlaputa.ne.jp/~kose/Emacs/lisp/iimage.el"
-	       )
-	(:name qml-mode
-	       :type git
-	       :url "git://github.com/Joonhwan/qml-mode.git"
-	       )
-	(:name log4j-mode
-	       :type elpa
-	       )
-	))
+		;; (:name python-mode
+		;;        :type git
+		;;        :url "git://github.com/emacsmirror/python-mode.git"
+		;;        :description "Major mode for editing Python programs"
+		;;        :features (python-mode doctest-mode)
+		;;        :compile nil
+		;;        :load "test/doctest-mode.el"
+		;;        :prepare (progn
+		;; 		  (autoload 'python-mode "python-mode"
+		;; 		    "Python editing mode." t)
+		;; 		  (add-to-list 'auto-mode-alist
+		;; 			       '("\\.py$" . python-mode))
+		;; 		  (add-to-list 'interpreter-mode-alist
+		;; 			       '("python" . python-mode))))
+		(:name iimage
+			   :description "inline'd image mode"
+			   :type http
+			   :url "http://www.netlaputa.ne.jp/~kose/Emacs/lisp/iimage.el"
+			   )
+		(:name qml-mode
+			   :type git
+			   :url "git://github.com/Joonhwan/qml-mode.git"
+			   )
+		(:name log4j-mode
+			   :type elpa
+			   )
+		(:name flymake-cursor
+			   :description "displays flymake error msg in minibuffer after delay"
+			   :type emacswiki
+			   :features flymake-cursor
+			   )
+		))
 
 (setq my-packages
       (append
