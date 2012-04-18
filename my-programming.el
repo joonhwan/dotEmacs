@@ -15,26 +15,16 @@
 )
 
 ;;
-;; nXML mode
-;;
-;; (progn
-;;   (add-to-list 'load-path "~/elisp/nxml")
-;;   (load "rng-auto")
-;;   (add-to-list 'auto-mode-alist  '("\\.\\(xml\\|xsl\\|rng\\|xhtml\\)\\'" . nxml-mode) nil)
-;;   (setq nxml-child-indent 4))))
-
-
-;;
 ;; emacs lisp
 ;;
-;; (require 'rainbow-delimiters)
-;; (add-hook 'emacs-lisp-mode-hook
-;;           '(lambda ()
-;;              (interactive)
-;;              ;; (require 'eldoc)
-;;              ;; (turn-on-eldoc-mode)
-;;              (rainbow-delimiters-mode t)
-;; 			 ))
+(require 'eldoc)
+(add-hook 'emacs-lisp-mode-hook
+          '(lambda ()
+             (interactive)
+             (turn-on-eldoc-mode)
+			 (if (featurep 'rainbow-delimiters)
+				 (rainbow-delimiters-mode t))
+			 ))
 
 ;;
 ;; ruby mode

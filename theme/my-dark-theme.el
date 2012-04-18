@@ -612,6 +612,7 @@
    `(helm-selection-line ((t (:inherit region))))
    `(helm-header ((t (:inherit region))))
    `(helm-match ((t (:foreground ,my-dark-orange :inherit italic))))
+   `(helm-visible-mark ((t (:inherit my-dark-highlight-subtle))))
 
    ;; wl (wanderlust)
    ;; some faces end with -face, while other don't; confusing

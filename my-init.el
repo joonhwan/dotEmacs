@@ -71,9 +71,6 @@
 (require 'my-el-get)
 ;; (require 'my-elpa)
 
-;; configure look-and-feel
-(require 'my-theme)
-
 (require 'my-editing)
 ;; (require 'my-cedet)
 (require 'my-programming) ;; for all except c/c++
@@ -103,22 +100,9 @@
 ;; (require 'my-anything)
 (require 'my-helm)
 
-;; (require 'my-icicles)
+;; configure look-and-feel
+(require 'my-theme)
 
-;; file association(special file ext for my work)
-;; (hint: see the doc for `set-auto-mode' function and its code)
-;; (hint: see also the doc for `magic-fallback-mode-alist'.)
-(add-to-list 'auto-mode-alist `(,(concat
-								  ".*"
-								  (my-regexp-concat
-								   '(
-									 "motion.*\.cfg"
-									 "\.rcp"
-									 ))
-								  "$") . conf-mode) nil)
-(add-to-list 'magic-mode-alist '("<\\?xml " . nxml-mode))
-(add-to-list 'auto-coding-alist '(".*\\.cache$" . utf-8))
-(add-to-list 'auto-mode-alist '("\\.qrc$" . xml-mode) nil)
 ;; (defun my-is-stl-header()
 ;;   (messsage "hey...")
 ;;   (message buffer-file-name)
