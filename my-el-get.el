@@ -1,3 +1,4 @@
+;; -*- coding:utf-8 -*-
 
 (add-to-list 'load-path (concat my-dotfiles-dir "alien/el-get-package/el-get"))
 
@@ -73,7 +74,7 @@
 			   :description "another eproject"
 			   :type git
 			   :url "git://repo.or.cz/eproject.git"
-		 )
+			   )
 		(:name iimage
 			   :description "inline'd image mode"
 			   :type http
@@ -85,6 +86,11 @@
 			   )
 		(:name log4j-mode
 			   :type elpa
+			   )
+		(:name flymake-cursor
+			   :description "displays flymake error msg in minibuffer after delay"
+			   :type emacswiki
+			   :features flymake-cursor
 			   )
 		))
 
