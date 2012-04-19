@@ -17,6 +17,7 @@
 ;;
 ;; emacs lisp
 ;;
+(my-try-require 'rainbow-delimiters)
 (require 'eldoc)
 (add-hook 'emacs-lisp-mode-hook
           '(lambda ()
@@ -292,9 +293,18 @@
 
 ;; (require 'csharp-mode)
 
-(when (and (my-try-require 'eproject)
-		   (boundp 'prj-groups))
+(when (my-try-require 'eproject)
+  (setq
+   ;; do not rename buffer to its relative path. too long to see in mode line!
+   prj-rename-buffers nil
+   ;; do not add/remove too intelligent. :(
+   prj-autotracking nil
+   )
+  (global-set-key (kbd "C-c C-f") 'eproject-visitfile)
   )
+
+(when (my-try-require 'qt-pro)
+  (add-to-list 'auto-mode-alist '("\\.pr[io]$" . qt-pro-mode)))
 
 
 (provide 'my-programming)
