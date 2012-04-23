@@ -69,12 +69,16 @@
 		;; 			       '("\\.py$" . python-mode))
 		;; 		  (add-to-list 'interpreter-mode-alist
 		;; 			       '("python" . python-mode))))
-		(
-		 :name eproject
-			   :description "another eproject"
-			   :type git
-			   :url "git://repo.or.cz/eproject.git"
-			   )
+		;; (:name eproject
+		;; 	   :description "another eproject"
+		;; 	   :type git
+		;; 	   :url "git://repo.or.cz/eproject.git"
+		;; 	   )
+		;; (:name ede-cmake
+		;; 	   :description "ede cmake mode"
+		;; 	   :type bzr
+		;; 	   :url "lp:~arankine/+junk/ede-cmake"
+		;; 	   )
 		(:name iimage
 			   :description "inline'd image mode"
 			   :type http
@@ -92,6 +96,23 @@
 			   :type emacswiki
 			   :features flymake-cursor
 			   )
+		(:name projectile
+			   :description "Projectile is a project interaction library for Emacs"
+			   :type git
+			   :url "git@github.com:Joonhwan/projectile.git" ;;"git://github.com/bbatsov/projectile.git"
+			   :features projectile
+			   )
+		(:name replace+
+			   :description "Extensions to `replace.el'."
+			   :type emacswiki
+			   :features replace+
+			   :depends thingatpt+
+			   )
+		(:name thingatpt+
+			   :description "Extensions to `thingatpt.el'."
+			   :type emacswiki
+			   :features thingatpt+
+			   )
 		))
 
 (setq my-packages
@@ -103,6 +124,7 @@
 		 auto-complete
 		 csharp-mode
 		 deferred
+		 dired+
 		 el-get
 		 ;; eproject
 		 ;; evil

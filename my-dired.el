@@ -2,6 +2,11 @@
 (require 'dired-x)
 (require 'wdired)
 (require 'find-lisp)
+
+(when (my-try-require 'dired+)
+  (toggle-diredp-find-file-reuse-dir 1)
+  )
+
 ;;
 ;; benrina wdired in normal dired mode
 ;;
@@ -122,7 +127,7 @@
 ;; (define-key dired-mode-map [(meta return)] 'my-open-in-total-cmd)
 
 (defun my-dired-mode-hook ()
-  (dired-omit-mode 1)
+  (dired-omit-mode -1)
   (subword-mode 1)
   )
 

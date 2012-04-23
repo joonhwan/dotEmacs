@@ -59,6 +59,8 @@
  standard-indent 4
  ;;
  default-tab-width 4
+ ;; when pressing 'q' in customize buffer, kill it
+ custom-buffer-done-kill t
  ;; convenient to move around currunt window.
  make-backup-files nil
  ;;
@@ -373,22 +375,14 @@ home directory is a root directory) and removes automounter prefixes
   )
 
 ;;
-;; occur mode
-;;
-(eval-after-load "occur"
+;; replace/occur
+;; 
+(eval-after-load "replace"
   '(progn
+     (setq list-matching-lines-default-context-lines 0)
 	 (add-hook 'occur-hook
 			   '(lambda()
 				  (next-error-follow-minor-mode t)))
-	 )
-  )
-
-(eval-after-load "replace"
-  '(progn
-     ;; ;; replace+
-     ;; ;; http://www.emacswiki.org/emacs/replace%2b.el
-     ;; (require 'replace+)
-     (setq list-matching-lines-default-context-lines 0)
      ))
 
 (eval-after-load "woman"

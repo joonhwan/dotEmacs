@@ -364,6 +364,21 @@
   ;; for work with auto-complete and yasnippet
   (when (boundp 'ac-sources)
 	(append ac-sources '(ac-source-yasnippet)))
+  (if (featurep 'expand-region-core)
+	  ;; in c++ mode i do not use er/mark-word actually.
+	  (set (make-local-variable 'er/try-expand-list) '(;; er/mark-word
+													   er/mark-symbol
+													   er/mark-symbol-with-prefix
+													   er/mark-next-accessor
+													   er/mark-method-call
+													   er/mark-comment
+													   er/mark-comment-block
+													   er/mark-inside-quotes
+													   er/mark-outside-quotes
+													   er/mark-inside-pairs
+													   er/mark-outside-pairs)))
+  (if (featurep 'projectile)
+	  (projectile-mode 1))
   ;; (flymake-mode 0)
   ;; (set (make-local-variable 'compile-command)
   ;; 	   (my-recommend-compile-command))
@@ -395,12 +410,15 @@
 
 (add-to-list 'auto-mode-alist '("\\.\\(c\\|cpp\\|cxx\\|cc\\|h\\|inl\\|hpp\\|ihh\\|hh\\)\\(\\.~[^~]+[~]?\\)?$" . c++-mode) nil)
 
+;; pairing.?! cpp <--> h no matter cursor position
+(defun my-ff-find-other-file (arg)
+  (interactive "P")
+  (ff-find-other-file arg t))
+
 (define-key c-mode-base-map (kbd "C-m") 'newline)
 (define-key c-mode-base-map (kbd "C-<f7>") 'compile)
 (define-key c-mode-base-map (kbd "C-<f8>") 'recompile)
-(define-key c-mode-base-map (kbd "C-c h p") '(lambda(arg)
-											   (interactive "P")
-											   (ff-find-other-file arg t)))
+(define-key c-mode-base-map (kbd "C-c h p") 'my-ff-find-other-file)
 (define-key c-mode-base-map (kbd "C-c h o") 'ff-find-other-file)
 
 (provide 'my-cc-mode)

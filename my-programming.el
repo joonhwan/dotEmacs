@@ -310,7 +310,7 @@
 
 ;; (require 'csharp-mode)
 
-(when (my-try-require 'eproject)
+(when (featurep 'eproject)
   (setq
    ;; do not rename buffer to its relative path. too long to see in mode line!
    prj-rename-buffers nil
@@ -318,6 +318,10 @@
    prj-autotracking nil
    )
   (global-set-key (kbd "C-c C-f") 'eproject-visitfile)
+  )
+
+(when (featurep 'projectile)
+  (require 'my-projectile)
   )
 
 (when (my-try-require 'qt-pro)

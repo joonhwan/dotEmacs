@@ -23,6 +23,7 @@
 
 (let (
 	  (my-dark-fg  "#dcdccc")
+	  (my-dark-fg-1  "#505050")
 	  (my-dark-bg-1"#1a0a0a")
 	  (my-dark-bg"#1c1c1c")
 	  (my-dark-bg+1 "#303030")
@@ -104,9 +105,9 @@
    `(my-dark-title ((t (:inherit variable-pitch :weight bold :inherit default))))
 
    ;; basics
-   `(Bold ((t (:weight bold))))
+   `(default ((t (:family "Bitstream Sans Vera Mono" :background ,my-dark-bg :foreground ,my-dark-fg))))
+   `(bold ((t (:weight bold))))
    `(bold-italic ((t (:slant italic :weight bold))))
-   `(default ((t (:background ,my-dark-bg :foreground ,my-dark-fg))))
    `(fixed-pitch ((t (:weight bold))))
    `(italic ((t (:slant italic))))
    `(underline ((t (:underline t))))
@@ -120,7 +121,7 @@
    `(mouse ((t (:inherit my-dark-foreground))))
    `(paren ((t (:inherit my-dark-red)))) ;;'my-dark-lowlight-1))))
    `(trailing-whitespace ((t (:inherit font-lock-warning-face))))
-   `(Buffer-menu-buffer ((t (:inherit my-dark-primary-1))))
+   `(buffer-menu-buffer ((t (:inherit my-dark-primary-1))))
    `(border ((t (:background ,my-dark-bg))))
    `(button ((t (:foreground ,my-dark-yellow-2 :underline t))))
    `(cursor ((t (:background "#aaaaaa" :foreground nil))))
@@ -241,6 +242,31 @@
    `(diff-context-face ((t (:inherit font-lock-comment-face))))
    `(diff-refine-change-face ((t (:inherit my-dark-background-2))))
 
+   ;; diredp
+   `(diredp-default ((t (:background ,my-dark-bg :inherit default))))
+   `(diredp-compressed-file-suffix ((t (:foreground ,my-dark-blue-3 :inherit diredp-default))))
+   `(diredp-date-time ((t (:foreground ,my-dark-blue-1  :inherit diredp-default))))
+   `(diredp-deletion ((t (:foreground ,my-dark-bg :background ,my-dark-red  :inherit diredp-default))))
+   `(diredp-deletion-file-name ((t (:foreground ,my-dark-red  :inherit diredp-default))))
+   `(diredp-dir-heading ((t (:foreground ,my-dark-yellow :slant italic  :inherit diredp-default))))
+   `(diredp-dir-priv ((t (:foreground ,my-dark-blue-1 :background ,my-dark-bg :slant italic  :inherit diredp-default))))
+   `(diredp-display-msg ((t (:foreground ,my-dark-yellow  :inherit diredp-default))))
+   `(diredp-exec-priv ((t (:foreground ,my-dark-yellow-1 :background ,my-dark-bg :inherit diredp-default))))
+   `(diredp-executable-tag ((t (:foreground ,my-dark-red  :inherit diredp-default))))
+   `(diredp-file-name ((t (:foreground ,my-dark-yellow  :inherit diredp-default))))
+   `(diredp-file-suffix ((t (:foreground ,my-dark-fg :slant italic  :inherit diredp-default))))
+   `(diredp-flag-mark ((t (:foreground ,my-dark-green+1  :background ,my-dark-bg :inherit diredp-default))))
+   `(diredp-flag-mark-line ((t (:foreground "black" :background ,my-dark-yellow-2  :inherit diredp-default))))
+   `(diredp-ignored-file-name ((t (:foreground ,my-dark-fg-1  :inherit diredp-default))))
+   `(diredp-link-priv ((t (:foreground ,my-dark-blue :background ,my-dark-bg :inherit diredp-default))))
+   `(diredp-no-priv ((t (:foreground ,my-dark-fg :background ,my-dark-bg :inherit diredp-default))))
+   `(diredp-number ((t (:foreground ,my-dark-fg  :inherit diredp-default))))
+   `(diredp-other-priv ((t (:foreground ,my-dark-blue-2 :background ,my-dark-bg  :inherit diredp-default))))
+   `(diredp-rare-priv ((t (:foreground ,my-dark-blue-4 :background ,my-dark-bg :inherit diredp-default))))
+   `(diredp-read-priv ((t (:foreground ,my-dark-blue-3 :background ,my-dark-bg :inherit diredp-default))))
+   `(diredp-symlink ((t (:foreground ,my-dark-blue-1  :inherit diredp-default))))
+   `(diredp-write-priv ((t (:foreground ,my-dark-green-1 :background ,my-dark-bg :inherit diredp-default))))
+
    ;; emms
    `(emms-pbi-song ((t (:foreground ,my-dark-yellow))))
    `(emms-pbi-current ((t (:inherit my-dark-primary-1))))
@@ -266,7 +292,6 @@
    `(erc-underline-face ((t (:inherit underline))))
    `(erc-default-face ((t (:foreground ,my-dark-fg))))
    `(erc-input-face ((t (:foreground ,my-dark-yellow))))
-
 
    ;; eshell
    `(eshell-prompt ((t (:inherit my-dark-primary-1))))
