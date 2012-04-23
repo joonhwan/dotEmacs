@@ -22,10 +22,8 @@
 ;;     (adjust)
 ;;     (type . line))))
 
-(autoload 'cscope-set-initial-directory "xcscope")
-(eval-after-load "xcscope"
-  '(progn
-	 (setq cscope-database-regexps
+(when (my-try-require "xcscope")
+  (setq cscope-database-regexps
 	  '(
 		( "^d:/prj/wp"
 		  ( t )
@@ -35,6 +33,6 @@
 		  ( "c:/dev/sdk/windows" )
 		  ( "c:/qt/4.7.1")
 		)
-		))))
+		)))
 
 (provide 'my-tags)

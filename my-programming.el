@@ -7,7 +7,7 @@
 ;; magit
 ;;
 (when (my-try-require 'magit)
-  (global-set-key (kbd "C-x C-g") 'magit-status)
+  (global-set-key (kbd "C-x g") 'magit-status)
   ;; unable to detect end of process in magit process buffer?!
   ;; discussion found https://github.com/magit/magit/issues/18
   ;; but no help. :(

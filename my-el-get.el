@@ -113,6 +113,12 @@
 			   :type emacswiki
 			   :features thingatpt+
 			   )
+		(:name xcscope
+			   :description "cscope interface for (X)Emacs"
+			   :type git
+			   :url "git://github.com/emacsattic/xcscope.git"
+			   :features xcscope
+			   )
 		))
 
 (setq my-packages

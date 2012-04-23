@@ -81,7 +81,7 @@
 (require 'my-isearch)
 (require 'my-ido)
 ;; ;; (require 'my-ecb)
-;; (require 'my-tags)
+(require 'my-tags)
 (require 'my-org)
 ;; (require 'bookmark)
 ;; (require 'ediff)
