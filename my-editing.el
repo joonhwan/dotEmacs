@@ -348,6 +348,30 @@ home directory is a root directory) and removes automounter prefixes
   (yas/global-mode 1)
   )
 
+(when (my-try-require 'expand-region-core)
+  ;; hack original code
+  (defun er/mark-outside-pairs ()
+	"Mark pairs (as defined by the mode), including the pair chars."
+	(interactive)
+	(cond
+	 ((looking-at "[ ]*[({]")
+	  ;; do nothing ?!
+	  t)
+	 ((looking-back "\\s)+\\=")
+	  (ignore-errors (backward-list 1)))
+	 (t
+      (skip-chars-forward er--space-str))
+	 )
+	(when (and (er--point-inside-pairs-p)
+			   (or (not (er--looking-at-pair))
+				   (er--looking-at-marked-pair)))
+	  (goto-char (nth 1 (syntax-ppss))))
+	(when (er--looking-at-pair)
+	  (set-mark (point))
+	  (forward-list)
+	  (exchange-point-and-mark)))
+  )
+
 (eval-after-load "info"
   '(progn
 	 (cond
@@ -419,6 +443,7 @@ home directory is a root directory) and removes automounter prefixes
 (eval-after-load "ace-jump-mode"
   '(progn
 	 (define-key global-map (kbd "C-c C-SPC") 'ace-jump-mode)
+	 (define-key global-map (kbd "M-g l") 'ace-jump-line-mode)
 	 )
   )
 
