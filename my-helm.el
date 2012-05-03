@@ -166,7 +166,7 @@
 	(define-key helm-command-map (kbd "j") 'my-helm-c-source-eproject-files)
 	)
   (when (featurep 'projectile)
-	(define-key helm-command-map (kbd "j") 'helm-projectile))
+  	(define-key helm-command-map (kbd "j") 'helm-projectile))
   (define-key helm-command-map (kbd "M-s o") 'my-helm-occur)
   (global-set-key (kbd "C-c a") helm-command-map)
   )

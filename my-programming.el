@@ -24,7 +24,8 @@
              (interactive)
              (turn-on-eldoc-mode)
 			 (if (featurep 'rainbow-delimiters)
-				 (rainbow-delimiters-mode t))
+				 (rainbow-delimiters-mode t)
+			   )
 			 ))
 
 ;;
@@ -320,7 +321,7 @@
   (global-set-key (kbd "C-c C-f") 'eproject-visitfile)
   )
 
-(when (featurep 'projectile)
+(when (my-try-require 'projectile)
   (require 'my-projectile)
   )
 

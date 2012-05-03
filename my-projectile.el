@@ -1,17 +1,9 @@
 ;; -*- coding:utf-8 -*-
 
-;; override default
-(define-key projectile-mode-map (kbd "C-c j j") 'projectile-jump-to-project-file)
-(define-key projectile-mode-map (kbd "C-c j f") 'projectile-grep-in-project)
-(define-key projectile-mode-map (kbd "C-c j b") 'projectile-switch-to-buffer)
-(define-key projectile-mode-map (kbd "C-c j o") 'projectile-multi-occur)
-(define-key projectile-mode-map (kbd "C-c j r") 'projectile-replace-in-project)
-(define-key projectile-mode-map (kbd "C-c j i") 'projectile-invalidate-project-cache)
-(define-key projectile-mode-map (kbd "C-c j t") 'projectile-regenerate-tags)
-;; (global-set-key (kbd "C-c j") projectile-mode-map)
+;; you can invalidate cache manually using
+;; `projectile-invalidate-cache'
+(setq projectile-enable-caching t)
 
-;; how re-build cache? until knowing it, disable it.
-;; (setq projectile-enable-caching t)
 (setq projectile-ignored-file-extensions
 	  (append projectile-ignored-file-extensions
 			  '(;; visual studio
@@ -26,6 +18,9 @@
 
 (setq projectile-ignored-files
 	  (append projectile-ignored-files '(".git" ".svn" ".hg")))
+
+(setq projectile-ignored-directories
+	  (append projectile-ignored-directories '(".git" ".svn" ".hg")))
 
 (projectile-global-mode 1)
 
@@ -78,6 +73,5 @@
 	(grep command-args)
 	(with-current-buffer b (cd old-dir))
 	))
-(define-key projectile-mode-map (kbd "C-c j f") 'my-projectile-grep)
 
 (provide 'my-projectile)
