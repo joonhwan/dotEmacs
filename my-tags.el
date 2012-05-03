@@ -23,16 +23,20 @@
 ;;     (type . line))))
 
 (when (my-try-require "xcscope")
-  (setq cscope-database-regexps
-	  '(
-		( "^d:/prj/wp"
-		  ( t )
-		  ( "c:/dev/vs9/vc" )
-		  ( "c:/dev/sdk/codejock")
-		  ( "c:/dev/sdk/boost/boost_1_43_0" )
-		  ( "c:/dev/sdk/windows" )
-		  ( "c:/qt/4.7.1")
-		)
-		)))
-
+  (cond
+   (win32p
+	(setq cscope-database-regexps
+		  '(
+			( "^d:/prj/study"
+			  ( t )
+			  ( "c:/qt/4.8.0/src")
+			  ( "c:/dev/vs9/vc" )
+			  ( "c:/dev/sdk/codejock")
+			  ( "c:/dev/sdk/boost/boost_1_43_0" )
+			  ( "c:/dev/sdk/windows" )
+			  )
+			)))
+   (t
+	)
+   ))
 (provide 'my-tags)
