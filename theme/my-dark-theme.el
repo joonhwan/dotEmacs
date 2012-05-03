@@ -627,14 +627,14 @@
    `(which-func ((t (:inherit mode-line))))
 
    ;; anything
-   `(helm-source-header ((t (:foreground ,my-dark-yellow))))
+   `(helm-source-header ((t (:foreground nil :background nil :underline nil :weight bold :inherit my-dark-highlight-damp))))
    `(helm-ff-file ((t (:inherit italic))))
-   `(helm-ff-executable ((t (:foreground ,my-dark-green+4 :inherit italic))))
-   `(helm-ff-directory ((t (:inherit italic))))
-   `(helm-grep-file ((t (:foreground ,my-dark-yellow-1))))
-   `(helm-grep-match ((t (:inherit my-dark-red))))
-   `(helm-selection ((t (:inherit region))))
-   `(helm-selection-line ((t (:inherit region))))
+   `(helm-ff-executable ((t (:foreground ,my-dark-green+4 :background nil :inherit italic))))
+   `(helm-ff-directory ((t (:foreground nil :background nil :inherit italic))))
+   `(helm-grep-file ((t (:foreground ,my-dark-yellow-1 :background nil))))
+   `(helm-grep-match ((t (:foreground nil :background nil :inherit my-dark-red))))
+   `(helm-selection ((t (:foreground nil :background nil :weight bold :underline nil :inherit region))))
+   `(helm-selection-line ((t (:foreground nil :background nil :underline t :inherit helm-selection))))
    `(helm-header ((t (:inherit region))))
    `(helm-match ((t (:foreground ,my-dark-orange :inherit italic))))
    `(helm-visible-mark ((t (:inherit my-dark-highlight-subtle))))
@@ -679,6 +679,8 @@
    `(wg-message-face ((t (:inherit wg-mode-line-face))))
    `(wg-other-workgroup-face ((t (:inherit wg-mode-line-face))))
    `(wg-previous-workgroup-face ((t (:inherit wg-mode-line-face))))
+
+   `(cscope-line-face ((t (:foreground nil :inherit my-dark-green+1))))
    ))
 
 (provide-theme 'my-dark)
