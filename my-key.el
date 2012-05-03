@@ -7,3 +7,7 @@
   (define-key map (kbd "RET")
 	'anything-confirm-and-exit-minibuffer)
   map)
+
+(when (featurep 'projectile)
+  ;; (define-key projectile-mode-map (kbd "C-c j j") 'projectile-find-file)
+  )

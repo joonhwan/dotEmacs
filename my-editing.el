@@ -332,6 +332,10 @@ home directory is a root directory) and removes automounter prefixes
 
 (when i-use-desktop
   (desktop-save-mode 1)
+  (setq
+   desktop-modes-not-to-save (append desktop-modes-not-to-save '(emacs-lisp helm))
+   desktop-buffer-mode-handlers (regexp-opt '("\.rcp$"))
+   )
   )
 
 (when (and i-use-yas

@@ -99,8 +99,13 @@
 		(:name projectile
 			   :description "Projectile is a project interaction library for Emacs"
 			   :type git
-			   :url "git@github.com:Joonhwan/projectile.git" ;;"git://github.com/bbatsov/projectile.git"
-			   :features projectile
+			   :prepare (progn
+						  (setq-default projectile-keymap-prefix (kbd "C-c j"))
+						  )
+			   ;;:url "git@github.com:Joonhwan/projectile.git"
+			   :url "git://github.com/bbatsov/projectile.git"
+			   ;; do-not (require 'projectile ) yet
+			   ;; :features projectile
 			   )
 		(:name replace+
 			   :description "Extensions to `replace.el'."
@@ -119,6 +124,10 @@
 			   :url "git://github.com/emacsattic/xcscope.git"
 			   :features xcscope
 			   )
+		(:name ido-ubiquitous
+			   :description "ido everywhere."
+			   :type git
+			   :url "git://github.com/technomancy/ido-ubiquitous.git")
 		))
 
 (setq my-packages
@@ -142,7 +151,6 @@
 		 gtranslate
 		 helm
 		 htmlize
-		 ido-ubiquitous
 		 iedit
 		 keywiz
 		 lua-mode

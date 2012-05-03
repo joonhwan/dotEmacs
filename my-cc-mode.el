@@ -378,7 +378,7 @@
 													   er/mark-inside-pairs
 													   er/mark-outside-pairs)))
   (if (featurep 'projectile)
-	  (projectile-mode 1))
+  	  (projectile-mode 1))
   ;; (flymake-mode 0)
   ;; (set (make-local-variable 'compile-command)
   ;; 	   (my-recommend-compile-command))
