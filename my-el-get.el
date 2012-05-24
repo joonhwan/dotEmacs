@@ -79,6 +79,11 @@
 		;; 	   :type bzr
 		;; 	   :url "lp:~arankine/+junk/ede-cmake"
 		;; 	   )
+		(:name iflipb
+			   :description "iflipb is ALT-TAB like buffer switching without full cycling."
+			   :type hg
+			   :url "http://hg.rosdahl.net/iflipb"
+			   )
 		(:name iimage
 			   :description "inline'd image mode"
 			   :type http

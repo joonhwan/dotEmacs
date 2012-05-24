@@ -12,6 +12,15 @@
   ;; discussion found https://github.com/magit/magit/issues/18
   ;; but no help. :(
   ;; (setq magit-process-connection-type nil)
+  (if win32p
+	  (setq magit-git-executable
+		  (cond
+		   ((file-exists-p "c:/Program Files/Git/bin/git.exe")
+			"c:/program files/git/bin/git.exe")
+		   ((file-exists-p "c:/Program Files (x86)/Git/bin/git.exe")
+			"c:/Program Files (x86)/Git/bin/git.exe")
+		   (t
+			"git"))))
 )
 
 ;;
@@ -119,12 +128,20 @@
 ;;
 (when (my-try-require 'cmake-mode)
   (require 'cmake-mode)
+  (defun my-cmake-mode-hook ()
+	(subword-mode 1)
+	(local-set-key (kbd "C-c . r") 'cmake-command-run)
+	(local-set-key (kbd "C-c . h") 'cmake-help-list-commands)
+	(local-set-key (kbd "C-c . t") 'cmake-get-topic)
+	(local-set-key (kbd "C-c . u") 'unscreamify-cmake-buffer)
+	)
   (setq auto-mode-alist
 		(append '(
 				  ("CMakeLists\\.txt\\'" . cmake-mode)
 				  ("\\.cmake\\'" . cmake-mode)
 				  )
 				auto-mode-alist))
+  (add-hook 'cmake-mode-hook 'my-cmake-mode-hook)
   )
 
 ;;
@@ -307,6 +324,13 @@
 							 (t "~/scripts/plantuml.jar"))
 	)
   )
+  )
+
+;;
+;; protobuf mode
+;;
+(when (my-try-require 'protobuf-mode)
+  (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
   )
 
 ;; (require 'csharp-mode)

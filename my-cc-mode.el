@@ -106,6 +106,22 @@
 	 (t
 	  nil))))
 
+(defun my-block-close-case-align(langelm)
+  (save-excursion
+	(backward-list)
+	(let ((syntax (car (car (c-guess-basic-syntax)))))
+	  (if (eq syntax 'case-label)
+		  '+
+		0))))
+
+(defun my-block-close-in-switch-case-align(langelm)
+  (save-excursion
+	(backward-up-list)
+	(let ((syntax (car (car (c-guess-basic-syntax)))))
+	  (if (eq syntax 'case-label)
+		  '+
+		0))))
+
 (defun my-file-containig-signature-exist-p (dir file-pattern-regexp signature-regexp)
   (let ((found-file-list (directory-files-and-attributes
 						  dir
@@ -241,6 +257,11 @@
 	   (substatement-open . 0)
 	   (template-args-cont . +)
 	   (topmost-intro-cont . my-c-lineup-topmost-intro-cont)
+	   ;; (block-close . my-block-close-case-align)
+	   (block-close . 0)
+	   ;; (statement-block-intro . my-block-close-in-switch-case-align)
+	   (statement-block-intro . +)
+	   (statement-case-intro . +)
 	   ))
 	))
 
