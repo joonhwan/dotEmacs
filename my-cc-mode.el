@@ -14,7 +14,7 @@
 		("\\.c\\'"
 		 (".h"))
 		("\\.h\\'"
-		 (".cpp" ".cxx" ".C" ".CC" ".c" ".cc" ))
+		 (".cpp" ".cxx" ".C" ".CC" ".c" ".cc" "_win32.cpp" ))
 		("\\.C\\'"
 		 (".H" ".hh" ".h"))
 		("\\.H\\'"
@@ -39,11 +39,13 @@
 	  '(
 		"."
 		"../include"
+		"../src"
+		"../source"
 		".."
 		"../../framework"
 		"../../common"
-		"c:/qt/4.8.0/include/Qt"
-		"c:/qt/4.8.0/include"
+		"c:/qt/4.8.1/include/Qt"
+		"c:/qt/4.8.1/include"
 		"c:/dev/gnuwin32/include"
 		))
 
@@ -77,7 +79,11 @@
 	  (progn
 		(beginning-of-line)
 		(cond
-		 ((re-search-forward "EVT_\\|ON_" (line-end-position) t)
+		 ((re-search-forward
+		   (regexp-opt '("EVT_"
+						 "ON_"
+						 ))
+		   (line-end-position) t)
 		  'c-basic-offset)
 		 ((re-search-forward 
 		   (regexp-opt '("DEFINE"
@@ -88,6 +94,14 @@
 						 "MAP_PROPERTY"))
 		   (line-end-position) t)
 		  0)
+		 ((save-excursion
+			(c-backward-syntactic-ws (c-langelem-pos langelm))
+			(re-search-backward
+			 (regexp-opt '("BEGIN_STATE"))
+			 (line-beginning-position) t)
+			)
+		  'c-basic-offset
+		  )
 		 (t
 		  (c-lineup-topmost-intro-cont langelm))))))))
 

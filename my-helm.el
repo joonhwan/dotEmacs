@@ -1,5 +1,4 @@
 ;; -*- coding:utf-8 -*-
-
 (helm-mode 1)
 
 (when macp
@@ -9,10 +8,15 @@
 	  (case system-type
 		('gnu/linux "locate -i -r %s")
 		('berkeley-unix "locate -i %s")
-		('windows-nt "es -s -p -r %s")
+		('windows-nt "es %s")
 		('darwin "mdfind -name %s")
 		(t "locate %s"))
 	  )
+
+(setq
+ helm-c-grep-default-command "ack-grep -Hn --no-group --no-color %e %p %f"
+ helm-c-grep-default-recurse-command "ack-grep -H --no-group --no-color %e %p %f"
+ )
 
 ;; Source for completing Emacs variables.
 (setq helm-c-source-emacs-variables

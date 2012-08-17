@@ -13,14 +13,32 @@
 				;; python
 				"pyc"
 				;; general documentations
-				"txt" "rst" "doc"
+				;; "txt"
+				"rst" "doc"
 				)))
+
+;; (defun my-projectile-ignored-directory-p (file)
+;;   "Check if FILE should be ignored."
+;;   (loop for ignored in projectile-ignored-directories
+;;         when (string= file (concat ignored "/"))
+;;         do (return t)
+;;         finally (return nil)))
+;; (defun projectile-ignored-directory-p (file)
+;;   "Check if FILE should be ignored."
+;;   (if (my-projectile-ignored-directory-p file)
+;; 	  (progn
+;; 		(message (concat "file " file " should be ignored"))
+;; 		t)
+;; 	(progn
+;; 	  (message (concat "file " file " should be NOT ignored"))
+;; 	  nil))
+;;   )
 
 (setq projectile-ignored-files
 	  (append projectile-ignored-files '(".git" ".svn" ".hg")))
 
 (setq projectile-ignored-directories
-	  (append projectile-ignored-directories '(".git" ".svn" ".hg")))
+	  (append projectile-ignored-directories '(".git" ".svn" ".hg" "build" "build-64" "build-32")))
 
 (projectile-global-mode 1)
 

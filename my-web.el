@@ -53,4 +53,21 @@
 ;; (setq yammer-consumer-secret "l2B854Zf8PWuCEjDotMEJouay5JZ7ces8AgmEZ3GLE")
 ;; (yammer-authenticate)
 
+(when (my-try-require 'warp)
+  (global-set-key (kbd "C-c C-w C-w") warp-mode) ;; Modify key bind as you want.
+
+  ;; Set markdown converter (if you want)
+  (add-to-list 'warp-format-converter-alist
+			   '("\\.md\\|\\.markdown" t (lambda ()
+										   ;; Set command you are using
+										   '("markdown"))))
+
+  ;; Below line is needed if you installed websocket npm module globally.
+  (setenv "NODE_PATH" "c:/program files/nodejs/node.exe")
+  ;; ;; or, if you have setup NODE_PATH in the shell
+  ;; (setenv "NODE_PATH"
+  ;; 		  (replace-regexp-in-string
+  ;; 		   "\n+$" "" (shell-command-to-string "echo $NODE_PATH")))
+  )
+
 (provide 'my-web)

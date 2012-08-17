@@ -151,10 +151,13 @@
 (when i-use-recentf
   (require 'recentf)
   (progn
-    (setq recentf-max-saved-items 500)
     (recentf-mode t)
-    (global-set-key (kbd "C-c f r") 'recentf-file)
+	(global-set-key (kbd "C-c f r") 'recentf-file)
     ))
+(add-hook 'recentf-load-hook
+		  (lambda ()
+			(setq recentf-max-saved-items 500)
+			))
 
 (when i-use-directory-abbrev
   (setq directory-abbrev-alist
@@ -315,9 +318,18 @@ home directory is a root directory) and removes automounter prefixes
 											)))
    ;; special-display-buffer-names '("*cmd shell*" "*compilation*"))
    )
-  (push '("*Python*" :height 15) popwin:special-display-config)
-  (push '("*shell*" :height 15) popwin:special-display-config)
-  (push '("*cscope*" :height 20) popwin:special-display-config)
+  (setq popwin:special-display-config
+		'(("*cscope*" :height 20)
+		  ("*shell*" :height 15)
+		  ("*Python*" :height 15)
+		  ("*Help*")
+		  ("*Completions*" :noselect t)
+		  ;; ("*compilation*" :noselect t)
+		  ;; ("*Occur*" :noselect t)
+		  ))
+  ;; (push '("*Python*" :height 15) popwin:special-display-config)
+  ;; (push '("*shell*" :height 15) popwin:special-display-config)
+  ;; (push '("*cscope*" :height 20) popwin:special-display-config)
   (global-set-key (kbd "C-c p") popwin:keymap)
   )
 
@@ -454,7 +466,8 @@ home directory is a root directory) and removes automounter prefixes
 (eval-after-load "ace-jump-mode"
   '(progn
 	 (define-key global-map (kbd "C-c C-SPC") 'ace-jump-mode)
-	 (define-key global-map (kbd "C-=") 'ace-jump-mode)
+	 ;; (define-key global-map (kbd "C-=") 'ace-jump-mode)
+	 (define-key global-map (kbd "C-'") 'ace-jump-mode)
 	 (define-key global-map (kbd "M-g l") 'ace-jump-line-mode)
 	 )
   )
@@ -528,6 +541,11 @@ iflipb-next-buffer or iflipb-previous-buffer this round."
 			  my-iflipb-ing-internal)))
   )
 
+(if win32p
+	(when (my-try-require 'everything)
+	  (setq everything-port 18000)
+	  )
+  )
 ;; activate disabled features
 (put 'narrow-to-region 'disabled nil)
 (put 'downcase-region 'disabled nil)

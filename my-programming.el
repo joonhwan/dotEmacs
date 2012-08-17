@@ -4,6 +4,18 @@
 ;; (require 'vc-svn)
 
 ;;
+;; vc
+;;
+(if win32p
+	(cond
+	 ((file-exists-p "c:/Program Files (x86)/Git/bin/git.exe")
+	  (setq vc-git-program "c:/Program Files (x86)/Git/bin/git.exe"))
+	 ((file-exists-p "c:/Program Files/Git/bin/git.exe")
+	  (setq vc-git-program "c:/Program Files (x86)/Git/bin/git.exe"))
+	 )
+  )
+
+;;
 ;; magit
 ;;
 (when (my-try-require 'magit)
@@ -319,12 +331,26 @@
 ;;
 (eval-after-load "plantuml"
   (progn
-	(setq plantuml-jar-path (cond
-							 (win32p "c:/dev/plantuml/plantuml.jar")
-							 (t "~/scripts/plantuml.jar"))
+	(setq
+	 plantuml-jar-path (cond
+						(win32p
+						 (cond
+						  ((file-exists-p "c:/dev/plantuml/plantuml.jar")
+						   "c:/dev/plantuml/plantuml.jar")
+						  ((file-exists-p "c:/dev/utility/plantuml.jar")
+						   "c:/dev/utility/plantuml.jar")
+						  ))
+						(t "~/scripts/plantuml.jar"))
+	 )
 	)
   )
-  )
+
+;;
+;; matlab
+;;
+(autoload 'matlab-mode "matlab" "Enter Matlab mode." t)
+(setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
+(autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
 
 ;;
 ;; protobuf mode

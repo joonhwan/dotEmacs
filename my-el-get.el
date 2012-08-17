@@ -101,6 +101,11 @@
 			   :type emacswiki
 			   :features flymake-cursor
 			   )
+		(:name everything
+			   :description "find files with everything"
+			   :type emacswiki
+			   :features everything
+			   )
 		(:name projectile
 			   :description "Projectile is a project interaction library for Emacs"
 			   :type git
@@ -133,6 +138,10 @@
 			   :description "ido everywhere."
 			   :type git
 			   :url "git://github.com/technomancy/ido-ubiquitous.git")
+		(:name warp
+			   :description "Realtime HTML Preview for Emacs"
+			   :type git
+			   :url "git://github.com/yukihr/Warp.git")
 		))
 
 (setq my-packages

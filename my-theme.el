@@ -67,7 +67,7 @@
 	   ;; 'alpha' : transparency
 	   ;; 1st number : foreground value,
 	   ;; 2nd number : background value
-	   ;; (alpha . (98 96))
+	   (alpha . (100 100))
 	   ;; ;; gamma correction
 	   ;; ;; 'nil' ==> default gamma
 	   ;; ;; 2.1 ==> maybe center? (check `frame.c' code)
@@ -89,5 +89,24 @@
   (setq initial-frame-alist default-frame-alist)
   (modify-all-frames-parameters default-frame-alist)
   )
+
+(defvar my-transparent-state-is-on t
+  ""
+  )
+
+;; 잘못 만든 함수. 1) active frame의 2) alpha값만 바꾸어야 하는데. 초기
+;; 프레임과 전체 frame parameter가 바뀐다. :(
+;; 
+(defun my-toggle-transparent-state ()
+  (interactive)
+  (setq default-frame-alist
+		(if my-transparent-state-is-on
+		   '((alpha . (85 50)))
+		  '((alpha . (100 100)))))
+  (setq my-transparent-state-is-on (not my-transparent-state-is-on))
+  (setq initial-frame-alist default-frame-alist)
+  (modify-all-frames-parameters default-frame-alist)
+  )
+;; (global-set-key (kbd "C-c t") 'my-toggle-transparent-state)
 
 (provide 'my-theme)
