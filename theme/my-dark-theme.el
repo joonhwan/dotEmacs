@@ -39,7 +39,9 @@
 	  (my-dark-yellow "#Ffb90f")
 	  (my-dark-yellow-1 "#Cd950c")
 	  (my-dark-yellow-2 "#8b6508")
+	  (my-dark-yellow-3 "#302008")
 
+	  (my-dark-green-3  "#1b2510")
 	  (my-dark-green-2  "#698b69")
 	  (my-dark-green-1 "#9bcd9b")
 	  (my-dark-green "#6e8b3d")
@@ -114,7 +116,7 @@
    `(variable-pitch ((t (:weight bold :family "나눔고딕" :inherit default))))
    `(fringe ((t (:inherit default :background ,my-dark-bg+1))))
    `(header-line ((t (:inherit my-dark-highlight-damp :box (:color "#2e3330" :line-width 2)))))
-   `(highlight ((t (:underline nil :background ,my-dark-blue-3))))
+   `(highlight ((t (:underline nil :foreground ,my-dark-bg :background ,my-dark-blue-3))))
    `(hover-highlight ((t (:underline t :foreground ,my-dark-yellow))))
    `(match ((t (:inherit my-dark-highlight-alerting :underline nil))))
    `(menu ((t (:background "#1e2320"))))
@@ -133,7 +135,7 @@
    `(mode-line-buffer-id ((t (:slant italic :weight bold))))
    `(mode-line-emphasis ((t (:weight bold :weight bold :inherit mode-line))))
    `(mode-line-highlight ((t :inherit mode-line-emphasis)))
-   `(region ((t (:foreground nil :background ,my-dark-bg+1))))
+   `(region ((t (:foreground nil :background ,my-dark-bg+2))))
    `(scroll-bar ((t (:background ,my-dark-bg+2))))
 
    `(secondary-selection ((t (:foreground nil :background ,my-dark-bg+2))))
@@ -638,6 +640,10 @@
    `(helm-header ((t (:inherit region))))
    `(helm-match ((t (:foreground ,my-dark-orange :inherit italic))))
    `(helm-visible-mark ((t (:inherit my-dark-highlight-subtle))))
+
+   ;; mark-multiple
+   `(mm/master-face ((t (:background nil :inherit region))))
+   `(mm/mirror-face ((t (:background nil :inherit highlight))))
 
    ;; wl (wanderlust)
    ;; some faces end with -face, while other don't; confusing
