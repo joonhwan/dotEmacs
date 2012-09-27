@@ -7,14 +7,17 @@
 (setq projectile-ignored-file-extensions
 	  (append projectile-ignored-file-extensions
 			  '(;; visual studio
-				"bak" "exp" "ncb" "ilk" "obj" "manifest"
+				"bak" "exp" "ncb" "ilk" "obj" "manifest" "pdb"
 				;; elisp
 				"elc"
 				;; python
 				"pyc"
 				;; general documentations
 				;; "txt"
-				"rst" "doc"
+				"rst" "doc" "html" "qdoc" "log" "mft" "ver" "txt"
+				"png" "jpg" "bmp" "tif"
+				;; binary
+				"dll" "lib" "exe"
 				)))
 
 ;; (defun my-projectile-ignored-directory-p (file)
@@ -35,10 +38,21 @@
 ;;   )
 
 (setq projectile-ignored-files
-	  (append projectile-ignored-files '(".git" ".svn" ".hg")))
+	  (append projectile-ignored-files '(".git"
+										 ".svn"
+										 ".hg"
+										 ".tag"
+										 )))
 
 (setq projectile-ignored-directories
-	  (append projectile-ignored-directories '(".git" ".svn" ".hg" "build" "build-64" "build-32")))
+	  (append projectile-ignored-directories '(".git"
+											   ".svn"
+											   ".hg"
+											   "build"
+											   "build32"
+											   "build64"
+											   "build-64"
+											   "build-32")))
 
 (projectile-global-mode 1)
 

@@ -386,6 +386,10 @@
 			   (funcall old-blink-paren))))))
 (define-key c-mode-base-map "("         'my-c-electric-paren)
 
+(when (my-try-require 'auto-complete)
+  (my-try-require 'auto-complete-config)
+  (my-try-require 'auto-complete-clang))
+
 (defun my-c-mode-common-hook ()
   (subword-mode 1)
   (c-toggle-auto-newline 1)
@@ -399,6 +403,12 @@
   ;; for work with auto-complete and yasnippet
   (when (boundp 'ac-sources)
 	(append ac-sources '(ac-source-yasnippet)))
+  (when (featurep 'auto-complete-clang)
+	(add-to-list 'ac-omni-completion-sources
+				 (cons "\\." '(ac-source-clang)))
+	(add-to-list 'ac-omni-completion-sources
+				 (cons "->" '(ac-source-clang)))
+	(setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources)))
   (if (featurep 'expand-region-core)
 	  ;; in c++ mode i do not use er/mark-word actually.
 	  (set (make-local-variable 'er/try-expand-list) '(;; er/mark-word

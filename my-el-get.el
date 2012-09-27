@@ -79,6 +79,30 @@
 		;; 	   :type bzr
 		;; 	   :url "lp:~arankine/+junk/ede-cmake"
 		;; 	   )
+		(:name auto-yasnippet
+			   :description "Quickly create disposable yasnippets"
+			   :type emacswiki
+			   :features auto-yasnippet
+			   )
+		(:name font-utils
+			   :website "http://www.emacswiki.org/emacs-en/FontUtils"
+			   :description "Utility functions for working with fonts."
+			   :type github
+			   :pkgname "rolandwalker/font-utils"
+			   ;; :post-ini (progn
+			   ;; 	       (require 'font-utils)
+			   ;; 	       )
+			   )
+		(:name miniedit
+			   :website "https://github.com/emacsmirror/miniedit"
+			   :description "Enhanced editing for minibuffer fields"
+			   :type github
+			   :pkgname "emacsmirror/miniedit"
+			   :post-ini (progn
+				       (require 'miniedit)
+				       (miniedit-install)
+				       )
+			   )
 		(:name iflipb
 			   :description "iflipb is ALT-TAB like buffer switching without full cycling."
 			   :type hg
@@ -151,6 +175,7 @@
 		 asciidoc
 		 auto-install
 		 auto-complete
+		 auto-complete-clang
 		 csharp-mode
 		 deferred
 		 dired+

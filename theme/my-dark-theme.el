@@ -159,6 +159,12 @@
    `(font-lock-pseudo-keyword-face ((t (:inherit my-dark-primary-4))))
    `(font-lock-operator-face ((t (:inherit my-dark-primary-3))))
 
+   `(ediff-current-diff-A ((t (:foreground "#000000" :background ,my-dark-red-2 :inherit default))))
+   `(ediff-current-diff-B ((t (:foreground "#000000"  :background ,my-dark-red-3 :inherit default))))
+   `(ediff-current-diff-C ((t (:foreground "#000000"  :background ,my-dark-red-4 :inherit default))))
+   `(ediff-old-diff-A ((t (:foreground "#000000"  :background ,my-dark-blue-2 :inherit default))))
+   `(ediff-old-diff-B ((t (:foreground "#000000"  :background ,my-dark-blue-3 :inherit default))))
+   `(ediff-old-diff-C ((t (:foreground "#000000"  :background ,my-dark-blue-4 :inherit default))))
 
    ;; apt-utils
    `(apt-utils-normal-package ((t (:inherit my-dark-primary-1))))
@@ -687,6 +693,9 @@
    `(wg-previous-workgroup-face ((t (:inherit wg-mode-line-face))))
 
    `(cscope-line-face ((t (:foreground nil :inherit my-dark-green+1))))
+
+   ;; diff
+   `(diff-refine-added ((t (:foreground nil :background ,my-dark-green-2))))
    ))
 
 (provide-theme 'my-dark)
