@@ -23,6 +23,7 @@
 
 (let (
 	  (my-dark-fg  "#dcdccc")
+	  (my-dark-fg-1  "#505050")
 	  (my-dark-bg-1"#1a0a0a")
 	  (my-dark-bg"#1c1c1c")
 	  (my-dark-bg+1 "#303030")
@@ -38,7 +39,9 @@
 	  (my-dark-yellow "#Ffb90f")
 	  (my-dark-yellow-1 "#Cd950c")
 	  (my-dark-yellow-2 "#8b6508")
+	  (my-dark-yellow-3 "#302008")
 
+	  (my-dark-green-3  "#1b2510")
 	  (my-dark-green-2  "#698b69")
 	  (my-dark-green-1 "#9bcd9b")
 	  (my-dark-green "#6e8b3d")
@@ -47,13 +50,13 @@
 	  (my-dark-green+3 "#4eee94")
 	  (my-dark-green+4 "#54ff9f")
 	  (my-dark-cyan  "#93e0e3")
-	  (my-dark-blue+1 "#00f5ff")
-	  (my-dark-blue  "#8cd0d3")
-	  (my-dark-blue-1 "#7cb8bb")
-	  (my-dark-blue-2 "#6ca0a3")
-	  (my-dark-blue-3 "#5c888b")
-	  (my-dark-blue-4 "#4c7073")
-	  (my-dark-blue-5 "#366060")
+	  (my-dark-blue+1 "#00d0f3")
+	  (my-dark-blue  "#5cd0d3")
+	  (my-dark-blue-1 "#4cb8bb")
+	  (my-dark-blue-2 "#3ca0a3")
+	  (my-dark-blue-3 "#2c888b")
+	  (my-dark-blue-4 "#1c7073")
+	  (my-dark-blue-5 "#066060")
 	  (my-dark-magenta "#8b008b")
 
 	  (my-dark-jhlee-mode-line-bg "#Daa520")
@@ -104,23 +107,23 @@
    `(my-dark-title ((t (:inherit variable-pitch :weight bold :inherit default))))
 
    ;; basics
-   `(Bold ((t (:weight bold))))
+   `(default ((t (:family "Bitstream Sans Vera Mono" :background ,my-dark-bg :foreground ,my-dark-fg))))
+   `(bold ((t (:weight bold))))
    `(bold-italic ((t (:slant italic :weight bold))))
-   `(default ((t (:background ,my-dark-bg :foreground ,my-dark-fg))))
    `(fixed-pitch ((t (:weight bold))))
    `(italic ((t (:slant italic))))
    `(underline ((t (:underline t))))
    `(variable-pitch ((t (:weight bold :family "나눔고딕" :inherit default))))
    `(fringe ((t (:inherit default :background ,my-dark-bg+1))))
    `(header-line ((t (:inherit my-dark-highlight-damp :box (:color "#2e3330" :line-width 2)))))
-   `(highlight ((t (:underline nil :background ,my-dark-blue-3))))
+   `(highlight ((t (:underline nil :foreground ,my-dark-bg :background ,my-dark-blue-3))))
    `(hover-highlight ((t (:underline t :foreground ,my-dark-yellow))))
    `(match ((t (:inherit my-dark-highlight-alerting :underline nil))))
    `(menu ((t (:background "#1e2320"))))
    `(mouse ((t (:inherit my-dark-foreground))))
    `(paren ((t (:inherit my-dark-red)))) ;;'my-dark-lowlight-1))))
-   `(trailing-whitespace ((t (:inherit font-lock-warning-face))))
-   `(Buffer-menu-buffer ((t (:inherit my-dark-primary-1))))
+   `(trailing-whitespace ((t (:background ,my-dark-yellow-2))))
+   `(buffer-menu-buffer ((t (:inherit my-dark-primary-5))))
    `(border ((t (:background ,my-dark-bg))))
    `(button ((t (:foreground ,my-dark-yellow-2 :underline t))))
    `(cursor ((t (:background "#aaaaaa" :foreground nil))))
@@ -132,7 +135,7 @@
    `(mode-line-buffer-id ((t (:slant italic :weight bold))))
    `(mode-line-emphasis ((t (:weight bold :weight bold :inherit mode-line))))
    `(mode-line-highlight ((t :inherit mode-line-emphasis)))
-   `(region ((t (:foreground nil :background ,my-dark-bg+1))))
+   `(region ((t (:foreground nil :background ,my-dark-bg+2))))
    `(scroll-bar ((t (:background ,my-dark-bg+2))))
 
    `(secondary-selection ((t (:foreground nil :background ,my-dark-bg+2))))
@@ -146,7 +149,7 @@
    `(font-lock-doc-face ((t (:inherit my-dark-green+1))))
    `(font-lock-doc-string-face ((t (:foreground ,my-dark-blue+1))))
    `(font-lock-function-name-face ((t (:foreground ,my-dark-blue))))
-   `(font-lock-keyword-face ((t (:slant italic :inherit my-dark-blue+1))))
+   `(font-lock-keyword-face ((t (:slant italic :foreground nil :background nil :inherit my-dark-blue-2))))
    `(font-lock-negation-char-face ((t (:inherit my-dark-primary-1))))
    `(font-lock-preprocessor-face ((t (:inherit my-dark-red-1))))
    `(font-lock-string-face ((t (:inherit my-dark-blue-3))))
@@ -156,6 +159,12 @@
    `(font-lock-pseudo-keyword-face ((t (:inherit my-dark-primary-4))))
    `(font-lock-operator-face ((t (:inherit my-dark-primary-3))))
 
+   `(ediff-current-diff-A ((t (:foreground "#000000" :background ,my-dark-red-2 :inherit default))))
+   `(ediff-current-diff-B ((t (:foreground "#000000"  :background ,my-dark-red-3 :inherit default))))
+   `(ediff-current-diff-C ((t (:foreground "#000000"  :background ,my-dark-red-4 :inherit default))))
+   `(ediff-old-diff-A ((t (:foreground "#000000"  :background ,my-dark-blue-2 :inherit default))))
+   `(ediff-old-diff-B ((t (:foreground "#000000"  :background ,my-dark-blue-3 :inherit default))))
+   `(ediff-old-diff-C ((t (:foreground "#000000"  :background ,my-dark-blue-4 :inherit default))))
 
    ;; apt-utils
    `(apt-utils-normal-package ((t (:inherit my-dark-primary-1))))
@@ -241,6 +250,31 @@
    `(diff-context-face ((t (:inherit font-lock-comment-face))))
    `(diff-refine-change-face ((t (:inherit my-dark-background-2))))
 
+   ;; diredp
+   `(diredp-default ((t (:background ,my-dark-bg :inherit default))))
+   `(diredp-compressed-file-suffix ((t (:foreground ,my-dark-blue-3 :inherit diredp-default))))
+   `(diredp-date-time ((t (:foreground ,my-dark-blue-1  :inherit diredp-default))))
+   `(diredp-deletion ((t (:foreground ,my-dark-bg :background ,my-dark-red  :inherit diredp-default))))
+   `(diredp-deletion-file-name ((t (:foreground ,my-dark-red  :inherit diredp-default))))
+   `(diredp-dir-heading ((t (:foreground ,my-dark-yellow :slant italic  :inherit diredp-default))))
+   `(diredp-dir-priv ((t (:foreground ,my-dark-blue-1 :background ,my-dark-bg :slant italic  :inherit diredp-default))))
+   `(diredp-display-msg ((t (:foreground ,my-dark-yellow  :inherit diredp-default))))
+   `(diredp-exec-priv ((t (:foreground ,my-dark-yellow-1 :background ,my-dark-bg :inherit diredp-default))))
+   `(diredp-executable-tag ((t (:foreground ,my-dark-red  :inherit diredp-default))))
+   `(diredp-file-name ((t (:foreground ,my-dark-yellow  :inherit diredp-default))))
+   `(diredp-file-suffix ((t (:foreground ,my-dark-fg :slant italic  :inherit diredp-default))))
+   `(diredp-flag-mark ((t (:foreground ,my-dark-green+1  :background ,my-dark-bg :inherit diredp-default))))
+   `(diredp-flag-mark-line ((t (:foreground "black" :background ,my-dark-yellow-2  :inherit diredp-default))))
+   `(diredp-ignored-file-name ((t (:foreground ,my-dark-fg-1  :inherit diredp-default))))
+   `(diredp-link-priv ((t (:foreground ,my-dark-blue :background ,my-dark-bg :inherit diredp-default))))
+   `(diredp-no-priv ((t (:foreground ,my-dark-fg :background ,my-dark-bg :inherit diredp-default))))
+   `(diredp-number ((t (:foreground ,my-dark-fg  :inherit diredp-default))))
+   `(diredp-other-priv ((t (:foreground ,my-dark-blue-2 :background ,my-dark-bg  :inherit diredp-default))))
+   `(diredp-rare-priv ((t (:foreground ,my-dark-blue-4 :background ,my-dark-bg :inherit diredp-default))))
+   `(diredp-read-priv ((t (:foreground ,my-dark-blue-3 :background ,my-dark-bg :inherit diredp-default))))
+   `(diredp-symlink ((t (:foreground ,my-dark-blue-1  :inherit diredp-default))))
+   `(diredp-write-priv ((t (:foreground ,my-dark-green-1 :background ,my-dark-bg :inherit diredp-default))))
+
    ;; emms
    `(emms-pbi-song ((t (:foreground ,my-dark-yellow))))
    `(emms-pbi-current ((t (:inherit my-dark-primary-1))))
@@ -266,7 +300,6 @@
    `(erc-underline-face ((t (:inherit underline))))
    `(erc-default-face ((t (:foreground ,my-dark-fg))))
    `(erc-input-face ((t (:foreground ,my-dark-yellow))))
-
 
    ;; eshell
    `(eshell-prompt ((t (:inherit my-dark-primary-1))))
@@ -602,17 +635,21 @@
    `(which-func ((t (:inherit mode-line))))
 
    ;; anything
-   `(helm-source-header ((t (:foreground ,my-dark-yellow))))
+   `(helm-source-header ((t (:foreground nil :background nil :underline nil :weight bold :inherit my-dark-highlight-damp))))
    `(helm-ff-file ((t (:inherit italic))))
-   `(helm-ff-executable ((t (:foreground ,my-dark-green+4 :inherit italic))))
-   `(helm-ff-directory ((t (:inherit italic))))
-   `(helm-grep-file ((t (:foreground ,my-dark-yellow-1))))
-   `(helm-grep-match ((t (:inherit my-dark-red))))
-   `(helm-selection ((t (:inherit region))))
-   `(helm-selection-line ((t (:inherit region))))
+   `(helm-ff-executable ((t (:foreground ,my-dark-green+4 :background nil :inherit italic))))
+   `(helm-ff-directory ((t (:foreground nil :background nil :inherit italic))))
+   `(helm-grep-file ((t (:foreground ,my-dark-yellow-1 :background nil))))
+   `(helm-grep-match ((t (:foreground nil :background nil :inherit my-dark-red))))
+   `(helm-selection ((t (:foreground nil :background nil :weight bold :underline nil :inherit region))))
+   `(helm-selection-line ((t (:foreground nil :background nil :underline t :inherit helm-selection))))
    `(helm-header ((t (:inherit region))))
    `(helm-match ((t (:foreground ,my-dark-orange :inherit italic))))
    `(helm-visible-mark ((t (:inherit my-dark-highlight-subtle))))
+
+   ;; mark-multiple
+   `(mm/master-face ((t (:background nil :inherit region))))
+   `(mm/mirror-face ((t (:background nil :inherit highlight))))
 
    ;; wl (wanderlust)
    ;; some faces end with -face, while other don't; confusing
@@ -654,6 +691,11 @@
    `(wg-message-face ((t (:inherit wg-mode-line-face))))
    `(wg-other-workgroup-face ((t (:inherit wg-mode-line-face))))
    `(wg-previous-workgroup-face ((t (:inherit wg-mode-line-face))))
+
+   `(cscope-line-face ((t (:foreground nil :inherit my-dark-green+1))))
+
+   ;; diff
+   `(diff-refine-added ((t (:foreground nil :background ,my-dark-green-2))))
    ))
 
 (provide-theme 'my-dark)

@@ -69,11 +69,44 @@
 		;; 			       '("\\.py$" . python-mode))
 		;; 		  (add-to-list 'interpreter-mode-alist
 		;; 			       '("python" . python-mode))))
-		(
-		 :name eproject
-			   :description "another eproject"
-			   :type git
-			   :url "git://repo.or.cz/eproject.git"
+		;; (:name eproject
+		;; 	   :description "another eproject"
+		;; 	   :type git
+		;; 	   :url "git://repo.or.cz/eproject.git"
+		;; 	   )
+		;; (:name ede-cmake
+		;; 	   :description "ede cmake mode"
+		;; 	   :type bzr
+		;; 	   :url "lp:~arankine/+junk/ede-cmake"
+		;; 	   )
+		(:name auto-yasnippet
+			   :description "Quickly create disposable yasnippets"
+			   :type emacswiki
+			   :features auto-yasnippet
+			   )
+		(:name font-utils
+			   :website "http://www.emacswiki.org/emacs-en/FontUtils"
+			   :description "Utility functions for working with fonts."
+			   :type github
+			   :pkgname "rolandwalker/font-utils"
+			   ;; :post-ini (progn
+			   ;; 	       (require 'font-utils)
+			   ;; 	       )
+			   )
+		(:name miniedit
+			   :website "https://github.com/emacsmirror/miniedit"
+			   :description "Enhanced editing for minibuffer fields"
+			   :type github
+			   :pkgname "emacsmirror/miniedit"
+			   :post-ini (progn
+				       (require 'miniedit)
+				       (miniedit-install)
+				       )
+			   )
+		(:name iflipb
+			   :description "iflipb is ALT-TAB like buffer switching without full cycling."
+			   :type hg
+			   :url "http://hg.rosdahl.net/iflipb"
 			   )
 		(:name iimage
 			   :description "inline'd image mode"
@@ -92,6 +125,47 @@
 			   :type emacswiki
 			   :features flymake-cursor
 			   )
+		(:name everything
+			   :description "find files with everything"
+			   :type emacswiki
+			   :features everything
+			   )
+		(:name projectile
+			   :description "Projectile is a project interaction library for Emacs"
+			   :type git
+			   :prepare (progn
+						  (setq-default projectile-keymap-prefix (kbd "C-c j"))
+						  )
+			   ;;:url "git@github.com:Joonhwan/projectile.git"
+			   :url "git://github.com/bbatsov/projectile.git"
+			   ;; do-not (require 'projectile ) yet
+			   ;; :features projectile
+			   )
+		(:name replace+
+			   :description "Extensions to `replace.el'."
+			   :type emacswiki
+			   :features replace+
+			   :depends thingatpt+
+			   )
+		(:name thingatpt+
+			   :description "Extensions to `thingatpt.el'."
+			   :type emacswiki
+			   :features thingatpt+
+			   )
+		(:name xcscope
+			   :description "cscope interface for (X)Emacs"
+			   :type git
+			   :url "git://github.com/emacsattic/xcscope.git"
+			   :features xcscope
+			   )
+		(:name ido-ubiquitous
+			   :description "ido everywhere."
+			   :type git
+			   :url "git://github.com/technomancy/ido-ubiquitous.git")
+		(:name warp
+			   :description "Realtime HTML Preview for Emacs"
+			   :type git
+			   :url "git://github.com/yukihr/Warp.git")
 		))
 
 (setq my-packages
@@ -101,8 +175,10 @@
 		 asciidoc
 		 auto-install
 		 auto-complete
+		 auto-complete-clang
 		 csharp-mode
 		 deferred
+		 dired+
 		 el-get
 		 ;; eproject
 		 ;; evil
@@ -114,7 +190,6 @@
 		 gtranslate
 		 helm
 		 htmlize
-		 ido-ubiquitous
 		 iedit
 		 keywiz
 		 lua-mode

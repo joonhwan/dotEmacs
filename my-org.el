@@ -32,6 +32,7 @@
  '((emacs-lisp . t)
    (python . t)
    (dot . t)
+   (c++ . nil)
    (gnuplot . t)
    (plantuml . t)))
 

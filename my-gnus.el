@@ -1,3 +1,6 @@
+;; from
+;; http://www.xsteve.at/prg/gnus/
+
 ;; XSteve's Gnus page
 ;; Gnus is a sophisticated and powerful crossplatform email and news reader.
 ;; It is implemented in Emacs Lisp. That way you have the full power of Emacs available in your email application.
@@ -8,12 +11,12 @@
 
 
 ;; Use a smtp server to send emails.
-(setq smtpmail-smtp-server "smtp@host.com")
-(setq user-mail-address "stefan@host.com")
+(setq smtpmail-smtp-server "joonhwan.lee@gmail.com")
+(setq user-mail-address "joonhwan.lee@gmail.com")
 (setq message-send-mail-real-function 'smtpmail-send-it)
 
 ;; Display the recipants in gnus summary buffers instead of my mail own mail address for my sent mails.
-(setq gnus-ignored-from-addresses "Stefan Reichör")
+(setq gnus-ignored-from-addresses "Joonhwan Lee")
 
 
 ;; Set the prefix when using jump to select a newsgroup.
@@ -25,9 +28,9 @@
 
 
 ;; Use nnml as mail backend. Use news.host.com as nntp server.
-(setq gnus-secondary-select-methods
-      '((nnml "")
-        (nntp "news.host.com")))
+(setq gnus-secondary-select-methods nil)
+      ;; '((nnml "")
+      ;;   (nntp "news.host.com")))
 
 ;; Keep a backup of the received mails for 60 days and delete that mails after 60 days without a confirmation.
 (setq mail-source-delete-incoming 60)
@@ -44,19 +47,19 @@
 
 ;; Specify the mail sources from which gnus should fetch new mail. The mail will be transfered to your computer and deleted on the mail host. Below you see an example definition for pop and one for imap. I have some fictional values for the needed entries.
 (setq mail-sources
-      '((pop :server "pop.host.at" :user "xsteve@host.at" :password "pwhost")
-        (imap :server "imap.host" :user "xsteve" :password "pwhost")))
+      '(;; (pop :server "pop.host.at" :user "xsteve@host.at" :password "pwhost")
+        (imap :server "imap.gmail.com" :user "joonhwan.lee@gmail.com" ;; :password "??????"
+			  )))
 
-
-;; Mail splitting is a very powerful and useful feature of gnus. You should add your own rules below. The rules are tried from the first to the last. If a rule matches, the Mail is spooled to the specified mail group. If no rule matches, the mail is delivered to the group "mail.other".
-(setq nnmail-split-methods 'nnmail-split-fancy)
-(setq nnmail-split-fancy
-      '(|
-        (: spam-split)
-        (: gnus-registry-split-fancy-with-parent)
-        ("X-BeenThere" "xtla-el-dev@gna.org" "mail.myprg.xtla")
-        (from ".*@amazon.de" "mail.privat.amazon")
-        "mail.other"))
+;; ;; Mail splitting is a very powerful and useful feature of gnus. You should add your own rules below. The rules are tried from the first to the last. If a rule matches, the Mail is spooled to the specified mail group. If no rule matches, the mail is delivered to the group "mail.other".
+;; (setq nnmail-split-methods 'nnmail-split-fancy)
+;; (setq nnmail-split-fancy
+;;       '(|
+;;         (: spam-split)
+;;         (: gnus-registry-split-fancy-with-parent)
+;;         ;; ("X-BeenThere" "xtla-el-dev@gna.org" "mail.myprg.xtla")
+;;         ;; (from ".*@amazon.de" "mail.privat.amazon")
+;;         "mail.other"))
 
 
 ;; Mails and News that you send are stored in the folders "sent-mail" or "sent-news"

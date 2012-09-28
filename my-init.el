@@ -55,7 +55,7 @@
 ;;
 ;; i'm not using normal path of emacs customization!
 ;;
-(setq custom-file "~/elisp/my-customization.el") ;; needed for theme'ing..
+(setq custom-file (concat my-dotfiles-dir "my-customization.el"))
 
 ;; sometimes system becomes slow. here's workaround
 ;; hint from
@@ -67,16 +67,13 @@
 (if macp
 	(require 'my-mac))
 
-;; first-one
 (require 'my-el-get)
 ;; (require 'my-elpa)
-
 (require 'my-editing)
 ;; (require 'my-cedet)
 (require 'my-programming) ;; for all except c/c++
 (require 'my-cc-mode) ;; for c/c++ mode only
 (require 'my-dired)
-;; ;; (require 'my-muse)
 (require 'my-shell)
 ;; ;; (require 'my-svn)
 ;; ;; (require 'my-web)
@@ -84,7 +81,7 @@
 (require 'my-isearch)
 (require 'my-ido)
 ;; ;; (require 'my-ecb)
-;; (require 'my-tags)
+(require 'my-tags)
 (require 'my-org)
 ;; (require 'bookmark)
 ;; (require 'ediff)
@@ -120,8 +117,6 @@
 ;;
 (load custom-file)
 
-(toggle-debug-on-error -1)
-
 (progn
   (message "modifying frame...")
   (let ((new-config
@@ -138,4 +133,4 @@
   )
 
 ;; disable trackback....
-(toggle-debug-on-error nil)
+(setq debug-on-error nil)

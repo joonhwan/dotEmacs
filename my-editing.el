@@ -59,6 +59,8 @@
  standard-indent 4
  ;;
  default-tab-width 4
+ ;; when pressing 'q' in customize buffer, kill it
+ custom-buffer-done-kill t
  ;; convenient to move around currunt window.
  make-backup-files nil
  ;;
@@ -149,10 +151,13 @@
 (when i-use-recentf
   (require 'recentf)
   (progn
-    (setq recentf-max-saved-items 500)
     (recentf-mode t)
-    (global-set-key (kbd "C-c f r") 'recentf-file)
+	(global-set-key (kbd "C-c f r") 'recentf-file)
     ))
+(add-hook 'recentf-load-hook
+		  (lambda ()
+			(setq recentf-max-saved-items 500)
+			))
 
 (when i-use-directory-abbrev
   (setq directory-abbrev-alist
@@ -304,11 +309,27 @@ home directory is a root directory) and removes automounter prefixes
   (setq
    display-buffer-function 'popwin:display-buffer
    special-display-function 'popwin:special-display-popup-window
-   special-display-regexps `(,(regexp-opt '("\\*selection\\*" "\\*completions\\*" "\\*Completions\\*" "\\*Help\\*" "\\*shell*\\")))
+   special-display-regexps `(,(regexp-opt '(
+											"\\*selection\\*"
+											"\\*completions\\*"
+											"\\*Completions\\*"
+											"\\*Help\\*"
+											"\\*shell\\*"
+											)))
    ;; special-display-buffer-names '("*cmd shell*" "*compilation*"))
    )
-  (push '("*Python*" :height 15) popwin:special-display-config)
-  (push '("*shell*" :height 15) popwin:special-display-config)
+  (setq popwin:special-display-config
+		'(("*cscope*" :height 20)
+		  ("*shell*" :height 15)
+		  ("*Python*" :height 15)
+		  ("*Help*")
+		  ("*Completions*" :noselect t)
+		  ;; ("*compilation*" :noselect t)
+		  ;; ("*Occur*" :noselect t)
+		  ))
+  ;; (push '("*Python*" :height 15) popwin:special-display-config)
+  ;; (push '("*shell*" :height 15) popwin:special-display-config)
+  ;; (push '("*cscope*" :height 20) popwin:special-display-config)
   (global-set-key (kbd "C-c p") popwin:keymap)
   )
 
@@ -330,6 +351,10 @@ home directory is a root directory) and removes automounter prefixes
 
 (when i-use-desktop
   (desktop-save-mode 1)
+  (setq
+   desktop-modes-not-to-save (append desktop-modes-not-to-save '(emacs-lisp helm))
+   desktop-buffer-mode-handlers (regexp-opt '("\.rcp$"))
+   )
   )
 
 (when (and i-use-yas
@@ -344,6 +369,30 @@ home directory is a root directory) and removes automounter prefixes
 		  ,(concat my-dotfiles-dir "alien/el-get-package/yasnippet/snippets")))
   ;; (yas/initialize)
   (yas/global-mode 1)
+  )
+
+(when (my-try-require 'expand-region-core)
+  ;; hack original code
+  (defun er/mark-outside-pairs ()
+	"Mark pairs (as defined by the mode), including the pair chars."
+	(interactive)
+	(cond
+	 ((looking-at "[ ]*[({]")
+	  ;; do nothing ?!
+	  t)
+	 ((looking-back "\\s)+\\=")
+	  (ignore-errors (backward-list 1)))
+	 (t
+      (skip-chars-forward er--space-str))
+	 )
+	(when (and (er--point-inside-pairs-p)
+			   (or (not (er--looking-at-pair))
+				   (er--looking-at-marked-pair)))
+	  (goto-char (nth 1 (syntax-ppss))))
+	(when (er--looking-at-pair)
+	  (set-mark (point))
+	  (forward-list)
+	  (exchange-point-and-mark)))
   )
 
 (eval-after-load "info"
@@ -373,22 +422,14 @@ home directory is a root directory) and removes automounter prefixes
   )
 
 ;;
-;; occur mode
-;;
-(eval-after-load "occur"
+;; replace/occur
+;; 
+(eval-after-load "replace"
   '(progn
+     (setq list-matching-lines-default-context-lines 0)
 	 (add-hook 'occur-hook
 			   '(lambda()
 				  (next-error-follow-minor-mode t)))
-	 )
-  )
-
-(eval-after-load "replace"
-  '(progn
-     ;; ;; replace+
-     ;; ;; http://www.emacswiki.org/emacs/replace%2b.el
-     ;; (require 'replace+)
-     (setq list-matching-lines-default-context-lines 0)
      ))
 
 (eval-after-load "woman"
@@ -425,6 +466,9 @@ home directory is a root directory) and removes automounter prefixes
 (eval-after-load "ace-jump-mode"
   '(progn
 	 (define-key global-map (kbd "C-c C-SPC") 'ace-jump-mode)
+	 ;; (define-key global-map (kbd "C-=") 'ace-jump-mode)
+	 (define-key global-map (kbd "C-'") 'ace-jump-mode)
+	 (define-key global-map (kbd "M-g l") 'ace-jump-line-mode)
 	 )
   )
 
@@ -459,6 +503,49 @@ home directory is a root directory) and removes automounter prefixes
   (global-undo-tree-mode 1)
   )
 
+(when (my-try-require 'iflipb)
+  ;; wrap is better?! trying..
+  (setq iflipb-wrap-around t)
+  ;; auto off function iflipb'ing
+  (setq my-iflipb-auto-off-timeout-sec 1)
+  (setq my-iflipb-auto-off-timer-canceler-internal nil)
+  (setq my-iflipb-ing-internal nil)
+  (defun my-iflipb-auto-off ()
+	(message nil)
+	(setq my-iflipb-auto-off-timer-canceler-internal nil
+		  my-iflipb-ing-internal nil)
+	)
+  (defun my-iflipb-next-buffer (arg)
+	(interactive "P")
+	(iflipb-next-buffer arg)
+	(if my-iflipb-auto-off-timer-canceler-internal
+		(cancel-timer my-iflipb-auto-off-timer-canceler-internal))
+	(run-with-idle-timer my-iflipb-auto-off-timeout-sec 0 'my-iflipb-auto-off)
+	(setq my-iflipb-ing-internal t)
+	)
+  (defun my-iflipb-previous-buffer ()
+	(interactive)
+	(iflipb-previous-buffer)
+	(if my-iflipb-auto-off-timer-canceler-internal
+		(cancel-timer my-iflipb-auto-off-timer-canceler-internal))
+	(run-with-idle-timer my-iflipb-auto-off-timeout-sec 0 'my-iflipb-auto-off)
+	(setq my-iflipb-ing-internal t)
+	)
+  (global-set-key (kbd "<C-tab>") 'my-iflipb-next-buffer)
+  (global-set-key (kbd "<C-S-tab>") 'my-iflipb-previous-buffer)
+  (defun iflipb-first-iflipb-buffer-switch-command ()
+	"Determines whether this is the first invocation of
+iflipb-next-buffer or iflipb-previous-buffer this round."
+	(not (and (or (eq last-command 'my-iflipb-next-buffer)
+				  (eq last-command 'my-iflipb-previous-buffer))
+			  my-iflipb-ing-internal)))
+  )
+
+(if win32p
+	(when (my-try-require 'everything)
+	  (setq everything-port 18000)
+	  )
+  )
 ;; activate disabled features
 (put 'narrow-to-region 'disabled nil)
 (put 'downcase-region 'disabled nil)

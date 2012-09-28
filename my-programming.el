@@ -4,14 +4,35 @@
 ;; (require 'vc-svn)
 
 ;;
+;; vc
+;;
+(if win32p
+	(cond
+	 ((file-exists-p "c:/Program Files (x86)/Git/bin/git.exe")
+	  (setq vc-git-program "c:/Program Files (x86)/Git/bin/git.exe"))
+	 ((file-exists-p "c:/Program Files/Git/bin/git.exe")
+	  (setq vc-git-program "c:/Program Files (x86)/Git/bin/git.exe"))
+	 )
+  )
+
+;;
 ;; magit
 ;;
 (when (my-try-require 'magit)
-  (global-set-key (kbd "C-x C-g") 'magit-status)
+  (global-set-key (kbd "C-x g") 'magit-status)
   ;; unable to detect end of process in magit process buffer?!
   ;; discussion found https://github.com/magit/magit/issues/18
   ;; but no help. :(
   ;; (setq magit-process-connection-type nil)
+  (if win32p
+	  (setq magit-git-executable
+		  (cond
+		   ((file-exists-p "c:/Program Files/Git/bin/git.exe")
+			"c:/program files/git/bin/git.exe")
+		   ((file-exists-p "c:/Program Files (x86)/Git/bin/git.exe")
+			"c:/Program Files (x86)/Git/bin/git.exe")
+		   (t
+			"git"))))
 )
 
 ;;
@@ -24,7 +45,8 @@
              (interactive)
              (turn-on-eldoc-mode)
 			 (if (featurep 'rainbow-delimiters)
-				 (rainbow-delimiters-mode t))
+				 (rainbow-delimiters-mode t)
+			   )
 			 ))
 
 ;;
@@ -118,12 +140,20 @@
 ;;
 (when (my-try-require 'cmake-mode)
   (require 'cmake-mode)
+  (defun my-cmake-mode-hook ()
+	(subword-mode 1)
+	(local-set-key (kbd "C-c . r") 'cmake-command-run)
+	(local-set-key (kbd "C-c . h") 'cmake-help-list-commands)
+	(local-set-key (kbd "C-c . t") 'cmake-get-topic)
+	(local-set-key (kbd "C-c . u") 'unscreamify-cmake-buffer)
+	)
   (setq auto-mode-alist
 		(append '(
 				  ("CMakeLists\\.txt\\'" . cmake-mode)
 				  ("\\.cmake\\'" . cmake-mode)
 				  )
 				auto-mode-alist))
+  (add-hook 'cmake-mode-hook 'my-cmake-mode-hook)
   )
 
 ;;
@@ -301,16 +331,37 @@
 ;;
 (eval-after-load "plantuml"
   (progn
-	(setq plantuml-jar-path (cond
-							 (win32p "c:/dev/plantuml/plantuml.jar")
-							 (t "~/scripts/plantuml.jar"))
+	(setq
+	 plantuml-jar-path (cond
+						(win32p
+						 (cond
+						  ((file-exists-p "c:/dev/plantuml/plantuml.jar")
+						   "c:/dev/plantuml/plantuml.jar")
+						  ((file-exists-p "c:/dev/utility/plantuml.jar")
+						   "c:/dev/utility/plantuml.jar")
+						  ))
+						(t "~/scripts/plantuml.jar"))
+	 )
 	)
   )
+
+;;
+;; matlab
+;;
+(autoload 'matlab-mode "matlab" "Enter Matlab mode." t)
+(setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
+(autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
+
+;;
+;; protobuf mode
+;;
+(when (my-try-require 'protobuf-mode)
+  (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
   )
 
 ;; (require 'csharp-mode)
 
-(when (my-try-require 'eproject)
+(when (featurep 'eproject)
   (setq
    ;; do not rename buffer to its relative path. too long to see in mode line!
    prj-rename-buffers nil
@@ -318,6 +369,10 @@
    prj-autotracking nil
    )
   (global-set-key (kbd "C-c C-f") 'eproject-visitfile)
+  )
+
+(when (my-try-require 'projectile)
+  (require 'my-projectile)
   )
 
 (when (my-try-require 'qt-pro)

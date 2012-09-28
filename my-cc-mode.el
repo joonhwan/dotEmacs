@@ -14,7 +14,7 @@
 		("\\.c\\'"
 		 (".h"))
 		("\\.h\\'"
-		 (".cpp" ".cxx" ".C" ".CC" ".c" ".cc" ))
+		 (".cpp" ".cxx" ".C" ".CC" ".c" ".cc" "_win32.cpp" ))
 		("\\.C\\'"
 		 (".H" ".hh" ".h"))
 		("\\.H\\'"
@@ -39,11 +39,13 @@
 	  '(
 		"."
 		"../include"
+		"../src"
+		"../source"
 		".."
 		"../../framework"
 		"../../common"
-		"c:/qt/4.8.0/include/Qt"
-		"c:/qt/4.8.0/include"
+		"c:/qt/4.8.1/include/Qt"
+		"c:/qt/4.8.1/include"
 		"c:/dev/gnuwin32/include"
 		))
 
@@ -77,7 +79,11 @@
 	  (progn
 		(beginning-of-line)
 		(cond
-		 ((re-search-forward "EVT_\\|ON_" (line-end-position) t)
+		 ((re-search-forward
+		   (regexp-opt '("EVT_"
+						 "ON_"
+						 ))
+		   (line-end-position) t)
 		  'c-basic-offset)
 		 ((re-search-forward 
 		   (regexp-opt '("DEFINE"
@@ -88,6 +94,14 @@
 						 "MAP_PROPERTY"))
 		   (line-end-position) t)
 		  0)
+		 ((save-excursion
+			(c-backward-syntactic-ws (c-langelem-pos langelm))
+			(re-search-backward
+			 (regexp-opt '("BEGIN_STATE"))
+			 (line-beginning-position) t)
+			)
+		  'c-basic-offset
+		  )
 		 (t
 		  (c-lineup-topmost-intro-cont langelm))))))))
 
@@ -105,6 +119,22 @@
 	  0)
 	 (t
 	  nil))))
+
+(defun my-block-close-case-align(langelm)
+  (save-excursion
+	(backward-list)
+	(let ((syntax (car (car (c-guess-basic-syntax)))))
+	  (if (eq syntax 'case-label)
+		  '+
+		0))))
+
+(defun my-block-close-in-switch-case-align(langelm)
+  (save-excursion
+	(backward-up-list)
+	(let ((syntax (car (car (c-guess-basic-syntax)))))
+	  (if (eq syntax 'case-label)
+		  '+
+		0))))
 
 (defun my-file-containig-signature-exist-p (dir file-pattern-regexp signature-regexp)
   (let ((found-file-list (directory-files-and-attributes
@@ -241,6 +271,11 @@
 	   (substatement-open . 0)
 	   (template-args-cont . +)
 	   (topmost-intro-cont . my-c-lineup-topmost-intro-cont)
+	   ;; (block-close . my-block-close-case-align)
+	   (block-close . 0)
+	   ;; (statement-block-intro . my-block-close-in-switch-case-align)
+	   (statement-block-intro . +)
+	   (statement-case-intro . +)
 	   ))
 	))
 
@@ -351,6 +386,10 @@
 			   (funcall old-blink-paren))))))
 (define-key c-mode-base-map "("         'my-c-electric-paren)
 
+(when (my-try-require 'auto-complete)
+  (my-try-require 'auto-complete-config)
+  (my-try-require 'auto-complete-clang))
+
 (defun my-c-mode-common-hook ()
   (subword-mode 1)
   (c-toggle-auto-newline 1)
@@ -364,6 +403,27 @@
   ;; for work with auto-complete and yasnippet
   (when (boundp 'ac-sources)
 	(append ac-sources '(ac-source-yasnippet)))
+  (when (featurep 'auto-complete-clang)
+	(add-to-list 'ac-omni-completion-sources
+				 (cons "\\." '(ac-source-clang)))
+	(add-to-list 'ac-omni-completion-sources
+				 (cons "->" '(ac-source-clang)))
+	(setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources)))
+  (if (featurep 'expand-region-core)
+	  ;; in c++ mode i do not use er/mark-word actually.
+	  (set (make-local-variable 'er/try-expand-list) '(;; er/mark-word
+													   er/mark-symbol
+													   er/mark-symbol-with-prefix
+													   er/mark-next-accessor
+													   er/mark-method-call
+													   er/mark-comment
+													   er/mark-comment-block
+													   er/mark-inside-quotes
+													   er/mark-outside-quotes
+													   er/mark-inside-pairs
+													   er/mark-outside-pairs)))
+  (if (featurep 'projectile)
+  	  (projectile-mode 1))
   ;; (flymake-mode 0)
   ;; (set (make-local-variable 'compile-command)
   ;; 	   (my-recommend-compile-command))
@@ -395,12 +455,15 @@
 
 (add-to-list 'auto-mode-alist '("\\.\\(c\\|cpp\\|cxx\\|cc\\|h\\|inl\\|hpp\\|ihh\\|hh\\)\\(\\.~[^~]+[~]?\\)?$" . c++-mode) nil)
 
+;; pairing.?! cpp <--> h no matter cursor position
+(defun my-ff-find-other-file (arg)
+  (interactive "P")
+  (ff-find-other-file arg t))
+
 (define-key c-mode-base-map (kbd "C-m") 'newline)
 (define-key c-mode-base-map (kbd "C-<f7>") 'compile)
 (define-key c-mode-base-map (kbd "C-<f8>") 'recompile)
-(define-key c-mode-base-map (kbd "C-c h p") '(lambda(arg)
-											   (interactive "P")
-											   (ff-find-other-file arg t)))
+(define-key c-mode-base-map (kbd "C-c h p") 'my-ff-find-other-file)
 (define-key c-mode-base-map (kbd "C-c h o") 'ff-find-other-file)
 
 (provide 'my-cc-mode)
