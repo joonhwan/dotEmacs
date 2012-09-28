@@ -107,7 +107,7 @@
    `(my-dark-title ((t (:inherit variable-pitch :weight bold :inherit default))))
 
    ;; basics
-   `(default ((t (:family "Bitstream Sans Vera Mono" :background ,my-dark-bg :foreground ,my-dark-fg))))
+   `(default ((t (:family nil :background ,my-dark-bg :foreground ,my-dark-fg))))
    `(bold ((t (:weight bold))))
    `(bold-italic ((t (:slant italic :weight bold))))
    `(fixed-pitch ((t (:weight bold))))

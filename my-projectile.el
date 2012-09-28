@@ -37,22 +37,22 @@
 ;; 	  nil))
 ;;   )
 
-(setq projectile-ignored-files
-	  (append projectile-ignored-files '(".git"
-										 ".svn"
-										 ".hg"
-										 ".tag"
-										 )))
+;; (setq projectile-ignored-files
+;; 	  (append projectile-ignored-files '(".git"
+;; 										 ".svn"
+;; 										 ".hg"
+;; 										 ".tag"
+;; 										 )))
 
-(setq projectile-ignored-directories
-	  (append projectile-ignored-directories '(".git"
-											   ".svn"
-											   ".hg"
-											   "build"
-											   "build32"
-											   "build64"
-											   "build-64"
-											   "build-32")))
+(setq projectile-globally-ignored-directories
+	  (append projectile-globally-ignored-directories '(".git"
+														".svn"
+														".hg"
+														"build"
+														"build32"
+														"build64"
+														"build-64"
+														"build-32")))
 
 (projectile-global-mode 1)
 
