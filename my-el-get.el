@@ -141,12 +141,12 @@
 			   ;; do-not (require 'projectile ) yet
 			   ;; :features projectile
 			   )
-		(:name replace+
-			   :description "Extensions to `replace.el'."
-			   :type emacswiki
-			   :features replace+
-			   :depends thingatpt+
-			   )
+		;; (:name replace+
+		;; 	   :description "Extensions to `replace.el'."
+		;; 	   :type emacswiki
+		;; 	   :features replace+
+		;; 	   :depends thingatpt+
+		;; 	   )
 		(:name thingatpt+
 			   :description "Extensions to `thingatpt.el'."
 			   :type emacswiki
@@ -196,7 +196,7 @@
 		 magit
 		 markdown-mode
 		 mark-multiple
-		 nxhtml
+		 ;; nxhtml
 		 ;; openwith
 		 package
 		 popwin
