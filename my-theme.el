@@ -82,7 +82,8 @@
 	(macp
 	 '(
 	   (tool-bar-lines . 0)
-	   (font . "Monaco-12:normal:spacing=110:antialias=natural")
+	   (font . "Menlo-12:normal:antialias=natural")
+	   (fullscreen . 'fullboth)
 	   ;; (font . "Ubuntu_Mono-14:normal:antialias=natural")
 	   ;; (font . "Menlo-13.5:normal:antialias=natural")
 	   ))))
