@@ -554,6 +554,16 @@ iflipb-next-buffer or iflipb-previous-buffer this round."
 ;; move will banish if cursor is over there...
 (mouse-avoidance-mode 'banish)
 
+;; sometimes... some mode(ie. *Help*) display shows ^M
+;; http://stackoverflow.com/questions/730751/hiding-m-in-emacs
+(defun my-remove-dos-eol ()
+  "Do not show ^M in files containing mixed UNIX and DOS line endings."
+  (interactive)
+  (setq buffer-display-table (make-display-table))
+  (aset buffer-display-table ?\^M []))
+(add-hook 'help-mode-hook 'my-remove-dos-eol)
+
+
 ;;
 ;; joon customized editing feature
 ;; 
