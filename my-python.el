@@ -2,15 +2,18 @@
 ;; python
 ;;
 
-(defun my-python-help-clean-up-buffer ()
-  (with-current-buffer "*Help*"
-	(toggle-read-only -1)
-	(replace-string "" "" nil (point-min) (point-max))
-	(toggle-read-only)
-	))
+;; hint from:https://bitbucket.org/jonwaltman/pydoc-info/
+;;
+;; wget https://bitbucket.org/jonwaltman/pydoc-info/downloads/python.info.gz
+;; gunzip python.info
+;; sudo cp python.info /usr/share/info
+;; sudo install-info --info-dir=/usr/share/info python.info
+;;
+;; Then add the following to your ~/.emacs.d/init.el::
+;; (add-to-list 'load-path "~/path/to/pydoc-info")
+;; (require 'pydoc-info)
+(require 'pydoc-info)
 
-(defadvice python-describe-symbol (after fix-python-describe-symble activate)
-  (my-python-help-clean-up-buffer))
 
 (eval-after-load "python"
   '(progn
