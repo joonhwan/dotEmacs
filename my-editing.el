@@ -404,19 +404,6 @@ home directory is a root directory) and removes automounter prefixes
 										   "c:/dev/gnuwin32/info"
 										   ))
 	   )
-	  (t
-	   (setq Info-directory-list    '(
-									  "/usr/bin/info"
-									  "/usr/lib/info"
-									  "/usr/share/info"
-									  "/usr/share/info/info"
-									  "/Applications/Emacs.app/Contents/Resources/info"
-									  "/Applications/Emacs.app/Contents/Resources/info/info"
-									  "/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/usr/lib/info"
-									  "/Developer/Platforms/iPhoneOS.platform/Developer/usr/share/info"
-									  "/Developer/usr/share/info"
-									  ))
-	   )
 	  )
 	 )
   )
