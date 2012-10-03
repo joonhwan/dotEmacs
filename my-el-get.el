@@ -166,6 +166,10 @@
 			   :description "Realtime HTML Preview for Emacs"
 			   :type git
 			   :url "git://github.com/yukihr/Warp.git")
+		(:name wgrep
+			   :description "Writable grep buffer and apply the changes to files"
+			   :type git
+			   :url "git://github.com/mhayashi1120/Emacs-wgrep.git")
 		))
 
 (setq my-packages
