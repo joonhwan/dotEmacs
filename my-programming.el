@@ -50,6 +50,42 @@
 			 ))
 
 ;;
+;; auto-complete mode
+;;
+;; (eval-after-load "auto-complete"
+;;   '(progn
+;; 	 (setq ac-auto-start nil)))
+(when (my-try-require 'auto-complete)
+  (setq ac-auto-start nil
+		ac-trigger-key "TAB"
+		ac-use-menu-map t
+		)
+
+  ;; http://blog.iany.me/2012/03/fix-tab-binding-for-yasnippet-and-auto-complete/
+  (defun my-tab-noconflict ()
+	(let ((command (key-binding [tab]))) ; remember command
+	  (local-unset-key [tab]) ; unset from (kbd "<tab>")
+	  (local-set-key (kbd "TAB") command))) ; bind to (kbd "TAB")
+  ;; (add-hook 'ruby-mode-hook 'my-ac-tab-noconflict)
+  (add-hook 'markdown-mode-hook 'my-ac-tab-noconflict)
+  (add-hook 'org-mode-hook 'my-ac-tab-noconflict)
+  (add-to-list
+   'ac-dictionary-directories
+   "~/elisp/alien/el-get-package/auto-complete/dict")
+
+  (when (my-try-require 'auto-complete-config)
+	(setq-default ac-sources '(
+							   ac-source-yasnippet
+							   ac-source-abbrev
+							   ac-source-dictionary
+							   ac-source-words-in-same-mode-buffers
+							   ))
+	(ac-config-default)
+	(add-to-list 'ac-modes 'objc-mode)
+	(my-try-require 'auto-complete-clang)
+	))
+
+;;
 ;; ruby mode
 ;;
 (autoload 'ruby-mode "ruby-mode" "Major mode for ruby files" t)
