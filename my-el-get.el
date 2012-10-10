@@ -55,38 +55,14 @@
 ;; local sources
 (setq el-get-sources
       '(
-		;; (:name python-mode
-		;;        :type git
-		;;        :url "git://github.com/emacsmirror/python-mode.git"
-		;;        :description "Major mode for editing Python programs"
-		;;        :features (python-mode doctest-mode)
-		;;        :compile nil
-		;;        :load "test/doctest-mode.el"
-		;;        :prepare (progn
-		;; 		  (autoload 'python-mode "python-mode"
-		;; 		    "Python editing mode." t)
-		;; 		  (add-to-list 'auto-mode-alist
-		;; 			       '("\\.py$" . python-mode))
-		;; 		  (add-to-list 'interpreter-mode-alist
-		;; 			       '("python" . python-mode))))
-		;; (:name eproject
-		;; 	   :description "another eproject"
-		;; 	   :type git
-		;; 	   :url "git://repo.or.cz/eproject.git"
-		;; 	   )
-		;; (:name ede-cmake
-		;; 	   :description "ede cmake mode"
-		;; 	   :type bzr
-		;; 	   :url "lp:~arankine/+junk/ede-cmake"
-		;; 	   )
-	(:name auto-complete
-	       :type github
-	       :pkgname "auto-complete/auto-complete"
-	       )
-	(:name fuzzy
-	       :type github
-	       :pkgname "auto-complete/fuzzy-el"
-	       )
+		(:name auto-complete
+			   :type github
+			   :pkgname "auto-complete/auto-complete"
+			   )
+		(:name fuzzy
+			   :type github
+			   :pkgname "auto-complete/fuzzy-el"
+			   )
 		(:name auto-yasnippet
 			   :description "Quickly create disposable yasnippets"
 			   :type emacswiki
@@ -125,9 +101,9 @@
 			   :type github
 			   :pkgname "emacsmirror/miniedit"
 			   :post-ini (progn
-				       (require 'miniedit)
-				       (miniedit-install)
-				       )
+						   (require 'miniedit)
+						   (miniedit-install)
+						   )
 			   )
 		(:name multiple-cursors
 			   :website "https://github.com/magnars/multiple-cursors.el"
@@ -167,6 +143,12 @@
 		       ;; :build ("make all")
 		       ;; :build/darwin `(,(concat "PATH=" (shell-quote-argument invocation-directory) ":$PATH make all"))
 		       )
+		;; elisp에서 문자열구연 레퍼런스 삼을 만한 것
+		(:name s_dot_el
+			   :description "The long lost Emacs string manipulation library."
+			   :type github
+			   :pkgname "magnars/s.el"
+			   )
 		(:name projectile
 			   :description "Projectile is a project interaction library for Emacs"
 			   :type git
@@ -178,12 +160,6 @@
 			   :depends s_dot_el
 			   ;; do-not (require 'projectile ) yet
 			   ;; :features projectile
-			   )
-		;; elisp에서 문자열구연 레퍼런스 삼을 만한 것
-		(:name s_dot_el
-			   :description "The long lost Emacs string manipulation library."
-			   :type github
-			   :pkgname "magnars/s.el"
 			   )
 		;; (:name replace+
 		;; 	   :description "Extensions to `replace.el'."
@@ -220,48 +196,34 @@
 (setq my-packages
       (append
        '(
-		 ace-jump-mode
-		 ;; asciidoc
-		 auto-install
-		 auto-complete-clang
-		 ;; csharp-mode
-		 deferred
-		 ;; dired+
-		 el-get
-		 ;; eproject
-		 ;; evil
-		 expand-region
-		 ;; flymake-fringe-icons
-		 full-ack
-		 goto-last-change
-		 graphviz-dot-mode
-		 gtranslate
-		 helm
-		 htmlize
-		 iedit
-		 keywiz
-		 lua-mode
-		 magit
-		 markdown-mode
-		 mark-multiple
-		 ;; nxhtml
-		 ;; openwith
-		 pastebin
-		 package
-		 popwin
-		 popup
-		 ;; pymacs
-		 rainbow-delimiters
-		 rainbow-mode
-		 ;; rope
-		 ;; ropemode
-		 ;; ropemacs
-		 ;; scss-mode
-		 smex
-		 undo-tree
-		 ;; workgroups
-		 yasnippet
-		 )
+	 ace-jump-mode
+	 auto-install
+	 auto-complete-clang
+	 deferred
+	 el-get
+	 expand-region
+	 full-ack
+	 goto-last-change
+	 graphviz-dot-mode
+	 gtranslate
+	 helm
+	 htmlize
+	 iedit
+	 keywiz
+	 lua-mode
+	 magit
+	 markdown-mode
+	 mark-multiple
+	 pastebin
+	 package
+	 popwin
+	 popup
+	 rainbow-delimiters
+	 rainbow-mode
+	 smex
+	 undo-tree
+	 yasnippet
+	 )
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
