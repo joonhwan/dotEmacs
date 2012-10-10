@@ -140,12 +140,15 @@
 ;;
 (when (my-try-require 'cmake-mode)
   (require 'cmake-mode)
+  (fset 'my-cmake-sort-list
+		[?\M-m ?\C-  ?\C-e ?\M-w ?\C-\M-u ?\C-a ?\C-n ?\C-  ?\C-\M-u ?\C-\M-n ?\C-p ?\C-e ?\M-x ?s ?o ?r ?t ?- ?l ?i ?n ?e ?s return ?\C-\M-u ?\C-s ?\M-e ?\C-y return ?\C-e])
   (defun my-cmake-mode-hook ()
 	(subword-mode 1)
 	(local-set-key (kbd "C-c . r") 'cmake-command-run)
 	(local-set-key (kbd "C-c . h") 'cmake-help-list-commands)
 	(local-set-key (kbd "C-c . t") 'cmake-get-topic)
 	(local-set-key (kbd "C-c . u") 'unscreamify-cmake-buffer)
+	(local-set-key (kbd "C-c . s") 'my-cmake-sort-list)
 	)
   (setq auto-mode-alist
 		(append '(

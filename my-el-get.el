@@ -79,6 +79,14 @@
 		;; 	   :type bzr
 		;; 	   :url "lp:~arankine/+junk/ede-cmake"
 		;; 	   )
+	(:name auto-complete
+	       :type github
+	       :pkgname "auto-complete/auto-complete"
+	       )
+	(:name fuzzy
+	       :type github
+	       :pkgname "auto-complete/fuzzy-el"
+	       )
 		(:name auto-yasnippet
 			   :description "Quickly create disposable yasnippets"
 			   :type emacswiki
@@ -93,6 +101,24 @@
 			   ;; 	       (require 'font-utils)
 			   ;; 	       )
 			   )
+		(:name pcache
+			   :type github
+			   :pkgname "sigma/pcache"
+			   )
+		(:name logito
+			   :type github
+			   :pkgname "sigma/logito"
+			   )
+		(:name gh-gist
+			   :type github
+			   :pkgname "sigma/gh.el"
+			   :depends (pcache logito)
+			   )
+		(:name gist
+			   :type github
+			   :pkgname "defunkt/gist.el"
+			   :depends gh-gist
+			   )
 		(:name miniedit
 			   :website "https://github.com/emacsmirror/miniedit"
 			   :description "Enhanced editing for minibuffer fields"
@@ -103,15 +129,16 @@
 				       (miniedit-install)
 				       )
 			   )
+		(:name multiple-cursors
+			   :website "https://github.com/magnars/multiple-cursors.el"
+			   :description "Multiple cursors for Emacs"
+			   :type git
+			   :url "git://github.com/magnars/multiple-cursors.el.git"
+			   )
 		(:name iflipb
 			   :description "iflipb is ALT-TAB like buffer switching without full cycling."
 			   :type hg
 			   :url "http://hg.rosdahl.net/iflipb"
-			   )
-		(:name iimage
-			   :description "inline'd image mode"
-			   :type http
-			   :url "http://www.netlaputa.ne.jp/~kose/Emacs/lisp/iimage.el"
 			   )
 		(:name qml-mode
 			   :type git
@@ -130,6 +157,16 @@
 			   :type emacswiki
 			   :features everything
 			   )
+		(:name magit
+		       :website "https://github.com/magit/magit#readme"
+		       :description "It's Magit! An Emacs mode for Git."
+		       :type github
+		       :pkgname "magit/magit"
+		       ;; :info "."
+		       ;; ;; that used to be how to build it :build ("./autogen.sh" "./configure" "make")
+		       ;; :build ("make all")
+		       ;; :build/darwin `(,(concat "PATH=" (shell-quote-argument invocation-directory) ":$PATH make all"))
+		       )
 		(:name projectile
 			   :description "Projectile is a project interaction library for Emacs"
 			   :type git
@@ -138,8 +175,15 @@
 						  )
 			   ;;:url "git@github.com:Joonhwan/projectile.git"
 			   :url "git://github.com/bbatsov/projectile.git"
+			   :depends s_dot_el
 			   ;; do-not (require 'projectile ) yet
 			   ;; :features projectile
+			   )
+		;; elisp에서 문자열구연 레퍼런스 삼을 만한 것
+		(:name s_dot_el
+			   :description "The long lost Emacs string manipulation library."
+			   :type github
+			   :pkgname "magnars/s.el"
 			   )
 		;; (:name replace+
 		;; 	   :description "Extensions to `replace.el'."
@@ -170,19 +214,19 @@
 			   :description "Writable grep buffer and apply the changes to files"
 			   :type git
 			   :url "git://github.com/mhayashi1120/Emacs-wgrep.git")
-		))
+		)
+	  )
 
 (setq my-packages
       (append
        '(
 		 ace-jump-mode
-		 asciidoc
+		 ;; asciidoc
 		 auto-install
-		 auto-complete
 		 auto-complete-clang
-		 csharp-mode
+		 ;; csharp-mode
 		 deferred
-		 dired+
+		 ;; dired+
 		 el-get
 		 ;; eproject
 		 ;; evil
@@ -202,18 +246,20 @@
 		 mark-multiple
 		 ;; nxhtml
 		 ;; openwith
+		 pastebin
 		 package
 		 popwin
-		 pymacs
+		 popup
+		 ;; pymacs
 		 rainbow-delimiters
 		 rainbow-mode
-		 rope
-		 ropemode
-		 ropemacs
-		 scss-mode
+		 ;; rope
+		 ;; ropemode
+		 ;; ropemacs
+		 ;; scss-mode
 		 smex
-		 ;; undo-tree
-		 workgroups
+		 undo-tree
+		 ;; workgroups
 		 yasnippet
 		 )
        (mapcar 'el-get-source-name el-get-sources)))

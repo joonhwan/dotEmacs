@@ -21,7 +21,7 @@
 (defvar i-use-delsel t)
 (defvar i-use-workgroup nil)
 (defvar i-use-truncate-line-mode t)
-(defvar i-use-desktop t)
+(defvar i-use-desktop nil)
 (defvar i-use-yas t)
 
 ;; platform independent setq
@@ -526,6 +526,25 @@ iflipb-next-buffer or iflipb-previous-buffer this round."
 	(not (and (or (eq last-command 'my-iflipb-next-buffer)
 				  (eq last-command 'my-iflipb-previous-buffer))
 			  my-iflipb-ing-internal)))
+  )
+
+(when (my-try-require 'warp)
+  (global-set-key (kbd "C-c C-w C-w") 'warp-mode) ;; Modify key bind as you want.
+  (setq warp-server-command "warp"
+		warp-node-js-program "c:/program files/nodejs/node.exe"
+		warp-server-command-args '("c:/Users/jhlee/elisp/alien/el-get-package/warp/warp"))
+  ;; Set markdown converter (if you want)
+  (add-to-list 'warp-format-converter-alist
+			   '("\\.md\\|\\.markdown" t (lambda ()
+										   ;; Set command you are using
+										   '("markdown"))))
+
+  ;; Below line is needed if you installed websocket npm module globally.
+  (setenv "NODE_PATH" "c:/Program Files/nodejs/node_modules/websocket")
+  ;; ;; or, if you have setup NODE_PATH in the shell
+  ;; (setenv "NODE_PATH"
+  ;; 		  (replace-regexp-in-string
+  ;; 		   "\n+$" "" (shell-command-to-string "echo $NODE_PATH")))
   )
 
 (if win32p
