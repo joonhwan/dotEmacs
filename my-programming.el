@@ -56,18 +56,21 @@
 ;;   '(progn
 ;; 	 (setq ac-auto-start nil)))
 (when (my-try-require 'auto-complete)
-  (setq ac-auto-start nil
-		ac-trigger-key "TAB"
-		ac-use-menu-map t
-		)
+  (setq
+   ;; 숫자면 해당 숫자 길이 이상의 문자 입력하면 바로 ac시작
+   ac-auto-start 2
+   ac-trigger-key "TAB"
+   ac-use-menu-map t
+   ac-quick-help-limit 1.0
+   )
   ;; http://blog.iany.me/2012/03/fix-tab-binding-for-yasnippet-and-auto-complete/
   (defun my-tab-noconflict ()
 	(let ((command (key-binding [tab]))) ; remember command
 	  (local-unset-key [tab]) ; unset from (kbd "<tab>")
 	  (local-set-key (kbd "TAB") command))) ; bind to (kbd "TAB")
-  ;; (add-hook 'ruby-mode-hook 'my-ac-tab-noconflict)
-  (add-hook 'markdown-mode-hook 'my-ac-tab-noconflict)
-  (add-hook 'org-mode-hook 'my-ac-tab-noconflict)
+  ;; (add-hook 'ruby-mode-hook 'my-tab-noconflict)
+  (add-hook 'markdown-mode-hook 'my-tab-noconflict)
+  (add-hook 'orgg-mode-hook 'my-tab-noconflict)
   (add-to-list
    'ac-dictionary-directories
    "~/elisp/alien/el-get-package/auto-complete/dict")

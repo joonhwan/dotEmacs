@@ -46,7 +46,7 @@
 (if win32p
 	(setq
 	 find-program "c:\\dev\\gnuwin32\\bin\\gfind.exe"
-	 find-ls-option '("-exec ls -hdlsb {} +" . "-hdlsb")
+	 ;; find-ls-option '("-exec ls -hdlsb {} +" . "-hdlsb")
 	 )
   )
 

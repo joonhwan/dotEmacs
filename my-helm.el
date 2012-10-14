@@ -26,6 +26,20 @@
     (type . variable)
     (requires-pattern . 2)))
 
+;; 원본의 helm-for-files-preferred-list 설정
+(setq helm-for-files-preferred-list 
+	  '(
+		;; helm-c-source-ffap-guesser ;; 이거 있으면 좋을 텐데 동작이 원하는대로 안됨
+		helm-c-source-ffap-line
+		helm-c-source-recentf
+		helm-c-source-files-in-current-dir
+		helm-c-source-files-in-all-dired
+		;; helm-c-source-buffers-list
+		helm-c-source-bookmarks
+		helm-c-source-file-cache
+		helm-c-source-locate
+		))
+
 ;; Source for completing Emacs functions.
 (setq helm-c-source-emacs-functions
   '((name . "Emacs Functions")
@@ -46,6 +60,14 @@
 	 prj-files)
 	files)
   )
+
+
+;; 이거 아직 좀 느리다.
+;; (when (and (featurep 'projectile)
+;; 		   (my-try-require 'helm-projectile))
+;;   ;; helm-projectile 이 있으면, 
+;;   (add-to-list 'helm-for-files-preferred-list 'helm-c-source-projectile-files-list t)
+;;   )
 
 (when (featurep 'eproject)
   (setq helm-c-source-eproject-files
@@ -78,16 +100,7 @@
 	(interactive)
 	(helm-other-buffer '(helm-c-source-ctags) "*helm for ctags*"))
 
-  ;; (setq helm-for-files-prefered-list
-  ;;   '(helm-c-source-ffap-line
-  ;;     helm-c-source-ffap-guesser
-  ;;     helm-c-source-buffers-list
-  ;;     helm-c-source-recentf
-  ;;     helm-c-source-bookmarks
-  ;;     helm-c-source-file-cache
-  ;;     helm-c-source-files-in-current-dir
-  ;;     helm-c-source-locate))
-  (add-to-list 'helm-for-files-prefered-list 'helm-c-source-eproject-files t)
+  (add-to-list 'helm-for-files-preferred-list 'helm-c-source-eproject-files t)
   )
 
 (when (featurep 'projectile)
