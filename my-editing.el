@@ -460,13 +460,20 @@ home directory is a root directory) and removes automounter prefixes
 (when (my-try-require 'inline-string-rectangle)
   (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
   )
-(when (my-try-require 'mark-more-like-this)
-  (global-set-key (kbd "C-<") 'mark-previous-like-this)
-  (global-set-key (kbd "C->") 'mark-next-like-this)
-  ;; like the other two, but takes an argument (negative is previous)
-  (global-set-key (kbd "C-M-m") 'mark-more-like-this) 
-  (global-set-key (kbd "C-*") 'mark-all-like-this)
+;; (when (my-try-require 'mark-more-like-this)
+;;   (global-set-key (kbd "C-<") 'mark-previous-like-this)
+;;   (global-set-key (kbd "C->") 'mark-next-like-this)
+;;   ;; like the other two, but takes an argument (negative is previous)
+;;   (global-set-key (kbd "C-M-m") 'mark-more-like-this) 
+;;   (global-set-key (kbd "C-*") 'mark-all-like-this)
+;;   )
+(when (my-try-require 'multiple-cursors)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<return>") 'mc/edit-lines)
+  (global-set-key (kbd "C-c C-;") 'mc/mark-all-like-this)
   )
+
 (when (my-try-require 'rename-sgml-tag)
   (eval-after-load "sgml-mode"
 	'(progn
@@ -564,7 +571,6 @@ iflipb-next-buffer or iflipb-previous-buffer this round."
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
 (add-hook 'help-mode-hook 'my-remove-dos-eol)
-
 
 ;;
 ;; joon customized editing feature
