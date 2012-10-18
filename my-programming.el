@@ -77,10 +77,10 @@
 
   (when (my-try-require 'auto-complete-config)
 	(setq-default ac-sources '(
+							   ac-source-words-in-same-mode-buffers
 							   ac-source-yasnippet
 							   ac-source-abbrev
 							   ac-source-dictionary
-							   ac-source-words-in-same-mode-buffers
 							   ))
 	(ac-config-default)
 	(add-to-list 'ac-modes 'objc-mode)
