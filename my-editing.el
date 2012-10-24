@@ -572,6 +572,31 @@ iflipb-next-buffer or iflipb-previous-buffer this round."
   (aset buffer-display-table ?\^M []))
 (add-hook 'help-mode-hook 'my-remove-dos-eol)
 
+;; http://stackoverflow.com/questions/251908/how-can-i-insert-current-date-and-time-into-a-file-using-emacs
+;; insert date and time
+(defvar my-current-date-time-format "%Y/%m/%d-%H:%M:%S" ;; "%a %b %d %H:%M:%S %Z %Y" "%a %b %d %H:%M:%S %Z %Y"
+  "Format of date to insert with `my-insert-current-date-time' func
+See help of `format-time-string' for possible replacements")
+(defvar my-current-time-format "%a %H:%M:%S"
+  "Format of date to insert with `my-insert-current-time' func.
+Note the weekly scope of the command's precision.")
+(defun my-insert-current-date-time ()
+  "insert the current date and time into current buffer.
+Uses `my-current-date-time-format' for the formatting the date/time."
+  (interactive)
+  ;; (insert "==========\n")
+  ;; (insert (let () (comment-start)))
+  (insert (format-time-string my-current-date-time-format (current-time)))
+  ;; (insert "\n")
+  )
+(defun my-insert-current-time ()
+  "insert the current time (1-week scope) into the current buffer."
+  (interactive)
+  (insert (format-time-string my-current-time-format (current-time)))
+  (insert "\n")
+  )
+(global-set-key (kbd "C-c i t") 'my-insert-current-date-time)
+
 ;;
 ;; joon customized editing feature
 ;; 
