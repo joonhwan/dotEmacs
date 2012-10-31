@@ -601,14 +601,14 @@ Uses `my-current-date-time-format' for the formatting the date/time."
 ;; joon customized editing feature
 ;; 
 (progn
-  (global-set-key (kbd "C-c b r") 'rename-buffer)
+  (global-set-key (kbd "C-c r b") 'rename-buffer)
   (global-set-key (kbd "C-c e b") 'ediff-buffers)
   (global-set-key (kbd "C-c e r") 'ediff-revision)
   (global-set-key (kbd "C-c m t") '(lambda() (interactive)(move-to-window-line 0)))
   (global-set-key (kbd "C-c m b") '(lambda() (interactive)(move-to-window-line -1)))
   (global-set-key (kbd "<f1>") (lambda  () (interactive) (manual-entry (current-word))))
-  (global-set-key (kbd "C-c , l") 'toggle-truncate-lines)
-  (global-set-key (kbd "C-c , <RET>") 'server-start)
+  (global-set-key (kbd "C-c t l") 'toggle-truncate-lines)
+  (global-set-key (kbd "C-c s s") 'server-start)
   )
 
 (provide 'my-editing)

@@ -398,7 +398,7 @@
 	  (toggle-debug-on-error))
   ;; for work with auto-complete and yasnippet
   (when (boundp 'ac-sources)
-	(append ac-sources '(ac-source-yasnippet)))
+	(add-to-list 'ac-sources 'ac-source-yasnippet t))
   (if (featurep 'expand-region-core)
 	  ;; in c++ mode i do not use er/mark-word actually.
 	  (set (make-local-variable 'er/try-expand-list) '(;; er/mark-word
@@ -423,8 +423,7 @@
 (set (make-local-variable 'my-build-dir) nil)
 (put 'my-build-dir 'disabled nil)
 
-(add-hook 'c-mode-hook 'my-c-mode-common-hook)
-(add-hook 'c++-mode-hook 'my-c-mode-common-hook)
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
 ;; (add-to-list 'load-path "~/elisp/project-buffer")
 ;; (require 'sln-mode)

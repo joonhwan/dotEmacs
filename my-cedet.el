@@ -1,235 +1,127 @@
-;;
-;; [Customization of the Cedet]
-;;
-(require 'cedet)
-(require 'semantic)
-
-(global-ede-mode t)
-
-(progn
-  (global-semantic-highlight-func-mode 1)
-  (global-semantic-stickyfunc-mode 1)
-  )
-
-;; To use additional features for names completion, and displaying of
-;; information for tags & classes, you also need to load the
-;; semantic-ia package. This could be performed with any usefule following
-;; command:
+;; -*- coding:utf-8 -*-
+;; from "A gentle introduction to CEDET"
+;; http://alexott.net/en/writings/emacs-devenv/EmacsCedet.html
+(setq my-cedet-dir (concat my-dotfiles-dir
+						   "alien/manual-package/cedet-bzr"))
+(add-to-list 'load-path my-cedet-dir)
+(require 'cedet-devel-load)
 (require 'semantic/ia)
+(require 'semantic/bovine/c)
 
-;; System header files
-;;
-;; To normal work with system-wide libraries,
-;; Semantic should has access to system include files, that contain
-;; information about functions & data types, implemented by these
-;; libraries.
-;;
-;; If you use GCC for programming in C & C++, then Semantic can
-;; automatically find path, where system include files are located. To
-;; do this, you need to load semantic-gcc package with following
-;; command:
-;;
-;; what if we could use gcc...?
-;; (require 'semantic-gcc)
+(setq semantic-default-submodes
+	  '(
+		;; enables global support for Semanticdb;
+		global-semanticdb-minor-mode
 
-;; You can also explicitly specify additional paths for look up of
-;; include files (and these paths also could vary for specific
-;; modes). To add some path to list of system include paths, you can
-;; use the semantic-add-system-include command, that accepts two
-;; parameters -  string with path to include files, and symbol,
-;; representing name of major mode, for which this path will used. For
-;; example:
-(progn
-  (semantic-add-system-include "c:/dev/sdk/boost_1_43_0/boost" 'c++-mode)
-  (semantic-add-system-include "c:/dev/vs9/vc/include" 'c++-mode)
+		;; enables automatic bookmarking of tags that you edited, so
+		;; you can return to them later with the
+		;; semantic-mrub-switch-tags command;
+		global-semantic-mru-bookmark-mode
+
+		;; ;; activates CEDET's context menu that is bound to right mouse
+		;; ;; button;
+		;; global-cedet-m3-minor-mode
+
+		;; activates highlighting of first line for current tag
+		;; (function, class, etc.);
+		global-semantic-highlight-func-mode
+
+		;; activates mode when name of current tag will be shown in
+		;; top line of buffer;
+		global-semantic-stickyfunc-mode
+
+		;; ;; activates use of separate styles for tags decoration
+		;; ;; (depending on tag's class). These styles are defined in the
+		;; ;; semantic-decoration-styles list;
+		;; global-semantic-decoration-mode
+
+		;; activates highlighting of local names that are the same as
+		;; name of tag under cursor;
+		global-semantic-idle-local-symbol-highlight-mode
+
+		;; activates automatic parsing of source code in the idle
+		;; time;
+		global-semantic-idle-scheduler-mode
+
+		;; activates displaying of possible name completions in the
+		;; idle time. Requires that
+		;; global-semantic-idle-scheduler-mode was enabled;
+		global-semantic-idle-completions-mode
+
+		;; activates displaying of information about current tag in
+		;; the idle time. Requires that
+		;; global-semantic-idle-scheduler-mode was enabled.
+		global-semantic-idle-summary-mode
+
+		;; 원래는 개발자용 옵션인데...
+		global-semantic-show-unmatched-syntax-mode
+		;; shows which elements weren't processed by current parser's rules;
+		global-semantic-show-parser-state-mode
+		;; shows current parser state in the modeline;
+		global-semantic-highlight-edits-mode
+		;; shows changes in the text that weren't processed by incremental parser yet.
+
+		;; 원래의 설정은 다음의 2개
+		;; global-semanticdb-minor-mode
+		;; global-semantic-idle-scheduler-mode
+		;; 
+		))
+(semantic-mode 1)
+
+(setq mac-qt4-header-dirs
+	  '("/Library/Frameworks/Qt3Support.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtCore.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtDBus.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtDeclarative.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtDesigner.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtGui.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtHelp.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtMultimedia.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtNetwork.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtOpenGL.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtScript.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtScriptTools.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtSql.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtSvg.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtTest.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtWebKit.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtXml.framework/Versions/4/Headers"
+		"/Library/Frameworks/QtXmlPatterns.framework/Versions/4/Headers"))
+
+(setq qt4-core-header-dir
+	  (cond
+	   (macp "/Library/Frameworks/QtCore.framework/Versions/4/Headers")
+	   (win32p "c:/Qt/qt4-x64/include/Qt")
+	   (t "")
+	   ))
+
+(setq my-system-header `(,@mac-qt4-header-dirs "another"))
+
+(dolist (header-dir my-system-header)
+  (message (concat "added " header-dir))
+  (semantic-add-system-include header-dir 'c++-mode)
+  (add-to-list 'auto-mode-alist (cons header-dir 'c++-mode))
   )
 
-;; [Optimization of Semantic's work]
-;;
-;; To optimize work with tags, you can use several techniques:
-;;
-;; 1)
-;; limit search by declaring an EDE project, as this described below;
-;;
-;; 2)
-;; explicitly specify a list of root directories for your projects, so
-;; Semantic will use limited number of databases with syntactic
-;; information;
-;;
-;; 3)
-;; explicitly generate tags databases for often used directories
-;; (/usr/include, /usr/local/include, etc.) with the
-;; semanticdb-create-ebrowse-database or
-;; semanticdb-create-cscope-database commands;
-;;
-;; 4)
-;; limit search by customization of the
-;; semanticdb-find-default-throttle variable for concrete modes - for
-;; example, don't use information from system include files, by
-;; removing system symbol from list of objects to search for c-mode:
-(setq-mode-local
- c-mode
- semanticdb-find-default-throttle
- '(project unloaded system recursive)) 	;; mabye 'local' is needed?
-;; Semantic extracts syntactic information when Emacs is idle. You can
-;; customize the semantic-idle-scheduler-idle-time variable to specify
-;; idle time (in seconds), if you don't want to use default value.
+(semantic-c-add-preprocessor-symbol "signals" "protected")
 
-;; [Integration with imenu]
-;;
-;; The Semantic package can be integrated with the imenu package. This
-;; enables the display of a menu with a list of functions, variables,
-;; and other tags. To enable this feature you can either use
-;; semantic-load-enable-code-helpers, or, you need to add following
-;; code into your initialization file:
-(defun my-semantic-hook ()
-  (imenu-add-to-menubar "TAGS"))
-(add-hook 'semantic-init-hooks 'my-semantic-hook)
+(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-core-header-dir "/qconfig.h"))
+(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-core-header-dir "/qconfig-dist.h"))
+(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-core-header-dir "/qglobal.h"))
 
-;;
-;; [Customization of Semanticdb]
-;;
+(defun my-c-mode-ac-setup()
+  (when (boundp 'ac-sources)
+	;; (add-to-list 'ac-sources 'ac-source-gtags)
+	(add-to-list 'ac-sources 'ac-source-semantic)
+	)
+  (when (functionp 'semantic-complete-self-insert)
+	(local-set-key "." 'semantic-complete-self-insert)
+	(local-set-key ">" 'semantic-complete-self-insert)
+	)
+  )
 
-;; If you use standard procedure for loading of Cedet, then Semanticdb
-;; will loaded automatically. Otherwise, you can load and enable it
-;; with following commands:
-(require 'semantic/db)
-(global-semanticdb-minor-mode 1)
-(global-semantic-idle-scheduler-mode 1)
-(global-semantic-idle-summary-mode 1)
-;; (global-semantic-mru-bookmark-mode 1)
-
-;; To customize Semanticdb you need to specify some number of
-;; variables, that are used to specify path, where databases will
-;; stored, and some other parameters. These variables could be set via
-;; semanticdb customization group.
-;;
-;; Besides this, Semanticdb can use databases generated by external
-;; utilities - gtags from GNU Global, ctags, ebrowse & cscope. To
-;; activate this you can use following code:
-;;
-;; if you want to enable support for gnu global
-(setq joon:use-gnu-global nil)
-(if joon:use-gnu-global
-	(progn
-	  (require 'semanticdb-global)
-	  (semanticdb-enable-gnu-global-databases 'c-mode)
-	  (semanticdb-enable-gnu-global-databases 'c++-mode)))
-
-;; ;; enable ctags for some languages:
-;; ;;  Unix Shell, Perl, Pascal, Tcl, Fortran, Asm
-;; (semantic-load-enable-primary-exuberent-ctags-support)
-
-;;
-;; [How to customize Semantic to work with C & C++ projects]
-;;
-
-;; To proper work of Semantic with �R & C++ code is recommended to use
-;; the EDE package (work with projects, etc.). For these languages,
-;; EDE package defines special project type - ede-cpp-root-project,
-;; that provides additional information to Semantic, that will be used
-;; to analyze source code of your project.
-;;
-;; To define a project, you need to use following code:
-
-;; (ede-cpp-root-project "Tsp"
-;; 					  :name "TspProject"
-;; 					  :file "d:/prj/wp/tsp/trunk/CMakeLists.txt"
-;; 					  :include-path '("/src/common"
-;; 									  "/src/framework"
-;; 									  "/src/system"
-;; 									  "/src/program"
-;; 									  )
-;; 					  ;; :system-include-path '("~/exp/include")
-;; 					  :spp-table '(("isUnix" . "")
-;; 								   ("BOOST_TEST_DYN_LINK" . "")))
-
-;; ;; from old-cedet release
-;; (defun semantic-load-enable-minimum-features ()
-;;   "Enable the minimum number of semantic features for basic usage.
-;; This includes:
-;;  `semantic-idle-scheduler-mode' - Keeps a buffer's parse tree up to date.
-;;  `semanticdb-minor-mode' - Stores tags when a buffer is not in memory.
-;;  `semanticdb-load-ebrowse-caches' - Loads any ebrowse dbs created earlier."
-;;   (interactive)
-;;   (global-semantic-idle-scheduler-mode 1)
-;;   (global-semanticdb-minor-mode 1)
-;;   ;; @todo - Enable this
-;;   ;; (semanticdb-cleanup-cache-files t)
-;;   ;; Don't do the loads from semantic-load twice.
-;;   (when (null semantic-load-system-cache-loaded)
-;;     ;; This loads any created system databases which get linked into
-;;     ;; any searches performed.
-;;     (setq semantic-load-system-cache-loaded t)
-;;     ;; This loads any created ebrowse databases which get linked into
-;;     ;; any searches performed.
-;;     (when (and (not (featurep 'xemacs))
-;; 	       (boundp 'semanticdb-default-system-save-directory)
-;; 	       (stringp semanticdb-default-system-save-directory)
-;; 	       (file-exists-p semanticdb-default-system-save-directory))
-;;       (semanticdb-load-ebrowse-caches))
-;;     )
-;;   )
-;; (defun semantic-load-enable-code-helpers ()
-;;   "Enable some semantic features that provide basic coding assistance.
-;; This includes `semantic-load-enable-minimum-features' plus:
-;;   `imenu' - Lists Semantic generated tags in the menubar.
-;;   `semantic-idle-summary-mode' - Show a summary for the tag indicated by
-;;                                  code under point.  (intellisense)
-;;   `senator-minor-mode' - Semantic Navigator, and global menu for all
-;;                          features Semantic.
-;;   `semantic-mru-bookmark-mode' - Provides a `switch-to-buffer' like
-;;                        keybinding for tag names."
-;;   (interactive)
-;;   (semantic-load-enable-minimum-features)
-;;   (when (and (eq window-system 'x)
-;; 	     (locate-library "imenu"))
-;;     (add-hook 'semantic-init-hooks (lambda ()
-;; 				     (condition-case nil
-;; 					 (imenu-add-to-menubar
-;; 					  semantic-load-imenu-string)
-;; 				       (error nil)))))
-;;   (global-semantic-idle-summary-mode 1)
-;;   (global-semantic-mru-bookmark-mode 1)
-;;   ;; Do this last.  This allows other minor modes to get loaded
-;;   ;; in so they appear in the menu properly.
-;;   (global-senator-minor-mode 1)
-;;   )
-;; (defun semantic-load-enable-gaudy-code-helpers ()
-;;   "Enable semantic features that provide gaudy coding assistance.
-;; This includes `semantic-load-enable-code-helpers'.
-;;   `semantic-stickyfunc-mode' - Tracks current function in header-line
-;;                                (when available).
-;;   `semantic-decoration-mode' - Decorate tags based on various attributes.
-;;   `semantic-decoration-on-includes' - Decoration style for include files.
-;;   `semantic-idle-completions-mode' - Provide smart symbol completion
-;;                                  automatically at idle time."
-;;   (interactive)
-;;   (global-semantic-decoration-mode 1)
-;;   (require 'semantic-decorate-include)
-;;   (when (boundp 'header-line-format)
-;;     (global-semantic-stickyfunc-mode 1))
-;;   (condition-case nil
-;;       (global-semantic-idle-completions-mode 1)
-;;     (error nil))
-;;   (semantic-load-enable-code-helpers)
-;;   )
-;; (defun semantic-load-enable-excessive-code-helpers ()
-;;   "Enable all semantic features that provide coding assistance.
-;; This includes all features of `semantic-load-enable-gaudy-code-helpers' plus:
-;;   `semantic-highlight-func-mode' - Highlight the current tag.
-;;   `semantic-decoration-on-*-members' - Two decoration modes that
-;;                     color the background of private and protected methods.
-;;   `which-func-mode' - Display the current function in the mode line."
-;;   (interactive)
-;;   (global-semantic-highlight-func-mode 1)
-;;   (semantic-load-enable-gaudy-code-helpers)
-;;   (semantic-toggle-decoration-style "semantic-decoration-on-private-members" t)
-;;   (semantic-toggle-decoration-style "semantic-decoration-on-protected-members" t)
-;;   (if (fboundp #'which-func-mode)
-;;       (add-hook 'semantic-init-hooks (lambda ()
-;; 				       (which-func-mode 1))))
-;;   )
-;; (semantic-load-enable-excessive-code-helpers)
+(add-hook 'c-mode-common-hook 'my-c-mode-ac-setup)
 
 (provide 'my-cedet)
+
+

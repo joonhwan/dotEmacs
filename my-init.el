@@ -64,13 +64,16 @@
 
 (setq x-select-enable-clipboard t)
 
+;; before my-el-get....
 (if macp
 	(require 'my-mac))
+;; (require 'my-cedet)
 
+;; ---------------------------
 (require 'my-el-get)
+
 ;; (require 'my-elpa)
 (require 'my-editing)
-;; (require 'my-cedet)
 (require 'my-programming) ;; for all except c/c++
 (require 'my-cc-mode) ;; for c/c++ mode only
 (require 'my-dired)
