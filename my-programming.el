@@ -3,6 +3,11 @@
 ;;
 ;; (require 'vc-svn)
 
+;; template
+(setq-default template-default-directories `(,(concat my-dotfiles-dir "template")))
+(require 'template)
+(template-initialize)
+
 ;;
 ;; vc
 ;;
