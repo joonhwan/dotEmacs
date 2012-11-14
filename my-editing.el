@@ -365,34 +365,9 @@ home directory is a root directory) and removes automounter prefixes
    ;; my private snippets
    )
   (setq yas/snippet-dirs
-		`(,(concat my-dotfiles-dir "snippets")
-		  ,(concat my-dotfiles-dir "alien/el-get-package/yasnippet/snippets")))
-  ;; (yas/initialize)
+  		`(,(concat my-dotfiles-dir "snippets")
+  		  ,(concat my-dotfiles-dir "alien/el-get-package/yasnippet/snippets")))
   (yas/global-mode 1)
-  )
-
-(when (my-try-require 'expand-region-core)
-  ;; hack original code
-  (defun er/mark-outside-pairs ()
-	"Mark pairs (as defined by the mode), including the pair chars."
-	(interactive)
-	(cond
-	 ((looking-at "[ ]*[({]")
-	  ;; do nothing ?!
-	  t)
-	 ((looking-back "\\s)+\\=")
-	  (ignore-errors (backward-list 1)))
-	 (t
-      (skip-chars-forward er--space-str))
-	 )
-	(when (and (er--point-inside-pairs-p)
-			   (or (not (er--looking-at-pair))
-				   (er--looking-at-marked-pair)))
-	  (goto-char (nth 1 (syntax-ppss))))
-	(when (er--looking-at-pair)
-	  (set-mark (point))
-	  (forward-list)
-	  (exchange-point-and-mark)))
   )
 
 (eval-after-load "info"
@@ -487,6 +462,33 @@ home directory is a root directory) and removes automounter prefixes
 ;; expand-region
 (when (my-try-require 'expand-region)
   (global-set-key (kbd "C-M-SPC") 'er/expand-region)
+  )
+;; (when (my-try-require 'expand-region-core)
+;;   ;; hack original code
+;;   (defun er/mark-outside-pairs ()
+;; 	"Mark pairs (as defined by the mode), including the pair chars."
+;; 	(interactive)
+;; 	(cond
+;; 	 ((looking-at "[ ]*[({]")
+;; 	  ;; do nothing ?!
+;; 	  t)
+;; 	 ((looking-back "\\s)+\\=")
+;; 	  (ignore-errors (backward-list 1)))
+;; 	 (t
+;;       (skip-chars-forward er--space-str))
+;; 	 )
+;; 	(when (and (er--point-inside-pairs-p)
+;; 			   (or (not (er--looking-at-pair))
+;; 				   (er--looking-at-marked-pair)))
+;; 	  (goto-char (nth 1 (syntax-ppss))))
+;; 	(when (er--looking-at-pair)
+;; 	  (set-mark (point))
+;; 	  (forward-list)
+;; 	  (exchange-point-and-mark)))
+;;   )
+
+(when (my-try-require 'miniedit)
+  (miniedit-install)
   )
 
 (when (my-try-require 'undo-tree)
@@ -609,6 +611,8 @@ Uses `my-current-date-time-format' for the formatting the date/time."
   (global-set-key (kbd "<f1>") (lambda  () (interactive) (manual-entry (current-word))))
   (global-set-key (kbd "C-c t l") 'toggle-truncate-lines)
   (global-set-key (kbd "C-c s s") 'server-start)
+  (global-set-key (kbd "C-c f f") 'font-lock-fontify-buffer)
+  (global-set-key (kbd "C-c r r") 'revert-buffer)
   )
 
 (provide 'my-editing)

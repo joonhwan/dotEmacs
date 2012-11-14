@@ -55,6 +55,12 @@
 ;; local sources
 (setq el-get-sources
       '(
+		(:name ace-jump-mode
+			   ;; :website "https://github.com/winterTTr/ace-jump-mode/wiki"
+			   ;; :description "A quick cursor location minor mode for emacs"
+			   :type github
+			   :pkgname "winterTTr/ace-jump-mode"
+			   :features ace-jump-mode)
 		(:name auto-complete
 			   :type github
 			   :pkgname "auto-complete/auto-complete"
@@ -63,11 +69,11 @@
 			   :type github
 			   :pkgname "auto-complete/fuzzy-el"
 			   )
-		(:name auto-yasnippet
-			   :description "Quickly create disposable yasnippets"
-			   :type emacswiki
-			   :features auto-yasnippet
-			   )
+		;; (:name auto-yasnippet
+		;; 	   :description "Quickly create disposable yasnippets"
+		;; 	   :type emacswiki
+		;; 	   :features auto-yasnippet
+		;; 	   )
 		(:name font-utils
 			   :website "http://www.emacswiki.org/emacs-en/FontUtils"
 			   :description "Utility functions for working with fonts."
@@ -76,6 +82,12 @@
 			   ;; :post-ini (progn
 			   ;; 	       (require 'font-utils)
 			   ;; 	       )
+			   )
+		(:name iedit
+			   :website "https://github.com/victorhge/iedit"
+			   :description "Edit multiple regions in the same way simultaneously"
+			   :type github
+			   :pkgname "victorhge/iedit"
 			   )
 		(:name pcache
 			   :type github
@@ -196,34 +208,32 @@
 (setq my-packages
       (append
        '(
-	 ace-jump-mode
-	 auto-install
-	 auto-complete-clang
-	 deferred
-	 el-get
-	 expand-region
-	 full-ack
-	 goto-last-change
-	 graphviz-dot-mode
-	 gtranslate
-	 helm
-	 htmlize
-	 iedit
-	 keywiz
-	 lua-mode
-	 magit
-	 markdown-mode
-	 mark-multiple
-	 pastebin
-	 package
-	 popwin
-	 popup
-	 rainbow-delimiters
-	 rainbow-mode
-	 smex
-	 undo-tree
-	 yasnippet
-	 )
+		 auto-install
+		 auto-complete-clang
+		 deferred
+		 el-get
+		 expand-region
+		 full-ack
+		 goto-last-change
+		 graphviz-dot-mode
+		 gtranslate
+		 helm
+		 htmlize
+		 keywiz
+		 lua-mode
+		 magit
+		 markdown-mode
+		 mark-multiple
+		 pastebin
+		 package
+		 popwin
+		 popup
+		 rainbow-delimiters
+		 rainbow-mode
+		 smex
+		 undo-tree
+		 yasnippet
+		 )
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
