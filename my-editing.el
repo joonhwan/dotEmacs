@@ -404,6 +404,10 @@ home directory is a root directory) and removes automounter prefixes
 	     woman-show-log t))
       )))
 
+(eval-after-load "man"
+  '(progn
+	 (setq Man-width 80)))
+
 (eval-after-load "tramp"
   '(progn
 	 (require 'tramp)
