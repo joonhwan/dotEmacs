@@ -88,6 +88,7 @@
 			   :description "Edit multiple regions in the same way simultaneously"
 			   :type github
 			   :pkgname "victorhge/iedit"
+			   :features iedit-mode
 			   )
 		(:name pcache
 			   :type github
@@ -132,9 +133,9 @@
 			   :type git
 			   :url "git://github.com/Joonhwan/qml-mode.git"
 			   )
-		(:name log4j-mode
-			   :type elpa
-			   )
+		;; (:name log4j-mode
+		;; 	   :type elpa
+		;; 	   )
 		(:name flymake-cursor
 			   :description "displays flymake error msg in minibuffer after delay"
 			   :type emacswiki
