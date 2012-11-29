@@ -46,7 +46,11 @@
 (if win32p
 	(setq
 	 find-program "c:/dev/ezwinports/bin/gfind.exe"
-	 ;; find-ls-option '("-exec ls -hdlsb {} +" . "-hdlsb")
+	 grep-program "c:/dev/ezwinports/bin/grep.exe"
+	 find-ls-option '("-exec ls -ld {} +";; "-ls"
+					  .
+					  "-ld" ;; "-hdlsb"
+					  )
 	 )
   )
 
