@@ -1,5 +1,5 @@
 ; -*- mode: Lisp; eval: (rainbow-mode t); -*-
-;;; zenburn-theme.el --- Dark and clean theme
+;;; my-dark-theme.el --- Dark and clean theme
 
 ;; Copyright (C) 2011 Free Software Foundation, Inc.
 
@@ -696,6 +696,10 @@
 
    ;; diff
    `(diff-refine-added ((t (:foreground nil :background ,my-dark-green-2))))
+
+   ;; wgrep
+   `(wgrep-face ((t (:foreeground nil :background ,my-dark-green-2))))
+   `(wgrep-delete-face ((t (:foreground nil :background nil :strike-through ,my-dark-red))))
    ))
 
 (provide-theme 'my-dark)
