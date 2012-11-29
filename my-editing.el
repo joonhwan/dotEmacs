@@ -61,8 +61,10 @@
  default-tab-width 4
  ;; when pressing 'q' in customize buffer, kill it
  custom-buffer-done-kill t
- ;; convenient to move around currunt window.
+ ;; 
  make-backup-files nil
+ ;; no need double space between sentences
+ sentence-end-double-space nil
  ;;
  completion-ignored-extensions '(".svn/" "CVS/" ".o" "~" ".bin" ".bak" ".obj" ".map" ".ico" ".pif" ".lnk" ".a" ".ln" ".blg" ".bbl" ".dll" ".drv" ".vxd" ".386" ".elc" ".lof" ".glo" ".idx" ".lot" ".dvi" ".fmt" ".tfm" ".pdf" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".fasl" ".ufsl" ".fsl" ".dxl" ".pfsl" ".dfsl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo")
  safe-local-variable-values '(
@@ -427,7 +429,7 @@ home directory is a root directory) and removes automounter prefixes
 
 (eval-after-load "ace-jump-mode"
   '(progn
-	 (define-key global-map (kbd "C-c C-SPC") 'ace-jump-mode)
+	 ;; (define-key global-map (kbd "C-c C-SPC") 'ace-jump-mode)
 	 ;; (define-key global-map (kbd "C-=") 'ace-jump-mode)
 	 (define-key global-map (kbd "C-'") 'ace-jump-mode)
 	 (define-key global-map (kbd "M-g l") 'ace-jump-line-mode)
@@ -493,6 +495,9 @@ home directory is a root directory) and removes automounter prefixes
 
 (when (my-try-require 'miniedit)
   (miniedit-install)
+  )
+
+(when (my-try-require 'iedit)
   )
 
 (when (my-try-require 'undo-tree)
@@ -614,7 +619,7 @@ Uses `my-current-date-time-format' for the formatting the date/time."
   (global-set-key (kbd "C-c m b") '(lambda() (interactive)(move-to-window-line -1)))
   (global-set-key (kbd "<f1>") (lambda  () (interactive) (manual-entry (current-word))))
   (global-set-key (kbd "C-c t l") 'toggle-truncate-lines)
-  (global-set-key (kbd "C-c s s") 'server-start)
+  (global-set-key (kbd "C-c s <RET>") 'server-start)
   (global-set-key (kbd "C-c f f") 'font-lock-fontify-buffer)
   (global-set-key (kbd "C-c r r") 'revert-buffer)
   )
