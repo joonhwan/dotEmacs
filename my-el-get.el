@@ -88,7 +88,7 @@
 			   :description "Edit multiple regions in the same way simultaneously"
 			   :type github
 			   :pkgname "victorhge/iedit"
-			   :features iedit-mode
+			   :features iedit
 			   )
 		(:name pcache
 			   :type github
