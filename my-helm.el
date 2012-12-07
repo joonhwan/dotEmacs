@@ -9,7 +9,7 @@
 		('gnu/linux "locate -i -r %s")
 		('berkeley-unix "locate -i %s")
 		('windows-nt "es %s")
-		('darwin "mdfind -name %s")
+		('darwin "mdfind -name %s %s")
 		(t "locate %s"))
 	  )
 
