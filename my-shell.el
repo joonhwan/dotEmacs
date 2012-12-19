@@ -1,19 +1,4 @@
-(defun my-mac-shell()
-  (interactive)
-  ;; (ansi-term "/bin/bash" "shell")
-  (let ((shell-buffer (shell)))
-	(when (functionp 'popwin:display-buffer)
-	  (popwin:display-buffer shell-buffer)))
-  )
-
-(cond
- (win32p
-  (global-set-key "\C-z" 'shell)
-  ;; (setq w32-quote-process-args ?\")
-  )
- (macp
-  (global-set-key "\C-z" 'my-mac-shell)
-  ))
+(global-set-key "\C-z" 'shell)
 
 (defun my-shell-setup()
   (dirtrack-mode t)
