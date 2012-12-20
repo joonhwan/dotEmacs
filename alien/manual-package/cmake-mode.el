@@ -325,13 +325,42 @@ optional argument topic will be appended to the argument list."
   )
 
 
+;; (defun cmake-help-command ()
+;;   "Prints out the help message corresponding to the command the cursor is on."
+;;   (interactive)
+;;   (setq command (cmake-get-topic "command"))
+;;   (cmake-command-run "--help-command" (downcase command))
+;;   )
+(defvar cmake-commands nil)
 (defun cmake-help-command ()
   "Prints out the help message corresponding to the command the cursor is on."
   (interactive)
-  (setq command (cmake-get-topic "command"))
-  (cmake-command-run "--help-command" (downcase command))
+  (unless cmake-commands
+	(let ((line-number 0))
+	  (dolist (line (process-lines "cmake" "--help-command-list"))
+		(if (and (> line-number 0) t)
+			(add-to-list 'cmake-commands line)
+		  )
+		(setq line-number (1+ line-number)))
+	  )
+	)
+  (cmake-command-run "--help-command" (downcase (completing-read "select command : " cmake-commands nil nil (word-at-point))))
   )
 
+(setq cmake-properties nil)
+(defun cmake-help-property ()
+  (interactive)
+  ;; (setq command (cmake-get-topic "property"))
+  (unless cmake-properties
+	(let ((line-number 0))
+	  (dolist (line (process-lines "cmake" "--help-property-list"))
+		(if (and (> line-number 0) t)
+			(add-to-list 'cmake-properties line)
+		  )
+		(setq line-number (1+ line-number)))
+	  )
+	)
+  (cmake-command-run "--help-property" (upcase (completing-read "select property : " cmake-properties nil nil (word-at-point)))))
 
 ; This file provides cmake-mode.
 (provide 'cmake-mode)
