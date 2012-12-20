@@ -608,6 +608,27 @@ Uses `my-current-date-time-format' for the formatting the date/time."
   )
 (global-set-key (kbd "C-c i t") 'my-insert-current-date-time)
 
+;; hint from http://emacs.wordpress.com/2007/01/16/quick-and-dirty-code-folding/
+(defun my-toggle-selective-display ()
+  (interactive)
+  (set-selective-display (if selective-display nil 1)))
+(global-set-key [f1] 'my-toggle-selective-display)
+
+;; make cleaner modeline even with multiple minor modes
+;; hint from http://whattheemacsd.com/init.el-04.html
+(when (my-try-require 'diminish)
+  ;; (diminish 'wrap-region-mode)
+  (diminish 'yas-minor-mode)
+  (diminish 'projectile-mode)
+  (diminish 'undo-tree-mode)
+  (diminish 'abbrev-mode)
+  (diminish 'helm-mode)
+  (diminish 'auto-complete-mode)
+  (diminish 'eldoc-mode)
+  )
+  
+
+
 ;;
 ;; joon customized editing feature
 ;; 

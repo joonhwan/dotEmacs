@@ -212,6 +212,7 @@
 		 auto-install
 		 auto-complete-clang
 		 deferred
+		 diminish
 		 el-get
 		 expand-region
 		 full-ack
