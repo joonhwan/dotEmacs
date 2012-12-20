@@ -3,7 +3,10 @@
 (defun my-shell-setup()
   (dirtrack-mode t)
   (ansi-color-for-comint-mode-on)
-  (setq comint-prompt-read-only t)
+  (setq
+   ;; comint-prompt-read-only t
+   comint-process-echoes t
+   )
 )
 
 (add-hook 'shell-mode-hook 'my-shell-setup)
