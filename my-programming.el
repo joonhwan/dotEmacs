@@ -8,6 +8,9 @@
 (require 'template)
 (template-initialize)
 
+;; idutils
+(autoload 'gid "idutils" "run idutils' gid command" t)
+
 ;;
 ;; vc
 ;;
