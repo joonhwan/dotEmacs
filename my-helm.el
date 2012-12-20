@@ -107,54 +107,33 @@
   (require 'helm-projectile))
 
 ;; variable first and function last
-(defun my-helm-for-help-variable ()
+(defun my-helm-c-help-variable-or-function ()
+  "Preconfigured helm to describe commands, functions, variables and faces."
   (interactive)
-  (helm
-   :sources '(helm-c-source-emacs-variables helm-c-source-emacs-functions)
-   :input (let (
-				(my-hint (thing-at-point 'symbol))
-				(my-input "")
-				)
-			(setq my-input (concat
-							;;"\b"
-							my-hint
-							;; "\b"
-							(if (featurep 'helm-match-plugin)
-								(if my-hint
-									" "
-								  "")
-							  ""
-							  )
-							))
-			my-input)
-   :buffer "*Helm Help(func/var)*"
-   )
-  )
-
+  (let ((default (thing-at-point 'symbol)))
+    (helm :sources
+          (mapcar (lambda (func)
+                    (funcall func default))
+                  '(helm-c-source-emacs-variables
+					helm-c-source-emacs-commands
+                    helm-c-source-emacs-functions
+                    ))
+          :buffer "*helm help elisp*"
+          :preselect default)))
 ;; function first and variable last
-(defun my-helm-for-help-function ()
+(defun my-helm-c-help-function-or-variable ()
+  "Preconfigured helm to describe commands, functions, variables and faces."
   (interactive)
-  (helm
-   :sources '(helm-c-source-emacs-functions helm-c-source-emacs-variables)
-   :input (let (
-				(my-hint (thing-at-point 'symbol))
-				(my-input "")
-				)
-			(setq my-input (concat
-							;;"\b"
-							my-hint
-							;; "\b"
-							(if (featurep 'helm-match-plugin)
-								(if my-hint
-									" "
-								  "")
-							  ""
-							  )
-							))
-			my-input)
-   :buffer "*Helm Help(func/var)*"
-   )
-  )
+  (let ((default (thing-at-point 'symbol)))
+    (helm :sources
+          (mapcar (lambda (func)
+                    (funcall func default))
+                  '(helm-c-source-emacs-commands
+                    helm-c-source-emacs-functions
+					helm-c-source-emacs-variables
+                    ))
+          :buffer "*helm help elisp*"
+          :preselect default)))
 
 ;; replace original occur with helm-occur
 ;; - display initial pattern using thing-at-pt
@@ -177,8 +156,8 @@
 (progn
   (define-key helm-command-map (kbd "<RET>") 'helm-mini)
   ;; (define-key helm-command-map (kbd "C-l") 'helm-filelist)
-  (define-key helm-command-map (kbd "h v") 'my-helm-for-help-variable)
-  (define-key helm-command-map (kbd "h f") 'my-helm-for-help-function)
+  (define-key helm-command-map (kbd "h v") 'my-helm-c-help-variable-or-function)
+  (define-key helm-command-map (kbd "h f") 'my-helm-c-help-function-or-variable)
   (when (featurep 'eproject)
 	(define-key helm-command-map (kbd "j") 'my-helm-c-source-eproject-files)
 	)
