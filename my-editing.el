@@ -73,6 +73,15 @@
 							  )
  )
 
+(progn
+  ;; Auto refresh buffers
+  (global-auto-revert-mode 1)
+  ;; Also auto refresh dired, but be quiet about it
+  (setq global-auto-revert-non-file-buffers t
+		auto-revert-verbose nil
+		)
+  )
+
 ;; per platform setq
 (cond
  (win32p
@@ -613,22 +622,7 @@ Uses `my-current-date-time-format' for the formatting the date/time."
   (interactive)
   (set-selective-display (if selective-display nil 1)))
 (global-set-key [f1] 'my-toggle-selective-display)
-
-;; make cleaner modeline even with multiple minor modes
-;; hint from http://whattheemacsd.com/init.el-04.html
-(when (my-try-require 'diminish)
-  ;; (diminish 'wrap-region-mode)
-  (diminish 'yas-minor-mode)
-  (diminish 'projectile-mode)
-  (diminish 'undo-tree-mode)
-  (diminish 'abbrev-mode)
-  (diminish 'helm-mode)
-  (diminish 'auto-complete-mode)
-  (diminish 'eldoc-mode)
-  )
   
-
-
 ;;
 ;; joon customized editing feature
 ;; 

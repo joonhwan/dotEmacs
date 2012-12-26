@@ -114,6 +114,21 @@
 ;; ---------------
 ;; (list-load-path-shadows)
 
+
+;; make cleaner modeline even with multiple minor modes
+;; hint from http://whattheemacsd.com/init.el-04.html
+(when (my-try-require 'diminish)
+  ;; (diminish 'wrap-region-mode)
+  (diminish 'yas-minor-mode)
+  (diminish 'projectile-mode)
+  (diminish 'undo-tree-mode)
+  (diminish 'abbrev-mode)
+  (diminish 'helm-mode)
+  (diminish 'auto-complete-mode)
+  (diminish 'eldoc-mode)
+  )
+
+
 ;;
 ;; IMPORTANT! we relocated emacs *Customization* file
 ;; so, we need to RELOAD IT HERE...
