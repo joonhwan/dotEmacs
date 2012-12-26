@@ -362,6 +362,21 @@ optional argument topic will be appended to the argument list."
 	)
   (cmake-command-run "--help-property" (upcase (completing-read "select property : " cmake-properties nil nil (word-at-point)))))
 
+(setq cmake-variables nil)
+(defun cmake-help-variable ()
+  (interactive)
+  ;; (setq command (cmake-get-topic "variable"))
+  (unless cmake-variables
+	(let ((line-number 0))
+	  (dolist (line (process-lines "cmake" "--help-variable-list"))
+		(if (and (> line-number 0) t)
+			(add-to-list 'cmake-variables line)
+		  )
+		(setq line-number (1+ line-number)))
+	  )
+	)
+  (cmake-command-run "--help-variable" (upcase (completing-read "select variable : " cmake-variables nil nil (word-at-point)))))
+
 ; This file provides cmake-mode.
 (provide 'cmake-mode)
 
