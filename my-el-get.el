@@ -216,6 +216,7 @@
 		 el-get
 		 expand-region
 		 full-ack
+		 js2-mode
 		 goto-last-change
 		 graphviz-dot-mode
 		 gtranslate

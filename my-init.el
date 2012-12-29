@@ -103,6 +103,19 @@
 ;; configure look-and-feel
 (require 'my-theme)
 
+;; make cleaner modeline even with multiple minor modes
+;; hint from http://whattheemacsd.com/init.el-04.html
+(when (my-try-require 'diminish)
+  ;; (diminish 'wrap-region-mode)
+  (diminish 'yas-minor-mode)
+  (diminish 'projectile-mode)
+  (diminish 'undo-tree-mode)
+  (diminish 'abbrev-mode)
+  (diminish 'helm-mode)
+  (diminish 'auto-complete-mode)
+  (diminish 'eldoc-mode)
+  )
+
 ;; (defun my-is-stl-header()
 ;;   (messsage "hey...")
 ;;   (message buffer-file-name)
