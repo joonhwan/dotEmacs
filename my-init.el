@@ -1,167 +1,1 @@
-;; -*- coding:utf-8; -*-
-(require 'cl)
-
-;; the very first package of mine
-(require 'my-lisp)
-
-;;
-;; Load path etc.
-;;
-(setq my-dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name))
-	  my-autoinstall-dir (concat my-dotfiles-dir "auto-install")
-	  ;; my-ccmode-dir (concat my-dotfiles-dir "cc-mode")
-	  my-dropbox-dir (cond
-					  (macp "~/DropBox")
-					  (t "~/DropBox"))
-	  my-etc-dir (concat my-dotfiles-dir "etc")
-	  )
-(make-variable-buffer-local 'my-project-root)
-
-(add-to-list 'load-path my-dotfiles-dir)
-(add-to-list 'load-path my-autoinstall-dir)
-(add-to-list 'load-path (concat my-dotfiles-dir "alien/manual-package"))
-
-(load ".manual-package-loaddefs.el")
-
-;; (add-to-list 'load-path my-ccmode-dir)
-(add-to-list 'load-path my-etc-dir)	;; misc elisp packages...
-
-;; run server for emacsclient
-(unless (daemonp)
-  (progn
-	(require 'server)
-	(setq server-port 15678)
-	(setq server-use-tcp t)
-	(server-mode t)
-	))
-
-;; language
-(progn
-  (set-language-environment "Korean")
-  (setq default-input-method "korean-hangul390")
-  (cond
-	  (macp
-	   (setq process-coding-system "utf-8-mac")
-	   )
-	  (t
-	   (setq process-coding-system-alist '(("locate" . "euc-kr-dos"))))
-	  )
-  ;; use 3 beolsik
-  ;; (setq default-korean-keyboard "3f") ;;--> 3beolsik final.
-  (setq default-korean-keyboard "390")) ;;--> 3beolsik 390
-(define-coding-system-alias 'ks_c_5601-1987 'korean-iso-8bit)
-(add-to-list 'file-coding-system-alist '("\\.el\\'" . utf-8))
-
-;;
-;; i'm not using normal path of emacs customization!
-;;
-(setq custom-file (concat my-dotfiles-dir "my-customization.el"))
-
-;; sometimes system becomes slow. here's workaround
-;; hint from
-;; http://stackoverflow.com/questions/2007329/emacs-23-1-50-1-hangs-ramdomly-for-6-8-seconds-on-windows-xp
-(setq w32-get-true-file-attributes nil)
-
-(setq x-select-enable-clipboard t)
-
-;; before my-el-get....
-(if macp
-	(require 'my-mac))
-;; (require 'my-cedet)
-
-;; ---------------------------
-(require 'my-el-get)
-
-;; (require 'my-elpa)
-(require 'my-editing)
-(require 'my-programming) ;; for all except c/c++
-(require 'my-cc-mode) ;; for c/c++ mode only
-(require 'my-dired)
-(require 'my-shell)
-;; ;; (require 'my-svn)
-;; ;; (require 'my-web)
-(require 'my-grep)
-(require 'my-isearch)
-(require 'my-ido)
-;; ;; (require 'my-ecb)
-(require 'my-tags)
-(require 'my-org)
-;; (require 'bookmark)
-;; (require 'ediff)
-;; (require 'erc)
-;; (require 'find-dired)
-;; (require 'locate)
-(unless (daemonp)
-  (require 'my-font))
-
-;; final big brother that can handle many configuration
-;;
-;; NOTE: this package should be followed at last
-;; (require 'my-anything)
-(require 'my-helm)
-
-;; configure look-and-feel
-(require 'my-theme)
-
-;; make cleaner modeline even with multiple minor modes
-;; hint from http://whattheemacsd.com/init.el-04.html
-(when (my-try-require 'diminish)
-  ;; (diminish 'wrap-region-mode)
-  (diminish 'yas-minor-mode)
-  (diminish 'projectile-mode)
-  (diminish 'undo-tree-mode)
-  (diminish 'abbrev-mode)
-  (diminish 'helm-mode)
-  (diminish 'auto-complete-mode)
-  (diminish 'eldoc-mode)
-  )
-
-;; (defun my-is-stl-header()
-;;   (messsage "hey...")
-;;   (message buffer-file-name)
-;;   t)
-;; (add-to-list 'magic-mode-alist '(my-is-stl-header . c++-mode))
-
-;; ---------------
-;; show possible path problem
-;; ---------------
-;; (list-load-path-shadows)
-
-
-;; make cleaner modeline even with multiple minor modes
-;; hint from http://whattheemacsd.com/init.el-04.html
-(when (my-try-require 'diminish)
-  ;; (diminish 'wrap-region-mode)
-  (diminish 'yas-minor-mode)
-  (diminish 'projectile-mode)
-  (diminish 'undo-tree-mode)
-  (diminish 'abbrev-mode)
-  (diminish 'helm-mode)
-  (diminish 'auto-complete-mode)
-  (diminish 'eldoc-mode)
-  )
-
-
-;;
-;; IMPORTANT! we relocated emacs *Customization* file
-;; so, we need to RELOAD IT HERE...
-;;
-(load custom-file)
-
-(progn
-  (message "modifying frame...")
-  (let ((new-config
-		 (cond
-		  ((or win32p unixp)
-		   '((top . 0) (left . 0) (width . 180) (height . 62)))
-		  (macp
-		   '((top . 10) (left . 10) (width . 150) (height . 46)))
-		  )))
-	(my-modify-alist-with-alist 'default-frame-alist new-config)
-	)
-  (setq initial-frame-alist default-frame-alist)
-  (modify-all-frames-parameters default-frame-alist)
-  )
-
-;; disable trackback....
-(setq debug-on-error nil)
+;; -*- coding:utf-8; -*-(require 'cl);; the very first package of mine(require 'my-lisp);;;; Load path etc.;;(setq my-dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name))	  my-autoinstall-dir (concat my-dotfiles-dir "auto-install")	  ;; my-ccmode-dir (concat my-dotfiles-dir "cc-mode")	  my-dropbox-dir (cond					  (macp "~/DropBox")					  (t "~/DropBox"))	  my-etc-dir (concat my-dotfiles-dir "etc")	  )(make-variable-buffer-local 'my-project-root)(add-to-list 'load-path my-dotfiles-dir)(add-to-list 'load-path my-autoinstall-dir)(add-to-list 'load-path (concat my-dotfiles-dir "alien/manual-package"))(load ".manual-package-loaddefs.el");; (add-to-list 'load-path my-ccmode-dir)(add-to-list 'load-path my-etc-dir)	;; misc elisp packages...;; run server for emacsclient(unless (daemonp)  (progn	(require 'server)	(setq server-port 15678)	(setq server-use-tcp t)	(server-mode t)	));; language(progn  (cond   (win32p	(set-language-environment "Korean")	)   (macp	;; (setq default-process-coding-system "utf-8-mac")	;; (setq buffer-file-coding-system "utf-8-mac")	;; (setq file-name-coding-system "utf-8")	)   )  (setq default-input-method "korean-hangul390")  (setq default-korean-keyboard "390")) ;;--> 3beolsik 390(define-coding-system-alias 'ks_c_5601-1987 'korean-iso-8bit);; (add-to-list 'file-coding-system-alist '("\\.el\\'" . 'utf-8));;;; i'm not using normal path of emacs customization!;;(setq custom-file (concat my-dotfiles-dir "my-customization.el"));; sometimes system becomes slow. here's workaround;; hint from;; http://stackoverflow.com/questions/2007329/emacs-23-1-50-1-hangs-ramdomly-for-6-8-seconds-on-windows-xp(setq w32-get-true-file-attributes nil)(setq x-select-enable-clipboard t);; before my-el-get....(if macp	(require 'my-mac));; (require 'my-cedet);; ---------------------------(require 'my-el-get);; (require 'my-elpa)(require 'my-editing)(require 'my-programming) ;; for all except c/c++(require 'my-cc-mode) ;; for c/c++ mode only(require 'my-dired)(require 'my-shell);; ;; (require 'my-svn);; ;; (require 'my-web)(require 'my-grep)(require 'my-isearch)(require 'my-ido);; ;; (require 'my-ecb)(require 'my-tags)(require 'my-org);; (require 'bookmark);; (require 'ediff);; (require 'erc);; (require 'find-dired);; (require 'locate)(unless (daemonp)  (require 'my-font));; final big brother that can handle many configuration;;;; NOTE: this package should be followed at last;; (require 'my-anything)(require 'my-helm);; configure look-and-feel(require 'my-theme);; make cleaner modeline even with multiple minor modes;; hint from http://whattheemacsd.com/init.el-04.html(when (my-try-require 'diminish)  ;; (diminish 'wrap-region-mode)  (diminish 'yas-minor-mode)  (diminish 'projectile-mode)  (diminish 'undo-tree-mode)  (diminish 'abbrev-mode)  (diminish 'helm-mode)  (diminish 'auto-complete-mode)  (diminish 'eldoc-mode)  );; (defun my-is-stl-header();;   (messsage "hey...");;   (message buffer-file-name);;   t);; (add-to-list 'magic-mode-alist '(my-is-stl-header . c++-mode));; ---------------;; show possible path problem;; ---------------;; (list-load-path-shadows);; make cleaner modeline even with multiple minor modes;; hint from http://whattheemacsd.com/init.el-04.html(when (my-try-require 'diminish)  ;; (diminish 'wrap-region-mode)  (diminish 'yas-minor-mode)  (diminish 'projectile-mode)  (diminish 'undo-tree-mode)  (diminish 'abbrev-mode)  (diminish 'helm-mode)  (diminish 'auto-complete-mode)  (diminish 'eldoc-mode)  );;;; IMPORTANT! we relocated emacs *Customization* file;; so, we need to RELOAD IT HERE...;;(load custom-file)(progn  (message "modifying frame...")  (let ((new-config		 (cond		  ((or win32p unixp)		   '((top . 0) (left . 0) (width . 180) (height . 62)))		  (macp		   '((top . 10) (left . 10) (width . 150) (height . 46)))		  )))	(my-modify-alist-with-alist 'default-frame-alist new-config)	)  (setq initial-frame-alist default-frame-alist)  (modify-all-frames-parameters default-frame-alist)  );; disable trackback....(setq debug-on-error nil)
