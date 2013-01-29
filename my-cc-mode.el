@@ -444,6 +444,8 @@
 
 (add-to-list 'auto-mode-alist '("\\.\\(c\\|cpp\\|cxx\\|cc\\|h\\|inl\\|hpp\\|ihh\\|hh\\)\\(\\.~[^~]+[~]?\\)?$" . c++-mode) nil)
 
+(add-to-list 'auto-mode-alist '("\\.\\(m\\)?$" . objc-mode) nil)
+
 ;; pairing.?! cpp <--> h no matter cursor position
 (defun my-ff-find-other-file (arg)
   (interactive "P")
