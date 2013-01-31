@@ -1,3 +1,14 @@
+;; hint from http://whattheemacsd.com/setup-shell.el-01.html
+(defun comint-delchar-or-eof-or-kill-buffer (arg)
+  (interactive "p")
+  (if (null (get-buffer-process (current-buffer)))
+      (kill-buffer)
+    (comint-delchar-or-maybe-eof arg)))
+
+(add-hook 'shell-mode-hook
+          (lambda ()
+            ))
+
 (defun my-get-existing-shell-buffer ()
   (let (proc proc-buffer)
 	(catch 'break
@@ -12,9 +23,14 @@
 		 (dir (if buffer-file-name (file-name-directory buffer-file-name) default-directory)))
 	(if (and arg sp dir)
 		(progn 
-		  (comint-simple-send sp (concat "cd " dir))
+		  (comint-simple-send sp (concat "cd /d " dir))
 		  (display-buffer (process-buffer sp)))
-	  (shell))))
+	  (progn
+		(shell)
+		(comint-simple-send "setlocal enableextensions"))
+	  )
+	)
+  )
 		 
 (global-set-key "\C-z" 'my-shell-with-current-directory)
 
@@ -25,6 +41,8 @@
    ;; comint-prompt-read-only t
    comint-process-echoes t
    )
+  ;; hint from http://whattheemacsd.com/setup-shell.el-01.html
+  (define-key shell-mode-map (kbd "C-d") 'comint-delchar-or-eof-or-kill-buffer)
 )
 
 (add-hook 'shell-mode-hook 'my-shell-setup)

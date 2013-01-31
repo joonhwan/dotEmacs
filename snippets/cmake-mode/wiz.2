@@ -2,45 +2,43 @@
 # name: static lib - using qt
 # key: wiz
 # --
+set(CURR_PRJ ${1:ProjectName})
 
-PROJECT(${1:ProjectName})
+include_directories(
+  \${CMAKE_CURRENT_BINARY_DIR}
+  )
 
-INCLUDE_DIRECTORIES(\${CMAKE_CURRENT_BINARY_DIR})
-
-SET(QT_USE_QTMAIN ON)
-INCLUDE(\${QT_USE_FILE})
-
-SET(sources
+set(\${CURR_PRJ}_source
   $0
   )
 
-SET(moc_header
+set(\${CURR_PRJ}_moc_header
   )
 
-SET(header
+set(\${CURR_PRJ}_header
   )
 
-SET(forms
+set(\${CURR_PRJ}_form
   )
 
-SET(resources
+set(\${CURR_PRJ}_resource
   )
 
-QT4_WRAP_CPP(moc_generated \${moc_header})
-QT4_WRAP_UI(forms_generated \${forms})
-QT4_ADD_RESOURCES(rc_generated \${resources})
+qt4_wrap_cpp(\${CURR_PRJ}_moc_generated \${\${CURR_PRJ}_moc_header})
+qt4_wrap_ui(\${CURR_PRJ}_forms_generated \${\${CURR_PRJ}_form})
+qt4_add_resources(\${CURR_PRJ}_rc_generated \${\${CURR_PRJ}_resource})
 
-ADD_LIBRARY(\${PROJECT_NAME}
-  \${sources}
-  \${header}
-  \${moc_header}
-  \${form}
-  \${resource}
-  \${moc_generated}
-  \${forms_generated}
-  \${rc_generated}
+add_library(\${CURR_PRJ}
+  \${\${CURR_PRJ}_source}
+  \${\${CURR_PRJ}_header}
+  \${\${CURR_PRJ}_moc_header}
+  \${\${CURR_PRJ}_form}
+  \${\${CURR_PRJ}_resource}
+  \${\${CURR_PRJ}_moc_generated}
+  \${\${CURR_PRJ}_form_generated}
+  \${\${CURR_PRJ}_rc_generated}
   )
 
-TARGET_LINK_LIBRARIES(\${PROJECT_NAME}
+target_link_libraries(\${CURR_PRJ}
   \${QT_LIBRARIES}
   )

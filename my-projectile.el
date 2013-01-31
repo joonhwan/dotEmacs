@@ -4,21 +4,21 @@
 ;; `projectile-invalidate-cache'
 (setq projectile-enable-caching t)
 
-(setq projectile-ignored-file-extensions
-	  (append projectile-ignored-file-extensions
-			  '(;; visual studio
-				"bak" "exp" "ncb" "ilk" "obj" "manifest" "pdb"
-				;; elisp
-				"elc"
-				;; python
-				"pyc"
-				;; general documentations
-				;; "txt"
-				"rst" "doc" "html" "qdoc" "log" "mft" "ver" "txt"
-				"png" "jpg" "bmp" "tif"
-				;; binary
-				"dll" "lib" "exe"
-				)))
+;; (setq projectile-ignored-file-extensions
+;; 	  (append projectile-ignored-file-extensions
+;; 			  '(;; visual studio
+;; 				"bak" "exp" "ncb" "ilk" "obj" "manifest" "pdb"
+;; 				;; elisp
+;; 				"elc"
+;; 				;; python
+;; 				"pyc"
+;; 				;; general documentations
+;; 				;; "txt"
+;; 				"rst" "doc" "html" "qdoc" "log" "mft" "ver" "txt"
+;; 				"png" "jpg" "bmp" "tif"
+;; 				;; binary
+;; 				"dll" "lib" "exe"
+;; 				)))
 
 ;; (defun my-projectile-ignored-directory-p (file)
 ;;   "Check if FILE should be ignored."
@@ -51,6 +51,8 @@
 														"build"
 														"build32"
 														"build64"
+														"build-x64"
+														"build-x86"
 														"build-64"
 														"build-32")))
 

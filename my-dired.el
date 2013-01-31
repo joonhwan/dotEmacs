@@ -123,6 +123,12 @@
 						dired-omit-extensions)
  )
 
+;; from hint http://whattheemacsd.com/setup-dired.el-01.html
+;; Make dired less verbose
+(require 'dired-details)
+(setq-default dired-details-hidden-string "--- ")
+(dired-details-install)
+
 ;; override
 ;; (define-key dired-mode-map [(meta return)] 'my-open-in-total-cmd)
 

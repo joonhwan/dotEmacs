@@ -65,9 +65,30 @@
 			   :type github
 			   :pkgname "auto-complete/auto-complete"
 			   )
+		(:name cdb-gud
+			   :type emacswiki
+			   :pkgname "cdb-gud"
+			   )
 		(:name fuzzy
 			   :type github
 			   :pkgname "auto-complete/fuzzy-el"
+			   )
+
+		(:name emacs-loc-changes
+			   :type github
+			   :pkgname "rocky/emacs-loc-changes"
+			   )
+		(:name emacs-load-relative
+			   :type github
+			   :pkgname "rocky/emacs-load-relative"
+			   )
+		(:name emacs-test-unit
+			   :type github
+			   :pkgname "rocky/emacs-test-unit"
+			   )
+		(:name emacs-dbgr
+			   :type github
+			   :pkgname "rocky/emacs-dbgr"
 			   )
 		;; (:name auto-yasnippet
 		;; 	   :description "Quickly create disposable yasnippets"
@@ -162,6 +183,11 @@
 			   :type github
 			   :pkgname "magnars/s.el"
 			   )
+		(:name dash
+			   :description "A modern list api for Emacs. No 'cl required."
+			   :type github
+			   :pkgname "magnars/dash.el"
+			   )
 		(:name projectile
 			   :description "Projectile is a project interaction library for Emacs"
 			   :type git
@@ -170,7 +196,7 @@
 						  )
 			   ;;:url "git@github.com:Joonhwan/projectile.git"
 			   :url "git://github.com/bbatsov/projectile.git"
-			   :depends s_dot_el
+			   :depends s_dot_el dash
 			   ;; do-not (require 'projectile ) yet
 			   ;; :features projectile
 			   )
@@ -213,6 +239,8 @@
 		 auto-complete-clang
 		 deferred
 		 diminish
+		 dired-details
+		 ;; dbgr
 		 el-get
 		 expand-region
 		 full-ack

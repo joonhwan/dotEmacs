@@ -80,6 +80,10 @@
   (setq global-auto-revert-non-file-buffers t
 		auto-revert-verbose nil
 		)
+  ;; Turn off mouse interface early in startup to avoid momentary display
+  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+  (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
   )
 
 ;; per platform setq
@@ -622,7 +626,17 @@ Uses `my-current-date-time-format' for the formatting the date/time."
   (interactive)
   (set-selective-display (if selective-display nil 1)))
 (global-set-key [f1] 'my-toggle-selective-display)
-  
+
+;; hint from http://whattheemacsd.com//key-bindings.el-03.html
+;; 눌러보면 알게될 한줄합치기.
+(global-set-key (kbd "M-]") (lambda () (interactive) (join-line -1)))
+(global-set-key (kbd "M-[") 'join-line)
+;; Move more quickly
+(global-set-key (kbd "C-S-n") (lambda () (interactive) (ignore-errors (next-line 5))))
+(global-set-key (kbd "C-S-p") (lambda () (interactive) (ignore-errors (previous-line 5)))) 
+(global-set-key (kbd "C-S-f") (lambda () (interactive) (ignore-errors (forward-char 5))))
+(global-set-key (kbd "C-S-b") (lambda () (interactive) (ignore-errors (backward-char 5))))
+
 ;;
 ;; joon customized editing feature
 ;; 

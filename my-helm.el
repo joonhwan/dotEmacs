@@ -30,7 +30,7 @@
 (setq helm-for-files-preferred-list 
 	  '(
 		;; helm-c-source-ffap-guesser ;; 이거 있으면 좋을 텐데 동작이 원하는대로 안됨
-		helm-c-source-ffap-line
+		;; helm-c-source-ffap-line ;; 이거또 없앴네... 헐
 		helm-c-source-recentf
 		helm-c-source-files-in-current-dir
 		helm-c-source-files-in-all-dired
