@@ -3,6 +3,13 @@
 (require 'cc-mode)
 (require 'cc-vars)
 
+(when (my-try-require 'cmake-project)
+  (setq cmake-project-default-build-dir-name "build/")
+  (defun my-maybe-cmake-project-hook ()
+	(if (file-exists-p "CMakeLists.txt")
+		(cmake-project-mode)))
+  )
+
 ;; order of cdr list is IMPORTANT!  (for example, when
 ;; 'ff-find-other-file' failed it would ask user the default file name
 ;; with the extension which is car of this list!)
@@ -415,9 +422,12 @@
 													   er/mark-outside-pairs)))
   (if (featurep 'projectile)
   	  (projectile-mode 1))
+  (if (featurep 'cmake-project)
+	  (my-maybe-cmake-project-hook))
   ;; (flymake-mode 0)
   ;; (set (make-local-variable 'compile-command)
   ;; 	   (my-recommend-compile-command))
+  
   )
 
 (setq my-build-dir "")

@@ -69,6 +69,10 @@
 			   :type emacswiki
 			   :pkgname "cdb-gud"
 			   )
+		(:name cmake-project
+			   :type github
+			   :pkgname "joonhwan/emacs-cmake-project"
+			   )
 		(:name fuzzy
 			   :type github
 			   :pkgname "auto-complete/fuzzy-el"
@@ -264,6 +268,7 @@
 		 smex
 		 undo-tree
 		 yasnippet
+		 yaml-mode
 		 )
        (mapcar 'el-get-source-name el-get-sources)))
 
