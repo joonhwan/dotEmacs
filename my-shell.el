@@ -20,14 +20,21 @@
 (defun my-shell-with-current-directory (&optional arg)
   (interactive "P")
   (let* ((sp (get-process "shell"))
+		 (spbuf (and sp (process-buffer sp)))
 		 (dir (if buffer-file-name (file-name-directory buffer-file-name) default-directory)))
-	(if (and arg sp dir)
+	(if (and arg sp spbuf dir)
 		(progn 
 		  (comint-simple-send sp (concat "cd /d " dir))
-		  (display-buffer (process-buffer sp)))
+		  (display-buffer spbuf)
+		  (save-excursion
+			(set-buffer spbuf)
+			(cd dir)
+			)
+		  )
 	  (progn
 		(shell)
-		(comint-simple-send "setlocal enableextensions"))
+		(comint-simple-send sp "setlocal enableextensions")
+		)
 	  )
 	)
   )
@@ -41,6 +48,8 @@
    ;; comint-prompt-read-only t
    comint-process-echoes t
    )
+  (if win32p
+	  (setq shell-cd-regexp "\\(cd\\)\\|\\(cd /d\\)"))
   ;; hint from http://whattheemacsd.com/setup-shell.el-01.html
   (define-key shell-mode-map (kbd "C-d") 'comint-delchar-or-eof-or-kill-buffer)
 )
