@@ -1,4 +1,4 @@
-; -*- mode: Lisp; eval: (rainbow-mode t); -*-
+; -*- mode: Lisp; eval: (rainbow-mode t); coding: utf-8;-*-
 ;;; my-dark-theme.el --- Dark and clean theme
 
 ;; Copyright (C) 2011 Free Software Foundation, Inc.
@@ -113,7 +113,7 @@
    `(fixed-pitch ((t (:weight bold))))
    `(italic ((t (:slant italic))))
    `(underline ((t (:underline t))))
-   `(variable-pitch ((t (:weight bold :family "나눔고딕" :inherit default))))
+   `(variable-pitch ((t (:weight bold :family "Gulim" :inherit default))))
    `(fringe ((t (:inherit default :background ,my-dark-bg+1))))
    `(header-line ((t (:inherit my-dark-highlight-damp :box (:color "#2e3330" :line-width 2)))))
    `(highlight ((t (:underline nil :foreground ,my-dark-bg :background ,my-dark-blue-3))))
