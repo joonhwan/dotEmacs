@@ -12,10 +12,10 @@
   (with-current-buffer
       (url-retrieve-synchronously
 	   ;; "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-       "https://raw.github.com/Joonhwan/el-get/master/el-get-install.el"
+       "https://raw.github.com/joonhwan/el-get/master/el-get-install.el"
 	   )
     (let ((el-get-master-branch t)
-	  (el-get-git-install-url "git@github.com:Joonhwan/el-get.git"))
+	  (el-get-git-install-url "git@github.com:joonhwan/el-get.git"))
       (end-of-buffer)
       (eval-print-last-sexp))))
 
@@ -156,7 +156,7 @@
 			   )
 		(:name qml-mode
 			   :type git
-			   :url "git://github.com/Joonhwan/qml-mode.git"
+			   :url "git://github.com/joonhwan/qml-mode.git"
 			   )
 		;; (:name log4j-mode
 		;; 	   :type elpa
@@ -198,7 +198,7 @@
 			   :prepare (progn
 						  (setq-default projectile-keymap-prefix (kbd "C-c j"))
 						  )
-			   ;;:url "git@github.com:Joonhwan/projectile.git"
+			   ;;:url "git@github.com:joonhwan/projectile.git"
 			   :url "git://github.com/bbatsov/projectile.git"
 			   :depends s_dot_el dash
 			   ;; do-not (require 'projectile ) yet
