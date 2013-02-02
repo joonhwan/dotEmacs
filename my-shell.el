@@ -38,8 +38,14 @@
 	  )
 	)
   )
-		 
-(global-set-key "\C-z" 'my-shell-with-current-directory)
+
+(cond
+ (win32p
+  (global-set-key "\C-z" 'my-shell-with-current-directory)
+  )
+ (
+  (global-set-key "\C-z" 'shell)
+  ))
 
 (defun my-shell-setup()
   (dirtrack-mode t)
