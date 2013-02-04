@@ -1,3 +1,4 @@
+;; -*- coding:utf-8-auto -*-
 ;; hint from http://whattheemacsd.com/setup-shell.el-01.html
 (defun comint-delchar-or-eof-or-kill-buffer (arg)
   (interactive "p")
