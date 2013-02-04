@@ -47,6 +47,26 @@
   (global-set-key "\C-z" 'shell)
   ))
 
+;; great hint from
+;; http://whattheemacsd.com//setup-dired.el-02.html
+(defun dired-back-to-top ()
+  (interactive)
+  (beginning-of-buffer)
+  (dired-next-line 4))
+
+(define-key dired-mode-map
+  (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
+
+(defun dired-jump-to-bottom ()
+  (interactive)
+  (end-of-buffer)
+  (dired-next-line -1))
+
+(define-key dired-mode-map
+  (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
+;; http://whattheemacsd.com//setup-dired.el-02.html
+
+
 (defun my-shell-setup()
   (dirtrack-mode t)
   (ansi-color-for-comint-mode-on)
