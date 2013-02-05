@@ -55,12 +55,6 @@
 ;; local sources
 (setq el-get-sources
       '(
-		(:name ace-jump-mode
-			   ;; :website "https://github.com/winterTTr/ace-jump-mode/wiki"
-			   ;; :description "A quick cursor location minor mode for emacs"
-			   :type github
-			   :pkgname "winterTTr/ace-jump-mode"
-			   :features ace-jump-mode)
 		(:name auto-complete
 			   :type github
 			   :pkgname "auto-complete/auto-complete"
@@ -115,6 +109,11 @@
 			   :pkgname "victorhge/iedit"
 			   :features iedit
 			   )
+		;; (:name pastebin
+		;;        :description "Emacs pastebin"
+		;;        :type github
+		;;        :pkgname "emacs-pastebin"
+		;;        )
 		(:name pcache
 			   :type github
 			   :pkgname "sigma/pcache"
@@ -239,6 +238,7 @@
 (setq my-packages
       (append
        '(
+		 ace-jump-mode
 		 auto-install
 		 auto-complete-clang
 		 deferred
@@ -259,7 +259,6 @@
 		 magit
 		 markdown-mode
 		 mark-multiple
-		 pastebin
 		 package
 		 popwin
 		 popup
