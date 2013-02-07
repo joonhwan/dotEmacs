@@ -21,7 +21,7 @@
 		("\\.c\\'"
 		 (".h"))
 		("\\.h\\'"
-		 (".cpp" ".cxx" ".C" ".CC" ".c" ".cc" "_win32.cpp" ))
+		 (".cpp" ".cxx" ".C" ".CC" ".c" ".cc" ".m" ".mm" "_win32.cpp" ))
 		("\\.C\\'"
 		 (".H" ".hh" ".h"))
 		("\\.H\\'"
@@ -41,7 +41,10 @@
 		("\\.cxx\\'"
 		 (".hxx" ".hh" ".h"))
 		("\\.hxx\\'"
-		 (".cxx" ".cpp"))))
+		 (".cxx" ".cpp"))
+		("\\.m[m]*"
+		 (".h"))
+		))
 (setq cc-search-directories
 	  '(
 		"."
