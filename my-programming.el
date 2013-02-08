@@ -92,9 +92,21 @@
 							   ))
 	(ac-config-default)
 	(add-to-list 'ac-modes 'objc-mode)
-	(my-try-require 'auto-complete-clang)
-	))
+	)
 
+  (when (my-try-require 'auto-complete-clang-async)
+	(defun my-ac-cc-clang-completion-mode-setup ()
+	  (setq ac-clang-complete-executable "c:/prj/oss/mine/emacs-clang-complete-async/build/Debug/clang-complete.exe")
+	  (setq ac-sources '(ac-source-clang-async))
+	  (ac-clang-launch-completion-process)
+	  )
+	(progn
+	  (add-hook 'c-mode-common-hook 'my-ac-cc-clang-completion-mode-setup)
+	  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+	  (global-auto-complete-mode t)
+	  )
+  )
+  )
 ;;
 ;; ruby mode
 ;;
@@ -182,7 +194,7 @@
   '(progn
 	 (defun my-compilation-setup()
 	   (setq
-		truncate-lines t
+		truncate-lines nil
 		compilation-scroll-output t
 		compilation-window-height 15)
 	   )
@@ -296,7 +308,15 @@
   (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
   )
 
-;; (require 'csharp-mode)
+;; csharp-mode
+(when (my-try-require 'csharp-mode)
+  (setq auto-mode-alist
+      (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
+   (defun my-csharp-mode-fn ()
+      "function that runs when csharp-mode is initialized for a buffer."
+   )
+   (add-hook  'csharp-mode-hook 'my-csharp-mode-fn t)
+   )
 
 (when (featurep 'eproject)
   (setq

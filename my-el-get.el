@@ -88,6 +88,10 @@
 			   :type github
 			   :pkgname "rocky/emacs-dbgr"
 			   )
+		(:name emacs-clang-complete-async
+			   :type github
+			   :pkgname "joonhwan/emacs-clang-complete-async"
+			   )
 		;; (:name auto-yasnippet
 		;; 	   :description "Quickly create disposable yasnippets"
 		;; 	   :type emacswiki
@@ -240,7 +244,8 @@
        '(
 		 ace-jump-mode
 		 auto-install
-		 auto-complete-clang
+		 ;; auto-complete-clang
+		 csharp-mode
 		 deferred
 		 diminish
 		 dired-details
