@@ -23,14 +23,16 @@
   (let* ((sp (get-process "shell"))
 		 (spbuf (and sp (process-buffer sp)))
 		 (dir (if buffer-file-name (file-name-directory buffer-file-name) default-directory)))
-	(if (and arg sp spbuf dir)
-		(progn 
-		  (comint-simple-send sp (concat "cd /d " dir))
-		  (display-buffer spbuf)
-		  (save-excursion
-			(set-buffer spbuf)
-			(cd dir)
+	(if (and sp spbuf dir)
+		(progn
+		  (when arg
+			(comint-simple-send sp (concat "cd /d " dir))
+			(save-excursion
+			  (set-buffer spbuf)
+			  (cd dir)
+			  )
 			)
+		  (display-buffer spbuf)
 		  )
 	  (progn
 		(shell)
