@@ -398,6 +398,13 @@ home directory is a root directory) and removes automounter prefixes
 	 )
   )
 
+(eval-after-load "rainbow-mode"
+  '(progn
+	 (add-to-list 'rainbow-hexadecimal-colors-font-lock-keywords
+				  '("QColor(\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*,\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*,\s*\\([0-9]\\{1,3\\}\\(?:\s*%\\)?\\)\s*)" (0 (rainbow-colorize-rgb))))
+	 )
+  )
+
 ;;
 ;; replace/occur
 ;; 
