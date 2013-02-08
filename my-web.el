@@ -1,3 +1,5 @@
+;; -*- coding: utf-8-auto; -*-
+
 (add-to-list 'load-path "~/elisp/web")
 (add-to-list 'load-path "~/elisp/g-client")
 

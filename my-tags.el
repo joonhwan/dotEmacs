@@ -1,4 +1,4 @@
-;;
+;; -*- coding: utf-8-auto; -*-
 ;;
 ;;
 ;; (require 'xgtags)

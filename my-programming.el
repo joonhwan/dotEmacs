@@ -1,4 +1,4 @@
-;; -*- coding:utf-8 -*-
+;; -*- coding:utf-8-auto -*-
 ;; dsvn(equivalent to tortoisesvn)
 ;;
 ;; (require 'vc-svn)

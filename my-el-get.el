@@ -1,4 +1,4 @@
-;; -*- coding:utf-8 -*-
+;; -*- coding:utf-8-auto -*-
 
 (add-to-list 'load-path (concat my-dotfiles-dir "alien/el-get-package/el-get"))
 

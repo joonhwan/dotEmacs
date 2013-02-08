@@ -1,3 +1,5 @@
+;; -*- coding:utf-8-auto; -*-
+
 (add-to-list 'load-path "~/elisp/svn")
 (require 'vc-svn)
 

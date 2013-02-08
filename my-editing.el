@@ -1,4 +1,4 @@
-;; -*- coding:utf-8; -*-
+;; -*- coding:utf-8-auto; -*-
 
 (require 'generic-x) ;; for many files' editing
 ;; (require 'indent)

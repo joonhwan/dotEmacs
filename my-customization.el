@@ -1,3 +1,5 @@
+;; -*- coding:utf-8-auto; -*-
+
 (message "loading my-customization")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
