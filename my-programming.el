@@ -94,7 +94,8 @@
 	(add-to-list 'ac-modes 'objc-mode)
 	)
 
-  (when (my-try-require 'auto-complete-clang-async)
+  (setq my-use-clang-complete nil)
+  (when (and my-use-clang-complete  (my-try-require 'auto-complete-clang-async))
 	(defun my-ac-cc-clang-completion-mode-setup ()
 	  (setq ac-clang-complete-executable "c:/prj/oss/mine/emacs-clang-complete-async/build/Debug/clang-complete.exe")
 	  (setq ac-sources '(ac-source-clang-async))
