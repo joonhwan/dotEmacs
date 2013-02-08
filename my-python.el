@@ -78,7 +78,8 @@
 		tab-width 4
 		python-remove-cwd-from-path nil
 		)
-	   (flymake-mode 1)
+	   (if (featurep 'flymake-mode)
+		 (flymake-mode 1))
 	   (eldoc-mode 1)
 	   )
 	 (add-hook 'python-mode-hook 'my-python-mode-hook)
