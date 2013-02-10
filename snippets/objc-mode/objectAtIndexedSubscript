@@ -1,4 +1,0 @@
-#name : objectAtIndexedSubscript
-#group : NSOrderedSet
-# --
-objectAtIndexedSubscript:${1:(NSUInteger)idx}

@@ -1,4 +1,0 @@
-#name : setObject
-#group : NSDictionary
-# --
-setObject:${1:(id)obj}

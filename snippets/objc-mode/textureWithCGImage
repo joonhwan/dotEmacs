@@ -1,4 +1,0 @@
-#name : textureWithCGImage
-#group : GLKTextureLoader
-# --
-textureWithCGImage:${1:(CGImageRef)cgImage}

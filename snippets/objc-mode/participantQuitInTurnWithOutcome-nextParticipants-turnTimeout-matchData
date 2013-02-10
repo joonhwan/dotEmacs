@@ -1,4 +1,0 @@
-#name : participantQuitInTurnWithOutcome:nextParticipants:turnTimeout:matchData
-#group : GKTurnBasedMatch
-# --
-participantQuitInTurnWithOutcome:${1:(GKTurnBasedMatchOutcome)matchOutcome} nextParticipants:${2:(NSArray *)nextParticipants} turnTimeout:${3:(NSTimeInterval)timeout} matchData:${4:(NSData*)matchData}

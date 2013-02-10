@@ -1,4 +1,0 @@
-#name : valueAtIndex
-#group : CIVector
-# --
-valueAtIndex:${1:(size_t)index}

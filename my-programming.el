@@ -84,12 +84,12 @@
    "~/elisp/alien/el-get-package/auto-complete/dict")
 
   (when (my-try-require 'auto-complete-config)
-	(setq-default ac-sources '(
-							   ac-source-words-in-same-mode-buffers
-							   ac-source-yasnippet
-							   ac-source-abbrev
-							   ac-source-dictionary
-							   ))
+	(setq ac-sources '(
+					   ac-source-words-in-same-mode-buffers
+					   ac-source-yasnippet
+					   ac-source-abbrev
+					   ac-source-dictionary
+					   ))
 	(ac-config-default)
 	(add-to-list 'ac-modes 'objc-mode)
 	)

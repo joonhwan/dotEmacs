@@ -1,4 +1,0 @@
-#name : updateEventFlags
-#group : IOHIKeyboardMapper
-# --
-updateEventFlags:${1:(unsigned)flags}

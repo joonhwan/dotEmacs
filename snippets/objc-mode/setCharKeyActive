@@ -1,4 +1,0 @@
-#name : setCharKeyActive
-#group : IOHIKeyboardMapper
-# --
-setCharKeyActive:${1:(bool)val}

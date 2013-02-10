@@ -1,4 +1,0 @@
-#name : initWithCollectionViewLayout
-#group : UICollectionViewController
-# --
-initWithCollectionViewLayout:${1:(UICollectionViewLayout *)layout}
