@@ -1,0 +1,4 @@
+#name : setAlphaLock
+#group : IOHIKeyboardMapper
+# --
+setAlphaLock:${1:(bool)val}

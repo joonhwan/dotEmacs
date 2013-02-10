@@ -1,0 +1,4 @@
+#name : setObject:atIndexedSubscript
+#group : NSOrderedSet
+# --
+setObject:${1:(id)obj} atIndexedSubscript:${2:(NSUInteger)idx}

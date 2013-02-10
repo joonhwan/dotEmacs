@@ -1,0 +1,4 @@
+#name : setDeviceFlags
+#group : IOHIKeyboardMapper
+# --
+setDeviceFlags:${1:(unsigned)flags}

@@ -1,0 +1,4 @@
+#name : startWithCompletionHandler
+#group : MKLocalSearch
+# --
+startWithCompletionHandler:${1:(MKLocalSearchCompletionHandler)completionHandler}

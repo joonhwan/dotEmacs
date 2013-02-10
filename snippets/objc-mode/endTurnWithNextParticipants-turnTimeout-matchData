@@ -1,0 +1,4 @@
+#name : endTurnWithNextParticipants:turnTimeout:matchData
+#group : GKTurnBasedMatch
+# --
+endTurnWithNextParticipants:${1:(NSArray *)nextParticipants} turnTimeout:${2:(NSTimeInterval)timeout} matchData:${3:(NSData*)matchData}

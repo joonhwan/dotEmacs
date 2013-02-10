@@ -1,0 +1,4 @@
+#name : initWithOptions
+#group : NSPointerFunctions
+# --
+initWithOptions:${1:(NSPointerFunctionsOptions)options}

@@ -1,0 +1,4 @@
+#name : objectForKeyedSubscript
+#group : NSDictionary
+# --
+objectForKeyedSubscript:${1:(id)key}

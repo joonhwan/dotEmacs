@@ -1,0 +1,4 @@
+#name : keyboardEvent
+#group : IOHIKeyboardMapper
+# --
+keyboardEvent:${1:(unsigned)eventType}
