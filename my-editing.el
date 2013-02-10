@@ -66,6 +66,8 @@
  ;; no need double space between sentences
  sentence-end-double-space nil
  ;;
+ revert-without-query '("\\.cpp" "\\.h" "\\.m" "\\.hpp" "\\.py" "CMakeLists.txt" "\\.cmake")
+ ;;
  completion-ignored-extensions '(".svn/" "CVS/" ".o" "~" ".bin" ".bak" ".obj" ".map" ".ico" ".pif" ".lnk" ".a" ".ln" ".blg" ".bbl" ".dll" ".drv" ".vxd" ".386" ".elc" ".lof" ".glo" ".idx" ".lot" ".dvi" ".fmt" ".tfm" ".pdf" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".fasl" ".ufsl" ".fsl" ".dxl" ".pfsl" ".dfsl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo")
  safe-local-variable-values '(
 							  (eval rainbow-mode t)
