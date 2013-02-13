@@ -71,7 +71,10 @@
 			   :type github
 			   :pkgname "auto-complete/fuzzy-el"
 			   )
-
+		(:name emacs-git-gutter
+			   :type github
+			   :pkgname "syohex/emacs-git-gutter"
+			   )
 		(:name emacs-loc-changes
 			   :type github
 			   :pkgname "rocky/emacs-loc-changes"
