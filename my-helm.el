@@ -2,7 +2,9 @@
 (helm-mode 1)
 
 (when macp
-  (setq helm-c-top-command "top -ncols %s -n 1"))
+  ;; 문제가 있다.
+  (setq helm-c-top-command "-ncols %s -F -R -u")
+)
 
 (setq helm-c-locate-command 
 	  (case system-type
