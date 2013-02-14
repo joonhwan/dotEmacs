@@ -242,6 +242,35 @@
 		)
 	  )
 
+(cond
+ (macp
+  (setq my-platform-packages
+		'(
+		  emacs-w3m
+		  )
+		)
+  (setq el-get-sources
+		(append el-get-sources
+				'(
+				  (:name emacs-xcode-document-viewer
+						 :description "emacs xcode doc viewer"
+						 :type github
+						 :pkgname "joonhwan/emacs-xcode-document-viewer"
+				 )
+				  )
+				))
+  )
+ (win32p
+  (setq my-platform-packages
+		nil
+		)
+  (setq el-get-sources
+		(append el-get-sources
+				nil)
+				  
+		))
+ )
+
 (setq my-packages
       (append
        '(
@@ -277,6 +306,7 @@
 		 yasnippet
 		 yaml-mode
 		 )
+	   my-platform-packages
        (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
