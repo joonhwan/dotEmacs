@@ -91,6 +91,10 @@
 			   :type github
 			   :pkgname "rocky/emacs-dbgr"
 			   )
+		(:name evil
+			   :type git
+			   :url "git://gitorious.org/evil/evil.git"
+			   )
 		(:name emacs-clang-complete-async
 			   :type github
 			   :pkgname "joonhwan/emacs-clang-complete-async"
