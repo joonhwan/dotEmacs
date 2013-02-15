@@ -1,6 +1,5 @@
-;; 
-;; -*- coding:utf-8 -*-
-;; 
+;; -*- coding:utf-8-auto; -*-
+
 (require 'org)
 (require 'org-compat)
 (require 'org-publish)
@@ -43,6 +42,8 @@
  org-src-fontify-natively t
  org-directory "~/DropBox/org"
  org-agenda-files '("todo.org")
+ ;; 충돌이 나는 키바인딩을 최대한 피하자.
+ org-replace-disputed-keys t 
  ;; org-agenda-ndays 7
  ;; org-deadline-warning-days 14
  ;; org-agenda-show-all-dates t
