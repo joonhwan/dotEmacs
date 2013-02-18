@@ -306,6 +306,7 @@
 		 rainbow-delimiters
 		 rainbow-mode
 		 smex
+		 switch-window
 		 undo-tree
 		 yasnippet
 		 yaml-mode
