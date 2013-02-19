@@ -636,6 +636,16 @@ Uses `my-current-date-time-format' for the formatting the date/time."
   (set-selective-display (if selective-display nil 1)))
 (global-set-key [f1] 'my-toggle-selective-display)
 
+;; make it damm hard key for hideshow easy
+(eval-after-load "hideshow"
+  '(progn
+	 (global-set-key (kbd "M-<left>") 'hs-hide-block)
+	 (global-set-key (kbd "M-<right>") 'hs-show-block)
+	 (global-set-key (kbd "M-S-<left>") 'hs-hide-all)
+	 (global-set-key (kbd "M-S-<right>") 'hs-show-all)
+	 )
+  )
+
 ;; hint from http://whattheemacsd.com//key-bindings.el-03.html
 ;; 눌러보면 알게될 한줄합치기.
 (global-set-key (kbd "M-]") (lambda () (interactive) (join-line -1)))
