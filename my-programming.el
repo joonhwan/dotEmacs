@@ -251,6 +251,10 @@
 
 ;;;; flymake
 ;;
+;; 이상하게 어떤 모드는 flymake를 require 하지 않으면 오류가 난다.
+;; 어디서 나는지 알면 아래 require는 제거해도 된다.
+(require 'flymake)
+;
 (eval-after-load "flymake"
   '(progn
 	 (setq
