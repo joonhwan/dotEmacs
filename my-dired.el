@@ -7,6 +7,15 @@
   (toggle-diredp-find-file-reuse-dir 1)
   )
 
+(when (featurep 'magit)
+  ;; magit 에서 dired-jump 를 하고 싶다.
+  (defun my-magit-dired-jump-action-hook()
+	(dired-jump)
+	t)
+  (setq magit-dired-jump-action-hook nil)
+  (add-hook 'magit-dired-jump-action-hook 'my-magit-dired-jump-action-hook)
+  )
+
 ;;
 ;; benrina wdired in normal dired mode
 ;;
