@@ -58,6 +58,21 @@
 		indicate-buffer-boundaries (quote left)
 		indicate-empty-lines t
 		)
+  ;; 한글 폰트를 위한 설정. 아래 default-frame-alist에서 설정한 것을
+  ;; 제외한 모든 다른 인코딩의 폰트는 fontset-default에 지정된 것이
+  ;; 사용되는 것 같다.
+  ;;
+  ;;현재로서는 글꼴의 크기를 조정해서 폭을 맞추고 있어서, 한글과
+  ;;영문간의 글꼴 크기 차이가 난다. font.c 의 코드를 보았지만, 아직은
+  ;;spacing 이나 scalable 같은게 어떻게 동작하는지 이해를 못하고 있다.
+  (set-fontset-font
+   "fontset-default"
+   'korean-ksc5601
+   (cond
+	(macp
+	 "NanumGothicCoding-14:weight=normal:spacing=m:scalable=false")
+	(t
+	 "나눔고딕코딩-11")))
   (setq
    default-frame-alist
    (cond
@@ -84,7 +99,7 @@
 	(macp
 	 '(
 	   (tool-bar-lines . 0)
-	   (font . "Menlo-12:normal:antialias=natural")
+	   (font . "Menlo-12:weight=normal:antialias=natural:spacing=m")
 	   ;; (font . "Monaco-12:normal:antialias=natural")
 	   (fullscreen . 'fullboth)
 	   ;; (font . "Ubuntu_Mono-14:normal:antialias=natural")
