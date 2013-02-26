@@ -1,0 +1,11 @@
+# -*- mode:snippet -*-
+# name: csharp compile command : ÆÄÀÏ1°³
+# key: compile
+# --
+// Local Variables:
+// compile-command:"csc /target:exe\
+//   /r:System.dll,System.Windows.Forms.dll,System.Drawing.dll\
+//   /main:${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`} /out:$1.exe $1.cs\
+//   && $1 ${2:arg1} ${3:\"arg2\"}"
+// End:
+$0
