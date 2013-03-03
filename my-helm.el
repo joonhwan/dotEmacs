@@ -160,6 +160,8 @@
   ;; (define-key helm-command-map (kbd "C-l") 'helm-filelist)
   (define-key helm-command-map (kbd "h v") 'my-helm-c-help-variable-or-function)
   (define-key helm-command-map (kbd "h f") 'my-helm-c-help-function-or-variable)
+  (define-key helm-command-map (kbd "o h") 'helm-org-headlines)
+  (define-key helm-command-map (kbd "o k") 'helm-org-keywords)
   (when (featurep 'eproject)
 	(define-key helm-command-map (kbd "j") 'my-helm-c-source-eproject-files)
 	)
