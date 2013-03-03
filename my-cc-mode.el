@@ -471,4 +471,16 @@
 (define-key c-mode-base-map (kbd "C-c h p") 'my-ff-find-other-file)
 (define-key c-mode-base-map (kbd "C-c h o") 'ff-find-other-file)
 
+;; csharp-mode
+(when (my-try-require 'csharp-mode)
+  (setq auto-mode-alist
+      (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
+   (defun my-csharp-mode-fn ()
+      "function that runs when csharp-mode is initialized for a buffer."
+	  ;; (my-c-mode-common-hook)
+   )
+   (add-hook  'csharp-mode-hook 'my-csharp-mode-fn t)
+   )
+
+
 (provide 'my-cc-mode)

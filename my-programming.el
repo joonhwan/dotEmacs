@@ -313,16 +313,6 @@
   (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
   )
 
-;; csharp-mode
-(when (my-try-require 'csharp-mode)
-  (setq auto-mode-alist
-      (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
-   (defun my-csharp-mode-fn ()
-      "function that runs when csharp-mode is initialized for a buffer."
-   )
-   (add-hook  'csharp-mode-hook 'my-csharp-mode-fn t)
-   )
-
 (when (featurep 'eproject)
   (setq
    ;; do not rename buffer to its relative path. too long to see in mode line!
