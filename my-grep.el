@@ -14,7 +14,7 @@
 
 (setq  grep-files-aliases
 	   '(("el" . "*.el")
-		 ("cpp" . "*.cc *.cpp *.c *.h *.hh *.hpp *.ihh *.inl *.cxx *.hxx")
+		 ("cpp" . "*.cc *.cpp *.c *.h *.hh *.hpp *.ihh *.inl *.cxx *.hxx *.m")
 		 ("src" . "*.cc *.cpp *.c")
 		 ("inc" . "*.h *.hh *.hpp *.ihh *.inl")
 		 ("ch" . "*.[ch]")

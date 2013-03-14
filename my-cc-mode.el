@@ -459,21 +459,19 @@
 (add-to-list 'auto-mode-alist '("\\.\\(c\\|cpp\\|cxx\\|cc\\|h\\|inl\\|hpp\\|ihh\\|hh\\)\\(\\.~[^~]+[~]?\\)?$" . c++-mode) nil)
 
 ;; *.h objc file criteria
-;; - if there are a pair of *.h/*.m
+;; - if there are a pair of *.h/*.m (skipped for now)
 ;; - if the directory contains xcodeproj
 ;; - if the directory contains xib
-(defun my/h-file-looks-like-objc()
+(defun my/source-file-looks-like-objc()
   ;; (message (concat "file path : " (buffer-file-name)))
   (let* ((file-path (buffer-file-name))
 		 (file-ext (or (and (stringp file-path) (downcase (file-name-extension file-path)))
 					   ""))
 		 )
-	(and (string= file-ext "h")
-		 (or (file-exists-p (concat (file-name-sans-extension file-path) ".m"))
-			 (directory-files (file-name-directory file-path) t (regexp-opt '("\.xib" "\.xcodeproj")))))
+	(and (string-match-p file-ext (regexp-opt '("h" "m")))
+		 (directory-files (file-name-directory file-path) t (regexp-opt '("\.xib" "\.xcodeproj" "\.lproj")))))
   )
-  )
-(add-to-list 'magic-mode-alist '(my/h-file-looks-like-objc . objc-mode))
+(add-to-list 'magic-mode-alist '(my/source-file-looks-like-objc . objc-mode))
 (add-to-list 'auto-mode-alist '("\\.\\(m\\)?$" . objc-mode) nil)
 
 ;; pairing.?! cpp <--> h no matter cursor position
