@@ -65,7 +65,9 @@
  make-backup-files nil
  ;; no need double space between sentences
  sentence-end-double-space nil
- ;;
+ ;; 더 빠른 keystroke의 echo.(기본값은 1. -> 느림)
+ ;; -keystrokes 0.02
+ ;; hint from : http://aaronhawley.livejournal.com/29311.html
  revert-without-query '("\\.cpp" "\\.h" "\\.m" "\\.hpp" "\\.py" "CMakeLists.txt" "\\.cmake")
  ;;
  completion-ignored-extensions '(".svn/" "CVS/" ".o" "~" ".bin" ".bak" ".obj" ".map" ".ico" ".pif" ".lnk" ".a" ".ln" ".blg" ".bbl" ".dll" ".drv" ".vxd" ".386" ".elc" ".lof" ".glo" ".idx" ".lot" ".dvi" ".fmt" ".tfm" ".pdf" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".fasl" ".ufsl" ".fsl" ".dxl" ".pfsl" ".dfsl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo")
@@ -104,6 +106,9 @@
 (defalias `cc `compile)
 (defalias `ccc `my-compile-this-file-only)
 (defalias `ffb `font-lock-fontify-buffer)
+(defalias `tdoe `toggle-debug-on-error)
+(defalias `tdoq `toggle-debug-on-quit)
+
 
 ;;
 ;; full option config
@@ -661,7 +666,15 @@ Uses `my-current-date-time-format' for the formatting the date/time."
 
 ;;
 ;; joon customized editing feature
-;; 
+;;
+(defun my/kill-and-reopen-buffer ()
+  (interactive)
+  (let ((buf-file (buffer-file-name)))
+	(when (stringp buf-file)
+	  (kill-buffer)
+	  (find-file buf-file))
+	)
+  )
 (progn
   (global-set-key (kbd "C-c r b") 'rename-buffer)
   (global-set-key (kbd "C-c e b") 'ediff-buffers)
@@ -672,7 +685,7 @@ Uses `my-current-date-time-format' for the formatting the date/time."
   (global-set-key (kbd "C-c t l") 'toggle-truncate-lines)
   (global-set-key (kbd "C-c s <RET>") 'server-start)
   (global-set-key (kbd "C-c f f") 'font-lock-fontify-buffer)
-  (global-set-key (kbd "C-c r r") 'revert-buffer)
+  (global-set-key (kbd "C-c r r") 'my/kill-and-reopen-buffer)
   )
 
 (provide 'my-editing)
