@@ -260,7 +260,12 @@
 						 :description "emacs xcode doc viewer"
 						 :type github
 						 :pkgname "joonhwan/emacs-xcode-document-viewer"
-				 )
+						 )
+				  (:name dash-at-point
+						 :description "a emacs lisp for searching the word at point with Dash"
+						 :type github
+						 :pkgname "Kapeli/dash-at-point"
+						 )
 				  )
 				))
   )

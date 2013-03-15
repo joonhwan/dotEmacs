@@ -136,7 +136,7 @@
    `(mode-line-buffer-id ((t (:slant italic :weight bold))))
    `(mode-line-emphasis ((t (:weight bold :weight bold :inherit mode-line))))
    `(mode-line-highlight ((t :inherit mode-line-emphasis)))
-   `(region ((t (:foreground nil :background ,my-dark-bg+2))))
+   `(region ((t (:foreground nil :background ,my-dark-yellow-3))))
    `(scroll-bar ((t (:background ,my-dark-bg+2))))
 
    `(secondary-selection ((t (:foreground nil :background ,my-dark-bg+2))))
