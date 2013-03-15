@@ -4,6 +4,9 @@
 (when macp
   ;; 문제가 있다.
   (setq helm-c-top-command "-ncols %s -F -R -u")
+  ;; hint from
+  ;; https://github.com/emacs-helm/helm/commit/e6d0634c41eeeb2219d15baf0dfd4758ef16b221
+  (add-to-list 'helm-completing-read-handlers-alist '(tmm-menubar . nil) t)
 )
 
 (setq helm-c-locate-command 
