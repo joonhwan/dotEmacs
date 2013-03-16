@@ -686,6 +686,8 @@ Uses `my-current-date-time-format' for the formatting the date/time."
   (global-set-key (kbd "C-c s <RET>") 'server-start)
   (global-set-key (kbd "C-c f f") 'font-lock-fontify-buffer)
   (global-set-key (kbd "C-c r r") 'my/kill-and-reopen-buffer)
+  ;; goto the source that defines that function
+  (global-set-key (kbd "C-h C-f") 'find-function)
   )
 
 (provide 'my-editing)
