@@ -304,7 +304,7 @@
 		 lua-mode
 		 magit
 		 markdown-mode
-		 mark-multiple
+		 ;; mark-multiple
 		 package
 		 popwin
 		 popup
