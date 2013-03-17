@@ -172,15 +172,17 @@
   "irfanview is being used to handling image in org mode"
   )
 
+(defvar my-org-image-pngpage-path
+  "pngpaste"
+  "pngpaste is a tool for saving a image file from mac osx pastebin")
+
 (defvar my-org-image-subdirectory-name
  "img"
  "subdirectory name where image file will be created"
  )
 
 (defun my-org-paste-image-from-clipboard ()
-  "Take a screenshot into a time stamped unique-named file in the same 
-  directory as the org-buffer and insert
-  a link to this file."
+  "paste image from clipboard if there is any into org buffer"
   (interactive)
   (let* ((buffer-file-directory
 		  (file-name-directory (buffer-file-name)))
@@ -198,25 +200,34 @@
 					  (format-time-string "%Y%m%d_%H%M%S_")
 					  ".png")))
 		 (image-rel-path (file-relative-name image-path buffer-file-directory))
+		 (image-file-created nil)
 		 )
-	(cond
-	 ;; Windows: Irfanview
-	 (win32p
-	  (call-process my-org-image-irfanview-path nil nil nil (concat 
-															 "/clippaste /convert=" image-path)))
-	 (t
-	  ;; Linux: ImageMagick
-	  (call-process "import" nil nil nil image-path)))
-	(insert (concat "[[file:" image-rel-path "]]"))
-	(org-display-inline-images)))
+	(unless (file-exists-p image-directory)
+	  (make-directory image-directory))
+	(setq image-file-created
+		  (cond
+		   ;; Windows: Irfanview
+		   (win32p
+			(call-process my-org-image-irfanview-path nil nil nil (concat 
+																   "/clippaste /convert=" image-path)))
+		   (macp
+			(call-process my-org-image-pngpage-path nil nil nil image-path))
+		   (t
+			;; Linux: ImageMagick
+			(call-process "import" nil nil nil image-path))))
+	(when image-file-created
+	  (insert (concat "[[file:" image-rel-path "]]"))
+	  (org-display-inline-images)))
+  )
 
 (define-key org-mode-map "\C-col" 'org-store-link)
 (define-key org-mode-map "\C-coa" 'org-agenda)
 (define-key org-mode-map "\C-cob" 'org-iswitchb)
 (define-key org-mode-map "\C-cop" 'my-org-publish)
-(when (locate-library "anything")
-  (define-key org-mode-map (kbd "C-c a o") 'anything-info-org)
-  (define-key org-mode-map (kbd "C-c a k") 'anything-org-keywords)
+(define-key org-mode-map (kbd "C-c o i") 'my-org-paste-image-from-clipboard)
+(when (my-try-require 'helm)
+  (define-key org-mode-map (kbd "C-c a o") 'helm-info-org)
+  (define-key org-mode-map (kbd "C-c a k") 'helm-org-keywords)
 )
 (define-key global-map (kbd "C-c c") 'org-capture)
 
