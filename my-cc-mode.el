@@ -460,6 +460,7 @@
 
 ;; *.h objc file criteria
 ;; - if there are a pair of *.h/*.m (skipped for now)
+;; - if there is "@class" or "@interface" or "@class"
 ;; - if the directory contains xcodeproj
 ;; - if the directory contains xib
 (defun my/source-file-looks-like-objc()
@@ -469,7 +470,8 @@
 					   ""))
 		 )
 	(and (string-match-p file-ext (regexp-opt '("h" "m")))
-		 (directory-files (file-name-directory file-path) t (regexp-opt '("\.xib" "\.xcodeproj" "\.lproj")))))
+		 (or (search-forward-regexp (regexp-opt '("@interface" "@class" "@implement")))
+			 (directory-files (file-name-directory file-path) t (regexp-opt '("\.xib" "\.xcodeproj" "\.lproj"))))))
   )
 (add-to-list 'magic-mode-alist '(my/source-file-looks-like-objc . objc-mode))
 (add-to-list 'auto-mode-alist '("\\.\\(m\\)?$" . objc-mode) nil)
