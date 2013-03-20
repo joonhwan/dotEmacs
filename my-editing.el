@@ -654,6 +654,31 @@ Uses `my-current-date-time-format' for the formatting the date/time."
 	 )
   )
 
+(defun my-easy-other-window (inc)
+  "easy other-window"
+  (interactive "p")
+  (let ((first t)
+		(keep-going t)
+		(other-window-step 1)
+		(ev last-command-event)
+		(echo-keystrokes nil))
+    (while keep-going
+      (let ((base (event-basic-type ev)))
+		(cond ((or first (eq base ?o))
+			   (setq keep-going t
+					 other-window-step 1))
+			  ((eq base ?i)
+			   (setq keep-going t
+					 other-window-step -1))
+			  (t
+			   (setq keep-going nil))))
+	  (setq first nil)
+      (when keep-going
+		(other-window other-window-step)
+		(setq ev (read-event "o=next i=prev: other window"))))
+    (push ev unread-command-events)))
+(global-set-key (kbd "C-x o") 'my-easy-other-window)
+
 ;; hint from http://whattheemacsd.com//key-bindings.el-03.html
 ;; 눌러보면 알게될 한줄합치기.
 (global-set-key (kbd "M-]") (lambda () (interactive) (join-line -1)))
