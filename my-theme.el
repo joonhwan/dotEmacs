@@ -72,7 +72,7 @@
 	(macp
 	 "NanumGothicCoding-14:weight=normal:spacing=m:scalable=true")
 	(t
-	 "나눔고딕코딩-10:weight=normal:scalable=true")))
+	 "나눔고딕코딩-12:weight=normal:scalable=true")))
   (setq
    default-frame-alist
    (cond
@@ -90,7 +90,7 @@
 	   ;; ;; 2.1 ==> maybe center? (check `frame.c' code)
 	   ;; (screen-gamma . nil)
 	   (line-spacing . 0)
-	   (font . "Bitstream Vera Sans Mono-8.5:normal:antialias=natural")
+	   (font . "Bitstream Vera Sans Mono-10.5:normal:antialias=natural")
 	   ;; (font . "나눔고딕코딩-12:normal:antialias=natural")
 	   ;; (font . "Monaco-11:normal:antialias=natural")
 	   ;; (font . "Anonymous Pro-11:normal:antialias=natural")
