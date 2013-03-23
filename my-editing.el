@@ -679,6 +679,19 @@ Uses `my-current-date-time-format' for the formatting the date/time."
     (push ev unread-command-events)))
 (global-set-key (kbd "C-x o") 'my-easy-other-window)
 
+(defun my-easy-find-file (&optional arg)
+  "Like `ido-find-file, but automatically edit the file with root(sudo) if needed"
+  (interactive "P")
+  (if arg
+	  (let ((file (ido-read-file-name "Edit as root: ")))
+		(unless (file-writable-p file)
+		  (setq file (concat "/sudo:root@localhost:" file))
+		  (find-file file)))
+	(ido-find-file)))
+(unless win32p
+  (global-set-key (kbd "C-x C-f") 'my-easy-find-file))
+
+
 ;; hint from http://whattheemacsd.com//key-bindings.el-03.html
 ;; 눌러보면 알게될 한줄합치기.
 (global-set-key (kbd "M-]") (lambda () (interactive) (join-line -1)))

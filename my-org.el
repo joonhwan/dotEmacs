@@ -38,8 +38,9 @@
 ;; customizing org
 (setq
  org-startup-folded t
- ;; #+begin_src ... #+end_src  font-lock
- org-src-fontify-natively t
+ org-speed-command t
+ ;; ;; #+begin_src ... #+end_src  font-lock
+ ;; org-src-fontify-natively t
  org-directory "~/DropBox/org"
  org-agenda-files '("todo.org")
  ;; 충돌이 나는 키바인딩을 최대한 피하자.
@@ -70,12 +71,14 @@
 		)
 	  (fset 'user-full-name 'my-user-full-name)))
 (setq
- org-export-htmlize-output-type 'css
- org-export-html-style (concat "<link"
-							   "rel=\"stylesheet\" "
-							   "type=\"text/css\" "
-							   "href=\"org-styles.css\""
-							   ">")
+ org-export-htmlize-output-type 'inline-css
+ org-export-html-style ""
+ org-export-html-preamble 'auto
+ ;; org-export-html-style (concat "<link"
+ ;; 							   "rel=\"stylesheet\" "
+ ;; 							   "type=\"text/css\" "
+ ;; 							   "href=\"org-styles.css\""
+ ;; 							   ">")
  )
 
 (setq org-publish-project-alist

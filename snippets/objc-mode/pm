@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: objective-c pragma mark
+# key: pm
+# --
+
+#pragma -
+#pragma - ${1:xcodeNavigationMark}
+$0
