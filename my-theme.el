@@ -9,6 +9,21 @@
 (setq custom-safe-themes t) ;; theme should be unsafe(?) though...
 
 ;; 폰트설정
+;; 한글 폰트를 위한 설정. 아래 default-frame-alist에서 설정한 것을
+;; 제외한 모든 다른 인코딩의 폰트는 fontset-default에 지정된 것이
+;; 사용되는 것 같다.
+;;
+;;현재로서는 글꼴의 크기를 조정해서 폭을 맞추고 있어서, 한글과
+;;영문간의 글꼴 크기 차이가 난다. font.c 의 코드를 보았지만, 아직은
+;;spacing 이나 scalable 같은게 어떻게 동작하는지 이해를 못하고 있다.
+(set-fontset-font
+ "fontset-default"
+ 'korean-ksc5601
+ (cond
+  (macp
+   "NanumGothicCoding-14:weight=normal:spacing=m:scalable=true")
+  (t
+   "나눔고딕코딩-12:weight=normal:scalable=true")))
 (defvar my-default-font-name nil)
 (defvar my-default-font-size 9)
 (cond
@@ -19,6 +34,7 @@
   (setq my-default-font-name "Bitstream Vera Sans Mono"
 		my-default-font-size 10.5))
  )
+(set-default-font (concat my-default-font-name) t t)
 ;; (font . "나눔고딕코딩-12:normal:antialias=natural")
 ;; (font . "Monaco-11:normal:antialias=natural")
 ;; (font . "Anonymous Pro-11:normal:antialias=natural")
@@ -28,16 +44,26 @@
 ;; (font . "Menlo-13.5:normal:antialias=natural")
 (load-theme 'my-zenburn)
 (defvar my-current-theme-is-dark t)
+
+(setq my-theme-cycle-list '('my-zenburn 'my-solarized-dark 'my-solarized-light 'my-white))
+(defvar my-default-dark-theme 'my-solarized-dark)
+(defvar my-default-light-theme 'my-solarized-light)
+(defun my-disable-all-theme ()
+  (mapcar
+   (lambda (th)
+	 (disable-theme th))
+   custom-enabled-themes)
+  )
 (defun my-toggle-theme ()
   (interactive)
   (if my-current-theme-is-dark
 	  (progn
-		(disable-theme 'my-zenburn)
-		(load-theme 'my-white)
+		(my-disable-all-theme)
+		(load-theme my-default-dark-theme t)
 		(setq my-current-theme-is-dark nil))
 	(progn
-	  (disable-theme 'my-white)
-	  (load-theme 'my-zenburn)
+	  (my-disable-all-theme)
+	  (load-theme my-default-light-theme t)
 	  (setq my-current-theme-is-dark t))
 	))
 (global-set-key (kbd "C-c t t") 'my-toggle-theme)
@@ -89,21 +115,6 @@
 		indicate-buffer-boundaries (quote left)
 		indicate-empty-lines t
 		)
-  ;; 한글 폰트를 위한 설정. 아래 default-frame-alist에서 설정한 것을
-  ;; 제외한 모든 다른 인코딩의 폰트는 fontset-default에 지정된 것이
-  ;; 사용되는 것 같다.
-  ;;
-  ;;현재로서는 글꼴의 크기를 조정해서 폭을 맞추고 있어서, 한글과
-  ;;영문간의 글꼴 크기 차이가 난다. font.c 의 코드를 보았지만, 아직은
-  ;;spacing 이나 scalable 같은게 어떻게 동작하는지 이해를 못하고 있다.
-  (set-fontset-font
-   "fontset-default"
-   'korean-ksc5601
-   (cond
-	(macp
-	 "NanumGothicCoding-14:weight=normal:spacing=m:scalable=true")
-	(t
-	 "나눔고딕코딩-12:weight=normal:scalable=true")))
   (setq
    default-frame-alist
    (cond
@@ -127,6 +138,8 @@
 	 '(
 	   (tool-bar-lines . 0)
 	   ;; (font . "Menlo-12:weight=normal:antialias=natural:spacing=m")
+	   (top . 0)
+	   (left . -1)
 	   (width . 115)
 	   (height . 71)
 	   ))))
