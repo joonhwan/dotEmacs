@@ -26,14 +26,13 @@
 ;;
 ;; magit
 ;;
-(when (my-try-require 'magit)
-  (global-set-key (kbd "C-x g") 'magit-status)
-  ;; unable to detect end of process in magit process buffer?!
-  ;; discussion found https://github.com/magit/magit/issues/18
-  ;; but no help. :(
-  ;; (setq magit-process-connection-type nil)
-  (if win32p
-	  (setq magit-git-executable
+(global-set-key (kbd "C-x g") 'magit-status)
+;; unable to detect end of process in magit process buffer?!
+;; discussion found https://github.com/magit/magit/issues/18
+;; but no help. :(
+;; (setq magit-process-connection-type nil)
+(if win32p
+	(setq magit-git-executable
 		  (cond
 		   ((file-exists-p "c:/Program Files/Git/bin/git.exe")
 			"c:/program files/git/bin/git.exe")
@@ -41,7 +40,6 @@
 			"c:/Program Files (x86)/Git/bin/git.exe")
 		   (t
 			"git"))))
-)
 
 ;;
 ;; emacs lisp

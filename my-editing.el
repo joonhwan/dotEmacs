@@ -5,23 +5,12 @@
 ;; (require 'misc)
 
 ;; my on/off option
-(defvar i-use-show-paren-mode t)
-(defvar i-display-time-date nil)
-(defvar i-use-column-number-mode nil)
-(defvar i-use-global-hl-line-mode nil)
 (defvar i-use-save-history-mode t)
 (defvar i-use-save-place t)
 (defvar i-use-ibuffer-mode t)
 (defvar i-use-directory-abbrev nil)
 (defvar i-use-uniquify t)
-(defvar i-use-recentf nil)
-(defvar i-use-cua-mode nil)
-(defvar i-use-nxhtml-mode nil)
 (defvar i-use-popwin t)
-(defvar i-use-delsel t)
-(defvar i-use-workgroup nil)
-(defvar i-use-truncate-line-mode t)
-(defvar i-use-desktop nil)
 (defvar i-use-yas t)
 
 ;; platform independent setq
@@ -75,6 +64,8 @@
 							  (eval rainbow-mode t)
 							  (my-org-current-project-name . "orgwiki")
 							  )
+ ;; i use command key as meta 
+ mac-command-modifier 'meta
  )
 
 (progn
@@ -88,6 +79,10 @@
   (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
   (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
   (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+  ;; display column number
+  (column-number-mode 1)
+  ;; no truncate-line
+  (toggle-truncate-lines 0)
   )
 
 ;; per platform setq
@@ -113,28 +108,6 @@
 ;;
 ;; full option config
 ;;
-(when i-use-column-number-mode
-  (show-paren-mode 1)
-  ;; one of parenthesis,expression, and mixed
-  (setq show-paren-style 'parenthesis)
-  )
-
-(when i-display-time-date
-  (display-time-mode 1)
-  ;; [display-time-mode]
-  ;; display fully if enabled
-  display-time-day-and-date t
- )
-
-(when i-use-column-number-mode
-  (column-number-mode 0)
-  )
-
-(when i-use-global-hl-line-mode
-    ;; hilight current line.
-  (global-hl-line-mode 1)
-  )
-
 (when i-use-save-history-mode
   (savehist-mode 1)
   (setq
@@ -170,12 +143,6 @@
    uniquify-min-dir-content 2
    ))
 
-(when i-use-recentf
-  (require 'recentf)
-  (progn
-    (recentf-mode t)
-	(global-set-key (kbd "C-c f r") 'recentf-file)
-    ))
 (add-hook 'recentf-load-hook
 		  (lambda ()
 			(setq recentf-max-saved-items 500)
@@ -252,80 +219,6 @@ home directory is a root directory) and removes automounter prefixes
   (fset 'abbreviate-file-name 'my-abbreviate-file-name)
   )
 
-(when i-use-cua-mode
-  ;;
-  ;; dwim-style 'end-of-line' and 'begin-of-line'
-  ;; http://www.reddit.com/r/emacs/comments/eml3a/one_key_to_delete_whitespace_sequentially/
-  ;;
-  (defun to-end-of-code ()
-    (end-of-line)
-    (skip-chars-backward " \t")
-    (let ((pt (point))
-	  (lbp (line-beginning-position))
-	  (comment-start-re (concat (regexp-quote
-				     (replace-regexp-in-string
-				      "[[:space:]]*" "" comment-start))
-				    "\\|\\s<"))
-	  (comment-stop-re "\\s>")
-	  (lim))
-      (when (re-search-backward comment-start-re lbp t)
-	(setq lim (point))
-	(if (re-search-forward comment-stop-re (1- pt) t)
-	    (goto-char pt)
-	  (goto-char lim)               ; test here ->
-	  (while (looking-back comment-start-re (1- (point)))
-	    (backward-char))
-	  (skip-chars-backward " \t")))))
-  (defun end-of-code-or-line ()
-    "Move to EOL. If already there, to EOL sans comments.
-    That is, the end of the code, ignoring any trailing comment
-    or whitespace.  Note this does not handle 2 character
-    comment starters like // or /*.  Such will not be skipped."
-    (interactive)
-    (if (eq last-command this-command)
-	(if (not (eolp))
-	    (end-of-line)
-	  (to-end-of-code))
-      (if (not (eolp))
-	  (to-end-of-code))))
-  (defun beginning-of-line-dwim (arg)
-    (interactive "p")
-    (if (eq last-command this-command)
-	(if (bolp)
-	    (beginning-of-line-text arg)
-	  (move-beginning-of-line arg))
-      (beginning-of-line-text arg)))
-
-  (put 'beginning-of-line-dwim 'CUA 'move)
-  ;; <home> is still bound to move-beginning-of-line
-  ;; (global-set-key (kbd "C-a") 'beginning-of-line-dwim)
-  (put 'end-of-code-or-line 'CUA 'move)
-  ;; <end> is still bound to end-of-visual-line
-  ;; (global-set-key (kbd "C-e") 'end-of-code-or-line)
-
-  ;;
-  ;; cua-mode (using it for its rectangle selection feature)
-  ;;
-  ;; ;; CUA에서 처럼, 선택영역 활성화시 DEL이나 다른 키 입력을 하면
-  ;; ;; 선택영역이 지워진다
-  ;; ;; 이 내용은 반드시 icicle의 활성화보다는 먼저 와야 한다.
-  ;; ;; http://www.emacswiki.org/cgi-bin/wiki/Icicles_-_Customization_and_General_Tips 참조
-  ;; (require 'delsel)
-  ;; ;; (delete-selection-mode t)
-  (setq cua-enable-cua-keys nil)
-  ;; without following hook, we cannot deactivate mark after pressing C-g !!
-  (add-hook 'deactivate-mark-hook
-	    (lambda ()
-	      (setq cua--explicit-region-start nil)
-	      ))
-  (cua-mode t)
-  )
-
-(when (and i-use-nxhtml-mode
-		   (my-try-require "nxhtml"))
-  (load "nxhtml/autostart.el" t "loaded nxhtml...")
- )
-
 (when (and i-use-popwin
 		   (my-try-require "popwin"))
   (setq
@@ -353,30 +246,6 @@ home directory is a root directory) and removes automounter prefixes
   ;; (push '("*shell*" :height 15) popwin:special-display-config)
   ;; (push '("*cscope*" :height 20) popwin:special-display-config)
   (global-set-key (kbd "C-c p") popwin:keymap)
-  )
-
-(when i-use-delsel
-  (delete-selection-mode 1)
-  )
-
-(when (and i-use-workgroup
-		   (my-try require 'workgroups))
-  ;; one that should be loaded at last
-  (setq
-   wg-prefix-key (kbd "C-c w")
-   wg-morph-on nil
-   )
-  (workgroups-mode t))
-
-(when i-use-truncate-line-mode
-	  (toggle-truncate-lines 1))
-
-(when i-use-desktop
-  (desktop-save-mode 1)
-  (setq
-   desktop-modes-not-to-save (append desktop-modes-not-to-save '(emacs-lisp helm))
-   desktop-buffer-mode-handlers (regexp-opt '("\.rcp$"))
-   )
   )
 
 (when (and i-use-yas
