@@ -3,13 +3,17 @@
 
 (custom-theme-set-faces
  'my-solarized-dark
- `(default ((t (:family ,my-default-font-name :foundry "apple" :width normal :height ,(* 10 my-default-font-size) :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "#708183" :background "#202428" :stipple nil :inherit nil))))
+ `(default ((t (:family ,my-default-font-name
+			;; :foundry "apple"
+			:width normal
+			:height ,my-default-font-size
+			:weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "#708183" :background "#202428" :stipple nil :inherit nil))))
  '(bold ((t (:weight bold))))
  '(bold-italic ((t (:slant italic :weight bold))))
- '(fixed-pitch ((t (:family "Monospace"))))
+ `(fixed-pitch ((t (:inherit (default)))))
  '(italic ((((supports :slant italic)) (:slant italic)) (((supports :underline t)) (:underline (:color foreground-color :style line))) (t (:slant italic))))
  '(underline ((((supports :underline t)) (:underline (:color foreground-color :style line))) (((supports :weight bold)) (:weight bold)) (t (:underline (:color foreground-color :style line)))))
- '(variable-pitch ((t (:family "Sans Serif"))))
+ '(variable-pitch ((t (:inherit (default)))))
  '(fringe ((t (:foreground "#465a61" :background "#0a2832"))))
  '(header-line ((t (:weight normal :slant normal :underline nil :box nil :inverse-video t :foreground "#708183" :background "#0a2832" :inherit (mode-line)))))
  '(highlight ((t (:background "#1a3842"))))
@@ -370,7 +374,7 @@
  '(outline-1 ((t (:weight normal :slant normal :underline nil :inverse-video nil :foreground "#2075c7" :inherit (font-lock-function-name-face)))))
  '(outline-2 ((t (:weight normal :slant normal :underline nil :inverse-video nil :foreground "#259185" :inherit (font-lock-variable-name-face)))))
  '(outline-3 ((t (:weight normal :slant normal :underline nil :inverse-video nil :foreground "#a57705" :inherit (font-lock-keyword-face)))))
- '(outline-4 ((t (:weight normal :slant normal :underline nil :inverse-video nil :foreground "#c60007" :inherit (font-lock-comment-face)))))
+ '(outline-4 ((t (:weight normal :slant normal :underline nil :inverse-video nil :foreground "#855705" :inherit (font-lock-comment-face)))))
  '(outline-5 ((t (:weight normal :slant normal :underline nil :inverse-video nil :foreground "#708183" :inherit (font-lock-type-face)))))
  '(outline-6 ((t (:weight normal :slant normal :underline nil :inverse-video nil :foreground "#465a61" :inherit (font-lock-constant-face)))))
  '(outline-7 ((t (:weight normal :slant normal :underline nil :inverse-video nil :foreground "#9d4632" :inherit (font-lock-builtin-face)))))

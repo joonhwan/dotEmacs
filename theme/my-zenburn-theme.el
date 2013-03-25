@@ -1,3 +1,4 @@
+;; -*- coding:utf-8-auto -*-
 (deftheme my-zenburn
   "my dark theme for coding")
 
@@ -7,7 +8,7 @@
 	((t (		 :family ,my-default-font-name
 				 ;; :foundry "apple"
 				 :width normal
-				 :height ,(* 10 my-default-font-size)
+				 :height ,my-default-font-size
 				 :weight normal
 				 :slant normal
 				 :underline nil
@@ -21,10 +22,10 @@
 				 :inherit nil))))
  '(bold ((t (:weight bold))))
  '(bold-italic ((t (:weight bold :slant italic))))
- '(fixed-pitch ((t (:weight bold))))
+ '(fixed-pitch ((t (:weight normal))))
  '(italic ((t (:slant italic))))
  '(underline ((t (:underline (:color foreground-color :style line)))))
- '(variable-pitch ((t (:inherit (default) :family "³ª´®°íµñ" :weight bold))))
+ '(variable-pitch ((t nil)))
  '(fringe ((t (:background "#303030" :inherit (default)))))
  '(header-line ((t (:box (:line-width 2 :color "#2e3330" :style nil) :inherit (zenburn-highlight-damp)))))
  '(highlight ((t (:weight bold :underline nil :foreground "#2a2a2a" :background "#2c888b" :inherit (zenburn-highlight-subtle)))))

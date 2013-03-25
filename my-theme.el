@@ -16,33 +16,38 @@
 ;;현재로서는 글꼴의 크기를 조정해서 폭을 맞추고 있어서, 한글과
 ;;영문간의 글꼴 크기 차이가 난다. font.c 의 코드를 보았지만, 아직은
 ;;spacing 이나 scalable 같은게 어떻게 동작하는지 이해를 못하고 있다.
-(set-fontset-font
- "fontset-default"
- 'korean-ksc5601
- (cond
-  (macp
-   "NanumGothicCoding-14:weight=normal:spacing=m:scalable=true")
-  (t
-   "나눔고딕코딩-12:weight=normal:scalable=true")))
 (defvar my-default-font-name nil)
-(defvar my-default-font-size 9)
+  (defvar my-default-font-size 90)
 (cond
  (macp
   (setq my-default-font-name "Menlo"
-		my-default-font-size 12))
+
+	my-default-font-size 120))
  (win32p
   (setq my-default-font-name "Bitstream Vera Sans Mono"
-		my-default-font-size 10.5))
+	my-default-font-size 105))
  )
-(set-default-font (concat my-default-font-name) t t)
-;; (font . "나눔고딕코딩-12:normal:antialias=natural")
-;; (font . "Monaco-11:normal:antialias=natural")
-;; (font . "Anonymous Pro-11:normal:antialias=natural")
-;; (font . "Andale Mono-10.0:bold:spacing=110:antialias=natural")
-;; (font . "Monaco-12:normal:antialias=natural")
-;; (font . "Ubuntu_Mono-14:normal:antialias=natural")
-;; (font . "Menlo-13.5:normal:antialias=natural")
-(load-theme 'my-zenburn)
+(defun my-setup-font-for-mbcs ()
+  (set-fontset-font
+   "fontset-default"
+   'korean-ksc5601
+   (cond
+	(macp
+	 "NanumGothicCoding-14:weight=normal:spacing=m:scalable=true")
+	(t
+	 "나눔고딕코딩:weight=normal:spacing=m:scalable=true")))
+  (setq face-font-rescale-alist
+		'(("나눔고딕코딩" . 1.23)))
+  (set-default-font (concat my-default-font-name) t t)
+  ;; (font . "나눔고딕코딩-12:normal:antialias=natural")
+  ;; (font . "Monaco-11:normal:antialias=natural")
+  ;; (font . "Anonymous Pro-11:normal:antialias=natural")
+  ;; (font . "Andale Mono-10.0:bold:spacing=110:antialias=natural")
+  ;; (font . "Monaco-12:normal:antialias=natural")
+  ;; (font . "Ubuntu_Mono-14:normal:antialias=natural")
+  ;; (font . "Menlo-13.5:normal:antialias=natural")
+  )
+(load-theme 'my-solarized-dark)
 (defvar my-current-theme-is-dark t)
 
 (setq my-theme-cycle-list '('my-zenburn 'my-solarized-dark 'my-solarized-light 'my-white))
@@ -59,11 +64,11 @@
   (if my-current-theme-is-dark
 	  (progn
 		(my-disable-all-theme)
-		(load-theme my-default-dark-theme t)
+		(load-theme my-default-light-theme t)
 		(setq my-current-theme-is-dark nil))
 	(progn
 	  (my-disable-all-theme)
-	  (load-theme my-default-light-theme t)
+	  (load-theme my-default-dark-theme t)
 	  (setq my-current-theme-is-dark t))
 	))
 (global-set-key (kbd "C-c t t") 'my-toggle-theme)
