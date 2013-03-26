@@ -5,7 +5,7 @@
  'my-solarized-dark
  `(default ((t (:family ,my-default-font-name
 						;; :foundry "apple"
-						:width normal :height ,(* 10 my-default-font-size) :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "#708183" :background "#202a24" :stipple nil :inherit nil))))
+						:width normal :height ,my-default-font-size :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "#708183" :background "#202a24" :stipple nil :inherit nil))))
  '(bold ((t (:weight bold))))
  '(bold-italic ((t (:slant italic :weight bold))))
  `(fixed-pitch ((t (:inherit (default)))))
