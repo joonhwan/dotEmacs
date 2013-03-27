@@ -24,7 +24,7 @@
  '(menu ((t (:inverse-video t :foreground "#708183" :background "#0a2832"))))
  '(mouse ((t nil)))
  '(paren ((t nil)))
- '(trailing-whitespace ((t (:weight normal :slant normal :underline nil :inverse-video t :foreground "#260007" :background "red1"))))
+ '(trailing-whitespace ((t (:weight normal :slant normal :underline nil :inverse-video nil :foreground nil :background "#302a24"))))
  '(buffer-menu-buffer ((t (:weight bold))))
  '(border ((t nil)))
  '(button ((t (:inherit (link)))))
