@@ -39,8 +39,8 @@
 (setq
  org-startup-folded t
  org-speed-command t
- ;; ;; #+begin_src ... #+end_src  font-lock
- ;; org-src-fontify-natively t
+ ;; #+begin_src ... #+end_src  font-lock
+ org-src-fontify-natively t
  org-directory "~/DropBox/org"
  org-agenda-files '("todo.org")
  ;; 충돌이 나는 키바인딩을 최대한 피하자.
