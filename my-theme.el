@@ -20,25 +20,22 @@
   (defvar my-default-font-size 90)
 (cond
  (macp
-  (setq my-default-font-name "Menlo"
-
-	my-default-font-size 120))
+  (setq my-default-font-name "Menlo" my-default-font-size 120))
  (win32p
-  (setq my-default-font-name "Bitstream Vera Sans Mono"
-	my-default-font-size 105))
+  (setq my-default-font-name "Bitstream Vera Sans Mono" my-default-font-size 105))
  )
 (defun my-setup-font-for-mbcs ()
-  (set-fontset-font
-   "fontset-default"
-   'korean-ksc5601
-   (cond
-	(macp
-	 "NanumGothicCoding-14:weight=normal:spacing=m:scalable=true")
-	(t
-	 "나눔고딕코딩:weight=normal:spacing=m:scalable=true")))
-  (setq face-font-rescale-alist
-		'(("나눔고딕코딩" . 1.23)))
-  (set-default-font (concat my-default-font-name) t t)
+  (interactive)
+  (cond
+   (macp
+	(set-fontset-font "-*-*-*-*-*-*-*-*-*-*-*-*-fontset-default" 'korean-ksc5601 "NanumGothicCoding:weight=normal:spacing=m:scalable=true")
+	(setq face-font-rescale-alist '(("NanumGothicCoding" . 1.21)))
+	)
+   (t
+	(set-fontset-font "-*-*-*-*-*-*-*-*-*-*-*-*-fontset-default" 'korean-ksc5601 "나눔고딕코딩:weight=normal:spacing=m:scalable=true")
+	(setq face-font-rescale-alist '(("나눔고딕코딩" . 1.23)))
+	))
+  (set-frame-font (concat my-default-font-name) t t)
   ;; (font . "나눔고딕코딩-12:normal:antialias=natural")
   ;; (font . "Monaco-11:normal:antialias=natural")
   ;; (font . "Anonymous Pro-11:normal:antialias=natural")
@@ -114,7 +111,7 @@
 ;; };
 
 (progn
-  (setq initial-frame-alist '((menu-bar-lines . 0) (tool-bar-lines . 0)))
+  (setq initial-frame-alist '())
   (setq frame-title-format (concat "Emacs " emacs-version " [%*] %f" ))
   (setq fringe-mode (quote (0 . 0))
 		indicate-buffer-boundaries (quote left)
@@ -124,29 +121,20 @@
    default-frame-alist
    (cond
 	((or win32p unixp)
-	 '(;; (menu-bar-lines . 0) ;; (menu-bar-mode nil)
-	   (tool-bar-lines . 0) ;; (setq tool-bar-mode nil)
-	   ;; (scroll-bar . 14)
-	   ;; (font . "Ubuntu Mono-11:normal:antialias=natural")
-	   ;; 'alpha' : transparency
-	   ;; 1st number : foreground value,
-	   ;; 2nd number : background value
+	 `((menu-bar-lines . 0)
+	   (tool-bar-lines . 0)
 	   (alpha . (100 100))
-	   ;; ;; gamma correction
-	   ;; ;; 'nil' ==> default gamma
-	   ;; ;; 2.1 ==> maybe center? (check `frame.c' code)
-	   ;; (screen-gamma . nil)
 	   (line-spacing . 0)
-	   ;; (font . "Bitstream Vera Sans Mono-10.5:normal:antialias=natural")
+	   (font . ,(format "%s-%d" my-default-font-name (* 0.1 my-default-font-size)))
 	   ))
 	(macp
-	 '(
+	 `((menu-bar-lines . 0)
 	   (tool-bar-lines . 0)
-	   ;; (font . "Menlo-12:weight=normal:antialias=natural:spacing=m")
 	   (top . 0)
 	   (left . -1)
 	   (width . 115)
 	   (height . 71)
+	   (font . ,(format "%s-%d" my-default-font-name (* 0.1 my-default-font-size)))
 	   ))))
   (setq initial-frame-alist default-frame-alist)
   (modify-all-frames-parameters default-frame-alist)
