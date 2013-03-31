@@ -44,31 +44,58 @@
   ;; (font . "Ubuntu_Mono-14:normal:antialias=natural")
   ;; (font . "Menlo-13.5:normal:antialias=natural")
   )
-(load-theme 'my-solarized-dark)
+;; 초기 테마
+(load-theme 'my-tango-dark)
 (defvar my-current-theme-is-dark t)
 
 (setq my-theme-cycle-list '('my-zenburn 'my-solarized-dark 'my-solarized-light 'my-white))
 (defvar my-default-dark-theme 'my-solarized-dark)
 (defvar my-default-light-theme 'my-solarized-light)
-(defun my-disable-all-theme ()
-  (mapcar
-   (lambda (th)
-	 (disable-theme th))
-   custom-enabled-themes)
+(defun my-opposite-theme (curr-theme-name)
+  (let ((curr-theme-split nil)
+		(opposite-theme-split nil)
+		)
+	(if curr-theme-name
+		(setq curr-theme-split (split-string curr-theme-name "-")))
+	(if (> (length curr-theme-split) 2)
+		(setq opposite-theme-split
+			  (mapcar 
+			   (lambda (e) 
+				 (cond 
+				  ((string= e "dark")
+				   "light")
+				  ((string= e "light")
+				   "dark")
+				  (t
+				   e)))
+			   curr-theme-split)))
+	(c-concat-separated opposite-theme-split "-")
+	)
   )
 (defun my-toggle-theme ()
   (interactive)
-  (if my-current-theme-is-dark
-	  (progn
-		(my-disable-all-theme)
-		(load-theme my-default-light-theme t)
-		(setq my-current-theme-is-dark nil))
-	(progn
-	  (my-disable-all-theme)
-	  (load-theme my-default-dark-theme t)
-	  (setq my-current-theme-is-dark t))
-	))
+  (let* ((current-theme (symbol-name (car custom-enabled-themes)))
+		 (opposite-theme (my-opposite-theme current-theme)))
+	(if (and (stringp opposite-theme)
+			 (> (length opposite-theme) 0))
+		(progn 
+		  (mapcar 'disable-theme custom-enabled-themes)
+		  (load-theme (intern opposite-theme) nil nil)
+		  (message (format "loaded [%s] theme(opposite of [%s])" opposite-theme current-theme))
+		  )
+	  (call-interactively 'my-select-theme)
+	  )
+  )
+)
 (global-set-key (kbd "C-c t t") 'my-toggle-theme)
+
+(defun my-select-theme (theme)
+  (interactive
+   (list (ido-completing-read "Select my theme: " (remove-if (lambda (s) (not (s-starts-with-p "my-" s))) (mapcar 'symbol-name (custom-available-themes))))))
+  (mapcar 'disable-theme custom-enabled-themes)
+  (load-theme (intern theme) nil nil)
+  )
+(global-set-key (kbd "C-c s t") 'my-select-theme)
 
 ;;
 ;;  from 'frame.c'
