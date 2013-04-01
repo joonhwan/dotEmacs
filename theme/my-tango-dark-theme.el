@@ -167,7 +167,7 @@
  '(font-latex-warning ((t nil)))
  '(font-lock-builtin-face ((t (:foreground "#ad7fa8"))))
  '(font-lock-comment-delimiter-face ((default (:inherit (font-lock-comment-face)))))
- '(font-lock-comment-face ((t (:foreground "#73d216"))))
+ '(font-lock-comment-face ((t (:foreground "#337206"))))
  '(font-lock-constant-face ((t (:foreground "#e6a8df"))))
  '(font-lock-doc-face ((t (:inherit (font-lock-string-face)))))
  '(font-lock-doc-string-face ((t nil)))
