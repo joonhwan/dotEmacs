@@ -3,7 +3,11 @@
 
 (custom-theme-set-faces
  'my-tango-dark
- '(default ((t (:family "Menlo" :foundry "apple" :width normal :height 120 :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "#eeeeec" :background "#2e3436" :stipple nil :inherit nil))))
+ '(default ((t (;; :family "Menlo"
+						;; :foundry "apple"
+						:width normal
+						;; :height 120
+						:weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "#eeeeec" :background "#242426" :stipple nil :inherit nil))))
  '(bold ((t (:weight bold))))
  '(bold-italic ((t (:slant italic :weight bold))))
  '(fixed-pitch ((t (:family "Monospace"))))
@@ -12,7 +16,7 @@
  '(variable-pitch ((t (:family "Sans Serif"))))
  '(fringe ((t (:background "#212526"))))
  '(header-line ((default (:inherit (mode-line))) (((type tty)) (:underline (:color foreground-color :style line) :inverse-video nil)) (((class color grayscale) (background light)) (:box nil :foreground "grey20" :background "grey90")) (((class color grayscale) (background dark)) (:box nil :foreground "grey90" :background "grey20")) (((class mono) (background light)) (:underline (:color foreground-color :style line) :box nil :inverse-video nil :foreground "black" :background "white")) (((class mono) (background dark)) (:underline (:color foreground-color :style line) :box nil :inverse-video nil :foreground "white" :background "black"))))
- '(highlight ((t (:foreground "#2e3436" :background "#edd400"))))
+ '(highlight ((t (:foreground nil :background "#4d3400"))))
  '(hover-highlight ((t nil)))
  '(match ((((class color) (min-colors 88) (background light)) (:background "yellow1")) (((class color) (min-colors 88) (background dark)) (:background "RoyalBlue3")) (((class color) (min-colors 8) (background light)) (:foreground "black" :background "yellow")) (((class color) (min-colors 8) (background dark)) (:foreground "white" :background "blue")) (((type tty) (class mono)) (:inverse-video t)) (t (:background "gray"))))
  '(menu ((((type tty)) (:inverse-video t)) (((type x-toolkit)) nil) (t (:inverse-video t))))
@@ -26,7 +30,7 @@
  '(escape-glyph-face ((t nil)))
  '(link ((t (:underline (:color foreground-color :style line) :foreground "#729fcf"))))
  '(minibuffer-prompt ((t (:foreground "#b4fa70"))))
- '(mode-line ((t (:box (:line-width -1 :color nil :style released-button) :foreground "#2e3436" :background "#d3d7cf"))))
+ '(mode-line ((t (:box (:line-width -1 :color nil :style released-button) :foreground "#242426" :background "#d3d7cf"))))
  '(mode-line-inactive ((t (:weight light :box (:line-width -1 :color nil :style released-button) :foreground "#eeeeec" :background "#555753" :inherit (mode-line)))))
  '(mode-line-buffer-id ((t (:weight bold))))
  '(mode-line-emphasis ((t (:weight bold))))
@@ -167,7 +171,7 @@
  '(font-latex-warning ((t nil)))
  '(font-lock-builtin-face ((t (:foreground "#ad7fa8"))))
  '(font-lock-comment-delimiter-face ((default (:inherit (font-lock-comment-face)))))
- '(font-lock-comment-face ((t (:foreground "#73d216"))))
+ '(font-lock-comment-face ((t (:foreground "#53b216"))))
  '(font-lock-constant-face ((t (:foreground "#e6a8df"))))
  '(font-lock-doc-face ((t (:inherit (font-lock-string-face)))))
  '(font-lock-doc-string-face ((t nil)))
