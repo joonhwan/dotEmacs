@@ -151,9 +151,10 @@
                (copy-sequence helm-compile-source-functions)))
 		(initial-hint (thing-at-point 'symbol))
 		)
-	(helm :sources 'helm-c-source-occur
+	(helm :sources 'helm-source-occur
 		  :input initial-hint
-		  :buffer "*Helm Occur+*"
+		  :buffer "*helm occur+*"
+		  :history 'helm-grep-history
 		  :preselect initial-hint
 		  )
 	))
