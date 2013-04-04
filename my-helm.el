@@ -1,13 +1,29 @@
 ;; -*- coding:utf-8 -*-
 (helm-mode 1)
 
-(when macp
+(cond
+ (macp
   ;; 문제가 있다.
   (setq helm-c-top-command "-ncols %s -F -R -u")
   ;; hint from
   ;; https://github.com/emacs-helm/helm/commit/e6d0634c41eeeb2219d15baf0dfd4758ef16b221
   (add-to-list 'helm-completing-read-handlers-alist '(tmm-menubar . nil) t)
-)
+  )
+ (win32p
+  (setq helm-grep-default-command "perl.exe c:/dev/utility/ack.pl -Hn --no-group --no-color %e %p %f"
+		helm-grep-default-recurse-command "perl.exe c:/dev/utility/ack.pl -H --no-group --no-color %e %p %f")
+  ;; override original
+  (defun* helm-grep-use-ack-p (&key where)
+	(case where
+	  (default (string= (helm-grep-command) "perl.exe"))
+	  (recursive (string= (helm-grep-command t) "perl.exe"))
+	  (strict (and (string= (helm-grep-command t) "perl.exe")
+				   (string= (helm-grep-command) "perl.exe")))
+	  (t (and (not (string= (helm-grep-command) "git-grep"))
+			  (or (string= (helm-grep-command) "perl.exe")
+				  (string= (helm-grep-command t) "perl.exe"))))))
+  )
+ )
 
 (setq helm-c-locate-command 
 	  (case system-type
@@ -19,8 +35,8 @@
 	  )
 
 (setq
- helm-c-grep-default-command "ack-grep -Hn --no-group --no-color %e %p %f"
- helm-c-grep-default-recurse-command "ack-grep -H --no-group --no-color %e %p %f"
+ helm-c-grep-default-command "perl.exe -Hn --no-group --no-color %e %p %f"
+ helm-c-grep-default-recurse-command "perl.exe -H --no-group --no-color %e %p %f"
  )
 
 ;; Source for completing Emacs variables.

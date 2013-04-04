@@ -22,7 +22,7 @@
  (macp
   (setq my-default-font-name "Menlo" my-default-font-size 120))
  (win32p
-  (setq my-default-font-name "Bitstream Vera Sans Mono" my-default-font-size 105))
+  (setq my-default-font-name "Bitstream Vera Sans Mono" my-default-font-size 108))
  )
 (defun my-setup-font-for-mbcs ()
   (interactive)
@@ -152,7 +152,8 @@
 	   (tool-bar-lines . 0)
 	   (alpha . (100 100))
 	   (line-spacing . 0)
-	   (font . ,(format "%s-%d" my-default-font-name (* 0.1 my-default-font-size)))
+	   (font . ,(format "%s-%g" my-default-font-name (* 0.1 my-default-font-size)))
+	   ;; (font . ,(format "%s" my-default-font-name))
 	   ))
 	(macp
 	 `((menu-bar-lines . 0)
@@ -161,7 +162,7 @@
 	   (left . -1)
 	   (width . 115)
 	   (height . 71)
-	   (font . ,(format "%s-%d" my-default-font-name (* 0.1 my-default-font-size)))
+	   (font . ,(format "%s-%g" my-default-font-name (* 0.1 my-default-font-size)))
 	   ))))
   (setq initial-frame-alist default-frame-alist)
   (modify-all-frames-parameters default-frame-alist)
