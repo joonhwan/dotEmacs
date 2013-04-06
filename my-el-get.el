@@ -214,6 +214,11 @@
 			   ;; do-not (require 'projectile ) yet
 			   ;; :features projectile
 			   )
+		;; (:name smartparens
+		;; 	   :description "Modern minor mode for Emacs that deals with parens pairs and tries to be smart about it."
+		;; 	   :type github
+		;; 	   :pkgname "Fuco1/smartparens"
+		;; 	   )
 		;; (:name replace+
 		;; 	   :description "Extensions to `replace.el'."
 		;; 	   :type emacswiki

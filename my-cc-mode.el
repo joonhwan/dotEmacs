@@ -394,7 +394,7 @@
 			   (not executing-kbd-macro)
 			   old-blink-paren
 			   (funcall old-blink-paren))))))
-(define-key c-mode-base-map "("         'my-c-electric-paren)
+;; (define-key c-mode-base-map "("         'my-c-electric-paren)
 
 (defun my-c-mode-common-hook ()
   (subword-mode 1)
@@ -404,9 +404,9 @@
   (hs-minor-mode 1)
   (which-function-mode 1) 
   (c-set-style "mystyle" nil)
-  ;; TODO more reasonable way to do this?
-  (if debug-on-error
-	  (toggle-debug-on-error))
+  ;; ;; TODO more reasonable way to do this?
+  ;; (if debug-on-error
+  ;; 	  (toggle-debug-on-error))
   ;; for work with auto-complete and yasnippet
   (when (boundp 'ac-sources)
 	(add-to-list 'ac-sources 'ac-source-yasnippet t))
@@ -466,7 +466,10 @@
 (defun my/source-file-looks-like-objc()
   ;; (message (concat "file path : " (buffer-file-name)))
   (let* ((file-path (buffer-file-name))
-		 (file-ext (or (and (stringp file-path) (downcase (file-name-extension file-path)))
+		 (fne (file-name-extension file-path))
+		 (file-ext (or (and (stringp file-path)
+							(stringp fne)
+							(downcase fne))
 					   ""))
 		 )
 	(and (string-match-p file-ext (regexp-opt '("h" "m")))
