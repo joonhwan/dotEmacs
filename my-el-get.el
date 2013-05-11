@@ -310,6 +310,7 @@
 		 magit
 		 markdown-mode
 		 ;; mark-multiple
+		 org-mode
 		 package
 		 popwin
 		 popup

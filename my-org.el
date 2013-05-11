@@ -58,6 +58,25 @@
  org-plantuml-jar-path (cond
 						(win32p "c:/dev/plantuml/plantuml.jar")
 						(t "~/scripts/plantuml.jar"))
+ org-latex-classes
+ '(("article" "\\documentclass[a4papaer,11pt]{oblivoir}"
+	("\\section{%s}" . "\\section*{%s}")
+	("\\subsection{%s}" . "\\subsection*{%s}")
+	("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+	("\\paragraph{%s}" . "\\paragraph*{%s}")
+	("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+   ("report" "\\documentclass[11pt]{report}"
+	("\\part{%s}" . "\\part*{%s}")
+	("\\chapter{%s}" . "\\chapter*{%s}")
+	("\\section{%s}" . "\\section*{%s}")
+	("\\subsection{%s}" . "\\subsection*{%s}")
+	("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+   ("book" "\\documentclass[11pt]{book}"
+	("\\part{%s}" . "\\part*{%s}")
+	("\\chapter{%s}" . "\\chapter*{%s}")
+	("\\section{%s}" . "\\section*{%s}")
+	("\\subsection{%s}" . "\\subsection*{%s}")
+	("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
  )
 
 (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)

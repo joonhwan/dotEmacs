@@ -466,7 +466,7 @@
 (defun my/source-file-looks-like-objc()
   ;; (message (concat "file path : " (buffer-file-name)))
   (let* ((file-path (buffer-file-name))
-		 (fne (file-name-extension file-path))
+		 (fne (file-name-extension (if (stringp file-path) file-path "")))
 		 (file-ext (or (and (stringp file-path)
 							(stringp fne)
 							(downcase fne))
