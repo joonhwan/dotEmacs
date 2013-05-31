@@ -1,6 +1,7 @@
 alien/*el-get-package
 _alien
 _*alien
+my-dot-emacs.el
 .emacs.desktop
 *_flymake.elc
 .DS_Store
