@@ -306,6 +306,7 @@
 		 helm
 		 htmlize
 		 keywiz
+		 key-chord
 		 lua-mode
 		 magit
 		 markdown-mode
