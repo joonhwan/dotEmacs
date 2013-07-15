@@ -8,6 +8,22 @@
 ;;   `(progn
 ;;      (add-to-list 'el-get-recipe-path (concat my-dotfiles-dir "el-get-recipes"))))
 
+;; unable to detect end of process in magit process buffer?!
+;; discussion found https://github.com/magit/magit/issues/18
+;; but no help. :(
+;; (setq magit-process-connection-type nil)
+(if win32p
+	(setq magit-git-executable
+		  (cond
+		   ((file-exists-p "c:/Program Files/Git/bin/git.exe")
+			"c:/program files/git/bin/git.exe")
+		   ((file-exists-p "c:/Program Files (x86)/Git/bin/git.exe")
+			"c:/Program Files (x86)/Git/bin/git.exe")
+		   ((file-exists-p "c:/msysgit/bin/git.exe")
+			"c:/msysgit/bin/git.exe")
+		   (t
+			"git"))))
+
 (unless (require 'el-get nil t)
   (with-current-buffer
       (url-retrieve-synchronously
@@ -66,6 +82,11 @@
 		(:name cmake-project
 			   :type github
 			   :pkgname "joonhwan/emacs-cmake-project"
+			   )
+		(:name esup
+			   :type git
+			   :pkgname "esup"
+			   :url "git://github.com/jschaf/esup.git"
 			   )
 		(:name fuzzy
 			   :type github
@@ -182,15 +203,15 @@
 			   :features everything
 			   )
 		(:name magit
-		       :website "https://github.com/magit/magit#readme"
-		       :description "It's Magit! An Emacs mode for Git."
-		       :type github
-		       :pkgname "magit/magit"
-		       ;; :info "."
-		       ;; ;; that used to be how to build it :build ("./autogen.sh" "./configure" "make")
-		       ;; :build ("make all")
-		       ;; :build/darwin `(,(concat "PATH=" (shell-quote-argument invocation-directory) ":$PATH make all"))
-		       )
+			   :website "https://github.com/magit/magit#readme"
+			   :description "It's Magit! An Emacs mode for Git."
+			   :type github
+			   :pkgname "magit/magit"
+			   ;; :info "."
+			   ;; ;; that used to be how to build it :build ("./autogen.sh" "./configure" "make")
+			   ;; :build ("make all")
+			   ;; :build/darwin `(,(concat "PATH=" (shell-quote-argument invocation-directory) ":$PATH make all"))
+			   )
 		;; elisp에서 문자열구연 레퍼런스 삼을 만한 것
 		(:name s_dot_el
 			   :description "The long lost Emacs string manipulation library."
@@ -249,7 +270,7 @@
 			   :type git
 			   :url "git://github.com/mhayashi1120/Emacs-wgrep.git")
 		)
-	  )
+      )
 
 (cond
  (macp
