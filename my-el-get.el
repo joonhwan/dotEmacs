@@ -186,8 +186,10 @@
 			   :url "http://hg.rosdahl.net/iflipb"
 			   )
 		(:name qml-mode
-			   :type git
-			   :url "git://github.com/joonhwan/qml-mode.git"
+			   :type github
+			   :pkgname "emacsmirror/qml-mode"
+			   ;; :type git
+			   ;; :url "git://github.com/joonhwan/qml-mode.git"
 			   )
 		;; (:name log4j-mode
 		;; 	   :type elpa
