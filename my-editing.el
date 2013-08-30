@@ -571,6 +571,15 @@ Uses `my-current-date-time-format' for the formatting the date/time."
 (global-set-key (kbd "C-S-f") (lambda () (interactive) (ignore-errors (forward-char 5))))
 (global-set-key (kbd "C-S-b") (lambda () (interactive) (ignore-errors (backward-char 5))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Begin automatic white-space insertion after comma
+;; For more information see:
+;; http://ericscrosson.wordpress.com/2013/04/05/minimizing-keystrokes-required-by-punctuation/
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key (kbd ",") (lambda() (interactive) (insert ", ")))
+
 ;;
 ;; joon customized editing feature
 ;;

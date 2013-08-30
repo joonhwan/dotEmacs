@@ -38,6 +38,8 @@
 			"c:/program files/git/bin/git.exe")
 		   ((file-exists-p "c:/Program Files (x86)/Git/bin/git.exe")
 			"c:/Program Files (x86)/Git/bin/git.exe")
+		   ((file-exists-p "c:/msysgit/bin/git.exe")
+			"c:/msysgit/bin/git.exe")
 		   (t
 			"git"))))
 
