@@ -125,14 +125,6 @@
 (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
 
 ;;
-;; python mode
-;;
-(defun my-python-hook()
-  (setq python-remove-cwd-from-path nil)
-  )
-(add-hook 'python-mode-hook 'my-python-hook)
-
-;;
 ;; qml-mode
 ;;
 (when (my-try-require 'qml-mode)
