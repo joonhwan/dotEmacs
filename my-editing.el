@@ -220,33 +220,25 @@ home directory is a root directory) and removes automounter prefixes
   )
 
 (when (and i-use-popwin
+		   (load-library "window")
 		   (my-try-require "popwin"))
   (setq
    display-buffer-function 'popwin:display-buffer
-   special-display-function 'popwin:special-display-popup-window
-   special-display-regexps `(,(regexp-opt '(
-											"\\*selection\\*"
-											"\\*completions\\*"
-											"\\*Completions\\*"
-											"\\*Help\\*"
-											"\\*shell\\*"
-											)))
-   ;; special-display-buffer-names '("*cmd shell*" "*compilation*"))
+   special-display-function 'special-display-popup-window ;;'popwin:special-display-popup-window
+   special-display-regexps nil
+   ;; ignore all default config for popwin:special-display-popup-window
+   popwin:special-display-config nil
    )
-  (setq popwin:special-display-config
-		'(("*cscope*" :height 20)
-		  ("*shell*" :height 15)
-		  ("*Python*" :height 15)
-		  ("*Help*")
-		  ("*Completions*" :noselect t)
-		  ;; ("*compilation*" :noselect t)
-		  ;; ("*Occur*" :noselect t)
-		  ))
-  ;; (push '("*Python*" :height 15) popwin:special-display-config)
-  ;; (push '("*shell*" :height 15) popwin:special-display-config)
-  ;; (push '("*cscope*" :height 20) popwin:special-display-config)
-  (global-set-key (kbd "C-c p") popwin:keymap)
-  )
+   (push 'help-mode popwin:special-display-config)
+   (push '(compilation-mode :noselect t) popwin:special-display-config)
+   (push '(completion-list-mode :noselect t) popwin:special-display-config)
+   (push '(grep-mode :height 20) popwin:special-display-config)
+   (push '("^\\*e?shell.*\\*$" :regexp t) popwin:special-display-config)
+   (push "*Shell Command Output*" popwin:special-display-config)
+   (push '("^\\*helm.*\\*$" :regexp t) popwin:special-display-config)
+
+   (global-set-key (kbd "C-c p") popwin:keymap)
+   )
 
 (when (and i-use-yas
 		   (my-try-require 'yasnippet))
@@ -540,12 +532,22 @@ Uses `my-current-date-time-format' for the formatting the date/time."
 			   (setq keep-going t
 					 other-window-step -1))
 			  (t
+			   (push ev unread-command-events)
 			   (setq keep-going nil))))
 	  (setq first nil)
       (when keep-going
 		(other-window other-window-step)
-		(setq ev (read-event "o=next i=prev: other window"))))
-    (push ev unread-command-events)))
+		(setq ev (read-event "o=next i=prev: other window" nil 1.0))
+		(if ev
+			(setq keep-going t)
+		  (setq keep-going nil)
+		  )
+		)
+	  )
+	(minibuffer-message "keep work!")
+	)
+  )
+
 (global-set-key (kbd "C-x o") 'my-easy-other-window)
 
 (defun my-easy-find-file (&optional arg)
