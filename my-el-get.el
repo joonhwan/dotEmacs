@@ -225,15 +225,20 @@
 			   :type github
 			   :pkgname "magnars/dash.el"
 			   )
+		(:name grizzl
+			   :description "Grizzl - A fuzzy search index & completing-read for Emacs"
+			   :type github
+			   :pkgname "d11wtq/grizzl"
+			   )
 		(:name projectile
 			   :description "Projectile is a project interaction library for Emacs"
 			   :type git
 			   :prepare (progn
 						  (setq-default projectile-keymap-prefix (kbd "C-c j"))
 						  )
-			   ;;:url "git@github.com:joonhwan/projectile.git"
-			   :url "git://github.com/bbatsov/projectile.git"
-			   :depends s_dot_el dash
+			   :url "git@github.com:joonhwan/projectile.git"
+			   ;; :url "git://github.com/bbatsov/projectile.git"
+			   :depends s_dot_el dash grizzl
 			   ;; do-not (require 'projectile ) yet
 			   ;; :features projectile
 			   )
@@ -247,6 +252,11 @@
 		;; 	   :type emacswiki
 		;; 	   :features replace+
 		;; 	   :depends thingatpt+
+		;; 	   )
+		;; (:name shell-pop
+		;; 	   :description "shell-pop.el helps you to use shell easily on Emacs. Only one key action to work."
+		;; 	   :type github
+		;; 	   :pkgname "kyagi/shell-pop-el"
 		;; 	   )
 		(:name thingatpt+
 			   :description "Extensions to `thingatpt.el'."
