@@ -60,9 +60,9 @@
 ;;
 ;; auto-complete mode
 ;;
-;; (eval-after-load "auto-complete"
-;;   '(progn
-;; 	 (setq ac-auto-start nil)))
+(eval-after-load "auto-complete"
+  '(progn
+	 (setq ac-auto-start nil)))
 (when (my-try-require 'auto-complete)
   (setq
    ;; 숫자면 해당 숫자 길이 이상의 문자 입력하면 바로 ac시작
@@ -82,7 +82,6 @@
   (add-to-list
    'ac-dictionary-directories
    "~/elisp/alien/el-get-package/auto-complete/dict")
-
   (when (my-try-require 'auto-complete-config)
 	(setq ac-sources '(
 					   ac-source-words-in-same-mode-buffers
@@ -93,20 +92,19 @@
 	(ac-config-default)
 	(add-to-list 'ac-modes 'objc-mode)
 	)
-
   (setq my-use-clang-complete nil)
-  (when (and my-use-clang-complete  (my-try-require 'auto-complete-clang-async))
-	(defun my-ac-cc-clang-completion-mode-setup ()
-	  (setq ac-clang-complete-executable "c:/prj/oss/mine/emacs-clang-complete-async/build/Debug/clang-complete.exe")
-	  (setq ac-sources '(ac-source-clang-async))
-	  (ac-clang-launch-completion-process)
-	  )
-	(progn
-	  (add-hook 'c-mode-common-hook 'my-ac-cc-clang-completion-mode-setup)
-	  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-	  (global-auto-complete-mode t)
-	  )
-  )
+  ;; (when (and my-use-clang-complete  (my-try-require 'auto-complete-clang-async))
+  ;; 	(defun my-ac-cc-clang-completion-mode-setup ()
+  ;; 	  (setq ac-clang-complete-executable "c:/prj/oss/mine/emacs-clang-complete-async/build/Debug/clang-complete.exe")
+  ;; 	  (setq ac-sources '(ac-source-clang-async))
+  ;; 	  (ac-clang-launch-completion-process)
+  ;; 	  )
+  ;; 	(progn
+  ;; 	  (add-hook 'c-mode-common-hook 'my-ac-cc-clang-completion-mode-setup)
+  ;; 	  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+  ;; 	  (global-auto-complete-mode t)
+  ;; 	  )
+  ;; )
   )
 
 ;;
