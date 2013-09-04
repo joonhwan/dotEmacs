@@ -922,6 +922,10 @@
                    :type github
                    :pkgname "auto-complete/fuzzy-el"
                    )
+            (:name elpy
+                   :type github
+                   :pkgname "jorgenschaefer/elpy"
+                   )
             (:name emacs-git-gutter
                    :type github
                    :pkgname "syohex/emacs-git-gutter"
@@ -1042,6 +1046,11 @@
                    ;; :build ("make all")
                    ;; :build/darwin `(,(concat "PATH=" (shell-quote-argument invocation-directory) ":$PATH make all"))
                    )
+            (:name nose
+                   :description "eays python test running in emacs"
+                   :type github
+                   :pkgname "emacsmirror/nose"
+                   )
             ;; elisp에서 문자열구연 레퍼런스 삼을 만한 것
             (:name s_dot_el
                    :description "The long lost Emacs string manipulation library."
@@ -1149,7 +1158,10 @@
              ;; dbgr
              el-get
              expand-region
+             find-file-in-project
              full-ack
+             highlight-indentation
+             idomenu
              js2-mode
              goto-last-change
              graphviz-dot-mode
@@ -1170,6 +1182,7 @@
              smex
              ;; switch-window
              undo-tree
+             virtualenv
              yasnippet
              yaml-mode
              )
@@ -2666,6 +2679,18 @@
        )
      
      
+   #+END_SRC
+
+** Python Programming
+   #+BEGIN_SRC emacs-lisp
+     (when (functionp 'elpy-enable)
+       (setq my-elpy-python-dir (concat (file-name-directory (locate-library "elpy")) "elpy"))
+       (let ((old-pythonpath (getenv "PYTHONPATH")))
+         (if old-pythonpath
+             (setenv "PYTHONPATH" (concat old-pythonpath ":" my-elpy-python-dir))
+           (setenv "PYTHONPATH" my-elpy-python-dir)))
+       (elpy-enable)
+       )
    #+END_SRC
 
 * Dired/Shell 
