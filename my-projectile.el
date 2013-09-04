@@ -1,8 +1,17 @@
 ;; -*- coding:utf-8 -*-
 
+(require 'my-grep)
+
 ;; you can invalidate cache manually using
 ;; `projectile-invalidate-cache'
-(setq projectile-enable-caching t)
+(setq projectile-enable-caching t
+	  projectile-indexing-method 'alien
+	  projectile-svn-command (concat find-program " . -type f -print0")
+	  projectile-generic-command (concat find-program " . -type f -print0")
+	  )
+
+(when (functionp 'grizzl-make-index)
+  (setq projectile-completion-system 'grizzl))
 
 ;; (setq projectile-ignored-file-extensions
 ;; 	  (append projectile-ignored-file-extensions
@@ -54,7 +63,13 @@
 														"build-x64"
 														"build-x86"
 														"build-64"
-														"build-32")))
+														"build-32"
+														"build-vc11"
+														"build-vc11-32"
+														"build-vc11-64"
+														"build-vc11-x86"
+														"build-vc11-x64"
+														)))
 
 (projectile-global-mode 1)
 
