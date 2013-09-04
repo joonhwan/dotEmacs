@@ -113,7 +113,24 @@
 		(if (file-directory-p w32file)
 			(shell-command (concat "c:/dev/totalcmd/totalcmd -O -L=\"" w32file "\""))))))
 
+;; great hint from
+;; http://whattheemacsd.com//setup-dired.el-02.html
+(defun dired-back-to-top ()
+  (interactive)
+  (beginning-of-buffer)
+  (dired-next-line 4))
 
+(define-key dired-mode-map
+  (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
+
+(defun dired-jump-to-bottom ()
+  (interactive)
+  (end-of-buffer)
+  (dired-next-line -1))
+
+(define-key dired-mode-map
+  (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
+;; http://whattheemacsd.com//setup-dired.el-02.html
 
 ;;
 ;; dired-x setting
