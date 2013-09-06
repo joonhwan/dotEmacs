@@ -1,0 +1,56 @@
+# -*- mode:snippet; -*-
+# name: Qt5 single program
+# key: qt5
+# --
+cmake_minimum_required(VERSION 2.8.11 FATAL_ERROR)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+
+project(${1:ProjectName})
+
+# Set up the environment
+set(QT5_ROOT "$ENV\{QT5_DIR\}" CACHE PATH "Qt5 directory")
+set(QT5_MODULES
+  # AxBase AxContainer AxServer Multimedia MultimediaWidgets OpenGL OpenGLExtensions UiTools
+  # WebKit WebKitWidgets Help LinguistTools Concurrent Declarative Designer Qml Quick QuickTest
+  # Script ScriptTools Sensors XmlPatterns SerialPort
+  Core Gui Network PrintSupport Sql Svg Test Widgets Xml
+  )
+foreach(_module \${QT5_MODULES\})
+  unset(Qt5\${_module}_DIR CACHE) # to abandon cached find_package results
+  set(CMAKE_PREFIX_PATH "\${QT5_ROOT}/qtbase/lib/cmake/Qt5\${_module}")
+  find_package(Qt5\${_module})
+  set(QT5_TARGETS \${QT5_TARGETS};Qt5::\${_module})
+endforeach()
+
+set(source
+  $0
+  )
+
+set(header
+  )
+
+set(form
+  )
+
+set(resource
+  )
+
+qt5_wrap_ui(forms_generated \${form})
+qt5_add_resources(rc_generated \${resource})
+
+add_executable(\${PROJECT_NAME} WIN32 MACOSX_BUNDLE
+  \${source}
+  \${header}
+  \${moc_header}
+  \${form}
+  \${resource}
+  \${moc_generated}
+  \${forms_generated}
+  \${rc_generated}
+  )
+
+target_link_libraries(\${PROJECT_NAME}
+  \${QT5_TARGETS}
+  )
