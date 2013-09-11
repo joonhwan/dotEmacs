@@ -314,7 +314,7 @@
  '(keywiz-wrong-face ((t (:foreground "Red"))))
  '(lazy-highlight ((t (:background "#8f5902"))))
  '(magit-branch ((t (:inherit (magit-header)))))
- '(magit-item-highlight ((t (:inherit (highlight)))))
+ '(magit-item-highlight ((t (:background nil :inherit (highlight)))))
  '(magit-section-title ((t (:inherit (magit-header)))))
  '(makefile-shell ((t nil)))
  '(makefile-space ((t nil)))
