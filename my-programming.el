@@ -42,6 +42,9 @@
 			"c:/msysgit/bin/git.exe")
 		   (t
 			"git"))))
+(if macp
+	(setq magit-emacsclient-executable
+		  "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"))
 
 ;;
 ;; emacs lisp
