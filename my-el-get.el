@@ -71,27 +71,14 @@
 ;; local sources
 (setq el-get-sources
       '(
-		(:name auto-complete
-			   :type github
-			   :pkgname "auto-complete/auto-complete"
-			   )
-		(:name cdb-gud
-			   :type emacswiki
-			   :pkgname "cdb-gud"
-			   )
 		(:name cmake-project
 			   :type github
 			   :pkgname "joonhwan/emacs-cmake-project"
 			   )
-		(:name esup
-			   :type git
-			   :pkgname "esup"
-			   :url "git://github.com/jschaf/esup.git"
-			   )
-		(:name fuzzy
-			   :type github
-			   :pkgname "auto-complete/fuzzy-el"
-			   )
+		;; (:name emacs-clang-complete-async
+		;; 	   :type github
+		;; 	   :pkgname "joonhwan/emacs-clang-complete-async"
+		;; 	   )
 		(:name emacs-git-gutter
 			   :type github
 			   :pkgname "syohex/emacs-git-gutter"
@@ -100,119 +87,15 @@
 			   :type github
 			   :pkgname "rocky/emacs-loc-changes"
 			   )
-		(:name emacs-load-relative
+		(:name grizzl
+			   :description "Grizzl - A fuzzy search index & completing-read for Emacs"
 			   :type github
-			   :pkgname "rocky/emacs-load-relative"
-			   )
-		(:name emacs-test-unit
-			   :type github
-			   :pkgname "rocky/emacs-test-unit"
-			   )
-		(:name emacs-dbgr
-			   :type github
-			   :pkgname "rocky/emacs-dbgr"
-			   )
-		(:name evil
-			   :type git
-			   :url "git://gitorious.org/evil/evil.git"
-			   )
-		(:name emacs-clang-complete-async
-			   :type github
-			   :pkgname "joonhwan/emacs-clang-complete-async"
-			   )
-		;; (:name auto-yasnippet
-		;; 	   :description "Quickly create disposable yasnippets"
-		;; 	   :type emacswiki
-		;; 	   :features auto-yasnippet
-		;; 	   )
-		(:name font-utils
-			   :website "http://www.emacswiki.org/emacs-en/FontUtils"
-			   :description "Utility functions for working with fonts."
-			   :type github
-			   :pkgname "rolandwalker/font-utils"
-			   ;; :post-ini (progn
-			   ;; 	       (require 'font-utils)
-			   ;; 	       )
-			   )
-		(:name iedit
-			   :website "https://github.com/victorhge/iedit"
-			   :description "Edit multiple regions in the same way simultaneously"
-			   :type github
-			   :pkgname "victorhge/iedit"
-			   :features iedit
-			   )
-		;; (:name pastebin
-		;;        :description "Emacs pastebin"
-		;;        :type github
-		;;        :pkgname "emacs-pastebin"
-		;;        )
-		(:name pcache
-			   :type github
-			   :pkgname "sigma/pcache"
-			   )
-		(:name logito
-			   :type github
-			   :pkgname "sigma/logito"
-			   )
-		(:name gh-gist
-			   :type github
-			   :pkgname "sigma/gh.el"
-			   :depends (pcache logito)
-			   )
-		(:name gist
-			   :type github
-			   :pkgname "defunkt/gist.el"
-			   :depends gh-gist
-			   )
-		(:name miniedit
-			   :website "https://github.com/emacsmirror/miniedit"
-			   :description "Enhanced editing for minibuffer fields"
-			   :type github
-			   :pkgname "emacsmirror/miniedit"
-			   :post-ini (progn
-						   (require 'miniedit)
-						   (miniedit-install)
-						   )
-			   )
-		(:name multiple-cursors
-			   :website "https://github.com/magnars/multiple-cursors.el"
-			   :description "Multiple cursors for Emacs"
-			   :type git
-			   :url "git://github.com/magnars/multiple-cursors.el.git"
+			   :pkgname "d11wtq/grizzl"
 			   )
 		(:name iflipb
 			   :description "iflipb is ALT-TAB like buffer switching without full cycling."
 			   :type hg
 			   :url "http://hg.rosdahl.net/iflipb"
-			   )
-		(:name qml-mode
-			   :type github
-			   :pkgname "emacsmirror/qml-mode"
-			   ;; :type git
-			   ;; :url "git://github.com/joonhwan/qml-mode.git"
-			   )
-		;; (:name log4j-mode
-		;; 	   :type elpa
-		;; 	   )
-		(:name flymake-cursor
-			   :description "displays flymake error msg in minibuffer after delay"
-			   :type emacswiki
-			   :features flymake-cursor
-			   )
-		(:name everything
-			   :description "find files with everything"
-			   :type emacswiki
-			   :features everything
-			   )
-		(:name magit
-			   :website "https://github.com/magit/magit#readme"
-			   :description "It's Magit! An Emacs mode for Git."
-			   :type github
-			   :pkgname "magit/magit"
-			   ;; :info "."
-			   ;; ;; that used to be how to build it :build ("./autogen.sh" "./configure" "make")
-			   ;; :build ("make all")
-			   ;; :build/darwin `(,(concat "PATH=" (shell-quote-argument invocation-directory) ":$PATH make all"))
 			   )
 		;; elisp에서 문자열구연 레퍼런스 삼을 만한 것
 		(:name s_dot_el
@@ -220,69 +103,17 @@
 			   :type github
 			   :pkgname "magnars/s.el"
 			   )
-		(:name dash
-			   :description "A modern list api for Emacs. No 'cl required."
-			   :type github
-			   :pkgname "magnars/dash.el"
-			   )
-		(:name grizzl
-			   :description "Grizzl - A fuzzy search index & completing-read for Emacs"
-			   :type github
-			   :pkgname "d11wtq/grizzl"
-			   )
-		(:name projectile
-			   :description "Projectile is a project interaction library for Emacs"
-			   :type git
-			   :prepare (progn
-						  (setq-default projectile-keymap-prefix (kbd "C-c j"))
-						  )
-			   :url "git@github.com:joonhwan/projectile.git"
-			   ;; :url "git://github.com/bbatsov/projectile.git"
-			   :depends s_dot_el dash grizzl
-			   ;; do-not (require 'projectile ) yet
-			   ;; :features projectile
-			   )
-		;; (:name smartparens
-		;; 	   :description "Modern minor mode for Emacs that deals with parens pairs and tries to be smart about it."
-		;; 	   :type github
-		;; 	   :pkgname "Fuco1/smartparens"
-		;; 	   )
-		;; (:name replace+
-		;; 	   :description "Extensions to `replace.el'."
-		;; 	   :type emacswiki
-		;; 	   :features replace+
-		;; 	   :depends thingatpt+
-		;; 	   )
-		;; (:name shell-pop
-		;; 	   :description "shell-pop.el helps you to use shell easily on Emacs. Only one key action to work."
-		;; 	   :type github
-		;; 	   :pkgname "kyagi/shell-pop-el"
-		;; 	   )
 		(:name thingatpt+
 			   :description "Extensions to `thingatpt.el'."
 			   :type emacswiki
 			   :features thingatpt+
 			   )
-		(:name xcscope
-			   :description "cscope interface for (X)Emacs"
-			   :type git
-			   :url "git://github.com/emacsattic/xcscope.git"
-			   :features xcscope
-			   )
-		(:name ido-ubiquitous
-			   :description "ido everywhere."
-			   :type git
-			   :url "git://github.com/technomancy/ido-ubiquitous.git")
-		(:name warp
-			   :description "Realtime HTML Preview for Emacs"
-			   :type git
-			   :url "git://github.com/yukihr/Warp.git")
 		(:name wgrep
 			   :description "Writable grep buffer and apply the changes to files"
 			   :type git
 			   :url "git://github.com/mhayashi1120/Emacs-wgrep.git")
 		)
-      )
+	  )
 
 (cond
  (macp
@@ -298,11 +129,6 @@
 						 :description "emacs xcode doc viewer"
 						 :type github
 						 :pkgname "joonhwan/emacs-xcode-document-viewer"
-						 )
-				  (:name dash-at-point
-						 :description "a emacs lisp for searching the word at point with Dash"
-						 :type github
-						 :pkgname "Kapeli/dash-at-point"
 						 )
 				  )
 				))
@@ -321,40 +147,76 @@
 (setq my-packages
       (append
        '(
-		 ace-jump-mode
-		 auto-install
 		 ;; auto-complete-clang
+		 ;; dbgr
+		 ;; mark-multiple
+		 ;; org-mode
+		 ;; switch-window
+		 popup
+		 ;; emacs-clang-complete-async
+		 ;; emacs-dbgr
+		 ;; emacs-load-relative
+		 ;; emacs-test-unit
+		 ;; cdb-gud
+		 ;; esup
+		 ;; everything
+		 ;; font-utils
+		 ;; gh-gist
+		 ;; gist
+		 ;; miniedit
+		 ace-jump-mode
+		 auto-complete
+		 auto-install
+		 cmake-project
 		 csharp-mode
+		 dash
+		 dash-at-point
 		 deferred
 		 diminish
 		 dired-details
-		 ;; dbgr
 		 el-get
+		 emacs-git-gutter
+		 emacs-loc-changes
+		 ;; evil
 		 expand-region
+		 flymake-cursor
 		 full-ack
-		 js2-mode
+		 fuzzy
+		 git-modes
 		 goto-last-change
 		 graphviz-dot-mode
+		 grizzl
 		 gtranslate
 		 helm
 		 htmlize
-		 keywiz
+		 ido-ubiquitous
+		 iedit
+		 iflipb
+		 js2-mode
 		 key-chord
+		 keywiz
+		 logito
 		 lua-mode
 		 magit
+		 magit
 		 markdown-mode
-		 ;; mark-multiple
-		 ;; org-mode
+		 multiple-cursors
 		 package
+		 pcache
 		 popwin
-		 popup
+		 projectile
+		 qml-mode
 		 rainbow-delimiters
 		 rainbow-mode
+		 s_dot_el
 		 smex
-		 ;; switch-window
+		 thingatpt+
 		 undo-tree
-		 yasnippet
+		 ;; warp
+		 wgrep
+		 xcscope
 		 yaml-mode
+		 yasnippet
 		 )
 	   my-platform-packages
        (mapcar 'el-get-source-name el-get-sources)))
