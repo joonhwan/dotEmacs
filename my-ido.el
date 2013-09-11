@@ -8,8 +8,8 @@
  )
 (ido-mode 1)
 
-(when (my-try-require 'ido-ubiquitous)
-  (ido-ubiquitous-mode 1))
+;; (when (my-try-require 'ido-ubiquitous)
+;;   (ido-ubiquitous-mode 1))
 
 (defun my-ido-find-file-in-tag-files ()
   (interactive)
