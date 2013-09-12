@@ -92,11 +92,11 @@
 			   :type github
 			   :pkgname "d11wtq/grizzl"
 			   )
-		(:name iflipb
-			   :description "iflipb is ALT-TAB like buffer switching without full cycling."
-			   :type hg
-			   :url "http://hg.rosdahl.net/iflipb"
-			   )
+		;; (:name iflipb
+		;; 	   :description "iflipb is ALT-TAB like buffer switching without full cycling."
+		;; 	   :type hg
+		;; 	   :url "http://hg.rosdahl.net/iflipb"
+		;; 	   )
 		;; elisp에서 문자열구연 레퍼런스 삼을 만한 것
 		(:name s_dot_el
 			   :description "The long lost Emacs string manipulation library."
@@ -112,6 +112,19 @@
 			   :description "Writable grep buffer and apply the changes to files"
 			   :type git
 			   :url "git://github.com/mhayashi1120/Emacs-wgrep.git")
+		(:name magit
+		       :website "https://github.com/magit/magit#readme"
+		       :description "It's Magit! An Emacs mode for Git."
+		       :type github
+		       :pkgname "magit/magit"
+		       :depends (cl-lib git-modes)
+		       ;; :info "."
+		       ;; let el-get care about autoloads so that it works with all OSes
+		       ;; :build (if (version<= "24.3" emacs-version)
+		       ;; 		  `(("make" ,(format "EMACS=%s" el-get-emacs) "all"))
+		       ;; 		`(("make" ,(format "EMACS=%s" el-get-emacs) "docs")))
+		       :;; build/berkeley-unix (("touch" "`find . -name Makefile`") ("gmake"))
+		       )
 		)
 	  )
 
@@ -174,7 +187,6 @@
 		 deferred
 		 diminish
 		 dired-details
-		 el-get
 		 emacs-git-gutter
 		 emacs-loc-changes
 		 ;; evil
@@ -191,13 +203,12 @@
 		 htmlize
 		 ido-ubiquitous
 		 iedit
-		 iflipb
+		 ;; iflipb
 		 js2-mode
 		 key-chord
 		 keywiz
 		 logito
 		 lua-mode
-		 magit
 		 magit
 		 markdown-mode
 		 multiple-cursors
