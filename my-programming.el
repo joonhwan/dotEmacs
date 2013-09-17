@@ -1,18 +1,27 @@
-;; -*- coding:utf-8-auto -*-
+;; -*- coding:utf-8-auto; -*-
 ;; dsvn(equivalent to tortoisesvn)
 ;;
 ;; (require 'vc-svn)
 
-;; template
+;; * template
 (setq-default template-default-directories `(,(concat my-dotfiles-dir "template")))
 (require 'template)
 (template-initialize)
 
-;; idutils
+;;
+;; * outshine for org'nized commenting
+;;
+(setq-default outline-minor-mode-prefix "\C-c\C-c")
+(require 'outshine)
+(require 'imenu)
+(add-hook 'outline-minor-mode-hook 'outshine-hook-function)
+
+
+;; * idutils
 (autoload 'gid "idutils" "run idutils' gid command" t)
 
 ;;
-;; vc
+;; * vc
 ;;
 (if win32p
 	(cond
@@ -24,7 +33,7 @@
   )
 
 ;;
-;; magit
+;; * magit
 ;;
 (global-set-key (kbd "C-x g") 'magit-status)
 ;; unable to detect end of process in magit process buffer?!
@@ -47,21 +56,21 @@
 		  "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"))
 
 ;;
-;; emacs lisp
+;; * emacs lisp
 ;;
 (my-try-require 'rainbow-delimiters)
 (require 'eldoc)
-(add-hook 'emacs-lisp-mode-hook
-          '(lambda ()
-             (interactive)
-             (turn-on-eldoc-mode)
-			 (if (featurep 'rainbow-delimiters)
-				 (rainbow-delimiters-mode t)
-			   )
-			 ))
+(defun my-emacs-lisp-mode-hook ()
+  (turn-on-eldoc-mode)
+  (outline-minor-mode 1)
+  (if (featurep 'rainbow-delimiters)
+	  (rainbow-delimiters-mode t)
+	)
+  )
+(add-hook 'emacs-lisp-mode-hook 'my-emacs-lisp-mode-hook)
 
 ;;
-;; auto-complete mode
+;; * auto-complete mode
 ;;
 (eval-after-load "auto-complete"
   '(progn
@@ -111,7 +120,7 @@
   )
 
 ;;
-;; dash-at-point
+;; * dash-at-point
 ;;
 (when macp
   (when (my-try-require 'dash-at-point) 
@@ -121,14 +130,14 @@
 	)
   )
 ;;
-;; ruby mode
+;; * ruby mode
 ;;
 (autoload 'ruby-mode "ruby-mode" "Major mode for ruby files" t)
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
 
 ;;
-;; qml-mode
+;; * qml-mode
 ;;
 (when (my-try-require 'qml-mode)
   (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
@@ -136,7 +145,7 @@
   )
 
 ;;
-;; markdown
+;; * markdown
 ;;
 (unless macp
   (progn
@@ -149,7 +158,7 @@
 
 
 ;;
-;; Visual-Basic-Mode
+;; * Visual-Basic-Mode
 ;;
 ;; (if (and win32p officep)
 ;;     (progn
@@ -179,7 +188,7 @@
 ;; 	  ;;(setq-default lua-default-application (if win32p "c:/msys/1.0/local/bin/lua" "/home/rp)
 ;;       ;;(add-hook 'lua-mode-hook (lambda () ))
 
-;; ediff
+;; * ediff
 (eval-after-load "ediff"
   '(progn
 	 (setq
@@ -194,7 +203,7 @@
 	 ))
 
 
-;; compilation-mode
+;; * compilation-mode
 (eval-after-load "compile"
   '(progn
 	 (defun my-compilation-setup()
@@ -207,7 +216,7 @@
 	 ))
 
 ;;
-;; cmake
+;; * cmake
 ;;
 (when (my-try-require 'cmake-mode)
   (require 'cmake-mode)
@@ -231,7 +240,7 @@
   )
 
 ;;
-;; eshell
+;; * eshell
 ;;
 (if win32p
     (defun eshell/op (FILE)
@@ -240,7 +249,7 @@
       (w32-shell-execute "Open" (substitute ?\\ ?/ (expand-file-name FILE)))))
 
 ;;
-;; graphviz
+;; * graphviz
 ;;
 (eval-after-load "graphviz-dot-mode"
   '(progn
@@ -285,7 +294,7 @@
 	  )))
 
 ;;
-;; plantuml
+;; * plantuml
 ;;
 (eval-after-load "plantuml"
   (progn
@@ -304,14 +313,14 @@
   )
 
 ;;
-;; matlab
+;; * matlab
 ;;
 (autoload 'matlab-mode "matlab" "Enter Matlab mode." t)
 (setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
 (autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
 
 ;;
-;; protobuf mode
+;; * protobuf mode
 ;;
 (when (my-try-require 'protobuf-mode)
   (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))

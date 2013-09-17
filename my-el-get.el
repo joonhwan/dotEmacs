@@ -125,6 +125,11 @@
 		       ;; 		`(("make" ,(format "EMACS=%s" el-get-emacs) "docs")))
 		       :;; build/berkeley-unix (("touch" "`find . -name Makefile`") ("gmake"))
 		       )
+		(:name outshine
+			   :description "outline with outshine outshines outline"
+			   :type github
+			   :pkgname "tj64/outshine"
+			   )
 		)
 	  )
 
