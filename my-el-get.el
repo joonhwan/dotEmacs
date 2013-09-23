@@ -196,7 +196,7 @@
 		 emacs-loc-changes
 		 ;; evil
 		 expand-region
-		 flymake-cursor
+		 flycheck
 		 full-ack
 		 fuzzy
 		 git-modes
