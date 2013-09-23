@@ -1,32 +1,9 @@
 ;; -*- coding:utf-8; -*-
-(require 'cl)
 
-;; the very first package of mine
-(require 'my-lisp)
+(require 'my-common)
+(require 'my-theme)
 
-;;
-;; Load path etc.
-;;
-(setq my-dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name))
-	  my-autoinstall-dir (concat my-dotfiles-dir "auto-install")
-	  ;; my-ccmode-dir (concat my-dotfiles-dir "cc-mode")
-	  my-dropbox-dir (cond
-					  (macp "~/DropBox")
-					  (t "~/DropBox"))
-	  my-etc-dir (concat my-dotfiles-dir "etc")
-	  )
-(make-variable-buffer-local 'my-project-root)
-
-(add-to-list 'load-path my-dotfiles-dir)
-(add-to-list 'load-path my-autoinstall-dir)
-(add-to-list 'load-path (concat my-dotfiles-dir "alien/manual-package"))
-
-(load ".manual-package-loaddefs.el")
-
-;; (add-to-list 'load-path my-ccmode-dir)
-(add-to-list 'load-path my-etc-dir)	;; misc elisp packages...
-
-;; run server for emacsclient
+;; * run server for emacsclient
 (unless (daemonp)
   (progn
 	(require 'server)
@@ -36,41 +13,6 @@
 	 (setq ns-pop-up-frames nil)
 	(server-mode t)
 	)))
-
-;; language
-(progn
-  (cond
-   (win32p
-	(set-language-environment "Korean")
-	)
-   (macp
-	;; (setq default-process-coding-system "utf-8-mac")
-	;; (setq buffer-file-coding-system "utf-8-mac")
-	;; (setq file-name-coding-system "utf-8")
-	(global-set-key (kbd "S-SPC") 'toggle-input-method)
-	)
-   )
-  (setq default-input-method "korean-hangul390")
-  (setq default-korean-keyboard "390")) ;;--> 3beolsik 390
-(define-coding-system-alias 'ks_c_5601-1987 'korean-iso-8bit)
-;; (add-to-list 'file-coding-system-alist '("\\.el\\'" . 'utf-8))
-
-;;
-;; i'm not using normal path of emacs customization!
-;;
-(setq custom-file (concat my-dotfiles-dir "my-customization.el"))
-
-;; sometimes system becomes slow. here's workaround
-;; hint from
-;; http://stackoverflow.com/questions/2007329/emacs-23-1-50-1-hangs-ramdomly-for-6-8-seconds-on-windows-xp
-(setq w32-get-true-file-attributes nil)
-
-(setq x-select-enable-clipboard t)
-
-;; before my-el-get....
-
-;; configure look-and-feel
-(require 'my-theme)
 
 ;; ---------------------------
 (require 'my-el-get)
@@ -106,7 +48,7 @@
   ;; (diminish 'auto-complete-mode)
   (diminish 'eldoc-mode)
   )
-
+o
 ;;
 ;; IMPORTANT! we relocated emacs *Customization* file
 ;; so, we need to RELOAD IT HERE...
