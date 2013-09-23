@@ -48,7 +48,7 @@
   ;; (diminish 'auto-complete-mode)
   (diminish 'eldoc-mode)
   )
-o
+
 ;;
 ;; IMPORTANT! we relocated emacs *Customization* file
 ;; so, we need to RELOAD IT HERE...
