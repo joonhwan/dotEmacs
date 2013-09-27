@@ -3,6 +3,12 @@
 (require 'cc-mode)
 (require 'cc-vars)
 
+(when (my-try-require 'codesearch)
+  (global-set-key (kbd "C-c , ,") 'codesearch-search-at-point)
+  (global-set-key (kbd "C-c , /") 'codesearch-build-index)
+  (global-set-key (kbd "C-c , u") 'codesearch-update-index)
+  )
+
 (when (my-try-require 'cmake-project)
   (setq cmake-project-default-build-dir-name "build/")
   (defun my-maybe-cmake-project-hook ()
