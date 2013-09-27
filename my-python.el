@@ -1,136 +1,26 @@
-;;
+;; -*- coding:utf-8 -*-
 ;; python
 ;;
-
-;; hint from:https://bitbucket.org/jonwaltman/pydoc-info/
-;;
-;; wget https://bitbucket.org/jonwaltman/pydoc-info/downloads/python.info.gz
-;; gunzip python.info
-;; sudo cp python.info /usr/share/info
-;; sudo install-info --info-dir=/usr/share/info python.info
-;;
-;; Then add the following to your ~/.emacs.d/init.el::
-;; (add-to-list 'load-path "~/path/to/pydoc-info")
-;; (require 'pydoc-info)
-(require 'pydoc-info)
-
+;; as is 2013/09/26 bankrup'd old python trials and then started with
+;; extremely simple configuration for study
 
 (eval-after-load "python"
   '(progn
-	 ;; hint from http://www.saltycrane.com/blog/2010/05/my-emacs-python-environment/
-	 (require 'pymacs)
-	 (pymacs-load "ropemacs" "rope-")
-	 (setq ropemacs-enable-autoimport t)
-	 (add-to-list 'load-path "~/.emacs.d/vendor/auto-complete-1.2")
-	 (require 'auto-complete-config)
-	 (add-to-list 'ac-dictionary-directories "~/.emacs.d/vendor/auto-complete-1.2/dict")
-	 (ac-config-default)
-	 (add-hook 'find-file-hook 'flymake-find-file-hook)
-	 ;; Pyflakes for python
-	 ;; (load-library "flymake-fringe-icons")
-	 (when (load "flymake" t)
-	   (defun flymake-pychecker-init ()
-		 (let* ((temp-file (flymake-init-create-temp-buffer-copy
-							'flymake-create-temp-inplace))
-				(local-file (file-relative-name
-							 temp-file
-							 (file-name-directory buffer-file-name))))
-		   (list "pycheck" (list local-file))))
-	   (add-to-list 'flymake-allowed-file-name-masks
-					'("\\.py\\'" flymake-pychecker-init)))
-	 ;; (when (load "flymake" t)
-	 ;;   (defun flymake-pyflakes-init ()
-	 ;; 	 (let* ((temp-file (flymake-init-create-temp-buffer-copy
-	 ;; 						'flymake-create-temp-inplace))
-	 ;; 			(local-file (file-relative-name
-	 ;; 						 temp-file
-	 ;; 						 (file-name-directory buffer-file-name))))
-	 ;; 	   (list "pycheckers"  (list local-file))))
-	 ;;   (add-to-list 'flymake-allowed-file-name-masks
-	 ;; 				'("\\.py\\'" flymake-pyflakes-init)))
-	 (global-set-key (kbd "C-c C-p") 'flymake-goto-prev-error)
-	 (global-set-key (kbd "C-c C-n") 'flymake-goto-next-error)
-	 (defun my-electric-pair ()
-	   "Insert character pair without sournding spaces"
-	   (interactive)
-	   (let (parens-require-spaces)
-		 (insert-pair)))
-	 (defun my-python-display-shell ()
-	   (interactive)
-	   (if (featurep 'popwin)
-		   (popwin:display-buffer "*Python*")
-		 (display-buffer "*Python*")))
-	 (defun my-python-send-buffer ()
-	   (interactive)
-	   (python-send-buffer)
-	   (when (featurep 'popwin)
-		 (popwin:display-buffer "*Python*")))
-	 (define-key python-mode-map (kbd "\C-c\C-c") 'my-python-send-buffer)
-	 (define-key python-mode-map (kbd "\C-c!") 'my-python-display-shell)
-	 (defun my-python-mode-hook ()
-	   ;; (define-key python-mode-map "\"" 'my-electric-pair)
-	   ;; (define-key python-mode-map "\'" 'my-electric-pair)
-	   ;; (define-key python-mode-map "(" 'my-electric-pair)
-	   ;; (define-key python-mode-map "[" 'my-electric-pair)
-	   ;; (define-key python-mode-map "{" 'my-electric-pair)
-	   (setq
-		indent-tabs-mode nil
-		tab-width 4
-		python-remove-cwd-from-path nil
-		)
-	   (if (featurep 'flymake-mode)
-		 (flymake-mode 1))
-	   (eldoc-mode 1)
+	 (setq python-shell-interpreter "c:/python33/python.exe")
+	 (defun my-python-shell-send-buffer (prefix)
+	   (interactive "P")
+	   (let ((source-window (selected-window)))
+		 (call-interactively 'run-python)
+		 (select-window source-window)
+		 ;; (switch-to-buffer source-window)
+		 (call-interactively 'python-shell-send-buffer)))
+	 (defun my-python-hook ()
+	   ;; (define-key python-mode-map "\C-m" 'newline-and-indent)
+	   (define-key python-mode-map "\C-c\C-a" 'my-python-shell-send-buffer)
 	   )
-	 (add-hook 'python-mode-hook 'my-python-mode-hook)
-	 ;; (when macp
-	 ;;   (defun my-inferior-python-mode-comint-filter-for-mac (s)
-	 ;; 	 (replace-regexp-in-string "" "" s)
-	 ;; 	 )
-	 ;;   (add-hook 'inferior-python-mode-hook 'my-inferior-python-mode-comint-filter-for-mac)
-	 ;;   )
+	 (add-hook 'python-mode-hook 'my-python-hook)
 	 )
   )
 
-;; (defun my-py-execute-buffer (&optional shell dedicated switch)
-;;   (interactive)
-;;   (sit-for 1.)
-;;   (py-execute-buffer shell dedicated switch)
-;;   (popwin:display-buffer "*Python*")
-;;   )
-;; (defun my-py-shell (&optional argprompt dedicated pyshellname switch sepchar)
-;;   (interactive "P")
-;;   (let ((py-shell-process (py-shell argprompt dedicated pyshellname switch sepchar)))
-;; 	(when (functionp 'popwin:display-buffer)
-;; 	  (popwin:display-buffer (process-buffer py-shell-process)))
-;; 	))
-;; (define-key python-mode-map (kbd "\C-c\C-c") 'my-py-execute-buffer)
-;; (define-key python-mode-map (kbd "\C-c!") 'my-py-shell)
-;; (define-key python-mode-map (kbd "\C-c\C-z") 'my-py-shell)
-;; (eval-after-load "python-mode"
-;;   '(progn
-;; 	 (setq
-;; 	  ;; disable python-mode to pop up buffer
-;; 	  py-split-windows-on-execute-p nil
-;; 	  py-shell-switch-buffers-on-execute-p nil
-;; 	  )
-;; 	 (cond
-;; 	  (macp
-;; 	   (setq python-python-command "python")
-;; 	   )
-;; 	  (t
-;; 	   (setq python-python-command "c:/dev/python26/python.exe")
-;; 	   )
-;; 	  )
-;; 	 (defun my-python-mode-hook ()
-;; 	   (setq
-;; 		py-shell-name "python"
-;; 		py-shell-toggle-1 "python3"
-;; 		py-shell-toggle-2 "python"
-;; 		)
-;; 	   (call-interactively 'py-switch-shell)
-;; 	   )
-;; 	 (add-hook 'python-mode-hook 'my-python-mode-hook)
-;; ))
 
 (provide 'my-python)
