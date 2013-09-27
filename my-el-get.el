@@ -75,6 +75,10 @@
 			   :type github
 			   :pkgname "joonhwan/emacs-cmake-project"
 			   )
+		(:name codesearch
+			   :type github
+			   :pkgname "abingham/codesearch.el"
+			   )
 		;; (:name emacs-clang-complete-async
 		;; 	   :type github
 		;; 	   :pkgname "joonhwan/emacs-clang-complete-async"
@@ -125,6 +129,10 @@
 		       ;; 		`(("make" ,(format "EMACS=%s" el-get-emacs) "docs")))
 		       :;; build/berkeley-unix (("touch" "`find . -name Makefile`") ("gmake"))
 		       )
+		(:name org-mode
+			   :type git
+			   :url "git://orgmode.org/org-mode.git"
+			   )
 		(:name outshine
 			   :description "outline with outshine outshines outline"
 			   :type github
@@ -229,6 +237,7 @@
 		 thingatpt+
 		 undo-tree
 		 ;; warp
+		 web-mode
 		 wgrep
 		 xcscope
 		 yaml-mode
