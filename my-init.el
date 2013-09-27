@@ -18,6 +18,7 @@
 (require 'my-el-get)
 (require 'my-editing)
 (require 'my-programming) ;; for all except c/c++
+(require 'my-python)
 (require 'my-cc-mode) ;; for c/c++ mode only
 (require 'my-dired)
 (require 'my-shell)
