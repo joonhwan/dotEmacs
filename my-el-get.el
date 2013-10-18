@@ -205,6 +205,7 @@
 		 ;; evil
 		 expand-region
 		 flycheck
+		 flymake-cursor
 		 full-ack
 		 fuzzy
 		 git-modes

@@ -443,7 +443,42 @@
 (set (make-local-variable 'my-build-dir) nil)
 (put 'my-build-dir 'disabled nil)
 
-(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+(add-hook 'c-mode-hook 'my-c-mode-common-hook)
+(add-hook 'c++-mode-hook 'my-c-mode-common-hook)
+
+
+(defun my-csharp-mode-hook ()
+  (subword-mode 1)
+  (c-toggle-auto-newline 1)
+  (c-toggle-hungry-state 1)
+  (setq show-trailing-whitespace t)
+  (hs-minor-mode 1)
+  (which-function-mode 1) 
+  (c-set-style "c#" nil)
+  ;; ;; TODO more reasonable way to do this?
+  ;; (if debug-on-error
+  ;; 	  (toggle-debug-on-error))
+  ;; for work with auto-complete and yasnippet
+  (when (boundp 'ac-sources)
+	(add-to-list 'ac-sources 'ac-source-yasnippet t))
+  (if (featurep 'expand-region-core)
+	  ;; in c++ mode i do not use er/mark-word actually.
+	  (set (make-local-variable 'er/try-expand-list) '(;; er/mark-word
+													   er/mark-symbol
+													   er/mark-symbol-with-prefix
+													   er/mark-next-accessor
+													   er/mark-method-call
+													   er/mark-comment
+													   er/mark-comment-block
+													   er/mark-inside-quotes
+													   er/mark-outside-quotes
+													   er/mark-inside-pairs
+													   er/mark-outside-pairs)))
+  (if (featurep 'projectile)
+  	  (projectile-mode 1))
+  )
+
+(add-hook 'csharp-mode-hook 'my-csharp-mode-hook)
 
 ;; (add-to-list 'load-path "~/elisp/project-buffer")
 ;; (require 'sln-mode)

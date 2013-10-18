@@ -249,6 +249,11 @@
       (w32-shell-execute "Open" (substitute ?\\ ?/ (expand-file-name FILE)))))
 
 ;;
+;; * xaml
+;;
+(setq auto-mode-alist (cons '("\.xaml$" . nxml-mode) auto-mode-alist))
+
+;;
 ;; * graphviz
 ;;
 (eval-after-load "graphviz-dot-mode"

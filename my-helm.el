@@ -4,7 +4,7 @@
 (cond
  (macp
   ;; 문제가 있다.
-  (setq helm-c-top-command "-ncols %s -F -R -u")
+  (setq helm-top-command "-ncols %s -F -R -u")
   ;; hint from
   ;; https://github.com/emacs-helm/helm/commit/e6d0634c41eeeb2219d15baf0dfd4758ef16b221
   (add-to-list 'helm-completing-read-handlers-alist '(tmm-menubar . nil) t)
@@ -25,22 +25,17 @@
   )
  )
 
-(setq helm-c-locate-command 
-	  (case system-type
-		('gnu/linux "locate -i -r %s")
-		('berkeley-unix "locate -i %s")
-		('windows-nt "es %s")
-		('darwin "mdfind -name %s %s")
-		(t "locate %s"))
-	  )
+(when macp
+  (setq helm-locate-command "mdfind -name %s %s")
+  )
 
 (setq
- helm-c-grep-default-command "perl.exe -Hn --no-group --no-color %e %p %f"
- helm-c-grep-default-recurse-command "perl.exe -H --no-group --no-color %e %p %f"
+ helm-grep-default-command "perl.exe -Hn --no-group --no-color %e %p %f"
+ helm-grep-default-recurse-command "perl.exe -H --no-group --no-color %e %p %f"
  )
 
 ;; Source for completing Emacs variables.
-(setq helm-c-source-emacs-variables
+(setq helm-source-emacs-variables
   '((name . "Emacs Variables")
     (candidates . (lambda ()
                     (sort (all-completions "" obarray 'boundp) 'string-lessp)))
@@ -50,19 +45,19 @@
 ;; 원본의 helm-for-files-preferred-list 설정
 (setq helm-for-files-preferred-list 
 	  '(
-		;; helm-c-source-ffap-guesser ;; 이거 있으면 좋을 텐데 동작이 원하는대로 안됨
-		;; helm-c-source-ffap-line ;; 이거또 없앴네... 헐
-		helm-c-source-recentf
-		helm-c-source-files-in-current-dir
-		helm-c-source-files-in-all-dired
-		;; helm-c-source-buffers-list
-		helm-c-source-bookmarks
-		helm-c-source-file-cache
-		helm-c-source-locate
+		;; helm-source-ffap-guesser ;; 이거 있으면 좋을 텐데 동작이 원하는대로 안됨
+		;; helm-source-ffap-line ;; 이거또 없앴네... 헐
+		helm-source-recentf
+		helm-source-files-in-current-dir
+		helm-source-files-in-all-dired
+		;; helm-source-buffers-list
+		helm-source-bookmarks
+		helm-source-file-cache
+		helm-source-locate
 		))
 
 ;; Source for completing Emacs functions.
-(setq helm-c-source-emacs-functions
+(setq helm-source-emacs-functions
   '((name . "Emacs Functions")
     (candidates . (lambda ()
                     (let (commands)
@@ -87,11 +82,11 @@
 ;; (when (and (featurep 'projectile)
 ;; 		   (my-try-require 'helm-projectile))
 ;;   ;; helm-projectile 이 있으면, 
-;;   (add-to-list 'helm-for-files-preferred-list 'helm-c-source-projectile-files-list t)
+;;   (add-to-list 'helm-for-files-preferred-list 'helm-source-projectile-files-list t)
 ;;   )
 
 (when (featurep 'eproject)
-  (setq helm-c-source-eproject-files
+  (setq helm-source-eproject-files
 		`((name . "eproject files")
 		  (init . (lambda () (require 'eproject)))
 		  (candidates . (lambda () (eproject-file-list)))
@@ -99,59 +94,59 @@
 		  (help-message . helm-generic-file-help-message)
 		  (mode-line . helm-generic-file-mode-line-string)
 		  (candidate-number-limit . 20)
-		  ;; (candidate-transformer helm-c-highlight-files)
+		  ;; (candidate-transformer helm-highlight-files)
 		  (type . file)
 		  (requires-pattern . 0)
 		  ))
   ;; `((name . "eproject files")
   ;; 	(candidates . (lambda ()
   ;; 					(with-helm-current-buffer
-  ;; 					  (directory-files (helm-c-current-directory) t))))
+  ;; 					  (directory-files (helm-current-directory) t))))
   ;; 	(keymap . ,helm-generic-files-map)
   ;; 	(help-message . helm-generic-file-help-message)
   ;; 	(mode-line . helm-generic-file-mode-line-string)
-  ;; 	(candidate-transformer helm-c-highlight-files)
+  ;; 	(candidate-transformer helm-highlight-files)
   ;; 	(type . file)))
 
-  (defun my-helm-c-source-eproject-files ()
+  (defun my-helm-source-eproject-files ()
 	(interactive)
-	(helm-other-buffer '(helm-c-source-eproject-files) "*helm for eproject*"))
+	(helm-other-buffer '(helm-source-eproject-files) "*helm for eproject*"))
 
-  (defun my-helm-c-ctags ()
+  (defun my-helm-ctags ()
 	(interactive)
-	(helm-other-buffer '(helm-c-source-ctags) "*helm for ctags*"))
+	(helm-other-buffer '(helm-source-ctags) "*helm for ctags*"))
 
-  (add-to-list 'helm-for-files-preferred-list 'helm-c-source-eproject-files t)
+  (add-to-list 'helm-for-files-preferred-list 'helm-source-eproject-files t)
   )
 
 (when (featurep 'projectile)
   (require 'helm-projectile))
 
 ;; variable first and function last
-(defun my-helm-c-help-variable-or-function ()
+(defun my-helm-help-variable-or-function ()
   "Preconfigured helm to describe commands, functions, variables and faces."
   (interactive)
   (let ((default (thing-at-point 'symbol)))
     (helm :sources
           (mapcar (lambda (func)
                     (funcall func default))
-                  '(helm-c-source-emacs-variables
-					helm-c-source-emacs-commands
-                    helm-c-source-emacs-functions
+                  '(helm-source-emacs-variables
+					helm-source-emacs-commands
+                    helm-source-emacs-functions
                     ))
           :buffer "*helm help elisp*"
           :preselect default)))
 ;; function first and variable last
-(defun my-helm-c-help-function-or-variable ()
+(defun my-helm-help-function-or-variable ()
   "Preconfigured helm to describe commands, functions, variables and faces."
   (interactive)
   (let ((default (thing-at-point 'symbol)))
     (helm :sources
           (mapcar (lambda (func)
                     (funcall func default))
-                  '(helm-c-source-emacs-commands
-                    helm-c-source-emacs-functions
-					helm-c-source-emacs-variables
+                  '(helm-source-emacs-commands
+                    helm-source-emacs-functions
+					helm-source-emacs-variables
                     ))
           :buffer "*helm help elisp*"
           :preselect default)))
@@ -178,12 +173,12 @@
 (progn
   (define-key helm-command-map (kbd "<RET>") 'helm-mini)
   ;; (define-key helm-command-map (kbd "C-l") 'helm-filelist)
-  (define-key helm-command-map (kbd "h v") 'my-helm-c-help-variable-or-function)
-  (define-key helm-command-map (kbd "h f") 'my-helm-c-help-function-or-variable)
+  (define-key helm-command-map (kbd "h v") 'my-helm-help-variable-or-function)
+  (define-key helm-command-map (kbd "h f") 'my-helm-help-function-or-variable)
   (define-key helm-command-map (kbd "o h") 'helm-org-headlines)
   (define-key helm-command-map (kbd "o k") 'helm-org-keywords)
   (when (featurep 'eproject)
-	(define-key helm-command-map (kbd "j") 'my-helm-c-source-eproject-files)
+	(define-key helm-command-map (kbd "j") 'my-helm-source-eproject-files)
 	)
   (when (featurep 'projectile)
   	(define-key helm-command-map (kbd "j") 'helm-projectile))
