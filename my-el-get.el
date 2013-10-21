@@ -237,6 +237,7 @@
 		 smex
 		 thingatpt+
 		 undo-tree
+		 use-package
 		 ;; warp
 		 web-mode
 		 wgrep
