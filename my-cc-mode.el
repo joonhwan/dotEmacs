@@ -476,6 +476,7 @@
 													   er/mark-outside-pairs)))
   (if (featurep 'projectile)
   	  (projectile-mode 1))
+  (flymake-mode 1)
   )
 
 (add-hook 'csharp-mode-hook 'my-csharp-mode-hook)
