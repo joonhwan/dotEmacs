@@ -33,6 +33,28 @@
   )
 
 ;;
+;; * tfs(MS Team Foundation Server) on win32
+;;
+(when win32p
+  ;; until lisp veteran gives me another nice tfs integration....
+  (require 'tfs)
+  (setq tfs/tf-exe  "c:/dev/vs11/Common7/IDE/TF.exe")
+  (global-set-key  "\C-cvo" 'tfs/checkout)
+  (global-set-key  "\C-cvi" 'tfs/checkin)
+  (global-set-key  "\C-cvp" 'tfs/properties)
+  (global-set-key  "\C-cvr" 'tfs/rename)
+  (global-set-key  "\C-cvg" 'tfs/get)
+  (global-set-key  "\C-cvh" 'tfs/history)
+  (global-set-key  "\C-cvu" 'tfs/undo)
+  (global-set-key  "\C-cvd" 'tfs/diff)
+  (global-set-key  "\C-cv-" 'tfs/delete)
+  (global-set-key  "\C-cv+" 'tfs/add)
+  (global-set-key  "\C-cvs" 'tfs/status)
+  (global-set-key  "\C-cva" 'tfs/annotate)
+  (global-set-key  "\C-cvw" 'tfs/workitem)
+  )
+
+;;
 ;; * magit
 ;;
 (global-set-key (kbd "C-x g") 'magit-status)

@@ -1,5 +1,8 @@
 ;; -*- coding:utf-8-auto -*-
 
+(require 'package)
+(package-initialize)
+
 (add-to-list 'load-path (concat my-dotfiles-dir "alien/el-get-package/el-get"))
 
 ;; (setq-default package-user-dir (concat my-dotfiles-dir "alien/elpa-package"))
@@ -235,6 +238,7 @@
 		 rainbow-mode
 		 s_dot_el
 		 smex
+		 tfs
 		 thingatpt+
 		 undo-tree
 		 use-package
