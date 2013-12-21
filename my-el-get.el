@@ -94,6 +94,10 @@
 			   :type github
 			   :pkgname "rocky/emacs-loc-changes"
 			   )
+		(:name iedit
+			   :type github
+			   :pkgname "victorhge/iedit"
+			   )
 		(:name grizzl
 			   :description "Grizzl - A fuzzy search index & completing-read for Emacs"
 			   :type github
@@ -219,7 +223,7 @@
 		 helm
 		 htmlize
 		 ido-ubiquitous
-		 iedit
+		 ;; iedit ;; i use my own github origin(victorhge's most active version)
 		 ;; iflipb
 		 js2-mode
 		 key-chord
