@@ -6,7 +6,8 @@
 
 (eval-after-load "python"
   '(progn
-	 (setq python-shell-interpreter "c:/python33/python.exe")
+	 (cond
+	  (win32p (setq python-shell-interpreter "c:/python33/python.exe")))
 	 (defun my-python-shell-send-buffer (prefix)
 	   (interactive "P")
 	   (let ((source-window (selected-window)))
