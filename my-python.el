@@ -6,7 +6,7 @@
 
 (eval-after-load "python"
   '(progn
-	 (setq python-shell-interpreter "c:/python33/python.exe")
+	 (setq python-shell-interpreter "c:/python27/python.exe")
 	 (defun my-python-shell-send-buffer (prefix)
 	   (interactive "P")
 	   (let ((source-window (selected-window)))
@@ -21,6 +21,7 @@
 	 (add-hook 'python-mode-hook 'my-python-hook)
 	 )
   )
+
 
 
 (provide 'my-python)

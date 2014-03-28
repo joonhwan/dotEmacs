@@ -408,7 +408,7 @@
   (c-toggle-hungry-state 1)
   (setq show-trailing-whitespace t)
   (hs-minor-mode 1)
-  (which-function-mode 1) 
+  ;; (which-function-mode 1) 
   (c-set-style "mystyle" nil)
   ;; ;; TODO more reasonable way to do this?
   ;; (if debug-on-error
@@ -453,7 +453,7 @@
   (c-toggle-hungry-state 1)
   (setq show-trailing-whitespace t)
   (hs-minor-mode 1)
-  (which-function-mode 1) 
+  ;; (which-function-mode 1) 
   (c-set-style "c#" nil)
   ;; ;; TODO more reasonable way to do this?
   ;; (if debug-on-error

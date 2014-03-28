@@ -65,6 +65,10 @@
 (if win32p
 	(setq magit-git-executable
 		  (cond
+		   ((file-exists-p "c:/dev/git/bin/git.exe")
+			"c:/dev/git/bin/git.exe")
+		   ((file-exists-p "c:/Users/jhlee/AppData/Local/GitHub/PortableGit_0f65d050d0c352fd38a0b25d82ee942deb19ef87/bin/git.exe")
+			"c:/Users/jhlee/AppData/Local/GitHub/PortableGit_0f65d050d0c352fd38a0b25d82ee942deb19ef87/bin/git.exe")
 		   ((file-exists-p "c:/Program Files/Git/bin/git.exe")
 			"c:/program files/git/bin/git.exe")
 		   ((file-exists-p "c:/Program Files (x86)/Git/bin/git.exe")
@@ -345,6 +349,16 @@
 (autoload 'matlab-mode "matlab" "Enter Matlab mode." t)
 (setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
 (autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
+
+;;
+;; * sql
+;;
+(eval-after-load "sql"
+  (load-library "sql-indent"))
+(cond
+ (win32p
+  (setq sql-postgres-program "C:\\Program Files\\PostgreSQL\\9.3\\bin\\psql.exe")
+  ))
 
 ;;
 ;; * protobuf mode

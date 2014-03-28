@@ -142,6 +142,9 @@ example:
   (cond
    (win32p
 	(set-language-environment "Korean")
+	;; elisp은 그냥 utf-8이 편하다.(github등의 코드들)
+	(add-to-list 'file-coding-system-alist '("\\.el\\'" utf-8))
+	(add-to-list 'process-coding-system-alist '("git" utf-8 . utf-8))
 	)
    (macp
 	;; (setq default-process-coding-system "utf-8-mac")

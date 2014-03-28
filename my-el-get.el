@@ -78,10 +78,10 @@
 			   :type github
 			   :pkgname "joonhwan/emacs-cmake-project"
 			   )
-		(:name codesearch
-			   :type github
-			   :pkgname "abingham/codesearch.el"
-			   )
+		;; (:name codesearch
+		;; 	   :type github
+		;; 	   :pkgname "abingham/codesearch.el"
+		;; 	   )
 		;; (:name emacs-clang-complete-async
 		;; 	   :type github
 		;; 	   :pkgname "joonhwan/emacs-clang-complete-async"
@@ -99,6 +99,23 @@
 			   :type github
 			   :pkgname "d11wtq/grizzl"
 			   )
+		(:name epl
+		       :description "Emacs Package Library"
+		       :type github
+		       :pkgname "cask/epl"
+		       )
+		(:name pkg-info
+		       :description "Provide information about Emacs packages."
+		       :type github
+		       :pkgname "lunaryorn/pkg-info.el"
+		       :depends (s epl)
+		       )
+		(:name projectile
+		       :description "Project navigation and management library for Emacs"
+		       :type github
+		       :pkgname "bbatsov/projectile"
+		       :depends (dash s pkg-info)
+		       :features projectile)
 		;; (:name iflipb
 		;; 	   :description "iflipb is ALT-TAB like buffer switching without full cycling."
 		;; 	   :type hg
@@ -140,6 +157,11 @@
 			   :description "outline with outshine outshines outline"
 			   :type github
 			   :pkgname "tj64/outshine"
+			   )
+		(:name sql-indent
+			   :description sql-indent mode
+			   :type emacswiki
+			   :features sql-indent
 			   )
 		)
 	  )
@@ -230,6 +252,7 @@
 		 markdown-mode
 		 multiple-cursors
 		 package
+		 pkg-info
 		 pcache
 		 popwin
 		 projectile
@@ -238,6 +261,7 @@
 		 rainbow-mode
 		 s_dot_el
 		 smex
+		 sql-indent
 		 tfs
 		 thingatpt+
 		 undo-tree
