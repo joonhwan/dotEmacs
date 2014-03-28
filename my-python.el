@@ -4,6 +4,9 @@
 ;; as is 2013/09/26 bankrup'd old python trials and then started with
 ;; extremely simple configuration for study
 
+(my-try-require 'adaptive-wrap)
+
+
 (eval-after-load "python"
   '(progn
 	 (cond
@@ -18,9 +21,13 @@
 	 (defun my-python-hook ()
 	   ;; (define-key python-mode-map "\C-m" 'newline-and-indent)
 	   (define-key python-mode-map "\C-c\C-a" 'my-python-shell-send-buffer)
+	   ;; (when (functionp 'adaptive-wrap-prefix-mode)
+	   ;; 	 (adaptive-wrap-prefix-mode)
+	   ;; 	 (setq adaptive-wrap-extra-indent 4)
+	   ;; 	 )
 	   )
 	 (add-hook 'python-mode-hook 'my-python-hook)
-	 )
+  )
   )
 
 
