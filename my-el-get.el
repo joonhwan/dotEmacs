@@ -1,7 +1,7 @@
 ;; -*- coding:utf-8-auto -*-
 
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; (require 'package)
+;; (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 ;; -- for el-get itself
 (add-to-list 'load-path (concat my-dotfiles-dir "alien/el-get-package/el-get"))
@@ -67,6 +67,11 @@
 		;; 	   :type hg
 		;; 	   :url "http://hg.rosdahl.net/iflipb"
 		;; 	   )
+		(:name org-page
+			   :type github
+			   :pkgname "kelvinh/org-page"
+			   :depends (ht dash mustache)
+			   )
 		(:name s_dot_el
 			   :description "The long lost Emacs string manipulation library."
 			   :type github
@@ -92,6 +97,7 @@
 		 gtranslate
 		 helm
 		 htmlize
+		 iedit
 		 ido-ubiquitous
 		 js2-mode
 		 key-chord
@@ -102,6 +108,7 @@
 		 markdown-mode
 		 multiple-cursors
 		 outshine
+		 org-mode
 		 pcache
 		 popwin
 		 projectile
@@ -121,6 +128,9 @@
 		 )
        (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
 
+;; ;; clean up any of packages that is not permanent
+;; (el-get-cleanup my-packages)
+;; init packages
 (el-get 'sync my-packages)
 
 (provide 'my-el-get)
