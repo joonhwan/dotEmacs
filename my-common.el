@@ -155,6 +155,36 @@ example:
 (define-coding-system-alias 'ks_c_5601-1987 'korean-iso-8bit)
 ;; (add-to-list 'file-coding-system-alist '("\\.el\\'" . 'utf-8))
 
+;; some critical key
+(setq
+ ;; i use command key as meta 
+ mac-command-modifier 'meta
+ )
+
+;; little func for win32 path resolving.. :(
+(defun my-find-any-first-exists-file (file-path-list &optional default-value)
+  "find any first existing file in list"
+  (let ((list file-path-list) 
+		(elem)
+		(found-elem))
+	(catch 'break
+	  (while list
+		(catch 'continue
+		  (setq elem (car list))
+		  (when (file-exists-p elem)
+			(setq found-elem elem)
+			(throw 'break elem)
+			)
+		  (setq list (cdr list))
+		  )
+		)
+	  )
+	(if (and (not found-elem) default-value)
+	  (setq found-elem default-value)
+	)
+  )
+)
+
 ;;
 ;; * i'm not using normal path of emacs customization!
 ;;

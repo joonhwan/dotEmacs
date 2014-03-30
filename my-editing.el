@@ -64,8 +64,6 @@
 							  (eval rainbow-mode t)
 							  (my-org-current-project-name . "orgwiki")
 							  )
- ;; i use command key as meta 
- mac-command-modifier 'meta
  )
 
 (progn
