@@ -64,8 +64,6 @@
 							  (eval rainbow-mode t)
 							  (my-org-current-project-name . "orgwiki")
 							  )
- ;; i use command key as meta 
- mac-command-modifier 'meta
  )
 
 (progn
@@ -547,8 +545,7 @@ Uses `my-current-date-time-format' for the formatting the date/time."
 	(minibuffer-message "keep work!")
 	)
   )
-
-(global-set-key (kbd "C-x o") 'my-easy-other-window)
+;; (global-set-key (kbd "C-x o") 'my-easy-other-window)
 
 (defun my-easy-find-file (&optional arg)
   "Like `ido-find-file, but automatically edit the file with root(sudo) if needed"
@@ -573,6 +570,7 @@ Uses `my-current-date-time-format' for the formatting the date/time."
 (global-set-key (kbd "C-S-f") (lambda () (interactive) (ignore-errors (forward-char 5))))
 (global-set-key (kbd "C-S-b") (lambda () (interactive) (ignore-errors (backward-char 5))))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Begin automatic white-space insertion after comma
@@ -580,7 +578,8 @@ Uses `my-current-date-time-format' for the formatting the date/time."
 ;; http://ericscrosson.wordpress.com/2013/04/05/minimizing-keystrokes-required-by-punctuation/
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-set-key (kbd ",") (lambda() (interactive) (insert ", ")))
+;; 나중에 minor mode로 만들어 사용해야 ... 
+;; (global-set-key (kbd ",") (lambda() (interactive) (insert ", ")))
 
 ;;
 ;; joon customized editing feature

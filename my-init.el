@@ -29,6 +29,7 @@
 (require 'my-ido)
 (require 'my-tags)
 (require 'my-org)
+(require 'my-org-page)
 (unless (daemonp)
   (require 'my-font))
 
