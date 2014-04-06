@@ -77,6 +77,11 @@
 			   :type github
 			   :pkgname "magnars/s.el"
 			   )
+		(:name warp-mode
+			   :description "Web Article Realtime Preview for Emacs"
+			   :type github
+			   :pkgname "yukihr/Warp"
+			   )
 		))
 
 ;; my packages
@@ -115,6 +120,7 @@
 		 qml-mode
 		 rainbow-delimiters
 		 rainbow-mode
+		 sql-indent
 		 smex
 		 tfs
 		 thingatpt+

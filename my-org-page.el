@@ -10,7 +10,8 @@
  op/personal-github-link "https://github.com/joonhwan"
  ;; ;;; the configuration below are optional
  ;; op/personal-google-analytics-id "your_google_analytics_id"
- ;; op/template-directory
+ ;; (setq op/theme-root-directory (concat my-dotfiles-dir "themes")
+ ;; (setq op/theme 'simple)
  )
 
 (provide 'my-org-page)

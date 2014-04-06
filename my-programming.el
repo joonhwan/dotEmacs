@@ -367,16 +367,20 @@
   (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
   )
 
-(when (featurep 'eproject)
-  (setq
-   ;; do not rename buffer to its relative path. too long to see in mode line!
-   prj-rename-buffers nil
-   ;; do not add/remove too intelligent. :(
-   prj-autotracking nil
-   )
-  (global-set-key (kbd "C-c C-f") 'eproject-visitfile)
+;; * warp(realtime update html file)
+(when (my-try-require 'warp)
+  (global-set-key (kbd "C-c w") 'warp-mode)
+  ;; ;; Set markdown converter (if you want)
+  ;; (add-to-list 'warp-format-converter-alist
+  ;; 			   '("\\.md\\|\\.markdown" t
+  ;; 				 (lambda ()
+  ;; 				   ;; Set command you are using
+  ;; 				   '("markdown"))))
   )
+  
 
+
+;; * projectile
 (when (my-try-require 'projectile)
   (require 'my-projectile)
   )
