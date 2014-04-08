@@ -99,13 +99,14 @@
 		 dash-at-point
 		 diminish
 		 dired-details
+		 flx
 		 full-ack
 		 fuzzy
 		 graphviz-dot-mode
-		 grizzl
 		 gtranslate
 		 helm
 		 htmlize
+		 ido-vertical-mode
 		 iedit
 		 ido-ubiquitous
 		 js2-mode

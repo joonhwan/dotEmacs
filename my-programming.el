@@ -377,8 +377,20 @@
   ;; 				   ;; Set command you are using
   ;; 				   '("markdown"))))
   )
-  
 
+;; * css mode
+(defun my-css-mode-hook ()
+  (define-key css-mode-map (kbd "}") 'my-self-insert-brace-and-indent)
+  )
+(add-hook 'css-mode-hook 'my-css-mode-hook)
+
+  
+;; * javascript
+(defun my-js-mode-hook ()
+  ;; (define-key js-mode-map "}" 'c-electric-brace)
+  (electric-indent-mode t)
+  )
+(add-hook 'js-mode-hook 'my-js-mode-hook)
 
 ;; * projectile
 (when (my-try-require 'projectile)

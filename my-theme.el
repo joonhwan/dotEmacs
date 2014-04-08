@@ -45,12 +45,12 @@
   ;; (font . "Menlo-13.5:normal:antialias=natural")
   )
 ;; 초기 테마
-(load-theme 'my-dark-theme)
+(load-theme 'my-default-dark)
 (defvar my-current-theme-is-dark t)
 
 (setq my-theme-cycle-list '('my-zenburn 'my-solarized-dark 'my-solarized-light 'my-white))
-(defvar my-default-dark-theme 'my-dark-theme)
-(defvar my-default-light-theme 'my-light-theme)
+(defvar my-default-dark-theme 'my-default-dark)
+(defvar my-default-light-theme 'my-default-light)
 (defun my-opposite-theme (curr-theme-name)
   (let ((curr-theme-split nil)
 		(opposite-theme-split nil)
