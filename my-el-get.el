@@ -67,6 +67,10 @@
 		;; 	   :type hg
 		;; 	   :url "http://hg.rosdahl.net/iflipb"
 		;; 	   )
+		(:name ob-browser
+			   :type github
+			   :pkgname "krisajenkins/ob-browser"
+			   )			   
 		(:name org-page
 			   :type github
 			   :pkgname "kelvinh/org-page"

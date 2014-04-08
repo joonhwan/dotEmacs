@@ -33,6 +33,8 @@
    (dot . t)
    (c++ . nil)
    (gnuplot . t)
+   (js . t)
+   (browser . t)
    (plantuml . t)))
 
 ;; customizing org
@@ -55,6 +57,9 @@
  ;; org-remember-store-without-prompt t
  ;; org-fast-tag-selection-single-key (quote expert))
  org-confirm-babel-evaluate nil
+ org-babel-default-header-args:browser '((:results . "file")
+										 (:exports . "both")
+										 (:cache . "yes"))
  org-plantuml-jar-path (cond
 						(win32p "c:/dev/plantuml/plantuml.jar")
 						(t "~/scripts/plantuml.jar"))
@@ -137,14 +142,14 @@
 
 ;; if i think it is safe block to be evaluated(i.e plantuml code)
 ;; then, just do not ask me about confirmation.
-(defun my-org-babel-confirm-evaluate-func (lang block)
-  (cond
-   ((string-equal lang "plantuml")
-	nil)
-   (t
-	t)
-   ))
-(setq org-confirm-babel-evaluate 'my-org-babel-confirm-evaluate-func)
+;; (defun my-org-babel-confirm-evaluate-func (lang block)
+;;   (cond
+;;    ((string-equal lang "plantuml")
+;; 	nil)
+;;    (t
+;; 	t)
+;;    ))
+;; (setq org-confirm-babel-evaluate 'my-org-babel-confirm-evaluate-func)
 
 (defun my-org-mode-hook ()
   (iimage-mode t)
