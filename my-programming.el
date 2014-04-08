@@ -380,7 +380,7 @@
 
 ;; * css mode
 (defun my-css-mode-hook ()
-  (define-key css-mode-map (kbd "}") 'my-self-insert-brace-and-indent)
+  ;; (define-key css-mode-map (kbd "}") 'my-self-insert-brace-and-indent)
   )
 (add-hook 'css-mode-hook 'my-css-mode-hook)
 
