@@ -78,6 +78,10 @@
 		;; 	   :type hg
 		;; 	   :url "http://hg.rosdahl.net/iflipb"
 		;; 	   )
+		(:name ob-browser
+			   :type github
+			   :pkgname "krisajenkins/ob-browser"
+			   )			   
 		(:name org-page
 			   :type github
 			   :pkgname "kelvinh/org-page"
@@ -99,6 +103,11 @@
 			   :type github
 			   :pkgname "magnars/s.el"
 			   )
+		(:name warp-mode
+			   :description "Web Article Realtime Preview for Emacs"
+			   :type github
+			   :pkgname "yukihr/Warp"
+			   )
 		))
 
 ;; my packages
@@ -112,13 +121,14 @@
 		 dash-at-point
 		 diminish
 		 dired-details
+		 flx
 		 full-ack
 		 fuzzy
 		 graphviz-dot-mode
-		 grizzl
 		 gtranslate
 		 helm
 		 htmlize
+		 ido-vertical-mode
 		 iedit
 		 ido-ubiquitous
 		 js2-mode
@@ -137,6 +147,7 @@
 		 qml-mode
 		 rainbow-delimiters
 		 rainbow-mode
+		 sql-indent
 		 smex
 		 sql-indent
 		 tfs

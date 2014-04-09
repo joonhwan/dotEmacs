@@ -42,6 +42,15 @@
  helm-grep-default-recurse-command "perl.exe -H --no-group --no-color %e %p %f"
  )
 
+(defun my-ido-over-helm (fn)
+  (if (listp fn)
+	  (dolist (fn-elem fn)
+		(add-to-list 'helm-completing-read-handlers-alist `(,fn-elem . ido)))
+	(add-to-list 'helm-completing-read-handlers-alist `(,fn . ido))))
+
+(when (featurep 'el-get)
+  (my-ido-over-helm '(el-get-cd el-get-install el-get-find-recipe-file)))
+
 ;; Source for completing Emacs variables.
 (setq helm-source-emacs-variables
   '((name . "Emacs Variables")
