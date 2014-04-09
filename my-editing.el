@@ -272,7 +272,7 @@ home directory is a root directory) and removes automounter prefixes
   )
 
 ;;
-;; replace/occur
+;; * replace/occur
 ;; 
 (eval-after-load "replace"
   '(progn
@@ -281,6 +281,14 @@ home directory is a root directory) and removes automounter prefixes
 			   '(lambda()
 				  (next-error-follow-minor-mode t)))
      ))
+
+;; * visual regexp
+(when (locate-library "visual-regexp")
+  (define-key global-map (kbd "C-M-%") 'vr/query-replace)
+  ;; (define-key global-map (kbd "C-c q") 'vr/replace)
+  ;; if you use multiple-cursors, this is for you:
+  ;; (define-key global-map (kbd "C-c m") 'vr/mc-mark)
+  )
 
 (eval-after-load "woman"
   '(progn

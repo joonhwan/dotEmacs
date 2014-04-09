@@ -131,6 +131,7 @@
 		 thingatpt+
 		 undo-tree
 		 use-package
+		 visual-regexp
 		 web-mode
 		 wgrep
 		 xcscope

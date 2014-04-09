@@ -57,7 +57,7 @@
 ;;
 (load custom-file)
 
-(my-setup-font-for-mbcs)
+;; (my-setup-font-for-mbcs)
 
 ;; (progn
 ;;   (message "modifying frame...")

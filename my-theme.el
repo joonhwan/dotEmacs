@@ -17,7 +17,7 @@
 ;;영문간의 글꼴 크기 차이가 난다. font.c 의 코드를 보았지만, 아직은
 ;;spacing 이나 scalable 같은게 어떻게 동작하는지 이해를 못하고 있다.
 (defvar my-default-font-name nil)
-  (defvar my-default-font-size 90)
+(defvar my-default-font-size 90)
 (cond
  (macp
   (setq my-default-font-name "Menlo" my-default-font-size 120))
@@ -47,8 +47,6 @@
 ;; 초기 테마
 (load-theme 'my-default-dark)
 (defvar my-current-theme-is-dark t)
-
-(setq my-theme-cycle-list '('my-zenburn 'my-solarized-dark 'my-solarized-light 'my-white))
 (defvar my-default-dark-theme 'my-default-dark)
 (defvar my-default-light-theme 'my-default-light)
 (defun my-opposite-theme (curr-theme-name)
@@ -91,9 +89,10 @@
 
 (defun my-select-theme (theme)
   (interactive
-   (list (ido-completing-read "Select my theme: " (remove-if (lambda (s) (not (s-starts-with-p "my-" s))) (mapcar 'symbol-name (custom-available-themes))))))
+   (list (ido-completing-read "Select my theme: " (remove-if (lambda (s) (not (string-match "my-" s))) (mapcar 'symbol-name (custom-available-themes))))))
   (mapcar 'disable-theme custom-enabled-themes)
   (load-theme (intern theme) nil nil)
+  (my-setup-font-for-mbcs)
   )
 (global-set-key (kbd "C-c s t") 'my-select-theme)
 
@@ -152,7 +151,7 @@
 	   (tool-bar-lines . 0)
 	   (alpha . (100 100))
 	   (line-spacing . 0)
-	   (font . ,(format "%s-%g" my-default-font-name (* 0.1 my-default-font-size)))
+	   ;; (font . ,(format "%s-%g" my-default-font-name (* 0.1 my-default-font-size)))
 	   ;; (font . ,(format "%s" my-default-font-name))
 	   ))
 	(macp
@@ -162,7 +161,8 @@
 	   ;; (left . -1)
 	   ;; (width . 115)
 	   ;; (height . 71)
-	   (font . ,(format "%s-%g" my-default-font-name (* 0.1 my-default-font-size)))
+	   ;; (font . ,(format "%s-%g" my-default-font-name (* 0.1 my-default-font-size)))
+	   ;; (font . ,(format "%s" my-default-font-name))
 	   ))))
   (setq initial-frame-alist default-frame-alist)
   (modify-all-frames-parameters default-frame-alist)

@@ -3,7 +3,7 @@
 
 (custom-theme-set-faces
  'my-default-dark
- '(default ((t (:family "Menlo" :foundry "apple" :width normal :height 120 :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "#eeeeec" :background "#242426" :stipple nil :inherit nil))))
+ '(default ((t (:width normal :height 120 :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "#eeeeec" :background "#242426" :stipple nil :inherit nil))))
  '(bold ((t (:weight bold))))
  '(bold-italic ((t (:slant italic :weight bold))))
  '(fixed-pitch ((t (:family "Monospace"))))
