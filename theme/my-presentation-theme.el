@@ -3,7 +3,7 @@
 
 (custom-theme-set-variables
  'my-presentation
- '(default-frame-alist (quote ((tool-bar-lines . 0) (menu-bar-lines . 0) (font . "Menlo-20") (vertical-scroll-bars)))))
+ '(my-default-font-size 200))
 
 (custom-theme-set-faces
  'my-presentation
@@ -464,6 +464,6 @@
  '(wl-highlight-summary-refiled-face ((t (:foreground "#232333"))))
  '(wl-highlight-summary-thread-top-face ((t (:foreground "#0f2050"))))
  '(wl-highlight-thread-indent-face ((t (:foreground "#23733c"))))
- '(default ((t (:inherit nil :stipple nil :background "#ffffff" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 200 :width normal)))))
+ '(default ((t (:inherit nil :stipple nil :background "#ffffff" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal)))))
 
 (provide-theme 'my-presentation)

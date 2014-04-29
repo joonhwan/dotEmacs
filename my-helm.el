@@ -53,34 +53,34 @@
 
 ;; 원본의 helm-for-files-preferred-list 설정
 (when (featurep 'projectile)
-  (setq my-helm-source-projectile-files-list
-	`((name . "Projectile Files")
-	  (init . (lambda ()
-				(let ((projectile-require-project-root nil))
-				  (helm-projectile-init-buffer-with-files (projectile-project-root)
-														  (projectile-current-project-files))
-				  )
-				)
-			)
-	  (coerce . helm-projectile-coerce-file)
-	  (candidates-in-buffer)
-	  (keymap . ,helm-generic-files-map)
-	  (help-message . helm-find-file-help-message)
-	  (mode-line . helm-ff-mode-line-string)
-	  (type . file)))
-  (setq helm-for-files-preferred-list 
-		'(
-		  ;; helm-source-ffap-guesser ;; 이거 있으면 좋을 텐데 동작이 원하는대로 안됨
-		  ;; helm-source-ffap-line ;; 이거또 없앴네... 헐
-		  helm-source-recentf
-		  helm-source-files-in-current-dir
-		  my-helm-source-projectile-files-list
-		  helm-source-files-in-all-dired
-		  ;; helm-source-buffers-list
-		  helm-source-bookmarks
-		  helm-source-file-cache
-		  ;; helm-source-locate
-		  ))
+  ;; (setq my-helm-source-projectile-files-list
+  ;; 	`((name . "Projectile Files")
+  ;; 	  (init . (lambda ()
+  ;; 				(let ((projectile-require-project-root nil))
+  ;; 				  (helm-projectile-init-buffer-with-files (projectile-project-root)
+  ;; 														  (projectile-current-project-files))
+  ;; 				  )
+  ;; 				)
+  ;; 			)
+  ;; 	  (coerce . helm-projectile-coerce-file)
+  ;; 	  (candidates-in-buffer)
+  ;; 	  (keymap . ,helm-generic-files-map)
+  ;; 	  (help-message . helm-find-file-help-message)
+  ;; 	  (mode-line . helm-ff-mode-line-string)
+  ;; 	  (type . file)))
+  ;; (setq helm-for-files-preferred-list 
+  ;; 		'(
+  ;; 		  ;; helm-source-ffap-guesser ;; 이거 있으면 좋을 텐데 동작이 원하는대로 안됨
+  ;; 		  ;; helm-source-ffap-line ;; 이거또 없앴네... 헐
+  ;; 		  helm-source-recentf
+  ;; 		  helm-source-files-in-current-dir
+  ;; 		  my-helm-source-projectile-files-list
+  ;; 		  helm-source-files-in-all-dired
+  ;; 		  ;; helm-source-buffers-list
+  ;; 		  ;; helm-source-bookmarks
+  ;; 		  ;; helm-source-file-cache
+  ;; 		  ;; helm-source-locate
+  ;; 		  ))
   )
 
 ;; Source for completing Emacs functions.
@@ -143,7 +143,7 @@
 	(interactive)
 	(helm-other-buffer '(helm-source-ctags) "*helm for ctags*"))
 
-  (add-to-list 'helm-for-files-preferred-list 'helm-source-eproject-files t)
+  ;; (add-to-list 'helm-for-files-preferred-list 'helm-source-eproject-files t)
   )
 
 (when (featurep 'projectile)

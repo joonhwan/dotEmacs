@@ -1,11 +1,16 @@
 (deftheme my-default-light
   "Created 2014-04-08.")
 
+(custom-theme-set-variables
+ 'my-default-light
+ '(my-default-font-size 120))
+
 (custom-theme-set-faces
  'my-default-light
- '(default ((t (:width normal :height 120 :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "#2e3436" :background "#eeeeec" :stipple nil :inherit nil))))
+ '(default ((t (:width normal :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "#2e3436" :background "#eeeeec" :stipple nil :inherit nil))))
  '(bold ((t (:weight bold))))
  '(bold-italic ((t (:slant italic :weight bold))))
+ '(error ((t (:weight bold :foreground-color:pink))))
  '(fixed-pitch ((t (:family "Monospace"))))
  '(italic ((((supports :slant italic)) (:slant italic)) (((supports :underline t)) (:underline (:color foreground-color :style line))) (t (:slant italic))))
  '(underline ((t (:underline (:color foreground-color :style line)))))

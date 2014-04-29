@@ -118,7 +118,7 @@
 		 markdown-mode
 		 multiple-cursors
 		 outshine
-		 org-mode
+		 ;; org-mode
 		 pcache
 		 popwin
 		 projectile

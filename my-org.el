@@ -35,6 +35,7 @@
    (gnuplot . t)
    (js . t)
    (browser . t)
+   (sh . t)
    (plantuml . t)))
 
 ;; customizing org
@@ -83,6 +84,22 @@
 	("\\subsection{%s}" . "\\subsection*{%s}")
 	("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
  )
+
+(eval-after-load 'htmlize
+  '(defun htmlize-face-size (face)
+	 ;; The size (height) of FACE, taking inheritance into account.
+	 ;; Only works in Emacs 21 and later.
+	 (let ((size-list
+			(loop
+			 for f = face then (let ((pf (face-attribute f :inherit)))
+								 (if (listp pf)
+									 (car pf)
+								   pf))
+			 until (or (not f) (eq f 'unspecified))
+			 for h = (face-attribute f :height)
+			 collect (if (eq h 'unspecified) nil h))))
+	   (reduce 'htmlize-merge-size (cons nil size-list))))
+  )
 
 (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 
