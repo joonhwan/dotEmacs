@@ -184,6 +184,7 @@ example:
 	  )
 	(if (and (not found-elem) default-value)
 	  (setq found-elem default-value)
+	  found-elem
 	)
   )
 )

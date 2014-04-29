@@ -52,13 +52,24 @@
 			   )
 		(:name magit
 			   :before (global-set-key (kbd "C-x g") 'magit-status))
-		
+		(:name epl
+		       :type github
+		       :description "Emacs Package Library"
+		       :pkgname "cask/epl")
 		(:name expand-region
 			   :before (global-set-key (kbd "C-M-SPC") 'er/expand-region))
-		
+		(:name helm-swoop
+			   :type github
+			   :pkgname "ShingoFukuyama/helm-swoop"
+			   :description "Efficiently hopping squeezed lines powered by Emacs helm interface"
+			   :depends (helm)
+			   )
 		(:name csharp-mode
 			   :type elpa)
-
+		(:name grizzl
+			   :type github
+			   :pkgname "d11wtq/grizzl"
+			   )
 		(:name goto-last-change
 			   :before (global-set-key (kbd "C-x C-/") 'goto-last-change))
 
@@ -76,6 +87,17 @@
 			   :pkgname "kelvinh/org-page"
 			   :depends (ht dash mustache)
 			   )
+		(:name outshine
+		       :type github
+		       :pkgname "tj64/outshine"
+		       :description "emacs outline with outshine outshines outline"
+		       )
+		(:name pkg-info
+		       :description "Provide information about Emacs packages."
+		       :type github
+		       :pkgname "lunaryorn/pkg-info.el"
+		       :depends (dash epl)
+		       )
 		(:name s_dot_el
 			   :description "The long lost Emacs string manipulation library."
 			   :type github
@@ -127,6 +149,7 @@
 		 rainbow-mode
 		 sql-indent
 		 smex
+		 sql-indent
 		 tfs
 		 thingatpt+
 		 undo-tree

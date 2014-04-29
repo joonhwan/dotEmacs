@@ -25,6 +25,14 @@
   )
  )
 
+(when (my-try-require 'helm-swoop)
+  (define-key helm-command-map (kbd ".") 'helm-swoop)
+  (define-key helm-swoop-map (kbd "C-.") 'helm-multi-swoop-all-from-helm-swoop)
+  ;; (define-key helm-command-map (kbd ".") 'helm-multi-swoop-all)
+  (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
+  (define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
+  )
+  
 (when macp
   (setq helm-locate-command "mdfind -name %s %s")
   )
