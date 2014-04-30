@@ -1,12 +1,17 @@
 (deftheme my-default-dark
   "Created 2014-04-08.")
 
+(custom-theme-set-variables
+ 'my-default-dark
+ '(my-default-font-size 120))
+
 (custom-theme-set-faces
  'my-default-dark
- '(default ((t (:family "Menlo" :foundry "apple" :width normal :height 120 :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "#eeeeec" :background "#242426" :stipple nil :inherit nil))))
+ '(default ((t (:width normal :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "#bebebc" :background "#242426" :stipple nil :inherit nil))))
  '(bold ((t (:weight bold))))
  '(bold-italic ((t (:slant italic :weight bold))))
- '(fixed-pitch ((t (:family "Monospace"))))
+ '(error ((t (:weight bold :foreground-color:pink))))
+ '(fixed-pitch ((t (:inherit (default)))))
  '(italic ((((supports :slant italic)) (:slant italic)) (((supports :underline t)) (:underline (:color foreground-color :style line))) (t (:slant italic))))
  '(underline ((t (:underline (:color foreground-color :style line)))))
  '(variable-pitch ((t (:family "Sans Serif"))))
@@ -52,7 +57,7 @@
  '(circe-originator-face ((t nil)))
  '(circe-prompt-face ((t nil)))
  '(circe-server-face ((t nil)))
- '(comint-highlight-input ((t (:weight bold))))
+ '(comint-highlight-input ((t (:foreground "goldenrod1" :weight bold))))
  '(comint-highlight-prompt ((t (:inherit (minibuffer-prompt)))))
  '(compilation-info ((t (:inherit (success)))))
  '(compilation-warning ((t (:inherit (warning)))))
@@ -166,13 +171,13 @@
  '(font-latex-title-4 ((t nil)))
  '(font-latex-warning ((t nil)))
  '(font-lock-builtin-face ((t (:foreground "#ad7fa8"))))
- '(font-lock-comment-delimiter-face ((t (:inherit (font-lock-comment-face)))))
- '(font-lock-comment-face ((t (:foreground "#53b216"))))
+ '(font-lock-comment-delimiter-face ((t (:inherit 'font-lock-comment-face))))
+ '(font-lock-comment-face ((t (:foreground "#53b216" :slant italic :inherit (default)))))
  '(font-lock-constant-face ((t (:foreground "#e6a8df"))))
  '(font-lock-doc-face ((t (:inherit (font-lock-string-face)))))
  '(font-lock-doc-string-face ((t nil)))
  '(font-lock-function-name-face ((t (:foreground "#fce94f"))))
- '(font-lock-keyword-face ((t (:foreground "#b4fa70"))))
+ '(font-lock-keyword-face ((t (:slant italic :foreground "#b4fa70"))))
  '(font-lock-negation-char-face ((t nil)))
  '(font-lock-operator-face ((t nil)))
  '(font-lock-preprocessor-face ((t (:inherit (font-lock-builtin-face)))))

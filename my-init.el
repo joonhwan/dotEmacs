@@ -28,8 +28,8 @@
 (require 'my-isearch)
 (require 'my-ido)
 (require 'my-tags)
-(require 'my-org)
-(require 'my-org-page)
+;; (require 'my-org)
+;; (require 'my-org-page)
 (unless (daemonp)
   (require 'my-font))
 
@@ -57,7 +57,7 @@
 ;;
 (load custom-file)
 
-(my-setup-font-for-mbcs)
+;; (my-setup-font-for-mbcs)
 
 ;; (progn
 ;;   (message "modifying frame...")

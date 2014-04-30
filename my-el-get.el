@@ -140,7 +140,7 @@
 		 markdown-mode
 		 multiple-cursors
 		 outshine
-		 org-mode
+		 ;; org-mode
 		 pcache
 		 popwin
 		 projectile
@@ -154,6 +154,7 @@
 		 thingatpt+
 		 undo-tree
 		 use-package
+		 visual-regexp
 		 web-mode
 		 wgrep
 		 xcscope

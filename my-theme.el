@@ -12,43 +12,45 @@
 ;; 한글 폰트를 위한 설정. 아래 default-frame-alist에서 설정한 것을
 ;; 제외한 모든 다른 인코딩의 폰트는 fontset-default에 지정된 것이
 ;; 사용되는 것 같다.
-;;
-;;현재로서는 글꼴의 크기를 조정해서 폭을 맞추고 있어서, 한글과
-;;영문간의 글꼴 크기 차이가 난다. font.c 의 코드를 보았지만, 아직은
-;;spacing 이나 scalable 같은게 어떻게 동작하는지 이해를 못하고 있다.
-(defvar my-default-font-name nil)
-  (defvar my-default-font-size 90)
-(cond
- (macp
-  (setq my-default-font-name "Menlo" my-default-font-size 120))
- (win32p
-  (setq my-default-font-name "Bitstream Vera Sans Mono" my-default-font-size 108))
- )
-(defun my-setup-font-for-mbcs ()
-  (interactive)
+;; hint from
+;; http://seorenn.blogspot.com/2011/04/emacs_24.html?showComment=1331616187916#c1562553045122508565
+(progn
   (cond
    (macp
-	(set-fontset-font "-*-*-*-*-*-*-*-*-*-*-*-*-fontset-default" 'korean-ksc5601 "NanumGothicCoding:weight=normal:spacing=m:scalable=true")
-	(setq face-font-rescale-alist '(("NanumGothicCoding" . 1.21)))
-	)
-   (t
-	(set-fontset-font "-*-*-*-*-*-*-*-*-*-*-*-*-fontset-default" 'korean-ksc5601 "나눔고딕코딩:weight=normal:spacing=m:scalable=true")
-	(setq face-font-rescale-alist '(("나눔고딕코딩" . 1.23)))
-	))
-  (set-frame-font (concat my-default-font-name) t t)
-  ;; (font . "나눔고딕코딩-12:normal:antialias=natural")
-  ;; (font . "Monaco-11:normal:antialias=natural")
-  ;; (font . "Anonymous Pro-11:normal:antialias=natural")
-  ;; (font . "Andale Mono-10.0:bold:spacing=110:antialias=natural")
-  ;; (font . "Monaco-12:normal:antialias=natural")
-  ;; (font . "Ubuntu_Mono-14:normal:antialias=natural")
-  ;; (font . "Menlo-13.5:normal:antialias=natural")
-  )
-;; 초기 테마
-(load-theme 'my-default-dark)
-(defvar my-current-theme-is-dark t)
+	;; 기본적인 2가지 폰트의 설정(폰트크기는 짝수로 해야 한/영간
+	;; 크기가 맞는다
+	(set-face-font 'default "Ubuntu Mono-14")
+	(set-face-font 'variable-pitch "Ubuntu 14")
 
-(setq my-theme-cycle-list '('my-zenburn 'my-solarized-dark 'my-solarized-light 'my-white))
+	;; 문자셋별로 원하는 폰트 설정(나눔고딕코딩이 그래도 쓸만함)
+	(set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+					  '("NanumGothicCoding" . "iso10646-1"))
+	(set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
+					  '("NanumGothicCoding" . "iso10646-1"))
+	(set-fontset-font "fontset-default" 'kana
+					  '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
+	(set-fontset-font "fontset-default" 'han
+					  '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
+	(set-fontset-font "fontset-default" 'japanese-jisx0208
+					  '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
+	(set-fontset-font "fontset-default" 'katakana-jisx0201
+					  '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
+	(setq face-font-rescale-alist
+		  '((".*hiragino.*" . 1.2)
+			(".*nanum.*" . 1.0)))
+	)
+   (win32p
+	(set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+					  '("나눔고딕" . "iso10646-1"))
+	(set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
+					  '("나눔고딕" . "iso10646-1"))
+	(setq face-font-rescale-alist
+		  '((".*나눔고딕.*" . 1.0)))
+	)
+   ))
+
+;; 초기 테마
+(defvar my-current-theme-is-dark t)
 (defvar my-default-dark-theme 'my-default-dark)
 (defvar my-default-light-theme 'my-default-light)
 (defun my-opposite-theme (curr-theme-name)
@@ -91,11 +93,14 @@
 
 (defun my-select-theme (theme)
   (interactive
-   (list (ido-completing-read "Select my theme: " (remove-if (lambda (s) (not (s-starts-with-p "my-" s))) (mapcar 'symbol-name (custom-available-themes))))))
+   (list (ido-completing-read "Select my theme: " (remove-if (lambda (s) (not (string-match "my-" s))) (mapcar 'symbol-name (custom-available-themes))))))
   (mapcar 'disable-theme custom-enabled-themes)
   (load-theme (intern theme) nil nil)
   )
 (global-set-key (kbd "C-c s t") 'my-select-theme)
+
+
+(my-select-theme "my-default-dark")
 
 ;;
 ;;  from 'frame.c'
@@ -152,17 +157,15 @@
 	   (tool-bar-lines . 0)
 	   (alpha . (100 100))
 	   (line-spacing . 0)
-	   (font . ,(format "%s-%g" my-default-font-name (* 0.1 my-default-font-size)))
-	   ;; (font . ,(format "%s" my-default-font-name))
-	   ))
-	(macp
-	 `((menu-bar-lines . 0)
-	   (tool-bar-lines . 0)
+	   ;; (font . ,(format "%s-%g" my-default-font-name (* 0.1 my-default-font-size)))
 	   ;; (top . 0)
 	   ;; (left . -1)
 	   ;; (width . 115)
 	   ;; (height . 71)
-	   (font . ,(format "%s-%g" my-default-font-name (* 0.1 my-default-font-size)))
+	   ))
+	(macp
+	 `((menu-bar-lines . 0)
+	   (tool-bar-lines . 0)
 	   ))))
   (setq initial-frame-alist default-frame-alist)
   (modify-all-frames-parameters default-frame-alist)
