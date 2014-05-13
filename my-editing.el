@@ -290,6 +290,11 @@ home directory is a root directory) and removes automounter prefixes
   ;; (define-key global-map (kbd "C-c m") 'vr/mc-mark)
   )
 
+(when (my-try-require 'ace-window)
+  (global-set-key (kbd "M-p") 'ace-window)
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  )
+
 (eval-after-load "woman"
   '(progn
      (cond
