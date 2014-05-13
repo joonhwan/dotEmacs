@@ -27,7 +27,7 @@
  '(buffer-menu-buffer ((t (:weight bold))))
  '(border ((t nil)))
  '(button ((t (:inherit (link)))))
- '(cursor ((t (:background "#fce94f"))))
+ '(cursor ((t (:background "red"))))
  '(escape-glyph-face ((t nil)))
  '(link ((t (:underline (:color foreground-color :style line) :foreground "#729fcf"))))
  '(minibuffer-prompt ((t (:foreground "#b4fa70"))))
