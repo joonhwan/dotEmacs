@@ -103,6 +103,11 @@
 			   :type github
 			   :pkgname "magnars/s.el"
 			   )
+		(:name sublimity
+			   :description "smooth-scrolling and minimap like sublime editor."
+			   :type github
+			   :pkgname "zk-phi/sublimity"
+			   )
 		(:name warp-mode
 			   :description "Web Article Realtime Preview for Emacs"
 			   :type github
@@ -140,7 +145,7 @@
 		 markdown-mode
 		 multiple-cursors
 		 outshine
-		 ;; org-mode
+		 org-mode
 		 pcache
 		 popwin
 		 projectile

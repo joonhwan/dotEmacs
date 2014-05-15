@@ -14,12 +14,13 @@
 ;; 사용되는 것 같다.
 ;; hint from
 ;; http://seorenn.blogspot.com/2011/04/emacs_24.html?showComment=1331616187916#c1562553045122508565
+;; http://www.emacswiki.org/emacs/SetFonts (cinsk가 작성한 Emacs for Mac OSX부분을 확인)
 (progn
   (cond
    (macp
 	;; 기본적인 2가지 폰트의 설정(폰트크기는 짝수로 해야 한/영간
 	;; 크기가 맞는다
-	(set-face-font 'default "Ubuntu Mono-14")
+	(set-face-font 'default "Ubuntu Mono-14;bold")
 	(set-face-font 'variable-pitch "Ubuntu 14")
 
 	;; 문자셋별로 원하는 폰트 설정(나눔고딕코딩이 그래도 쓸만함)
@@ -40,12 +41,12 @@
 			(".*nanum.*" . 1.0)))
 	)
    (win32p
-	(set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-					  '("나눔고딕" . "iso10646-1"))
-	(set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-					  '("나눔고딕" . "iso10646-1"))
-	(setq face-font-rescale-alist
-		  '((".*나눔고딕.*" . 1.0)))
+	;; 기본적인 2가지 폰트의 설정(폰트크기는 짝수로 해야 한/영간
+	;; 크기가 맞는다
+	(set-face-font 'default "Ubuntu Mono-12")
+	(set-face-font 'variable-pitch "Ubuntu 12")
+	(set-fontset-font t 'hangul (font-spec :name "나눔고딕코딩"))
+	;; (setq face-font-rescale-alist '((".*나눔고딕코딩.*" . 1.0)))
 	)
    ))
 

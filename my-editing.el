@@ -436,6 +436,11 @@ iflipb-next-buffer or iflipb-previous-buffer this round."
 			  my-iflipb-ing-internal)))
   )
 
+(when (my-try-require 'sublimity)
+  (require 'sublimity-scroll)
+  (sublimity-mode 1)
+  )
+
 (when (my-try-require 'warp)
   (global-set-key (kbd "C-c C-w C-w") 'warp-mode) ;; Modify key bind as you want.
   (setq warp-server-command "warp"

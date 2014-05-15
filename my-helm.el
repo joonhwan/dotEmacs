@@ -1,6 +1,8 @@
 ;; -*- coding:utf-8 -*-
 (helm-mode 1)
 
+;; 공통
+(setq helm-full-frame t)
 (cond
  (macp
   ;; 문제가 있다.

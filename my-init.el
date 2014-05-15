@@ -30,8 +30,8 @@
 (require 'my-tags)
 ;; (require 'my-org)
 ;; (require 'my-org-page)
-(unless (daemonp)
-  (require 'my-font))
+;; (unless (daemonp)
+;;   (require 'my-font))
 
 ;; final big brother that can handle many configuration
 ;;
