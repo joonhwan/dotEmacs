@@ -42,7 +42,12 @@
 
 ;; personal recipes
 (setq el-get-sources
-      '((:name cmake-project
+      '((:name ace-window
+			   :type github
+			   :pkgname "abo-abo/ace-window"
+			   :depends (ace-jump-mode)
+			   )
+		(:name cmake-project
 			   :type github
 			   :pkgname "joonhwan/emacs-cmake-project"
 			   )
