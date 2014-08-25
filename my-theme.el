@@ -172,22 +172,29 @@
   (modify-all-frames-parameters default-frame-alist)
   )
 
-;; 잘못 만든 함수. 1) active frame의 2) alpha값만 바꾸어야 하는데. 초기
-;; 프레임과 전체 frame parameter가 바뀐다. :(
-;;
+;; 프레임 투명상태는 만들기
 (defvar my-transparent-state-is-on t
   ""
   )
-(defun my-toggle-transparent-state ()
-  (interactive)
+(defun my-toggle-transparent-state (&optional arg)
+  (interactive "P")
+  (setq my-transparent-state-is-on 
+		(if (null arg)
+			(not my-transparent-state-is-on)
+		  (> (prefix-numeric-value arg) 0))
+		  )
   (setq default-frame-alist
 		(if my-transparent-state-is-on
-		   '((alpha . (85 50)))
+		   '((alpha . (80 80)))
 		  '((alpha . (100 100)))))
-  (setq my-transparent-state-is-on (not my-transparent-state-is-on))
   (setq initial-frame-alist default-frame-alist)
   (modify-all-frames-parameters default-frame-alist)
   )
+
+;; emacs 비활성화 상태에서만 투명하게 하기.
+(add-hook 'focus-in-hook '(lambda () (my-toggle-transparent-state -1)))
+(add-hook 'focus-out-hook '(lambda () (my-toggle-transparent-state 1)))
+
 ;; (global-set-key (kbd "C-c t") 'my-toggle-transparent-state)
 
 ;; 커스템 테마를 만든다음 실행할 함수.

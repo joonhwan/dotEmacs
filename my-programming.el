@@ -146,13 +146,30 @@
   )
 
 ;;
-;; * dash-at-point
+;; * dash-at-point or zeal-at-point
 ;;
 (when macp
   (when (my-try-require 'dash-at-point) 
 	(autoload 'dash-at-point "dash-at-point"
 	  "Search the word at point with Dash." t nil)
 	(global-set-key "\C-cd" 'dash-at-point)
+	)
+  )
+(when win32p
+  (when (my-try-require 'zeal-at-point)
+	(global-set-key "\C-cd" 'zeal-at-point)
+	;; Zeal queries can be narrowed down with a docset prefix. You can
+	;; customize the relations between docsets and major modes.
+	;; ```lisp
+	;; (add-to-list 'zeal-at-point-mode-alist '(perl-mode . "perl"))
+	;; ```
+	;; Additionally, the buffer-local variable `zeal-at-point-docset` can
+	;; be set in a specific mode hook (or file/directory local variables)
+	;; to programmatically override the guessed docset. For example:
+	;; ```lisp
+	;; (add-hook 'rinari-minor-mode-hook
+	;;    (lambda () (setq zeal-at-point-docset "rails")))
+	;; ```
 	)
   )
 ;;

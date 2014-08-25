@@ -229,7 +229,7 @@
 ;;
 ;; style
 ;;
-(c-add-style
+(c-add-style 
  "mystyle"
  '("stroustrup"
    ;; other could use tab :(
@@ -293,123 +293,46 @@
 	   (statement-block-intro . +)
 	   (statement-case-intro . +)
 	   ))
-	))
-
-(defun my-c-electric-paren (arg)
-  "Hack original `c-electric-paren'"
-  (interactive "*P")
-  (let ((literal (c-save-buffer-state () (c-in-literal)))
-		;; shut this up
-		(c-echo-syntactic-information-p nil))
-    (self-insert-command (prefix-numeric-value arg))
-
-    (if (and (not arg) (not literal))
-		(let* (	;; We want to inhibit blinking the paren since this will
-			   ;; be most disruptive.  We'll blink it ourselves
-			   ;; afterwards.
-			   (old-blink-paren blink-paren-function)
-			   blink-paren-function)
-		  (if (and c-syntactic-indentation c-electric-flag)
-			  (indent-according-to-mode))
-
-		  ;; If we're at EOL, check for new-line clean-ups.
-		  (when (and c-electric-flag c-auto-newline
-					 (looking-at "[ \t]*\\\\?$"))
-
-			;; clean up brace-elseif-brace
-			(when
-				(and (memq 'brace-elseif-brace c-cleanup-list)
-					 (eq last-command-event ?\()
-					 (re-search-backward
-					  (concat "}"
-							  "\\([ \t\n]\\|\\\\\n\\)*"
-							  "else"
-							  "\\([ \t\n]\\|\\\\\n\\)+"
-							  "if"
-							  "\\([ \t\n]\\|\\\\\n\\)*"
-							  "("
-							  "\\=")
-					  nil t)
-					 (not  (c-save-buffer-state () (c-in-literal))))
-			  (delete-region (match-beginning 0) (match-end 0))
-			  (insert-and-inherit "} else if ("))
-
-			;; clean up brace-catch-brace
-			(when
-				(and (memq 'brace-catch-brace c-cleanup-list)
-					 (eq last-command-event ?\()
-					 (re-search-backward
-					  (concat "}"
-							  "\\([ \t\n]\\|\\\\\n\\)*"
-							  "catch"
-							  "\\([ \t\n]\\|\\\\\n\\)*"
-							  "("
-							  "\\=")
-					  nil t)
-					 (not  (c-save-buffer-state () (c-in-literal))))
-			  (delete-region (match-beginning 0) (match-end 0))
-			  (insert-and-inherit "} catch (")))
-
-		  ;; Check for clean-ups at function calls.  These two DON'T need
-		  ;; `c-electric-flag' or `c-syntactic-indentation' set.
-		  ;; Point is currently just after the inserted paren.
-		  (let (beg (end (1- (point))))
-			(cond
-
-			 ;; space-before-funcall clean-up?
-			 ((and (memq 'space-before-funcall c-cleanup-list)
-				   (eq last-command-event ?\()
-				   (save-excursion
-					 (backward-char)
-					 (skip-chars-backward " \t")
-					 (setq beg (point))
-					 (and (c-save-buffer-state () (c-on-identifier))
-                          ;; Don't add a space into #define FOO()....
-                          (not (and (c-beginning-of-macro)
-                                    (c-forward-over-cpp-define-id)
-                                    (eq (point) beg))))))
-			  (save-excursion
-				(delete-region beg end)
-				(goto-char beg)
-				(insert ?\ )))
-
-			 ;; compact-empty-funcall clean-up?
-			 ((c-save-buffer-state ()
-				(and (memq 'compact-empty-funcall c-cleanup-list)
-					 (eq last-command-event ?\))
-					 (save-excursion
-					   (c-safe (backward-char 2))
-					   (when (looking-at "()")
-						 (setq end (point))
-						 (skip-chars-backward " \t")
-						 (setq beg (point))
-						 (c-on-identifier)))))
-			  (delete-region beg end)))
-			;; HACKED HERE...
-			;; add blank between keyword (
-			(save-excursion
-			  (backward-char)
-			  (let ((insert-point (point)))
-				(skip-syntax-backward "w_")
-				(when (looking-at c-keywords-regexp)
-				  (goto-char insert-point)
-				  (insert ?\ ))
-				  ))
-			)
-		  (and (eq last-input-event ?\))
-			   (not executing-kbd-macro)
-			   old-blink-paren
-			   (funcall old-blink-paren))))))
-;; (define-key c-mode-base-map "("         'my-c-electric-paren)
+   )
+ )
+(c-add-style 
+ "mystyle2"
+ '("stroustrup"
+   (indent-tabs-mode . t) ;; other could use tab :(
+   (c-basic-offset . 4) 
+   (tab-width . 4) ;;necessary setq!!!
+   (c-offsets-alist
+	. ((arglist-intro . ++)
+	   (comment-intro . 0)
+	   (inher-cont . c-lineup-multi-inher)
+	   (inline-open . 0)
+	   (innamespace . -)
+	   (label . 0)
+	   (member-init-intro . +)
+	   (statement-case-open . +)
+	   (statement-case-open . +)
+	   (statement-cont . (my-c-lineup-statement-cont c-lineup-math))
+	   (substatement-open . 0)
+	   (template-args-cont . +)
+	   (topmost-intro-cont . my-c-lineup-topmost-intro-cont)
+	   ;; (block-close . my-block-close-case-align)
+	   (block-close . 0)
+	   ;; (statement-block-intro . my-block-close-in-switch-case-align)
+	   (statement-block-intro . +)
+	   (statement-case-intro . +)
+	   ))
+   )
+ )
 
 (defun my-c-mode-common-hook ()
   (subword-mode 1)
+  (electric-indent-mode 1)
   (c-toggle-auto-newline 1)
   (c-toggle-hungry-state 1)
   (setq show-trailing-whitespace t)
   (hs-minor-mode 1)
   ;; (which-function-mode 1) 
-  (c-set-style "mystyle" nil)
+  (c-set-style "mystyle2" nil)
   ;; ;; TODO more reasonable way to do this?
   ;; (if debug-on-error
   ;; 	  (toggle-debug-on-error))
@@ -447,6 +370,16 @@
 (add-hook 'c++-mode-hook 'my-c-mode-common-hook)
 
 
+(when (my-try-require 'omnisharp)
+  (setq
+   omnisharp--windows-curl-tmp-file-path "d:/temp/omnisharp-tmp-file.cs"
+   ;; omnisharp-auto-complete-popup-help-delay nil ;; no delay
+   ;; omnisharp-host "http://localhost:2000"
+   omnisharp-server-executable-path "c:/dev/omnisharp/omnisharp.exe"
+   ;; omnisharp-timeout 1
+   )
+  )
+  
 (defun my-csharp-mode-hook ()
   (subword-mode 1)
   (c-toggle-auto-newline 1)
@@ -476,7 +409,8 @@
 													   er/mark-outside-pairs)))
   (if (featurep 'projectile)
   	  (projectile-mode 1))
-  (flymake-mode 0)
+  ;; (flymake-mode nil)
+  (omnisharp-mode 1)
   )
 
 (add-hook 'csharp-mode-hook 'my-csharp-mode-hook)
@@ -531,7 +465,7 @@
 (define-key c-mode-base-map (kbd "C-m") 'newline)
 (define-key c-mode-base-map (kbd "C-<f7>") 'compile)
 (define-key c-mode-base-map (kbd "C-<f8>") 'recompile)
-(define-key c-mode-base-map (kbd "C-c h p") 'my-ff-find-other-file)
+(define-key c-mode-base-map (kbd "C-c h p") 'ff-find-other-file)
 (define-key c-mode-base-map (kbd "C-c h o") 'ff-find-other-file)
 
 ;; csharp-mode

@@ -83,10 +83,19 @@
 		;; 	   :type hg
 		;; 	   :url "http://hg.rosdahl.net/iflipb"
 		;; 	   )
+		(:name emacs-python-environment
+			   :type github
+			   :pkgname "tkf/emacs-python-environment"
+			   )
 		(:name ob-browser
 			   :type github
 			   :pkgname "krisajenkins/ob-browser"
-			   )			   
+			   )
+		(:name omnisharp-emacs
+			   :type github
+			   :pkgname "sp3ctum/omnisharp-emacs"
+			   :depends (flycheck)
+			   )
 		(:name org-page
 			   :type github
 			   :pkgname "kelvinh/org-page"
@@ -117,6 +126,11 @@
 			   :description "Web Article Realtime Preview for Emacs"
 			   :type github
 			   :pkgname "yukihr/Warp"
+			   )
+		(:name zeal-at-point
+			   :description "Search the word at point with Zeal (Emacs)"
+			   :type github
+			   :pkgname "jinzhu/zeal-at-point"
 			   )
 		))
 
@@ -154,6 +168,7 @@
 		 pcache
 		 popwin
 		 projectile
+		 pydoc-info
 		 qml-mode
 		 rainbow-delimiters
 		 rainbow-mode
@@ -170,6 +185,7 @@
 		 xcscope
 		 yaml-mode
 		 yasnippet
+		 zeal-at-point
 		 )
        (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
 

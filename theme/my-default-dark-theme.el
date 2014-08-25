@@ -31,7 +31,7 @@
  '(escape-glyph-face ((t nil)))
  '(link ((t (:underline (:color foreground-color :style line) :foreground "#729fcf"))))
  '(minibuffer-prompt ((t (:foreground "#b4fa70"))))
- '(mode-line ((t (:box (:line-width -1 :color nil :style released-button) :foreground "#242426" :background "#d3d7cf"))))
+ '(mode-line ((t (:box (:line-width -1 :color nil :style released-button) :foreground "#242426" :background "DarkGoldenRod3"))))
  '(mode-line-inactive ((t (:weight light :box (:line-width -1 :color nil :style released-button) :foreground "#eeeeec" :background "#555753" :inherit (mode-line)))))
  '(mode-line-buffer-id ((t (:weight bold))))
  '(mode-line-emphasis ((t (:weight bold))))

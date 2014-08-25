@@ -10,7 +10,7 @@
 (defvar i-use-ibuffer-mode t)
 (defvar i-use-directory-abbrev nil)
 (defvar i-use-uniquify t)
-(defvar i-use-popwin t)
+(defvar i-use-popwin nil)
 (defvar i-use-yas t)
 
 ;; platform independent setq
@@ -225,7 +225,7 @@ home directory is a root directory) and removes automounter prefixes
    special-display-function 'special-display-popup-window ;;'popwin:special-display-popup-window
    special-display-regexps nil
    ;; ignore all default config for popwin:special-display-popup-window
-   popwin:special-display-config nil
+   ;; popwin:special-display-config nil
    )
    (push 'help-mode popwin:special-display-config)
    (push '(compilation-mode :noselect t) popwin:special-display-config)
@@ -441,10 +441,10 @@ iflipb-next-buffer or iflipb-previous-buffer this round."
 			  my-iflipb-ing-internal)))
   )
 
-(when (my-try-require 'sublimity)
-  (require 'sublimity-scroll)
-  (sublimity-mode 1)
-  )
+;; (when (my-try-require 'sublimity)
+;;   (require 'sublimity-scroll)
+;;   (sublimity-mode 1)
+;;   )
 
 (when (my-try-require 'warp)
   (global-set-key (kbd "C-c C-w C-w") 'warp-mode) ;; Modify key bind as you want.
