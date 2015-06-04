@@ -1,4 +1,4 @@
-
+;-*- coding:utf-8 -*-
 (require 'dired)
 (require 'dired-x)
 (require 'wdired)
@@ -9,7 +9,7 @@
   )
 
 (when (featurep 'magit)
-  ;; magit ø°º≠ dired-jump ∏¶ «œ∞Ì ΩÕ¥Ÿ.
+  ;; magit ÏóêÏÑú dired-jump Î•º ÌïòÍ≥† Ïã∂Îã§.
   (defun my-magit-dired-jump-action-hook()
 	(dired-jump)
 	t)
@@ -28,18 +28,18 @@
 (cond
  (win32p
   (progn
-	(require 'ls-lisp)
-	(setq dired-listing-switches "-alh"
-		  ;; ls-lisp-use-insert-directory-program nil
-		  ls-lisp-verbosity '('links 'uid)
-		  ls-lisp-ignore-case nil
-		  ls-lisp-use-localized-time-format t
-		  ls-lisp-format-time-list '("%y/%m/%d %H:%M" "%y/%m/%d %H:%M")
-		  ls-lisp-dirs-first t
-		  )
-	(setq ls-lisp-emulation (quote MS-Windows))
-	(ls-lisp-set-options) ;; special functionupdating parameters for ls-lisp
-	))
+ 	(require 'ls-lisp)
+ 	(setq dired-listing-switches "-alh"
+ 		  ;; ls-lisp-use-insert-directory-program nil
+ 		  ;; ls-lisp-verbosity '('links 'uid)
+ 		  ;; ls-lisp-ignore-case nil
+ 		  ls-lisp-use-localized-time-format t
+ 		  ls-lisp-format-time-list '("%y/%m/%d %H:%M" "%y/%m/%d %H:%M")
+ 		  ls-lisp-dirs-first t
+ 		  )
+ 	(setq ls-lisp-emulation (quote MS-Windows))
+ 	(ls-lisp-set-options) ;; special functionupdating parameters for ls-lisp
+ 	))
  (macp
   (message "macp")
   (setq
@@ -114,24 +114,24 @@
 		(if (file-directory-p w32file)
 			(shell-command (concat "c:/dev/totalcmd/totalcmd -O -L=\"" w32file "\""))))))
 
-;; great hint from
-;; http://whattheemacsd.com//setup-dired.el-02.html
-(defun dired-back-to-top ()
-  (interactive)
-  (beginning-of-buffer)
-  (dired-next-line 4))
+;; ;; great hint from
+;; ;; http://whattheemacsd.com//setup-dired.el-02.html
+;; (defun dired-back-to-top ()
+;;   (interactive)
+;;   (beginning-of-buffer)
+;;   (dired-next-line 4))
 
-(define-key dired-mode-map
-  (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
+;; (define-key dired-mode-map
+;;   (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
 
-(defun dired-jump-to-bottom ()
-  (interactive)
-  (end-of-buffer)
-  (dired-next-line -1))
+;; (defun dired-jump-to-bottom ()
+;;   (interactive)
+;;   (end-of-buffer)
+;;   (dired-next-line -1))
 
-(define-key dired-mode-map
-  (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
-;; http://whattheemacsd.com//setup-dired.el-02.html
+;; (define-key dired-mode-map
+;;   (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
+;; ;; http://whattheemacsd.com//setup-dired.el-02.html
 
 ;;
 ;; dired-x setting

@@ -238,18 +238,19 @@ home directory is a root directory) and removes automounter prefixes
    (global-set-key (kbd "C-c p") popwin:keymap)
    )
 
-(when (and i-use-yas
-		   (my-try-require 'yasnippet))
+(when i-use-yas
+  (use-package
+   yasnippet
+   :config
   (setq
    ;; not to use original yas/x-prompt at first
-   yas/prompt-functions '(yas/dropdown-prompt yas/completing-prompt)
+   yas-prompt-functions '(yas/dropdown-prompt yas/completing-prompt)
    ;; my private snippets
-   )
-  (setq yas/snippet-dirs
+   yas-snippet-dirs
   		`(,(concat my-dotfiles-dir "snippets")
   		  ,(concat my-dotfiles-dir "alien/el-get-package/yasnippet/snippets")))
-  (yas/global-mode 1)
-  )
+  ;; (yas/global-mode 1)
+  ))
 
 (eval-after-load "info"
   '(progn
@@ -577,6 +578,12 @@ Uses `my-current-date-time-format' for the formatting the date/time."
 (unless win32p
   (global-set-key (kbd "C-x C-f") 'my-easy-find-file))
 
+;; ;; gtranslate(google translate)
+;; (autoload 'gtranslate-translate "gtranslate" nil t)
+;; (autoload 'gtranslate-translate-auto "gtranslate" nil t)
+;; (defun my-trasnlate-english()
+;;   (interactive)
+;;   (gtranslate-translate-auto (gtranslate-region-or-input) "en" "ko"))
 
 ;; hint from http://whattheemacsd.com//key-bindings.el-03.html
 ;; 눌러보면 알게될 한줄합치기.
@@ -587,6 +594,7 @@ Uses `my-current-date-time-format' for the formatting the date/time."
 (global-set-key (kbd "C-S-p") (lambda () (interactive) (ignore-errors (previous-line 5)))) 
 (global-set-key (kbd "C-S-f") (lambda () (interactive) (ignore-errors (forward-char 5))))
 (global-set-key (kbd "C-S-b") (lambda () (interactive) (ignore-errors (backward-char 5))))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -28,7 +28,7 @@
  )
 
 (when (my-try-require 'helm-swoop)
-  (define-key helm-command-map (kbd ".") 'helm-swoop)
+  (define-key helm-map (kbd ".") 'helm-swoop)
   (define-key helm-swoop-map (kbd "C-.") 'helm-multi-swoop-all-from-helm-swoop)
   ;; (define-key helm-command-map (kbd ".") 'helm-multi-swoop-all)
   (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
@@ -191,21 +191,39 @@
 ;; replace original occur with helm-occur
 ;; - display initial pattern using thing-at-pt
 ;; - initial pattern should be marked region
+;; (defun my-helm-occur ()
+;;   (interactive)
+;;   (let ((helm-compile-source-functions
+;;          ;; rule out helm-match-plugin because the input is one regexp.
+;;          (delq 'helm-compile-source--match-plugin
+;;                (copy-sequence helm-compile-source-functions)))
+;; 		(initial-hint (thing-at-point 'symbol))
+;; 		)
+;; 	(helm :sources 'helm-source-occur
+;; 		  :input initial-hint
+;; 		  :buffer "*helm occur+*"
+;; 		  :history 'helm-grep-history
+;; 		  :preselect initial-hint
+;; 		  )
+;; 	))
 (defun my-helm-occur ()
+  "Preconfigured helm for Occur."
   (interactive)
-  (let ((helm-compile-source-functions
-         ;; rule out helm-match-plugin because the input is one regexp.
-         (delq 'helm-compile-source--match-plugin
-               (copy-sequence helm-compile-source-functions)))
-		(initial-hint (thing-at-point 'symbol))
-		)
-	(helm :sources 'helm-source-occur
-		  :input initial-hint
-		  :buffer "*helm occur+*"
-		  :history 'helm-grep-history
-		  :preselect initial-hint
-		  )
-	))
+  (helm-occur-init-source)
+  (let ((bufs (list (buffer-name (current-buffer)))))
+    (helm-attrset 'moccur-buffers bufs helm-source-occur)
+    (helm-set-local-variable 'helm-multi-occur-buffer-list bufs)
+    (helm-set-local-variable
+     'helm-multi-occur-buffer-tick
+     (cl-loop for b in bufs
+              collect (buffer-chars-modified-tick (get-buffer b)))))
+  (helm :sources 'helm-source-occur
+        :buffer "*helm occur*"
+        :history 'helm-grep-history
+		:input (thing-at-point 'symbol)
+        :preselect (and (memq 'helm-source-occur helm-sources-using-default-as-input)
+                        (format "%s:%d:" (buffer-name) (line-number-at-pos (point))))
+        :truncate-lines t))
 
 (progn
   (define-key helm-command-map (kbd "<RET>") 'helm-mini)

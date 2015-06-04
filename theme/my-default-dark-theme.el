@@ -286,6 +286,7 @@
  '(info-title-4 ((t (:weight bold :inherit (variable-pitch)))))
  '(info-xref ((t (:inherit (link)))))
  '(info-xref-visited ((t (:inherit (link-visited info-xref)))))
+ '(Info-quoted ((t (:foreground "GreenYellow" :inherit (default)))))
  '(isearch ((t (:foreground "#eeeeec" :background "#ce5c00"))))
  '(isearch-fail ((((class color) (min-colors 88) (background light)) (:background "RosyBrown1")) (((class color) (min-colors 88) (background dark)) (:background "red4")) (((class color) (min-colors 16)) (:background "red")) (((class color) (min-colors 8)) (:background "red")) (((class color grayscale)) (:foreground "grey")) (t (:inverse-video t))))
  '(jabber-chat-prompt-foreign ((t nil)))

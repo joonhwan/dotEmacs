@@ -7,6 +7,8 @@
 (add-to-list 'load-path (concat my-dotfiles-dir "alien/el-get-package/el-get"))
 (setq-default el-get-dir (concat my-dotfiles-dir "alien/el-get-package"))
 
+(require 'package)
+
 ;; git path
 (if win32p
     (setq magit-git-executable
@@ -42,11 +44,7 @@
 
 ;; personal recipes
 (setq el-get-sources
-      '((:name ace-window
-			   :type github
-			   :pkgname "abo-abo/ace-window"
-			   :depends (ace-jump-mode)
-			   )
+      '(
 		(:name cmake-project
 			   :type github
 			   :pkgname "joonhwan/emacs-cmake-project"
@@ -55,8 +53,23 @@
 			   :type github
 			   :pkgname "syohex/emacs-git-gutter"
 			   )
+		;; (:name magit
+		;; 	   :before (global-set-key (kbd "C-x g") 'magit-status))
 		(:name magit
-			   :before (global-set-key (kbd "C-x g") 'magit-status))
+		       :website "https://github.com/magit/magit#readme"
+		       :description "It's Magit! An Emacs mode for Git."
+		       :type github
+		       :pkgname "magit/magit"
+		       :branch "master"
+		       :depends (cl-lib git-modes)
+		       ;; :info "."
+		       ;; use the Makefile to produce the info manual, el-get can
+		       ;; handle compilation and autoloads on its own.
+		       :compile "magit.*\\.el\\'"
+		       ;; :build `(("make" ,(format "EMACSBIN=%s" el-get-emacs) "docs"))
+		       ;; :build/berkeley-unix (("gmake" ,(format "EMACSBIN=%s" el-get-emacs) "docs"))
+		       ;; assume windows lacks make and makeinfo
+		       :build/windows-nt (progn nil))
 		(:name epl
 		       :type github
 		       :description "Emacs Package Library"
@@ -101,11 +114,11 @@
 			   :pkgname "kelvinh/org-page"
 			   :depends (ht dash mustache)
 			   )
-		(:name outshine
-		       :type github
-		       :pkgname "tj64/outshine"
-		       :description "emacs outline with outshine outshines outline"
-		       )
+		;; (:name outshine
+		;;        :type github
+		;;        :pkgname "tj64/outshine"
+		;;        :description "emacs outline with outshine outshines outline"
+		;;        )
 		(:name pkg-info
 		       :description "Provide information about Emacs packages."
 		       :type github
@@ -139,6 +152,7 @@
       (append
        ;; list of packages we use straight from official recipes
        '(ace-jump-mode
+	 ace-window
 		 auto-complete
 		 ;; csharp-mode
 		 dash
@@ -149,7 +163,7 @@
 		 full-ack
 		 fuzzy
 		 graphviz-dot-mode
-		 gtranslate
+		 git-commit-mode
 		 helm
 		 htmlize
 		 ido-vertical-mode
@@ -157,25 +171,24 @@
 		 ido-ubiquitous
 		 js2-mode
 		 key-chord
-		 keywiz
+		 ;; keywiz
 		 logito
 		 lua-mode
 		 magit
 		 markdown-mode
 		 multiple-cursors
 		 outshine
-		 org-mode
+		 ;; org-mode
 		 pcache
 		 popwin
 		 projectile
-		 pydoc-info
-		 qml-mode
+		 ;; pydoc-info
+		 ;; qml-mode
 		 rainbow-delimiters
 		 rainbow-mode
-		 sql-indent
 		 smex
-		 sql-indent
-		 tfs
+		 ;; sql-indent
+		 ;; tfs
 		 thingatpt+
 		 undo-tree
 		 use-package

@@ -135,6 +135,7 @@ example:
 (add-to-list 'load-path my-dotfiles-dir)
 (add-to-list 'load-path my-autoinstall-dir)
 (add-to-list 'load-path (concat my-dotfiles-dir "alien/manual-package"))
+(add-to-list 'load-path (concat my-dotfiles-dir "alien/use-package"))
 (load ".manual-package-loaddefs.el")
 
 ;; * language
@@ -142,8 +143,9 @@ example:
   (cond
    (win32p
 	(set-language-environment "Korean")
-	;; elisp은 그냥 utf-8이 편하다.(github등의 코드들)
+	;; elisp 등 은 그냥 utf-8이 편하다.(github등의 코드들)
 	(add-to-list 'file-coding-system-alist '("\\.el\\'" utf-8))
+	(add-to-list 'file-coding-system-alist '("\\.md\\'" utf-8))
 	(add-to-list 'process-coding-system-alist '("git" utf-8 . utf-8))
 	)
    (macp
@@ -188,6 +190,12 @@ example:
 	)
   )
 )
+
+;; use-package
+(eval-when-compile
+  (require 'use-package))
+
+
 
 ;;
 ;; * i'm not using normal path of emacs customization!
