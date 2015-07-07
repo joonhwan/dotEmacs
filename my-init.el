@@ -22,6 +22,12 @@
 
 ;; ---------------------------
 (require 'my-el-get)
+
+;; * Path
+;; 이상하게도, mac에서는 PATH가 종종 내가 설정해 놓은 게 아닌 걸로 실행된다.
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
 (require 'my-editing)
 (require 'my-programming) ;; for all except c/c++
 ;; (require 'my-python)
@@ -48,9 +54,9 @@
 ;; hint from http://whattheemacsd.com/init.el-04.html
 (when (my-try-require 'diminish)
   ;; (diminish 'wrap-region-mode)
-  (diminish 'yas-minor-mode)
+  ;; (diminish 'yas-minor-mode)
   (diminish 'projectile-mode)
-  (diminish 'undo-tree-mode)
+  ;; (diminish 'undo-tree-mode)
   (diminish 'abbrev-mode)
   (diminish 'helm-mode)
   ;; (diminish 'auto-complete-mode)

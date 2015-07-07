@@ -53,6 +53,11 @@
 			   :type github
 			   :pkgname "syohex/emacs-git-gutter"
 			   )
+		(:name exec-path-from-shell
+			   :type github
+			   :pkgname "purcell/exec-path-from-shell"
+			   :description "Make Emacs use the $PATH set up by the user's shell"
+			   )
 		;; (:name magit
 		;; 	   :before (global-set-key (kbd "C-x g") 'magit-status))
 		(:name magit
@@ -82,6 +87,11 @@
 			   :description "Efficiently hopping squeezed lines powered by Emacs helm interface"
 			   :depends (helm)
 			   )
+		(:name impatient-mode
+			   :type github
+			   :pkgname "skeeto/impatient-mode"
+			   :depends (simple-httpd)
+			   )
 		(:name csharp-mode
 			   :type elpa)
 		(:name grizzl
@@ -104,11 +114,11 @@
 			   :type github
 			   :pkgname "krisajenkins/ob-browser"
 			   )
-		(:name omnisharp-emacs
-			   :type github
-			   :pkgname "sp3ctum/omnisharp-emacs"
-			   :depends (flycheck)
-			   )
+		;; (:name omnisharp-emacs
+		;; 	   :type github
+		;; 	   :pkgname "sp3ctum/omnisharp-emacs"
+		;; 	   :depends (flycheck)
+		;; 	   )
 		(:name org-page
 			   :type github
 			   :pkgname "kelvinh/org-page"
@@ -152,7 +162,7 @@
       (append
        ;; list of packages we use straight from official recipes
        '(ace-jump-mode
-	 ace-window
+		 ace-window
 		 auto-complete
 		 ;; csharp-mode
 		 dash
@@ -180,13 +190,14 @@
 		 outshine
 		 ;; org-mode
 		 pcache
+		 php-mode
 		 popwin
 		 projectile
 		 ;; pydoc-info
 		 ;; qml-mode
 		 rainbow-delimiters
 		 rainbow-mode
-		 smex
+		 ;; smex
 		 ;; sql-indent
 		 ;; tfs
 		 thingatpt+

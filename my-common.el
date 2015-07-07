@@ -136,6 +136,7 @@ example:
 (add-to-list 'load-path my-autoinstall-dir)
 (add-to-list 'load-path (concat my-dotfiles-dir "alien/manual-package"))
 (add-to-list 'load-path (concat my-dotfiles-dir "alien/use-package"))
+
 (load ".manual-package-loaddefs.el")
 
 ;; * language
@@ -194,8 +195,6 @@ example:
 ;; use-package
 (eval-when-compile
   (require 'use-package))
-
-
 
 ;;
 ;; * i'm not using normal path of emacs customization!

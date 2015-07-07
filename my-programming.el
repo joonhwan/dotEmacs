@@ -22,6 +22,10 @@
 (autoload 'gid "idutils" "run idutils' gid command" t)
 
 ;;
+(add-hook 'prog-mode-hook 'yas-minor-mode)
+
+
+;;
 ;; * vc
 ;;
 (if win32p

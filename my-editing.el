@@ -575,8 +575,8 @@ Uses `my-current-date-time-format' for the formatting the date/time."
 		  (setq file (concat "/sudo:root@localhost:" file))
 		  (find-file file)))
 	(ido-find-file)))
-(unless win32p
-  (global-set-key (kbd "C-x C-f") 'my-easy-find-file))
+;; (unless win32p
+;;   (global-set-key (kbd "C-x C-f") 'my-easy-find-file))
 
 ;; ;; gtranslate(google translate)
 ;; (autoload 'gtranslate-translate "gtranslate" nil t)
