@@ -400,7 +400,7 @@
  '(rst-level-3-face ((t nil)))
  '(rst-level-4-face ((t nil)))
  '(setnu-line-number ((t nil)))
- '(show-paren-match ((t (:background "steelblue3"))))
+ '(show-paren-match ((t (:background "HotPink4"))))
  '(show-paren-mismatch ((t (:foreground "white" :background "purple"))))
  '(speedbar-button-face ((t (:foreground "green3"))))
  '(speedbar-directory-face ((t (:foreground "light blue"))))
