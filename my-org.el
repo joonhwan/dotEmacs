@@ -36,6 +36,7 @@
    (js . t)
    (browser . t)
    (sh . t)
+   (js . t)
    (plantuml . t)))
 
 ;; customizing org

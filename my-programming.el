@@ -24,6 +24,26 @@
 ;;
 (add-hook 'prog-mode-hook 'yas-minor-mode)
 
+(setq sql-connection-alist
+      '((mamp-mysql
+		 (sql-product 'mysql)
+		 (sql-port 8889)
+		 (sql-server "127.0.0.1")
+		 (sql-user "root")
+		 (sql-password "root"))
+        ;; (server2 (sql-product 'postgres)
+        ;;           (sql-port 5432)
+        ;;           (sql-server "localhost")
+        ;;           (sql-user "user")
+        ;;           (sql-password "password")
+        ;;           (sql-database "db2"))
+		))
+
+(defun my-sql-mysql-mamp ()
+  (interactive)
+  (let ((sql-mysql-program "/Applications/MAMP/Library/bin/mysql"))
+	(sql-connect 'mamp-mysql)
+  ))
 
 ;;
 ;; * vc
@@ -151,7 +171,24 @@
   ;; )
   )
 
-;;
+;; web-mode
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-indent-style 2
+   )
+  (defun my-web-mode-insert-closing-brace ()
+	(interactive)
+	(insert "}")
+	(c-indent-line-or-region)
+	)
+  (define-key web-mode-map "}" 'my-web-mode-insert-closing-brace)
+  )
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+
 ;; * dash-at-point or zeal-at-point
 ;;
 (when macp
